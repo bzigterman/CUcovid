@@ -28,6 +28,6 @@ ggplot(dville_after_Oct, aes(x = as.Date(date),
         plot.title = element_text(size = 22, family = "Oswald"),
         legend.position = c(.1,.5),
         legend.background = element_blank(),
-        legend.key = element_blank()) 
+        legend.key = element_blank())
 
-ggsave("danville/dvilleprison.png", width = 8, height = 4.5, dpi = 320)
+ggsave("danville/dvilleprison.png", width = 8, height = 4.57142857, dpi = 320)
