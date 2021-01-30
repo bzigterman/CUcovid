@@ -27,11 +27,11 @@ ggplot(uicovid, aes(x = as.Date(Date), y = New_Cases)) +
         axis.text.y = element_text(size = 12),
         axis.text.x = element_text(size = 12),
         plot.title = element_text(size = 22, family = "Oswald")) 
-ggsave("UI/2UICases.png", width = 8, height = 4.57142857, dpi = 320)
+ggsave("UI/2UICases.png", width = 8, height = 32/7, dpi = 320)
 ggsave("UICasesWeb.png", 
        path = "../bzigterman.github.io/images/",
-       width = 8, height = 4.57142857, dpi = 320)
-# ggsave("1TweetUICases.png", width = 8, height = 4.57142857, dpi = 150)
+       width = 8, height = 32/7, dpi = 320)
+# ggsave("1TweetUICases.png", width = 8, height = 32/7, dpi = 150)
 
 # new tests with 7 day avg
 ggplot(uicovid, aes(x = as.Date(Date), y = New_Tests)) +
@@ -53,11 +53,11 @@ ggplot(uicovid, aes(x = as.Date(Date), y = New_Tests)) +
         axis.text.y = element_text(size = 12),
         axis.text.x = element_text(size = 12),
         plot.title = element_text(size = 22, family = "Oswald")) 
-ggsave("UI/3UITests.png", width = 8, height = 4.57142857, dpi = 320)
+ggsave("UI/3UITests.png", width = 8, height = 32/7, dpi = 320)
 ggsave("UITestsWeb.png", 
        path = "../bzigterman.github.io/images/",
-       width = 8, height = 4.57142857, dpi = 320)
-# ggsave("2TweetUITests.png", width = 8, height = 4.57142857, dpi = 150)
+       width = 8, height = 32/7, dpi = 320)
+# ggsave("2TweetUITests.png", width = 8, height = 32/7, dpi = 150)
 
 # positivity with 7 day avg
 ggplot(uicovid, aes(x = as.Date(Date), y = positivity)) +
@@ -79,11 +79,11 @@ ggplot(uicovid, aes(x = as.Date(Date), y = positivity)) +
         axis.text.y = element_text(size = 12),
         axis.text.x = element_text(size = 12),
         plot.title = element_text(size = 22, family = "Oswald")) 
-ggsave("UI/4UIPositivity.png", width = 8, height = 4.57142857, dpi = 320)
+ggsave("UI/4UIPositivity.png", width = 8, height = 32/7, dpi = 320)
 ggsave("UIPositivityWeb.png", 
        path = "../bzigterman.github.io/images/",
-       width = 8, height = 4.57142857, dpi = 320)
-# ggsave("3TweetUIPositivity.png", width = 8, height = 4.57142857, dpi = 150)
+       width = 8, height = 32/7, dpi = 320)
+# ggsave("3TweetUIPositivity.png", width = 8, height = 32/7, dpi = 150)
 
 # bar chart/table of this year vs last year
 uicovidbyyear <- read_sheet("1UUGDwV5qahPos-bhWUfzf4Y1WYXEh-I0JBOJaoGMrJs",
@@ -105,8 +105,8 @@ ggplot(uicovidbyyear, aes(y = factor(Year),
     axis.text.y = element_text(size = 30),
     plot.title = element_text(size = 25, family = "Oswald")
   )
-# ggsave("UITotals.png", width = 8, height = 4.57142857, dpi = 320)
-# ggsave("4TweetUITotals.png", width = 8, height = 4.57142857, dpi = 150)
+# ggsave("UITotals.png", width = 8, height = 32/7, dpi = 320)
+# ggsave("4TweetUITotals.png", width = 8, height = 32/7, dpi = 150)
 
 # fall vs spring semester new cases
 ggplot(uicovid, aes(x = Semester_day/7, y = New_Cases, colour = Semester)) +
@@ -140,10 +140,10 @@ ggplot(uicovid, aes(x = Semester_day/7, y = New_Cases, colour = Semester)) +
         legend.key = element_blank(),
         legend.text = element_text(size = 12)) 
 
-ggsave("UI/1UISemCompare.png", width = 8, height = 4.57142857, dpi = 320)
+ggsave("UI/1UISemCompare.png", width = 8, height = 32/7, dpi = 320)
 ggsave("UISemCompare.png", 
        path = "../bzigterman.github.io/images/",
-       width = 8, height = 4.57142857, dpi = 320)
+       width = 8, height = 32/7, dpi = 320)
 
 
 # todo

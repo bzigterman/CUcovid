@@ -44,10 +44,10 @@ vaxplot +
         axis.text.x = element_text(size = 12),
         plot.title = element_text(size = 22, family = "Oswald")) 
 
-ggsave("vax/chamvax.png", width = 8, height = 4.57142857, dpi = 320)
+ggsave("vax/chamvax.png", width = 8, height = 32/7, dpi = 320)
 ggsave("VaccinesWeb.png", 
        path = "../bzigterman.github.io/images/",
-       width = 8, height = 4.57142857, dpi = 150)
+       width = 8, height = 32/7, dpi = 150)
 
 # chart of new doses administered
 ggplot(vax, aes(x = as.Date(date), y = new_doses)) +
@@ -72,8 +72,8 @@ ggplot(vax, aes(x = as.Date(date), y = new_doses)) +
         axis.text.y = element_text(size = 12),
         axis.text.x = element_text(size = 12),
         plot.title = element_text(size = 22, family = "Oswald")) 
-ggsave("vax/NewVaccines.png", width = 8, height = 4.57142857, dpi = 320)
+ggsave("vax/NewVaccines.png", width = 8, height = 32/7, dpi = 320)
 ggsave("NewVaccinesWeb.png", 
        path = "../bzigterman.github.io/images/",
-       width = 8, height = 4.57142857, dpi = 150)
+       width = 8, height = 32/7, dpi = 150)
 

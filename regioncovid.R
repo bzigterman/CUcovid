@@ -32,10 +32,10 @@ ggplot(regioncovid, aes(x = as.Date(Date), y = ChampaignCoNoUIpositives)) +
         axis.text.x = element_text(size = 12),
         plot.title = element_text(size = 22, family = "Oswald")) 
 ggsave("region/1ChampaignCountyNoUICases.png", 
-       width = 8, height = 4.57142857, dpi = 320)
+       width = 8, height = 32/7, dpi = 320)
 ggsave("ChampaignCountyNoUICasesWeb.png", 
        path = "../bzigterman.github.io/images/",
-       width = 8, height = 4.57142857, dpi = 320)
+       width = 8, height = 32/7, dpi = 320)
 
 # chart of champaign county tests without the UI
 ggplot(regioncovid, aes(x = as.Date(Date), y = ChampaignCoNoUItests)) +
@@ -61,10 +61,10 @@ ggplot(regioncovid, aes(x = as.Date(Date), y = ChampaignCoNoUItests)) +
         axis.text.x = element_text(size = 12),
         plot.title = element_text(size = 22, family = "Oswald")) 
 ggsave("region/CountyTestsnoUI.png", 
-       width = 8, height = 4.57142857, dpi = 320)
+       width = 8, height = 32/7, dpi = 320)
 ggsave("CountyTestsnoUIWeb.png", 
        path = "../bzigterman.github.io/images/",
-       width = 8, height = 4.57142857, dpi = 320)
+       width = 8, height = 32/7, dpi = 320)
 
 # chart of champaign county positivity without the UI
 ggplot(regioncovid, aes(x = as.Date(Date), y = ChampaignCoNoUIpositivity)) +
@@ -87,10 +87,10 @@ ggplot(regioncovid, aes(x = as.Date(Date), y = ChampaignCoNoUIpositivity)) +
         axis.text.x = element_text(size = 12),
         plot.title = element_text(size = 22, family = "Oswald")) 
 ggsave("region/ChampaignConoUIPositivity.png", 
-       width = 8, height = 4.57142857, dpi = 320)
+       width = 8, height = 32/7, dpi = 320)
 ggsave("ChampaignConoUIPositivityWeb.png", 
        path = "../bzigterman.github.io/images/",
-       width = 8, height = 4.57142857, dpi = 320)
+       width = 8, height = 32/7, dpi = 320)
 
 # chart of Positive tests in champaign county
 ggplot(regioncovid, aes(x = as.Date(Date))) +
@@ -140,10 +140,10 @@ ggplot(regioncovid, aes(x = as.Date(Date))) +
         legend.key = element_blank(),
         legend.text = element_text(size = 12)) 
 ggsave("region/2ChampaignCoCasesSplit.png", 
-       width = 8, height = 4.57142857, dpi = 320)
+       width = 8, height = 32/7, dpi = 320)
 ggsave("ChampaignCoCasesSplitWeb.png", 
        path = "../bzigterman.github.io/images/",
-       width = 8, height = 4.57142857, dpi = 320)
+       width = 8, height = 32/7, dpi = 320)
 
 # chart of seven day positivity without UI tests
 ggplot(regioncovid, aes(x = as.Date(Date))) +
@@ -181,10 +181,10 @@ ggplot(regioncovid, aes(x = as.Date(Date))) +
         legend.key = element_blank(),
         legend.text = element_text(size = 12)) 
 ggsave("region/3NoUIpositivity.png", 
-       width = 8, height = 4.57142857, dpi = 320)
+       width = 8, height = 32/7, dpi = 320)
 ggsave("NoUIpositivityWeb.png", 
        path = "../bzigterman.github.io/images/",
-       width = 8, height = 4.57142857, dpi = 320)
+       width = 8, height = 32/7, dpi = 320)
 
 # chart of state positivity
 ggplot(regioncovid, aes(x = as.Date(Date))) +
@@ -219,8 +219,8 @@ ggplot(regioncovid, aes(x = as.Date(Date))) +
         legend.key = element_blank(),
         legend.text = element_text(size = 12)) 
 ggsave("region/4statepositivity.png", 
-       width = 8, height = 4.57142857, dpi = 320)
+       width = 8, height = 32/7, dpi = 320)
 ggsave("statepositivityWeb.png", 
        path = "../bzigterman.github.io/images/",
-       width = 8, height = 4.57142857, dpi = 320)
+       width = 8, height = 32/7, dpi = 320)
 
