@@ -110,6 +110,9 @@ ggplot(uicovidbyyear, aes(y = factor(Year),
 
 # fall vs spring semester new cases
 ggplot(uicovid, aes(x = Semester_day/7, y = New_Cases, colour = Semester)) +
+  #geom_vline(xintercept = 0, colour = "grey50") +
+  annotate("rect", xmin = -Inf, xmax = 0, ymin = 0, ymax = Inf,
+           fill = "white") +
   geom_point(alpha = .25) +
   geom_line(aes(y = rollmean(New_Cases, 7, fill = TRUE, align = "right")),
             size = 1.5) +
@@ -135,7 +138,7 @@ ggplot(uicovid, aes(x = Semester_day/7, y = New_Cases, colour = Semester)) +
         axis.text.y = element_text(size = 12),
         axis.text.x = element_text(size = 12),
         plot.title = element_text(size = 22, family = "Oswald"),
-        legend.position = c(.075,.85),
+        legend.position = c(.058,.85),
         legend.background = element_blank(),
         legend.key = element_blank(),
         legend.text = element_text(size = 12)) 
