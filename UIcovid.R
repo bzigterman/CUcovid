@@ -85,26 +85,26 @@ ggsave("UIPositivityWeb.png",
        width = 8, height = 32/7, dpi = 320)
 # ggsave("3TweetUIPositivity.png", width = 8, height = 32/7, dpi = 150)
 
-# bar chart/table of this year vs last year
-uicovidbyyear <- read_sheet("1UUGDwV5qahPos-bhWUfzf4Y1WYXEh-I0JBOJaoGMrJs",
-                      sheet = 4)
-ggplot(uicovidbyyear, aes(y = factor(Year),
-                          x = Location)) +
-  geom_text(aes(label = comma(Cases)),
-            size = 20,
-            family = "Barlow") +
-  scale_y_discrete(limits = c("This year:","Last year:")) +
-  scale_x_continuous(breaks = NULL) +
-  xlab(NULL) +
-  ylab(NULL) + 
-  ggtitle("Total Cases at the University of Illinois") +
-  theme_void() +
-  theme(
-    text = element_text(family = "Barlow",
-                        size = 20),
-    axis.text.y = element_text(size = 30),
-    plot.title = element_text(size = 25, family = "Oswald")
-  )
+# # bar chart/table of this year vs last year
+# uicovidbyyear <- read_sheet("1UUGDwV5qahPos-bhWUfzf4Y1WYXEh-I0JBOJaoGMrJs",
+#                       sheet = 4)
+# ggplot(uicovidbyyear, aes(y = factor(Year),
+#                           x = Location)) +
+#   geom_text(aes(label = comma(Cases)),
+#             size = 20,
+#             family = "Barlow") +
+#   scale_y_discrete(limits = c("This year:","Last year:")) +
+#   scale_x_continuous(breaks = NULL) +
+#   xlab(NULL) +
+#   ylab(NULL) + 
+#   ggtitle("Total Cases at the University of Illinois") +
+#   theme_void() +
+#   theme(
+#     text = element_text(family = "Barlow",
+#                         size = 20),
+#     axis.text.y = element_text(size = 30),
+#     plot.title = element_text(size = 25, family = "Oswald")
+#   )
 # ggsave("UITotals.png", width = 8, height = 32/7, dpi = 320)
 # ggsave("4TweetUITotals.png", width = 8, height = 32/7, dpi = 150)
 
