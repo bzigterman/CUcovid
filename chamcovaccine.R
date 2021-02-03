@@ -53,13 +53,12 @@ ggsave("VaccinesWeb.png",
 ggplot(vax, aes(x = as.Date(date), y = new_doses)) +
   geom_col(fill = "#674EA7",
            alpha = .25) +
-  geom_step(aes(y = rollmean(new_doses, 
+  geom_line(aes(y = rollmean(new_doses, 
                              7, 
                              fill = TRUE, 
                              align = "right")),
             colour = "#674EA7",
-            size = 1.15,
-            direction = "mid") +
+            size = 1.5) +
   xlab(NULL) +
   ylab(NULL) +
   scale_y_continuous(labels = comma, 
