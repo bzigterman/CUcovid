@@ -7,6 +7,8 @@ library(zoo)
 # get the data from google sheet
 uicovid <- read_sheet("1UUGDwV5qahPos-bhWUfzf4Y1WYXEh-I0JBOJaoGMrJs",
                       sheet = 2)
+write.csv(uicovid,"data/uicovid.csv", row.names = FALSE)
+
 # new cases with 7 day avg
 ggplot(uicovid, aes(x = as.Date(Date), y = New_Cases)) +
   geom_col(fill = "#B45F06",

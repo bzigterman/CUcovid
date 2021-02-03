@@ -7,6 +7,7 @@ library(zoo)
 # get the data from google sheet
 regioncovid <- read_sheet("1UUGDwV5qahPos-bhWUfzf4Y1WYXEh-I0JBOJaoGMrJs",
                       sheet = 3)
+write.csv(regioncovid,"data/regioncovid.csv", row.names = FALSE)
 
 # chart of Champaign Co positives without the UI 
 ggplot(regioncovid, aes(x = as.Date(Date), y = ChampaignCoNoUIpositives)) +

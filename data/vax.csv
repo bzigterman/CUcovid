@@ -1,0 +1,54 @@
+"date","doses_administered","new_doses","dose1","new_dose1","percent_dose1","dose2","new_dose2","percent_dose2","text"
+2020-12-16,8,8,8,8,3.80983222451341e-05,NA,NA,NA,NA
+2020-12-17,191,183,191,183,0.000909597443602577,NA,NA,NA,NA
+2020-12-18,477,286,477,286,0.00227161246386612,NA,NA,NA,NA
+2020-12-19,480,3,480,3,0.00228589933470805,NA,NA,NA,NA
+2020-12-20,481,1,481,1,0.00229066162498869,NA,NA,NA,NA
+2020-12-21,482,1,482,1,0.00229542391526933,NA,NA,NA,NA
+2020-12-22,510,28,510,28,0.0024287680431273,NA,NA,NA,NA
+2020-12-23,1009,499,1009,499,0.00480515089316754,NA,NA,NA,NA
+2020-12-24,1388,379,1388,379,0.00661005890953077,NA,NA,NA,NA
+2020-12-25,1683,295,1683,295,0.00801493454232009,NA,NA,NA,NA
+2020-12-26,1856,173,1856,173,0.00883881076087112,NA,NA,NA,NA
+2020-12-27,1857,1,1857,1,0.00884357305115176,NA,NA,NA,NA
+2020-12-28,2045,188,2045,188,0.00973888362391241,NA,NA,NA,NA
+2020-12-29,2201,156,2201,156,0.0104818009076925,NA,NA,NA,NA
+2020-12-30,2800,599,2800,599,0.0133344127857969,NA,NA,NA,NA
+2020-12-31,3239,439,3239,439,0.0154250582189987,NA,NA,NA,NA
+2021-01-01,3545,306,3545,306,0.0168823190448751,NA,NA,NA,NA
+2021-01-02,3933,388,3933,388,0.0187300876737641,NA,NA,NA,NA
+2021-01-03,4317,384,4317,384,0.0205588071415305,NA,NA,NA,NA
+2021-01-04,4880,563,4880,563,0.0232399765695318,NA,NA,NA,NA
+2021-01-05,5389,509,5389,509,0.0256639823223785,NA,NA,NA,NA
+2021-01-06,5724,335,5724,844,0.0272593495663935,NA,NA,NA,"5724 vaccines administered first dose, up 844 from Jan. 4. 2.7% of the eligible population has received first dose. https://www.c-uphd.org/covid-vaccinations.html"
+2021-01-07,6026,302,6026,302,0.0286975612311473,NA,NA,NA,"6026 vaccines administered first dose, up 302 from Jan. 6. 2.9% of the eligible population has received first dose. https://www.c-uphd.org/covid-vaccinations.html"
+2021-01-08,6512,486,6290,264,0.0299548058652367,222,222,0.00105722844230247,"6290 vaccines administered first dose, up 264 from Jan. 7. 3% of the eligible population has received first dose. https://www.c-uphd.org/covid-vaccinations.html"
+2021-01-09,6944,432,6464,174,0.0307834443740684,480,258,0.00228589933470805,"6464 vaccines administered first dose, up 174 from Jan. 8. 3.1% of the eligible population has received first dose. 480 vaccines administered second dose, up 258 from Jan. 8. https://www.c-uphd.org/covid-vaccinations.html"
+2021-01-10,7226,282,6743,279,0.0321121233623674,483,3,0.00230018620554997,"6743 vaccines administered first dose, up 279 from Jan. 9. 3.2% of the eligible population has received first dose. 483 vaccines administered second dose, up 3 from Jan. 9. https://www.c-uphd.org/covid-vaccinations.html"
+2021-01-11,7327,101,6828,85,0.032516918036222,499,16,0.00237638285004024,"6828 vaccines administered first dose, up 85 from Jan. 10. 3.3% of the eligible population has received first dose. 499 vaccines administered second dose, up 16 from Jan. 10. https://www.c-uphd.org/covid-vaccinations.html"
+2021-01-12,8219,892,7694,866,0.0366410614192577,525,26,0.00250020239733693,"7694 vaccines administered first dose, up 866 from Jan. 11. 3.7% of the eligible population has received first dose. 525 vaccines administered second dose, up 26 from Jan. 11. http://www.dph.illinois.gov/covid19/vaccinedata?county=Champaign"
+2021-01-13,9658,1439,8735,1041,0.0415986056014058,923,398,0.00439559392903235,"8735 vaccines administered first dose, up 1041 from Jan. 12. 4.2% of the total population has received first dose. 923 vaccines administered second dose, up 398 from Jan. 12. http://www.dph.illinois.gov/covid19/vaccinedata?county=Champaign"
+2021-01-14,11124,1466,9742,1007,0.0463942319140121,1382,459,0.00658148516784692,"9742 vaccines administered first dose, up 1007 from Jan. 13. 4.6% of the total population has received first dose. 1382 vaccines administered second dose, up 459 from Jan. 13. http://www.dph.illinois.gov/covid19/vaccinedata?county=Champaign"
+2021-01-15,12008,884,10191,449,0.0485325002500202,1817,435,0.00865308143992609,"10191 vaccines administered first dose, up 449 from Jan. 14. 4.9% of the total population has received first dose. 1817 vaccines administered second dose, up 435 from Jan. 14. http://www.dph.illinois.gov/covid19/vaccinedata?county=Champaign"
+2021-01-16,12321,313,10303,112,0.0490658767614521,2018,201,0.00961030178633508,"12321 vaccine doses administered total, up 313 from Jan. 15. 10303 of the first dose administered, up 112 from Jan. 15. 2018 of the second dose administered, up 201 from Jan. 15. http://www.dph.illinois.gov/covid19/vaccinedata?county=Champaign"
+2021-01-17,12410,89,10385,82,0.0494563845644647,2025,7,0.00964363781829958,"12410 vaccine doses administered total, up 89 from Jan. 16. 10385 of the first dose administered, up 82 from Jan. 16. 2025 of the second dose administered, up 7 from Jan. 16. http://www.dph.illinois.gov/covid19/vaccinedata?county=Champaign"
+2021-01-18,12697,287,10666,281,0.0507945881333251,2031,6,0.00967221155998343,"12697 vaccine doses administered total, up 287 from Jan. 17. 10666 of the first dose administered, up 281 from Jan. 17. 2031 of the second dose administered, up 6 from Jan. 17. http://www.dph.illinois.gov/covid19/vaccinedata?county=Champaign"
+2021-01-19,14107,1410,12070,1404,0.0574808436873461,2037,6,0.00970078530166728,"14107 vaccine doses administered total, up 1410 from Jan. 18. 12070 of the first dose administered, up 1404 from Jan. 18. 2037 of the second dose administered, up 6 from Jan. 18. http://www.dph.illinois.gov/covid19/vaccinedata?county=Champaign"
+2021-01-20,15592,1485,13415,1345,0.0638861241148093,2177,140,0.0103675059409571,"15592 vaccine doses administered total, up 1485 from Jan. 19. 13415 of the first dose administered, up 1345 from Jan. 19. 2177 of the second dose administered, up 140 from Jan. 19. http://www.dph.illinois.gov/covid19/vaccinedata?county=Champaign"
+2021-01-21,16895,1303,14693,1278,0.0699723310934695,2202,25,0.0104865631979732,"16895 vaccine doses administered total, up 1303 from Jan. 20. 14693 of the first dose administered, up 1278 from Jan. 20. 2202 of the second dose administered, up 25 from Jan. 20. http://www.dph.illinois.gov/covid19/vaccinedata?county=Champaign"
+2021-01-22,18348,1453,16018,1325,0.0762823657153198,2330,128,0.0110961363538953,"18348 vaccine doses administered total, up 1453 from Jan. 21. 16018 of the first dose administered, up 1325 from Jan. 21. 2330 of the second dose administered, up 128 from Jan. 21. http://www.dph.illinois.gov/covid19/vaccinedata?county=Champaign"
+2021-01-23,18671,323,16337,319,0.0778015363148445,2334,4,0.0111151855150179,"18671 vaccine doses administered total, up 323 from Jan. 22. 16337 of the first dose administered, up 319 from Jan. 22. 2334 of the second dose administered, up 4 from Jan. 22. http://www.dph.illinois.gov/covid19/vaccinedata?county=Champaign"
+2021-01-24,18688,17,16354,17,0.0778824952496154,2334,0,0.0111151855150179,"18688 vaccine doses administered total, up 17 from Jan. 23. 16354 of the first dose administered, up 17 from Jan. 23. 2334 of the second dose administered, up 0 from Jan. 23. http://www.dph.illinois.gov/covid19/vaccinedata?county=Champaign"
+2021-01-25,18847,159,16493,139,0.0785444535986247,2354,20,0.0112104313206307,"18847 vaccine doses administered total, up 159 from Jan. 24. 16493 of the first dose administered, up 139 from Jan. 24. 2354 of the second dose administered, up 20 from Jan. 24. http://www.dph.illinois.gov/covid19/vaccinedata?county=Champaign"
+2021-01-26,21135,2288,18615,2122,0.0886500335741465,2520,166,0.0120009715072173,"21135 vaccine doses administered total, up 2288 from Jan. 25. 18615 of the first dose administered, up 2122 from Jan. 25. 2520 of the second dose administered, up 166 from Jan. 25. http://www.dph.illinois.gov/covid19/vaccinedata?county=Champaign"
+2021-01-27,23621,2486,20612,1997,0.0981603272645881,3009,489,0.0143297314544511,"23621 vaccine doses administered total, up 2486 from Jan. 26. 20612 of the first dose administered, up 1997 from Jan. 26. 3009 of the second dose administered, up 489 from Jan. 26. http://www.dph.illinois.gov/covid19/vaccinedata?county=Champaign"
+2021-01-28,26135,2514,22660,2048,0.107913497759342,3475,466,0.0165489587252301,"26135 vaccine doses administered total, up 2514 from Jan. 27. 22660 of the first dose administered, up 2048 from Jan. 27. 3475 of the second dose administered, up 466 from Jan. 27. http://www.dph.illinois.gov/covid19/vaccinedata?county=Champaign"
+2021-01-29,27412,1277,23517,857,0.111994780529852,3895,420,0.0185491206430997,"27412 vaccine doses administered total, up 1277 from Jan. 28. 23517 of the first dose administered, up 857 from Jan. 28. 3895 of the second dose administered, up 420 from Jan. 28. http://www.dph.illinois.gov/covid19/vaccinedata?county=Champaign"
+2021-01-30,28345,933,23989,472,0.114242581542315,4356,461,0.0207445364624755,"28345 vaccine doses administered total, up 933 from Jan. 29. 23989 of the first dose administered, up 472 from Jan. 29. 4356 of the second dose administered, up 461 from Jan. 29. http://www.dph.illinois.gov/covid19/vaccinedata?county=Champaign"
+2021-01-31,29489,1144,24684,695,0.117552373287361,4805,449,0.0228828047984837,"29489 vaccine doses administered total, up 1144 from Jan. 30. 24684 of the first dose administered, up 695 from Jan. 30. 4805 of the second dose administered, up 449 from Jan. 30. http://www.dph.illinois.gov/covid19/vaccinedata?county=Champaign"
+2021-02-01,30360,871,25144,460,0.119743026816457,5216,411,0.0248401061038275,"30360 vaccine doses administered total, up 871 from Jan. 31. 25144 of the first dose administered, up 460 from Jan. 31. 5216 of the second dose administered, up 411 from Jan. 31. http://www.dph.illinois.gov/covid19/vaccinedata?county=Champaign"
+2021-02-02,32682,2322,26834,1690,0.127791297390741,5848,632,0.027849873561193,"32,682 vaccine doses administered total, up 2,322 from Feb. 1. 
+26,834 of the first dose administered, up 1,690 from Feb. 1, or 12.8% of the population has received one dose. 
+5,848 of the second dose administered, up 632 from Feb. 1, or 2.8% of the population is fully vaccinated.
+10% of the population is waiting to receive second dose.
+http://www.dph.illinois.gov/covid19/vaccinedata?county=Champaign"

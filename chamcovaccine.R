@@ -4,10 +4,11 @@ library(ggplot2)
 library(scales)
 
 vax <- read_sheet("1HbhKu6Uby8b6YKGIFhTYQRiRX5Y2T8aS2DBqG7cz_eE")
-vaxplot <- ggplot(vax, aes(x = as.Date(date),
-                           y = dose1)) 
+write.csv(vax,"data/vax.csv", row.names = FALSE)
 
 # new plot trying to get just the last point labeled with tail
+vaxplot <- ggplot(vax, aes(x = as.Date(date),
+                           y = dose1)) 
 vaxplot +
   geom_area(colour = "#674EA7",
             fill = "#674EA7",
