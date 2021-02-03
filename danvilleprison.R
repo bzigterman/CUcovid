@@ -7,8 +7,8 @@ dville <- read_sheet("1K4RSNbuBPkOFgr18klpNL0vX-UUov7Ct1fRobOGZw6o",
                      sheet = 2)
 write.csv(dville,"data/dville.csv", row.names = FALSE)
 dville_after_Oct <- subset(dville, date > "2020-09-30")
-  
 
+# chart of Danville prison cases
 ggplot(dville_after_Oct, aes(x = as.Date(date),
                    y = active,
                    fill = who)) +
