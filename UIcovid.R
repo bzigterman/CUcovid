@@ -83,7 +83,7 @@ ggplot(uicovid, aes(x = as.Date(Date), y = positivity)) +
         axis.text.x = element_text(size = 12),
         plot.title = element_text(size = 22, family = "Oswald")) 
 ggsave("UI/4UIPositivity.png", width = 8, height = 32/7, dpi = 320)
-ggsave("UIPositivityWeb.png", 
+ggsave("UIPositivityWeb.png", # save to my website
        path = "../bzigterman.github.io/images/",
        width = 8, height = 32/7, dpi = 320)
 # ggsave("3TweetUIPositivity.png", width = 8, height = 32/7, dpi = 150)
