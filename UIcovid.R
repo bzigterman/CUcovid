@@ -72,6 +72,7 @@ ggplot(uicovid, aes(x = as.Date(Date), y = positivity)) +
   ylab(NULL) +
   scale_y_continuous(labels = percent, 
                      position = "right",
+                     # limits = c(0,max(uicovid$Week_avg_pos)),
                      expand = expansion(mult = c(0,.05))) +
   scale_x_date(expand = expansion(mult = c(.01,.01))) +
   guides(fill = FALSE) +
