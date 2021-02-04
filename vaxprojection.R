@@ -125,6 +125,6 @@ ggsave("VaccineProjectionCombined.png",
 
 # todo
 ## annotate what the two lines are in combined chart
-## annotate where 50% is in first chart
+## annotate where 50% is in first chart - pick first over 50%
 ## change date format in second dose chart
 
