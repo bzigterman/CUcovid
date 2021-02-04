@@ -1,4 +1,4 @@
-"date","Percent Receiving First Dose","first_dose","new_dose1","avg_daily_first_dose","pct_dose1","second_dose","new_dose2","avg_daily_second_dose","pct_dose2"
+"date","actual_proj","first_dose","new_dose1","avg_daily_first_dose","pct_dose1","second_dose","new_dose2","avg_daily_second_dose","pct_dose2"
 2020-12-16,"Actual",8,8,NA,3.80983222451341e-05,NA,NA,NA,NA
 2020-12-17,"Actual",191,183,NA,0.000909597443602577,NA,NA,NA,NA
 2020-12-18,"Actual",477,286,NA,0.00227161246386612,NA,NA,NA,NA
