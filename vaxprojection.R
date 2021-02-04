@@ -9,9 +9,11 @@ vax_proj <- read_sheet("1HbhKu6Uby8b6YKGIFhTYQRiRX5Y2T8aS2DBqG7cz_eE",
 write.csv(vax_proj,"data/vax_proj.csv", row.names = FALSE)
 
 # chart
-ggplot(vax_proj, aes(x = as.Date(date), y = pct, colour = real)) +
+ggplot(vax_proj, aes(x = as.Date(date), y = pct, 
+                     colour = `Percent Receiving First Dose`,
+                     linetype = `Percent Receiving First Dose`)) +
   geom_line(size = 1.5) +
-  ggtitle("When Champaign County Residents are Projected to Receive First Vaccine Dose",
+  ggtitle("When a Percent of Champaign County Residents Might Receive First Vaccine Dose",
           "Based on average new first doses administered over the past week")+
   xlab(NULL) +
   ylab(NULL) +
@@ -19,11 +21,10 @@ ggplot(vax_proj, aes(x = as.Date(date), y = pct, colour = real)) +
                      position = "right",
                      expand = expansion(mult = c(0,0))) +
   scale_x_date(expand = c(0,0)) +
-  scale_colour_manual(values = c("#800080", "#008040"),
-                      guide = guide_legend(title = NULL)) +
+  scale_colour_manual(values = c("#800080", "#008040")) +
   theme(text = element_text(family = "Barlow"),
-        axis.text.y = element_text(size = 12),
-        axis.text.x = element_text(size = 12),
+        axis.text.y = element_text(size = 15),
+        axis.text.x = element_text(size = 15),
         plot.title = element_text(size = 18, family = "Oswald"),
         legend.position = c(.15,.5),
         legend.background = element_blank(),
