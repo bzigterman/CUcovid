@@ -26,8 +26,8 @@ ggplot(uicovid, aes(x = as.Date(Date), y = New_Cases)) +
   ggtitle("New Cases at the University of Illinois",
           "With seven-day moving average")+
   theme(text = element_text(family = "Barlow"),
-        axis.text.y = element_text(size = 12),
-        axis.text.x = element_text(size = 12),
+        axis.text.y = element_text(size = 13),
+        axis.text.x = element_text(size = 13),
         plot.title = element_text(size = 22, family = "Oswald")) 
 ggsave("UI/2UICases.png", width = 8, height = 32/7, dpi = 320)
 ggsave("UICasesWeb.png", 
@@ -52,8 +52,8 @@ ggplot(uicovid, aes(x = as.Date(Date), y = New_Tests)) +
   ggtitle("New Tests at the University of Illinois",
           "With seven-day moving average")+
   theme(text = element_text(family = "Barlow"),
-        axis.text.y = element_text(size = 12),
-        axis.text.x = element_text(size = 12),
+        axis.text.y = element_text(size = 13),
+        axis.text.x = element_text(size = 13),
         plot.title = element_text(size = 22, family = "Oswald")) 
 ggsave("UI/3UITests.png", width = 8, height = 32/7, dpi = 320)
 ggsave("UITestsWeb.png", 
@@ -79,8 +79,8 @@ ggplot(uicovid, aes(x = as.Date(Date), y = positivity)) +
   ggtitle("Test Positivity at the University of Illinois",
           "With seven-day moving average")+
   theme(text = element_text(family = "Barlow"),
-        axis.text.y = element_text(size = 12),
-        axis.text.x = element_text(size = 12),
+        axis.text.y = element_text(size = 13),
+        axis.text.x = element_text(size = 13),
         plot.title = element_text(size = 22, family = "Oswald")) 
 ggsave("UI/4UIPositivity.png", width = 8, height = 32/7, dpi = 320)
 ggsave("UIPositivityWeb.png", # save to my website
@@ -138,13 +138,13 @@ ggplot(uicovid, aes(x = Semester_day/7, y = New_Cases, colour = Semester)) +
   ggtitle("Fall Semester vs. Spring Semester at the University of Illinois",
           "New cases with seven-day moving average")+
   theme(text = element_text(family = "Barlow"),
-        axis.text.y = element_text(size = 12),
-        axis.text.x = element_text(size = 12),
+        axis.text.y = element_text(size = 13),
+        axis.text.x = element_text(size = 13),
         plot.title = element_text(size = 22, family = "Oswald"),
         legend.position = c(.058,.85),
         legend.background = element_blank(),
         legend.key = element_blank(),
-        legend.text = element_text(size = 12)) 
+        legend.text = element_text(size = 13)) 
 
 ggsave("UI/1UISemCompare.png", width = 8, height = 32/7, dpi = 320)
 ggsave("UISemCompare.png", 

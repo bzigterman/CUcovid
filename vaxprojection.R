@@ -35,13 +35,13 @@ ggplot(vax_proj_first_dose, aes(x = as.Date(date), y = pct_dose1,
                       guide = guide_legend(title = NULL)) +
   scale_linetype_discrete(guide = guide_legend(title = NULL)) +
   theme(text = element_text(family = "Barlow"),
-        axis.text.y = element_text(size = 15),
-        axis.text.x = element_text(size = 15),
+        axis.text.y = element_text(size = 13),
+        axis.text.x = element_text(size = 13),
         plot.title = element_text(size = 18, family = "Oswald"),
         legend.position = c(.15,.5),
         legend.background = element_blank(),
         legend.key = element_blank(),
-        legend.text = element_text(size = 12)) 
+        legend.text = element_text(size = 13)) 
 
 ggsave("vax/VaccineProjection.png", width = 8, height = 32/7, dpi = 320)
 ggsave("VaccineProjection.png", 
@@ -70,13 +70,13 @@ ggplot(vax_proj, aes(x = as.Date(date), y = pct_dose2,
   #scale_linetype_manual(guide = guide_legend(title = NULL)) +
   scale_linetype_discrete(guide = guide_legend(title = NULL)) +
   theme(text = element_text(family = "Barlow"),
-        axis.text.y = element_text(size = 15),
-        axis.text.x = element_text(size = 15),
+        axis.text.y = element_text(size = 13),
+        axis.text.x = element_text(size = 13),
         plot.title = element_text(size = 18, family = "Oswald"),
         legend.position = c(.15,.5),
         legend.background = element_blank(),
         legend.key = element_blank(),
-        legend.text = element_text(size = 12)) 
+        legend.text = element_text(size = 13)) 
 
 ggsave("vax/VaccineProjection2.png", width = 8, height = 32/7, dpi = 320)
 ggsave("VaccineProjection2.png", 
@@ -110,13 +110,13 @@ ggplot(vax_proj_first_dose,
                       guide = guide_legend(title = NULL)) +
   scale_linetype_discrete(guide = guide_legend(title = NULL)) +
   theme(text = element_text(family = "Barlow"),
-        axis.text.y = element_text(size = 15),
-        axis.text.x = element_text(size = 15),
+        axis.text.y = element_text(size = 13),
+        axis.text.x = element_text(size = 13),
         plot.title = element_text(size = 18, family = "Oswald"),
         legend.position = c(.15,.5),
         legend.background = element_blank(),
         legend.key = element_blank(),
-        legend.text = element_text(size = 12)) 
+        legend.text = element_text(size = 13)) 
 
 ggsave("vax/VaccineProjectionCombined.png", width = 8, height = 32/7, dpi = 320)
 ggsave("VaccineProjectionCombined.png", 

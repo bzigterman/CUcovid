@@ -41,8 +41,8 @@ vaxplot +
   ggtitle("People Vaccinated in Champaign County",
           "With percent of total population. Source: IDPH") +
   theme(text = element_text(family = "Barlow"),
-        axis.text.y = element_text(size = 12),
-        axis.text.x = element_text(size = 12),
+        axis.text.y = element_text(size = 13),
+        axis.text.x = element_text(size = 13),
         plot.title = element_text(size = 22, family = "Oswald")) 
 
 ggsave("vax/chamvax.png", width = 8, height = 32/7, dpi = 320)
@@ -70,8 +70,8 @@ ggplot(vax, aes(x = as.Date(date), y = new_doses)) +
   ggtitle("New Vaccine Doses Administered in Champaign County",
           "With seven-day moving average. Source: IDPH")+
   theme(text = element_text(family = "Barlow"),
-        axis.text.y = element_text(size = 12),
-        axis.text.x = element_text(size = 12),
+        axis.text.y = element_text(size = 13),
+        axis.text.x = element_text(size = 13),
         plot.title = element_text(size = 22, family = "Oswald")) 
 ggsave("vax/NewVaccines.png", width = 8, height = 32/7, dpi = 320)
 ggsave("NewVaccinesWeb.png", 

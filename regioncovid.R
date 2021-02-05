@@ -29,8 +29,8 @@ ggplot(regioncovid, aes(x = as.Date(Date), y = ChampaignCoNoUIpositives)) +
   ggtitle("Champaign County Cases without University of Illinois Tests",
           "With seven-day moving average. Source: IDPH")+
   theme(text = element_text(family = "Barlow"),
-        axis.text.y = element_text(size = 12),
-        axis.text.x = element_text(size = 12),
+        axis.text.y = element_text(size = 13),
+        axis.text.x = element_text(size = 13),
         plot.title = element_text(size = 22, family = "Oswald")) 
 ggsave("region/1ChampaignCountyNoUICases.png", 
        width = 8, height = 32/7, dpi = 320)
@@ -58,8 +58,8 @@ ggplot(regioncovid, aes(x = as.Date(Date), y = ChampaignCoNoUItests)) +
   ggtitle("Champaign County Tests without University of Illinois Tests",
           "With seven-day moving average. Source: IDPH")+
   theme(text = element_text(family = "Barlow"),
-        axis.text.y = element_text(size = 12),
-        axis.text.x = element_text(size = 12),
+        axis.text.y = element_text(size = 13),
+        axis.text.x = element_text(size = 13),
         plot.title = element_text(size = 22, family = "Oswald")) 
 ggsave("region/CountyTestsnoUI.png", 
        width = 8, height = 32/7, dpi = 320)
@@ -84,8 +84,8 @@ ggplot(regioncovid, aes(x = as.Date(Date), y = ChampaignCoNoUIpositivity)) +
   ggtitle("Champaign County Positivity without University of Illinois Tests",
           "With seven-day moving average. Source: IDPH")+
   theme(text = element_text(family = "Barlow"),
-        axis.text.y = element_text(size = 12),
-        axis.text.x = element_text(size = 12),
+        axis.text.y = element_text(size = 13),
+        axis.text.x = element_text(size = 13),
         plot.title = element_text(size = 22, family = "Oswald")) 
 ggsave("region/ChampaignConoUIPositivity.png", 
        width = 8, height = 32/7, dpi = 320)
@@ -133,13 +133,13 @@ ggplot(regioncovid, aes(x = as.Date(Date))) +
   ggtitle("Champaign County Cases",
           "With seven-day moving average. Source: IDPH")+
   theme(text = element_text(family = "Barlow"),
-        axis.text.y = element_text(size = 12),
-        axis.text.x = element_text(size = 12),
+        axis.text.y = element_text(size = 13),
+        axis.text.x = element_text(size = 13),
         plot.title = element_text(size = 22, family = "Oswald"),
         legend.position = c(.16,.85),
         legend.background = element_blank(),
         legend.key = element_blank(),
-        legend.text = element_text(size = 12)) 
+        legend.text = element_text(size = 13)) 
 ggsave("region/2ChampaignCoCasesSplit.png", 
        width = 8, height = 32/7, dpi = 320)
 ggsave("ChampaignCoCasesSplitWeb.png", 
@@ -174,13 +174,13 @@ ggplot(regioncovid, aes(x = as.Date(Date))) +
   ggtitle("Positivity without University of Illinois tests",
           "With seven-day moving average. Source: IDPH")+
   theme(text = element_text(family = "Barlow"),
-        axis.text.y = element_text(size = 12),
-        axis.text.x = element_text(size = 12),
+        axis.text.y = element_text(size = 13),
+        axis.text.x = element_text(size = 13),
         plot.title = element_text(size = 22, family = "Oswald"),
         legend.position = c(.16,.85),
         legend.background = element_blank(),
         legend.key = element_blank(),
-        legend.text = element_text(size = 12)) 
+        legend.text = element_text(size = 13)) 
 ggsave("region/3NoUIpositivity.png", 
        width = 8, height = 32/7, dpi = 320)
 ggsave("NoUIpositivityWeb.png", 
@@ -212,13 +212,13 @@ ggplot(regioncovid, aes(x = as.Date(Date))) +
   ggtitle("Illinois Test Positivity",
           "With seven-day moving average. Source: IDPH")+
   theme(text = element_text(family = "Barlow"),
-        axis.text.y = element_text(size = 12),
-        axis.text.x = element_text(size = 12),
+        axis.text.y = element_text(size = 13),
+        axis.text.x = element_text(size = 13),
         plot.title = element_text(size = 22, family = "Oswald"),
         legend.position = c(.2,.85),
         legend.background = element_blank(),
         legend.key = element_blank(),
-        legend.text = element_text(size = 12)) 
+        legend.text = element_text(size = 13)) 
 ggsave("region/4statepositivity.png", 
        width = 8, height = 32/7, dpi = 320)
 ggsave("statepositivityWeb.png", 
