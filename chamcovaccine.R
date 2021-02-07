@@ -2,6 +2,7 @@ library(googlesheets4)
 library(dplyr)
 library(ggplot2)
 library(scales)
+library(zoo)
 
 vax <- read_sheet("1HbhKu6Uby8b6YKGIFhTYQRiRX5Y2T8aS2DBqG7cz_eE")
 write.csv(vax,"data/vax.csv", row.names = FALSE)
