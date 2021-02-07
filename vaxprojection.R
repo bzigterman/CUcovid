@@ -2,6 +2,7 @@ library(googlesheets4)
 library(dplyr)
 library(ggplot2)
 library(scales)
+library(zoo)
 
 # grab data from google sheet and save to csv
 vax_proj <- read_sheet("1HbhKu6Uby8b6YKGIFhTYQRiRX5Y2T8aS2DBqG7cz_eE",
