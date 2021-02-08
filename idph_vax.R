@@ -6,17 +6,40 @@ library(dplyr)
 library(ggplot2)
 library(scales)
 library(zoo)
+library(clipr)
 
 # import and clean data
 idph_vax_champaign <- rio::import("https://idph.illinois.gov/DPHPublicInformation/api/COVIDExport/GetVaccineAdministration?format=csv&countyName=Champaign",
-                                  format = "csv")
-idph_vax_champaign_clean <- idph_vax_champaign %>%
+                                  format = "csv") %>%
   mutate(Date = mdy_hms(Report_Date)) %>%
   mutate(PersonsDose1 = AdministeredCount - PersonsFullyVaccinated) %>%
-  mutate(PercentDose1 = PersonsDose1/209983) 
+  mutate(PercentDose1 = PersonsDose1/209983) %>%
+  mutate(Dose1Change = PersonsDose1 - lag(PersonsDose1)) %>%
+  mutate(Dose2Change = PersonsFullyVaccinated - lag(PersonsFullyVaccinated)) %>%
+  mutate(Text = paste(AdministeredCount,
+                      " total doses administered in the past day, up ", 
+                      AdministeredCountChange, 
+                      " from the day before. ▪︎ ",
+                      PersonsDose1,
+                      " have received the first dose, up ",
+                      Dose1Change,
+                      " from the day before. ",
+                      percent(PercentDose1,
+                              accuracy = .1),
+                      "% of the population has received first dose. ▪︎ ",
+                      PersonsFullyVaccinated,
+                      " have received both doses, up ",
+                      Dose2Change,
+                      " from the day before. ",
+                      percent(PctVaccinatedPopulation,
+                              accuracy = .1),
+                      "% of the population is fully vaccinated.",
+                      sep = ""))
+write.csv(idph_vax_champaign,"idph/vax_champaign.csv", row.names = FALSE)
+write_clip(tail(idph_vax_champaign$Text, n = 1)) # paste text to clipboard
 
 # new vaccines administered chart copy
-ggplot(idph_vax_champaign_clean, 
+ggplot(idph_vax_champaign, 
        aes(x = as.Date(Date), y = AdministeredCountChange)) +
   geom_col(fill = "#674EA7",
            alpha = .25) +
@@ -37,8 +60,13 @@ ggplot(idph_vax_champaign_clean,
         axis.text.x = element_text(size = 13),
         plot.title = element_text(size = 22, family = "Oswald")) 
 
+ggsave("vax/NewVaccines.png", width = 8, height = 32/7, dpi = 320)
+ggsave("NewVaccinesWeb.png", 
+       path = "../bzigterman.github.io/images/",
+       width = 8, height = 32/7, dpi = 150)
+
 # first and second dose comparison chart
-ggplot(idph_vax_champaign_clean, aes(x = as.Date(Date),
+ggplot(idph_vax_champaign, aes(x = as.Date(Date),
                 y = PersonsDose1))  +
   geom_area(colour = "#674EA7",
             fill = "#674EA7",
@@ -49,11 +77,11 @@ ggplot(idph_vax_champaign_clean, aes(x = as.Date(Date),
             alpha = 1) +
   geom_label(aes(label = paste("First dose:",
                                percent(PercentDose1, accuracy = .1))),
-             data = tail(idph_vax_champaign_clean, 1),
+             data = tail(idph_vax_champaign, 1),
              size = 4,
              hjust = 1.3,
              family = "Barlow") +
-  geom_label(data = tail(idph_vax_champaign_clean, 1),
+  geom_label(data = tail(idph_vax_champaign, 1),
              aes(x = as.Date(Date), 
                  y = PersonsFullyVaccinated,
                  label = paste("Fully vaccinated:",
@@ -75,6 +103,12 @@ ggplot(idph_vax_champaign_clean, aes(x = as.Date(Date),
         axis.text.x = element_text(size = 13),
         plot.title = element_text(size = 22, family = "Oswald")) 
 
+ggsave("vax/chamvax.png", width = 8, height = 32/7, dpi = 320)
+ggsave("VaccinesWeb.png", 
+       path = "../bzigterman.github.io/images/",
+       width = 8, height = 32/7, dpi = 150)
+
 # todo
-# - save the charts, prob replace the manual-made ones
-# - save the data to idph folder
+# - [x] save the charts, prob replace the manual-made ones
+# - [x] save the data to idph folder
+# - [x] generate text
