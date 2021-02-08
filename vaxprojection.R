@@ -83,7 +83,7 @@ ggsave("VaccineProjection2.png",
        path = "../bzigterman.github.io/images/",
        width = 8, height = 32/7, dpi = 150)
 
-# combined
+# combined short
 ggplot(vax_proj_first_dose, 
        aes(x = as.Date(date), y = pct_dose1, 
            colour = actual_proj,
@@ -94,9 +94,9 @@ ggplot(vax_proj_first_dose,
                 colour = actual_proj,
                 linetype = actual_proj),
             size = 1.5) + 
-  annotate("text", x = as.Date("2021-05-01"), y = .8, 
+  annotate("text", x = as.Date("2021-04-01"), y = .8, 
            label = "First Dose", family = "Barlow", size = 5) +
-  annotate("text", x = as.Date("2021-06-01"), y = .17, 
+  annotate("text", x = as.Date("2021-05-01"), y = .12, 
            label = "Second Dose", family = "Barlow", size = 5) +
   ggtitle("When a Percent of Champaign County Residents Might Receive Vaccine Dose",
           "Based on average new doses administered over the past week")+
@@ -120,6 +120,45 @@ ggplot(vax_proj_first_dose,
 
 ggsave("vax/VaccineProjectionCombined.png", width = 8, height = 32/7, dpi = 320)
 ggsave("VaccineProjectionCombined.png", 
+       path = "../bzigterman.github.io/images/",
+       width = 8, height = 32/7, dpi = 150)
+
+# combined long
+ggplot(vax_proj, 
+       aes(x = as.Date(date), y = pct_dose1, 
+           colour = actual_proj,
+           linetype = actual_proj)) +
+  geom_line(size = 1.5) +
+  geom_line(aes(x = as.Date(date), y = pct_dose2, 
+                colour = actual_proj,
+                linetype = actual_proj),
+            size = 1.5) + 
+  annotate("text", x = as.Date("2021-03-01"), y = .8, 
+           label = "First Dose", family = "Barlow", size = 5) +
+  annotate("text", x = as.Date("2021-06-01"), y = .12, 
+           label = "Second Dose", family = "Barlow", size = 5) +
+  ggtitle("When a Percent of Champaign County Residents Might Receive Vaccine Dose",
+          "Based on average new doses administered over the past week")+
+  xlab(NULL) +
+  ylab(NULL) +
+  scale_y_continuous(labels = percent, 
+                     position = "right",
+                     expand = expansion(mult = c(0,0))) +
+  scale_x_date(expand = c(0,0)) +
+  scale_colour_manual(values = c("#800080", "#008040"),
+                      guide = guide_legend(title = NULL)) +
+  scale_linetype_discrete(guide = guide_legend(title = NULL)) +
+  theme(text = element_text(family = "Barlow"),
+        axis.text.y = element_text(size = 13),
+        axis.text.x = element_text(size = 13),
+        plot.title = element_text(size = 18, family = "Oswald"),
+        legend.position = c(.75,.25),
+        legend.background = element_blank(),
+        legend.key = element_blank(),
+        legend.text = element_text(size = 13)) 
+
+ggsave("vax/VaccineProjectionCombinedLong.png", width = 8, height = 32/7, dpi = 320)
+ggsave("VaccineProjectionCombinedLong.png", 
        path = "../bzigterman.github.io/images/",
        width = 8, height = 32/7, dpi = 150)
 
