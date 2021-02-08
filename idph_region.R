@@ -73,7 +73,7 @@ ggplot(idph_region6, aes(x = as.Date(Date), y = CLIAdmissions_RollingAvg)) +
         plot.title = element_text(size = 22, family = "Oswald")) 
 ggsave("region/region6newhospital.png", 
        width = 8, height = 32/7, dpi = 320)
-ggsave("regoin6newhospital.png", 
+ggsave("region6newhospital.png", 
        path = "../bzigterman.github.io/images/",
        width = 8, height = 32/7, dpi = 320)
 
