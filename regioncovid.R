@@ -215,7 +215,7 @@ ggplot(regioncovid, aes(x = as.Date(Date))) +
         axis.text.y = element_text(size = 13),
         axis.text.x = element_text(size = 13),
         plot.title = element_text(size = 22, family = "Oswald"),
-        legend.position = c(.2,.85),
+        legend.position = c(.25,.85),
         legend.background = element_blank(),
         legend.key = element_blank(),
         legend.text = element_text(size = 13)) 
