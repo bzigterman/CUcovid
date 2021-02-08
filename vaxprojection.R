@@ -48,7 +48,6 @@ ggsave("vax/VaccineProjection.png", width = 8, height = 32/7, dpi = 320)
 ggsave("VaccineProjection.png", 
         path = "../bzigterman.github.io/images/",
         width = 8, height = 32/7, dpi = 150)
- 
 
 # chart of second dose
 ggplot(vax_proj, aes(x = as.Date(date), y = pct_dose2, 
@@ -128,4 +127,5 @@ ggsave("VaccineProjectionCombined.png",
 ## annotate what the two lines are in combined chart
 ## annotate where 50% is in first chart - pick first over 50%
 ## change date format in second dose chart
+## switch axes on projection chart
 
