@@ -9,13 +9,13 @@ library(zoo)
 library(clipr)
 
 idph_region6 <- rio::import("https://idph.illinois.gov/DPHPublicInformation/api/COVIDExport/GetResurgenceData?format=csv&regionID=6&daysIncluded=0",
-                                  format = "csv") %>%
+                            format = "csv") %>%
   filter(RegionID == 6) %>%
   mutate(Date = mdy_hms(ReportDate)) 
 write.csv(idph_region6,"idph/region6.csv", row.names = FALSE)
 
 idph_region6noUI <- rio::import("https://idph.illinois.gov/DPHPublicInformation/api/COVIDExport/GetResurgenceData?format=csv&regionID=6&daysIncluded=0",
-                            format = "csv") %>%
+                                format = "csv") %>%
   filter(RegionID == 14) %>%
   mutate(Date = mdy_hms(ReportDate)) 
 write.csv(idph_region6noUI,"idph/idph_region6noUI.csv", row.names = FALSE)
