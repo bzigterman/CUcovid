@@ -18,7 +18,7 @@ idph_region6noUI <- rio::import("https://idph.illinois.gov/DPHPublicInformation/
                                 format = "csv") %>%
   filter(RegionID == 14) %>%
   mutate(Date = mdy_hms(ReportDate)) 
-write.csv(idph_region6noUI,"idph/idph_region6noUI.csv", row.names = FALSE)
+write.csv(idph_region6noUI,"idph/region6noUI.csv", row.names = FALSE)
 
 #idph_region6noUI <- rio::import("https://idph.illinois.gov/DPHPublicInformation/api/COVIDExport/GetResurgenceData?format=csv&regionID=14&daysIncluded=0",
  #                           format = "csv")# %>%
