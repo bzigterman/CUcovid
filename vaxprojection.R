@@ -167,4 +167,5 @@ ggsave("VaccineProjectionCombinedLong.png",
 ## annotate where 50% is in first chart - pick first over 50%
 ## change date format in second dose chart
 ## switch axes on projection chart
+## use function to create line? https://r-graphics.org/recipe-annotate-lines
 
