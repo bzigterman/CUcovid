@@ -151,6 +151,45 @@ ggsave("UISemCompare.png",
        path = "../bzigterman.github.io/images/",
        width = 8, height = 32/7, dpi = 320)
 
+# fall vs spring semester total cases
+ggplot(uicovid, aes(x = Semester_day/7, y = Sem_totals, colour = Semester)) +
+  annotate("rect", xmin = -Inf, xmax = 0, ymin = 0, ymax = Inf,
+           fill = "white") +
+  geom_line(size = 1.5) +
+#  geom_line(aes(y = rollmean(Total_cases, 7, fill = TRUE, align = "right")),
+ #           size = 1.5) +
+  xlab("Weeks into Semester") +
+  ylab(NULL) +
+  scale_y_continuous(labels = comma, 
+                     position = "right",
+                     # limits = c(0,max(rollmean(uicovid$Sem_totals,
+                     #                           7,
+                     #                           fill = TRUE,
+                     #                           align = "right"))),
+                     expand = expansion(mult = c(0,.05))) +
+  scale_x_continuous(breaks = c(-2,0,4,8,12,16),
+                     expand = expansion(mult = c(.01,.01))) +
+  #scale_colour_manual(breaks = c("Fall","Spring"),
+  #                    values = c("#d16c1f","#26ab5c")) +
+  scale_colour_brewer(breaks = c("Fall","Spring"),
+                      palette = "Set1",
+                      guide = guide_legend(title = NULL)) +
+  ggtitle("Fall Semester vs. Spring Semester at the University of Illinois",
+          "Total cases from two weeks before classes start")+
+  theme(text = element_text(family = "Barlow"),
+        axis.text.y = element_text(size = 13),
+        axis.text.x = element_text(size = 13),
+        plot.title = element_text(size = 22, family = "Oswald"),
+        legend.position = c(.058,.85),
+        legend.background = element_blank(),
+        legend.key = element_blank(),
+        legend.text = element_text(size = 13)) 
+
+# ggsave("UI/1UISemCompare.png", width = 8, height = 32/7, dpi = 320)
+# ggsave("UISemCompare.png", 
+#        path = "../bzigterman.github.io/images/",
+#        width = 8, height = 32/7, dpi = 320)
+
 
 # todo
 # 
