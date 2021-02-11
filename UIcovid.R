@@ -135,7 +135,7 @@ ggplot(uicovid, aes(x = Semester_day/7, y = New_Cases, colour = Semester)) +
   scale_colour_brewer(breaks = c("Fall","Spring"),
                       palette = "Set1",
                       guide = guide_legend(title = NULL)) +
-  ggtitle("Fall Semester vs. Spring Semester at the University of Illinois",
+  ggtitle("Fall vs. Spring Semester at the University of Illinois",
           "New cases with seven-day moving average")+
   theme(text = element_text(family = "Barlow"),
         axis.text.y = element_text(size = 13),
