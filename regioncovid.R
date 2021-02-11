@@ -225,3 +225,5 @@ ggsave("statepositivityWeb.png",
        path = "../bzigterman.github.io/images/",
        width = 8, height = 32/7, dpi = 320)
 
+# todo
+# - make the hospitalizations charts geom_area
