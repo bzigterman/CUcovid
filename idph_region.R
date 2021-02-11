@@ -29,12 +29,14 @@ write.csv(idph_region6noUI,"idph/region6noUI.csv", row.names = FALSE)
 ggplot(idph_region6, aes(x = as.Date(Date), y = COVIDHospitalBedsInUse)) +
   geom_col(fill = "#910000",
            alpha = .25) +
-  geom_line(aes(y = rollmean(COVIDHospitalBedsInUse, 
-                             7, 
-                             fill = TRUE, 
-                             align = "right")),
-            colour = "#910000",
-            size = 1) +
+  geom_line(colour = "#910000",
+            size = 1.5) +
+  # geom_line(aes(y = rollmean(COVIDHospitalBedsInUse, 
+  #                            7, 
+  #                            fill = TRUE, 
+  #                            align = "right")),
+  #           colour = "#910000",
+  #           size = 1) +
   xlab(NULL) +
   ylab(NULL) +
   scale_y_continuous(labels = comma, 
@@ -43,7 +45,7 @@ ggplot(idph_region6, aes(x = as.Date(Date), y = COVIDHospitalBedsInUse)) +
   scale_x_date(expand = c(0,0)) +
   guides(fill = FALSE) +
   ggtitle("Hospital Beds in Use for COVID-19 in Region 6",
-          "With seven-day moving average. Source: IDPH")+
+          "Source: IDPH")+
   theme(text = element_text(family = "Barlow"),
         axis.text.y = element_text(size = 13),
         axis.text.x = element_text(size = 13),
