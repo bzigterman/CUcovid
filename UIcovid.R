@@ -185,10 +185,10 @@ ggplot(uicovid, aes(x = Semester_day/7, y = Sem_totals, colour = Semester)) +
         legend.key = element_blank(),
         legend.text = element_text(size = 13)) 
 
-# ggsave("UI/1UISemCompare.png", width = 8, height = 32/7, dpi = 320)
-# ggsave("UISemCompare.png", 
-#        path = "../bzigterman.github.io/images/",
-#        width = 8, height = 32/7, dpi = 320)
+ggsave("UI/UISemCompareTotal.png", width = 8, height = 32/7, dpi = 320)
+ggsave("UISemCompareTotal.png", 
+       path = "../bzigterman.github.io/images/",
+       width = 8, height = 32/7, dpi = 320)
 
 
 # todo
