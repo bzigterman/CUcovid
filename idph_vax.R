@@ -109,19 +109,12 @@ ggsave("VaccinesWeb.png",
        width = 8, height = 32/7, dpi = 150)
 
 # first dose projection
-# linear model prediction
-#week_vax <- idph_vax_champaign %>%
- # tail(7)
 avgdose1change <- mean(tail(idph_vax_champaign$Dose1Change,7), na.rm = TRUE)
-#pace <- lm(PersonsDose1~as.Date(Date), data = week_vax)
 xmin <- max(as.Date(idph_vax_champaign$Date))
 xmax <- as.Date("2023-04-01")
 ymin <- max(idph_vax_champaign$PersonsDose1)
-#ymax <- 209983
-projected <- data.frame(Date = seq(xmin, xmax, by = "day"))# %>%
-#  mutate(PersonsDose1 = seq(ymin, nrow(projected)*, by = avgdose1change)) 
+projected <- data.frame(Date = seq(xmin, xmax, by = "day"))
 projected$PersonsDose1 <- seq(ymin,
-                              #ymin+nrow(projected)*avgdose1change-1, 
                               by = avgdose1change,
                               length.out = nrow(projected))
 projected <- projected %>%
@@ -216,8 +209,10 @@ ggplot(idph_vax_champaign, aes(x = as.Date(Date),
         axis.text.x = element_text(size = 13),
         plot.title = element_text(size = 18, family = "Oswald")) 
 
-
-
+ggsave("vax/VaccineProjection.png", width = 8, height = 32/7, dpi = 320)
+ggsave("VaccineProjection.png", 
+       path = "../bzigterman.github.io/images/",
+       width = 8, height = 32/7, dpi = 150)
 
 # todo
 # - [x] save the charts, prob replace the manual-made ones
