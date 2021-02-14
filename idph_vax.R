@@ -170,12 +170,12 @@ ggplot(idph_vax_champaign, aes(x = as.Date(Date),
   geom_text(data = half_vax, # half point projection label
             aes(x = as.Date(Date),
                 y = PercentDose1,
-                label = paste("50% by",
+                label = paste("At current pace:\n50% by",
                               month(Date, label = TRUE, abbr = FALSE),
                               mday(Date))),
             family = "Barlow",
             hjust = 1.1,
-            vjust = -1.3,
+            vjust = -0.3,
             size = 4.4) +
   geom_point(data = eighty_vax, # eighty pct point projection point
              aes(x = as.Date(Date),
@@ -188,12 +188,12 @@ ggplot(idph_vax_champaign, aes(x = as.Date(Date),
   geom_text(data = eighty_vax, # eighty pct point projection label
             aes(x = as.Date(Date),
                 y = PercentDose1,
-                label = paste("80% by",
+                label = paste("At current pace:\n80% by",
                               month(Date, label = TRUE, abbr = FALSE),
                               mday(Date))),
             family = "Barlow",
             hjust = 1.1,
-            vjust = -1.3,
+            vjust = -0.3,
             size = 4.4) +
   xlab(NULL) +
   ylab(NULL) +
