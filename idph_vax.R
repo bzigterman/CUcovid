@@ -108,6 +108,117 @@ ggsave("VaccinesWeb.png",
        path = "../bzigterman.github.io/images/",
        width = 8, height = 32/7, dpi = 150)
 
+# first dose projection
+# linear model prediction
+#week_vax <- idph_vax_champaign %>%
+ # tail(7)
+avgdose1change <- mean(tail(idph_vax_champaign$Dose1Change,7), na.rm = TRUE)
+#pace <- lm(PersonsDose1~as.Date(Date), data = week_vax)
+xmin <- max(as.Date(idph_vax_champaign$Date))
+xmax <- as.Date("2023-04-01")
+ymin <- max(idph_vax_champaign$PersonsDose1)
+#ymax <- 209983
+projected <- data.frame(Date = seq(xmin, xmax, by = "day"))# %>%
+#  mutate(PersonsDose1 = seq(ymin, nrow(projected)*, by = avgdose1change)) 
+projected$PersonsDose1 <- seq(ymin,
+                              #ymin+nrow(projected)*avgdose1change-1, 
+                              by = avgdose1change,
+                              length.out = nrow(projected))
+projected <- projected %>%
+  filter(PersonsDose1 <209983) %>%
+  mutate(PercentDose1 = PersonsDose1/209983)
+
+# points
+current_vax <- idph_vax_champaign %>%
+  tail(1)
+half_vax <- projected %>%
+  filter(PercentDose1 >.5) %>%
+  head(1)
+eighty_vax <- projected %>%
+  filter(PercentDose1 >.8) %>%
+  head(1)
+
+# plot
+ggplot(idph_vax_champaign, aes(x = as.Date(Date),
+                               y = PercentDose1)) +
+  geom_line(colour = "#800080", # actual line 
+            size = 1.5) +
+  geom_line(data = projected, # projected line
+            aes(x = as.Date(Date),
+                y = PercentDose1),
+            linetype = "dashed",
+            size = 1.5, 
+            colour = "#008040") +
+  geom_point(data = current_vax, # current point
+             aes(x = as.Date(Date),
+                 y = PercentDose1),
+             shape = 21,
+             colour = "#800080",
+             size = 2.5,
+             fill = "white",
+             stroke = 1.5) +
+  geom_text(data = current_vax, # current label
+             aes(x = as.Date(Date),
+                 y = PercentDose1,
+                 label = paste(percent(PercentDose1),
+                               "have already received first dose")),
+            family = "Barlow",
+            hjust = -.05,
+            vjust = 1.5,
+            size = 4.4) +
+  geom_point(data = half_vax, # half point projection point
+             aes(x = as.Date(Date),
+                 y = PercentDose1),
+             shape = 21,
+             colour = "#008040",
+             size = 2.5,
+             fill = "white",
+             stroke = 1.5) +
+  geom_text(data = half_vax, # half point projection label
+            aes(x = as.Date(Date),
+                y = PercentDose1,
+                label = paste("50% by",
+                              month(Date, label = TRUE, abbr = FALSE),
+                              mday(Date))),
+            family = "Barlow",
+            hjust = 1.1,
+            vjust = -1.3,
+            size = 4.4) +
+  geom_point(data = eighty_vax, # eighty pct point projection point
+             aes(x = as.Date(Date),
+                 y = PercentDose1),
+             shape = 21,
+             colour = "#008040",
+             size = 2.5,
+             fill = "white",
+             stroke = 1.5) +
+  geom_text(data = eighty_vax, # eighty pct point projection label
+            aes(x = as.Date(Date),
+                y = PercentDose1,
+                label = paste("80% by",
+                              month(Date, label = TRUE, abbr = FALSE),
+                              mday(Date))),
+            family = "Barlow",
+            hjust = 1.1,
+            vjust = -1.3,
+            size = 4.4) +
+  xlab(NULL) +
+  ylab(NULL) +
+  scale_y_continuous(labels = percent, 
+                     position = "right",
+                     limits = c(0,1),
+                     expand = expansion(mult = c(0,0))) +
+  scale_x_date(expand = c(0,0)) +
+  ggtitle("When a Percent of Champaign County Residents Might Receive First Vaccine Dose",
+          "Based on average new first doses administered over the past week") +
+  theme(text = element_text(family = "Barlow"),
+        axis.text.y = element_text(size = 13),
+        axis.text.x = element_text(size = 13),
+        plot.title = element_text(size = 18, family = "Oswald")) 
+
+
+
+
 # todo
 # - [x] save the charts, prob replace the manual-made ones
 # - [x] save the data to idph folder
