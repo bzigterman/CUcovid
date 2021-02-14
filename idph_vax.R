@@ -203,7 +203,7 @@ ggplot(idph_vax_champaign, aes(x = as.Date(Date),
                      expand = expansion(mult = c(0,0))) +
   scale_x_date(expand = c(0,0)) +
   ggtitle("When a Percent of Champaign County Residents Might Receive First Vaccine Dose",
-          "Based on average new first doses administered over the past week") +
+          "Based on average new first doses administered over the past week. Source: IDPH") +
   theme(text = element_text(family = "Barlow"),
         axis.text.y = element_text(size = 13),
         axis.text.x = element_text(size = 13),
