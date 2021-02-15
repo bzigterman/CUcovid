@@ -65,7 +65,7 @@ ggplot(vax_nearby, aes(x = as.Date(Date), y = PctVaccinatedPopulation,
   scale_y_continuous(labels = percent, 
                      position = "right",
                      expand = expansion(mult = c(0,.05))) +
-  scale_x_date(expand = expansion(mult = c(0,.1))) +
+  scale_x_date(expand = expansion(mult = c(0,.15))) +
   #guides(fill = FALSE) +
   xlab(NULL) +
   ylab(NULL) +
