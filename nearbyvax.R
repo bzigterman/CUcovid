@@ -58,15 +58,25 @@ vax_nearby <- full_join(vax_champaign, vax_vermilion) %>%
 ggplot(vax_nearby, aes(x = as.Date(Date), y = PctVaccinatedPopulation,
                        colour = CountyName)) +
   geom_line() +
+  geom_text(data = filter(vax_nearby, as.Date(Date) == last(Date)),
+            aes(label = CountyName,
+                colour = CountyName),
+            hjust = 0) +
   scale_y_continuous(labels = percent, 
                      position = "right",
                      expand = expansion(mult = c(0,.05))) +
-  scale_x_date(expand = expansion(mult = c(0,0))) +
-  guides(fill = FALSE) +
+  scale_x_date(expand = expansion(mult = c(0,.1))) +
+  #guides(fill = FALSE) +
   xlab(NULL) +
   ylab(NULL) +
   ggtitle("Percent of Population Fully Vaccinated in Nearby Counties")+
   theme(text = element_text(family = "Barlow"),
         axis.text.y = element_text(size = 13),
         axis.text.x = element_text(size = 13),
+        legend.position = "none",
         plot.title = element_text(size = 22, family = "Oswald")) 
+ggsave("vax/nearby.png", width = 8, height = 32/7, dpi = 320)
+ggsave("nearby.png", 
+       path = "../bzigterman.github.io/images/",
+       width = 8, height = 32/7, dpi = 150)
+
