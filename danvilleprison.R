@@ -4,10 +4,6 @@ library(ggplot2)
 library(scales)
 
 # get data from google sheet and save as csv
-# dville <- read_sheet("1K4RSNbuBPkOFgr18klpNL0vX-UUov7Ct1fRobOGZw6o",
-#                      sheet = 2)
-# write.csv(dville,"data/dville.csv", row.names = FALSE)
-# dville_after_Oct <- subset(dville, date > "2020-09-30")
 dville <- read_sheet("1K4RSNbuBPkOFgr18klpNL0vX-UUov7Ct1fRobOGZw6o",
                          sheet = 1) %>%
   select(date, Staff_current, Inmates_current) %>%
