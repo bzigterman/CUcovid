@@ -4,13 +4,19 @@ library(ggplot2)
 library(scales)
 
 # get data from google sheet and save as csv
+# dville <- read_sheet("1K4RSNbuBPkOFgr18klpNL0vX-UUov7Ct1fRobOGZw6o",
+#                      sheet = 2)
+# write.csv(dville,"data/dville.csv", row.names = FALSE)
+# dville_after_Oct <- subset(dville, date > "2020-09-30")
 dville <- read_sheet("1K4RSNbuBPkOFgr18klpNL0vX-UUov7Ct1fRobOGZw6o",
-                     sheet = 2)
+                         sheet = 1) %>%
+  select(date, Staff_current, Inmates_current) %>%
+  subset(date > "2020-09-30") %>%
+  pivot_longer(!date, names_to = "who", values_to = "active")
 write.csv(dville,"data/dville.csv", row.names = FALSE)
-dville_after_Oct <- subset(dville, date > "2020-09-30")
 
 # chart of Danville prison cases
-ggplot(dville_after_Oct, aes(x = as.Date(date),
+ggplot(dville, aes(x = as.Date(date),
                    y = active,
                    fill = who)) +
   geom_area() +
@@ -21,7 +27,8 @@ ggplot(dville_after_Oct, aes(x = as.Date(date),
                      position = "right",
                      expand = expansion(mult = c(0,.05))) +
   scale_x_date(expand = c(0,0)) +
-  scale_fill_brewer(palette = "Dark2") +
+  scale_fill_brewer(palette = "Dark2",
+                    labels = c("Inmates","Staff")) +
   ggtitle("Active Cases at the Danville Prison",
           "Source: Illinois Department of Corrections") +
   theme(text = element_text(family = "Barlow"),
