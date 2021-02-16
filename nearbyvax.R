@@ -71,3 +71,6 @@ ggsave("nearby.png",
        path = "../bzigterman.github.io/images/",
        width = 8, height = 32/7, dpi = 150)
 
+# todo
+# add new dose1 and new dose2 and percent of each dose for each county
+# before merging
