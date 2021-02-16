@@ -1,7 +1,12 @@
+library(rio)
+library(tidyverse)
+library(lubridate)
 library(googlesheets4)
 library(dplyr)
 library(ggplot2)
 library(scales)
+library(zoo)
+library(clipr)
 
 # get data from google sheet and save as csv
 dville <- read_sheet("1K4RSNbuBPkOFgr18klpNL0vX-UUov7Ct1fRobOGZw6o",
