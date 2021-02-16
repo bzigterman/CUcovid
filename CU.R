@@ -38,7 +38,7 @@ ggplot(CUcovid, aes(x = as.Date(Date), y = New_cases)) +
   scale_x_date(expand = c(0,0)) +
   #guides(fill = FALSE) +
   ggtitle("New Cases in Champaign County",
-          "With seven-day moving average")+
+          "With seven-day moving average. Source: CUPHD")+
   theme(text = element_text(family = "Barlow"),
         axis.text.y = element_text(size = 13),
         axis.text.x = element_text(size = 13),
@@ -65,7 +65,7 @@ ggplot(CUcovid, aes(x = as.Date(Date), y = New_tests)) +
   scale_x_date(expand = c(0,0)) +
   guides(fill = FALSE) +
   ggtitle("New Tests in Champaign County",
-          "With seven-day moving average")+
+          "With seven-day moving average. Source: CUPHD")+
   theme(text = element_text(family = "Barlow"),
         axis.text.y = element_text(size = 13),
         axis.text.x = element_text(size = 13),
@@ -83,11 +83,12 @@ ggplot(CUcovidactive, aes(x = as.Date(Date), y = count, fill = Active)) +
   scale_x_date(expand = c(0,0)) +
   scale_y_continuous(labels = comma, 
                      position = "right") +
-  scale_fill_manual(values = c("#ff4000","#f9c400"),
+  scale_fill_manual(values = c("#ff5f1a","#ffb648"),
                     labels = c("Hospitalized", "Not Hospitalized")) +
   guides(fill = guide_legend(reverse = TRUE,
                              title = NULL)) +
-  ggtitle("Active Cases in Champaign County")+
+  ggtitle("Active Cases in Champaign County",
+          "Source: CUPHD")+
   theme(text = element_text(family = "Barlow"),
         axis.text.y = element_text(size = 13),
         axis.text.x = element_text(size = 13),
@@ -102,13 +103,12 @@ ggsave("CUactiveWeb.png",
        width = 8, height = 32/7, dpi = 320)
 
 # hospitalizations
-
 ggplot(filter(CUcovid, Hospitalized != is.null(TRUE)), 
               aes(x = as.Date(Date), y = Hospitalized)) +
-  geom_col(fill = "#ff4000",
+  geom_col(fill = "#ff5f1a",
            alpha = .25) +
   geom_line(aes(y = avgnewhospitalized),
-            colour = "#ff4000",
+            colour = "#ff5f1a",
             size = 1.5) +
   xlab(NULL) +
   ylab(NULL) +
@@ -117,8 +117,8 @@ ggplot(filter(CUcovid, Hospitalized != is.null(TRUE)),
                      expand = expansion(mult = c(0,.05))) +
   scale_x_date(expand = c(0,0)) +
   guides(fill = FALSE) +
-  ggtitle("Hospitalizations in Champaign County",
-          "With seven-day moving average")+
+  ggtitle("Currently Hospitalized in Champaign County",
+          "With seven-day moving average. Source: CUPHD")+
   theme(text = element_text(family = "Barlow"),
         axis.text.y = element_text(size = 13),
         axis.text.x = element_text(size = 13),
@@ -142,7 +142,8 @@ ggplot(filter(CUcovid, Quarantined != is.null(TRUE)),
                      position = "right",
                      expand = expansion(mult = c(0,.05))) +
   scale_x_date(expand = c(0,0)) +
-  ggtitle("Quarantined in Champaign County")+
+  ggtitle("Currently Quarantined in Champaign County",
+          "Source: CUPHD")+
   theme(text = element_text(family = "Barlow"),
         axis.text.y = element_text(size = 13),
         axis.text.x = element_text(size = 13),
@@ -153,7 +154,6 @@ ggsave("CUquarantinedWeb.png",
        width = 8, height = 32/7, dpi = 320)
 
 # deaths
-
 ggplot(CUcovid, 
        aes(x = as.Date(Date), y = New_Deceased)) +
   geom_col(fill = "#d90000",
@@ -167,7 +167,7 @@ ggplot(CUcovid,
                      expand = expansion(mult = c(0,.05))) +
   scale_x_date(expand = c(0,0)) +
   ggtitle("New Deaths in Champaign County",
-          "With seven-day moving average")+
+          "With seven-day moving average. Source: CUPHD")+
   theme(text = element_text(family = "Barlow"),
         axis.text.y = element_text(size = 13),
         axis.text.x = element_text(size = 13),
