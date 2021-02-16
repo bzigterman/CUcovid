@@ -58,7 +58,6 @@ ggplot(vax_nearby, aes(x = as.Date(Date), y = PctVaccinatedPopulation,
                      position = "right",
                      expand = expansion(mult = c(0,.05))) +
   scale_x_date(expand = expansion(mult = c(0,.15))) +
-  #guides(fill = FALSE) +
   xlab(NULL) +
   ylab(NULL) +
   ggtitle("Percent of Population Fully Vaccinated in Nearby Counties")+
