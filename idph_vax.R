@@ -16,25 +16,26 @@ idph_vax_champaign <- rio::import("https://idph.illinois.gov/DPHPublicInformatio
   mutate(PercentDose1 = PersonsDose1/209983) %>%
   mutate(Dose1Change = PersonsDose1 - lag(PersonsDose1)) %>%
   mutate(Dose2Change = PersonsFullyVaccinated - lag(PersonsFullyVaccinated)) %>%
-  mutate(Text = paste(AdministeredCount,
+  mutate(Text = paste(comma(AdministeredCount, accuracy = 1),
                       " total doses administered in the past day, up ", 
-                      AdministeredCountChange, 
+                      comma(AdministeredCountChange, accuracy = 1), 
                       " from the day before. \n",
-                      PersonsDose1,
+                      comma(PersonsDose1, accuracy = 1),
                       " have received the first dose, up ",
-                      Dose1Change,
+                      comma(Dose1Change, accuracy = 1),
                       " from the day before. ",
                       percent(PercentDose1,
                               accuracy = .1),
-                      "% of the population has received first dose. \n",
-                      PersonsFullyVaccinated,
+                      " of the population has received first dose. \n",
+                      comma(PersonsFullyVaccinated, accuracy = 1),
                       " have received both doses, up ",
-                      Dose2Change,
+                      comma(Dose2Change, accuracy = 1),
                       " from the day before. ",
                       percent(PctVaccinatedPopulation,
                               accuracy = .1),
-                      "% of the population is fully vaccinated.",
+                      " of the population is fully vaccinated.",
                       sep = ""))
+
 write.csv(idph_vax_champaign,"idph/vax_champaign.csv", row.names = FALSE)
 write_clip(tail(idph_vax_champaign$Text, n = 1)) # paste text to clipboard
 
@@ -130,6 +131,11 @@ half_vax <- projected %>%
 eighty_vax <- projected %>%
   filter(PercentDose1 >.8) %>%
   head(1)
+full_vax <- projected %>%
+  filter(PercentDose1 >.99) %>%
+  tail(1)
+
+write_clip(paste("In the past week, an average of ",comma(avgdose1change)," new Champaign County residents received their first dose of the COVID-19 vaccine.\n\nIf that pace continued, half of Champaign County residents could recive their first dose by ",month(half_vax$Date, label = TRUE, abbr = FALSE)," ",mday(half_vax$Date),", and the entire county would be vaccinated around ",month(full_vax$Date, label = TRUE, abbr = FALSE)," ",mday(full_vax$Date),".\n\nOf course, the pace is expected to vary as more vaccines are approved, shipments vary, people hesitate and eligibility expands.\n\nAlready, ",percent(current_vax$PercentDose1)," of Champaign County residents have received their first dose, according to the Illinois Department of Public Health.",sep="")) # paste text to clipboard
 
 # plot
 ggplot(idph_vax_champaign, aes(x = as.Date(Date),
