@@ -1,5 +1,12 @@
 library(tidyverse)
 library(lubridate)
+library(httr)
+library(jsonlite)
+path = "https://idph.illinois.gov/DPHPublicInformation/api/COVIDExport/GetCountyRates"
+champaign_test <- GET("https://idph.illinois.gov/DPHPublicInformation/api/COVID/GetCountyRates?countyName=Champaign")
+champaign_test <- rio::import("https://idph.illinois.gov/DPHPublicInformation/api/COVID/GetCountyRates",
+                              format = "json") 
+
 
 c("Champaign","Vermilion","Ford","Edgar","Douglas","Piatt","Iroquois",
   "De%20Witt","Macon","Moultrie")
