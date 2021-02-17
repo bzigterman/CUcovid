@@ -8,6 +8,9 @@ library(scales)
 library(zoo)
 library(clipr)
 
+c("Champaign","Vermilion","Ford","Edgar","Douglas","Piatt","Iroquois",
+  "De%20Witt","Macon","Moultrie")
+
 # import and clean data
 
 vax_champaign <- rio::import("https://idph.illinois.gov/DPHPublicInformation/api/COVIDExport/GetVaccineAdministration?format=csv&countyName=Champaign",
