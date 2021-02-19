@@ -78,3 +78,4 @@ ggsave("nearby.png",
 # add new dose1 and new dose2 and percent of each dose for each county
 # before merging
 # facet by county
+# set county pops as variables
