@@ -82,7 +82,8 @@ ggplot(CUcovidactive, aes(x = as.Date(Date), y = count, fill = Active)) +
   ylab(NULL) +
   scale_x_date(expand = c(0,0)) +
   scale_y_continuous(labels = comma, 
-                     position = "right") +
+                     position = "right",
+                     expand = expansion(mult = c(0,.05))) +
   scale_fill_manual(values = c("#ff5f1a","#ffb648"),
                     labels = c("Hospitalized", "Not Hospitalized")) +
   guides(fill = guide_legend(reverse = TRUE,
