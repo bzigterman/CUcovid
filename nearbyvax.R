@@ -56,7 +56,8 @@ ggplot(vax_nearby, aes(x = as.Date(Date), y = PctVaccinatedPopulation,
             aes(label = CountyName,
                 colour = CountyName),
             hjust = 0,
-            family = "Barlow") +
+            family = "Barlow",
+            size = 4.6) +
   scale_y_continuous(labels = percent, 
                      position = "right",
                      expand = expansion(mult = c(0,.05))) +
