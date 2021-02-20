@@ -220,51 +220,49 @@ ggsave("nearbycombinedonedose.png",
        width = 8, height = 32/7, dpi = 150)
 
 # combined cleveland dot
-?geom_segment
 last_vax_nearby <- vax_nearby %>%
-  filter(Date == tail(Date, 1))
-# %>%
-  # add_row(CountyName = "Sample",
-  #         PercentDose1 = .07,
-  #         PctVaccinatedPopulation = .025) 
+  filter(Date == tail(Date, 1)) %>%
+  arrange(desc(PercentDose1))
+topcounty <- head(last_vax_nearby$CountyName,1)
+
 ggplot(last_vax_nearby, aes(y = reorder(CountyName,
                                         PercentDose1))) +
-  geom_segment(aes(x = PctVaccinatedPopulation,
+  geom_segment(aes(x = PctVaccinatedPopulation, # first line segment to dose2
                    yend = CountyName), 
                xend = 0, 
                colour = "#674EA7",
                size = 3.6) +
-  geom_segment(aes(x = PercentDose1,
+  geom_segment(aes(x = PercentDose1, # line segment to dose1%
                    yend = CountyName),
                xend = 0, 
                colour = "#674EA7",
                size = 2,
                alpha = .3) +
-  geom_text(data = filter(last_vax_nearby, 
-                          CountyName != "Piatt"),
+  geom_text(data = filter(last_vax_nearby, # label for all but top county dose1
+                          CountyName != topcounty),
             aes(x = PercentDose1,
                 label = percent(PercentDose1, .1)),
             hjust = -.25,
             size = 4,
             family = "Barlow") +
-  geom_text(data = filter(last_vax_nearby, 
-                          CountyName == "Piatt"),
+  geom_text(data = filter(last_vax_nearby, # label for top county, dose1
+                          CountyName == topcounty),
             aes(x = PercentDose1,
                 label = paste(percent(PercentDose1, .1),
                               "received first dose")),
             hjust = -0.06,
             size = 4,
             family = "Barlow") +
-  geom_text(data = filter(last_vax_nearby, 
-                          CountyName != "Piatt"),
+  geom_text(data = filter(last_vax_nearby, # label for all but top county, dose2
+                          CountyName != topcounty),
             aes(x = PctVaccinatedPopulation,
                 label = percent(PctVaccinatedPopulation, .1)),
             hjust = .3,
             vjust = -.9,
             size = 3.5,
             family = "Barlow") +
-  geom_text(data = filter(last_vax_nearby, 
-                          CountyName == "Piatt"),
+  geom_text(data = filter(last_vax_nearby, # label for top county, dose2
+                          CountyName == topcounty),
             aes(x = PctVaccinatedPopulation,
                 label = paste(percent(PctVaccinatedPopulation, .1),
                               "fully vaccinated")),
