@@ -35,25 +35,25 @@ vax_vermilion <- rio::import("https://idph.illinois.gov/DPHPublicInformation/api
 vax_ford <- rio::import("https://idph.illinois.gov/DPHPublicInformation/api/COVIDExport/GetVaccineAdministration?format=csv&countyName=Ford",
                              format = "csv") %>%
   mutate(population = fordpop)
-vax_edgar<- rio::import("https://idph.illinois.gov/DPHPublicInformation/api/COVIDExport/GetVaccineAdministration?format=csv&countyName=Edgar",
+vax_edgar <- rio::import("https://idph.illinois.gov/DPHPublicInformation/api/COVIDExport/GetVaccineAdministration?format=csv&countyName=Edgar",
                         format = "csv") %>%
   mutate(population = edgarpop)
-vax_douglas<- rio::import("https://idph.illinois.gov/DPHPublicInformation/api/COVIDExport/GetVaccineAdministration?format=csv&countyName=Douglas",
+vax_douglas <- rio::import("https://idph.illinois.gov/DPHPublicInformation/api/COVIDExport/GetVaccineAdministration?format=csv&countyName=Douglas",
                           format = "csv") %>%
   mutate(population = douglaspop)
-vax_piatt<- rio::import("https://idph.illinois.gov/DPHPublicInformation/api/COVIDExport/GetVaccineAdministration?format=csv&countyName=Piatt",
+vax_piatt <- rio::import("https://idph.illinois.gov/DPHPublicInformation/api/COVIDExport/GetVaccineAdministration?format=csv&countyName=Piatt",
                         format = "csv") %>%
   mutate(population = piattpop)
 vax_iroquois <- rio::import("https://idph.illinois.gov/DPHPublicInformation/api/COVIDExport/GetVaccineAdministration?format=csv&countyName=Iroquois",
                             format = "csv") %>%
   mutate(population = iroquoispop)
-vax_dewitt<- rio::import("https://idph.illinois.gov/DPHPublicInformation/api/COVIDExport/GetVaccineAdministration?format=csv&countyName=De%20Witt",
+vax_dewitt <- rio::import("https://idph.illinois.gov/DPHPublicInformation/api/COVIDExport/GetVaccineAdministration?format=csv&countyName=De%20Witt",
                          format = "csv") %>%
   mutate(population = dewittpop)
-vax_macon<- rio::import("https://idph.illinois.gov/DPHPublicInformation/api/COVIDExport/GetVaccineAdministration?format=csv&countyName=Macon",
+vax_macon <- rio::import("https://idph.illinois.gov/DPHPublicInformation/api/COVIDExport/GetVaccineAdministration?format=csv&countyName=Macon",
                         format = "csv") %>%
   mutate(population = maconpop)
-vax_moultrie<- rio::import("https://idph.illinois.gov/DPHPublicInformation/api/COVIDExport/GetVaccineAdministration?format=csv&countyName=Moultrie",
+vax_moultrie <- rio::import("https://idph.illinois.gov/DPHPublicInformation/api/COVIDExport/GetVaccineAdministration?format=csv&countyName=Moultrie",
                            format = "csv") %>%
   mutate(population = moultriepop)
 vax_nearby <- full_join(vax_champaign, vax_vermilion) %>%
@@ -137,7 +137,7 @@ ggplot(last_vax_nearby, aes(x = PctVaccinatedPopulation,
                size = 1.2) +
   geom_point(size = 2.4) +
   geom_text(aes(label = percent(PctVaccinatedPopulation, .1)),
-            hjust = -.4,
+            hjust = -.35,
             size = 4,
             family = "Barlow") +
   #facet_grid(. ~ CountyName) +
@@ -183,7 +183,7 @@ ggplot(last_vax_nearby, aes(x = PercentDose1,
                size = 1.2) +
   geom_point(size = 2.4) +
   geom_text(aes(label = percent(PercentDose1, .1)),
-            hjust = -.4,
+            hjust = -.35,
             size = 4,
             family = "Barlow") +
   #facet_grid(. ~ CountyName) +
@@ -219,6 +219,79 @@ ggsave("nearbycombinedonedose.png",
        path = "../bzigterman.github.io/images/",
        width = 8, height = 32/7, dpi = 150)
 
+# combined cleveland dot
+?geom_segment
+last_vax_nearby <- vax_nearby %>%
+  filter(Date == tail(Date, 1))
+# %>%
+  # add_row(CountyName = "Sample",
+  #         PercentDose1 = .07,
+  #         PctVaccinatedPopulation = .025) 
+ggplot(last_vax_nearby, aes(y = reorder(CountyName,
+                                        PercentDose1))) +
+  geom_segment(aes(x = PctVaccinatedPopulation,
+                   yend = CountyName), 
+               xend = 0, 
+               colour = "#674EA7",
+               size = 3.6) +
+  geom_segment(aes(x = PercentDose1,
+                   yend = CountyName),
+               xend = 0, 
+               colour = "#674EA7",
+               size = 2,
+               alpha = .3) +
+  geom_text(data = filter(last_vax_nearby, 
+                          CountyName != "Piatt"),
+            aes(x = PercentDose1,
+                label = percent(PercentDose1, .1)),
+            hjust = -.25,
+            size = 4,
+            family = "Barlow") +
+  geom_text(data = filter(last_vax_nearby, 
+                          CountyName == "Piatt"),
+            aes(x = PercentDose1,
+                label = paste(percent(PercentDose1, .1),
+                              "received first dose")),
+            hjust = -0.06,
+            size = 4,
+            family = "Barlow") +
+  geom_text(data = filter(last_vax_nearby, 
+                          CountyName != "Piatt"),
+            aes(x = PctVaccinatedPopulation,
+                label = percent(PctVaccinatedPopulation, .1)),
+            hjust = .3,
+            vjust = -.9,
+            size = 3.5,
+            family = "Barlow") +
+  geom_text(data = filter(last_vax_nearby, 
+                          CountyName == "Piatt"),
+            aes(x = PctVaccinatedPopulation,
+                label = paste(percent(PctVaccinatedPopulation, .1),
+                              "fully vaccinated")),
+            hjust = .1,
+            vjust = -.9,
+            size = 3.5,
+            family = "Barlow") +
+  scale_x_continuous(labels = percent,
+                     limits = c(0,1),
+                     expand = expansion(mult = c(0,.05))) +
+  xlab(NULL) +
+  ylab(NULL) +
+  theme_classic() +
+  ggtitle("Percent of Population Vaccinated in Nearby Counties",
+          "Source: IDPH")+
+  theme(text = element_text(family = "Barlow"),
+        axis.text.y = element_text(size = 13),
+        axis.text.x = element_text(size = 13),
+        axis.line.x = element_blank(),
+        axis.ticks.y = element_blank(),
+        legend.position = "none",
+        panel.grid.major.y = element_blank(),  
+        plot.title = element_text(size = 22, family = "Oswald")) 
+ggsave("vax/nearbybothdoses.png", width = 8, height = 32/7, dpi = 320)
+ggsave("nearbybothdoses.png", 
+       path = "../bzigterman.github.io/images/",
+       width = 8, height = 32/7, dpi = 150)
 
 
 # todo
