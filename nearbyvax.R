@@ -114,7 +114,7 @@ ggplot(vax_nearby, aes(x = as.Date(Date), y = PercentDose1,
   scale_x_date(expand = expansion(mult = c(0,.15))) +
   xlab(NULL) +
   ylab(NULL) +
-  ggtitle("Percent of Population With One Vaccine Dose in Nearby Counties")+
+  ggtitle("Percent of Population with One Vaccine Dose in Nearby Counties")+
   theme(text = element_text(family = "Barlow"),
         axis.text.y = element_text(size = 13),
         axis.text.x = element_text(size = 13),
@@ -168,8 +168,8 @@ ggplot(last_vax_nearby, aes(x = PctVaccinatedPopulation,
         panel.grid.major.y = element_blank(),  
         #        panel.grid.minor.x = element_blank(),   
         plot.title = element_text(size = 22, family = "Oswald")) 
-ggsave("vax/nearbycombined.png", width = 8, height = 32/7, dpi = 320)
-ggsave("nearbycombined.png", 
+ggsave("vax/nearbycombineddose2.png", width = 8, height = 32/7, dpi = 320)
+ggsave("nearbycombineddose2.png", 
        path = "../bzigterman.github.io/images/",
        width = 8, height = 32/7, dpi = 150)
 
@@ -214,8 +214,8 @@ ggplot(last_vax_nearby, aes(x = PercentDose1,
         panel.grid.major.y = element_blank(),  
         #        panel.grid.minor.x = element_blank(),   
         plot.title = element_text(size = 22, family = "Oswald")) 
-ggsave("vax/nearbycombined.png", width = 8, height = 32/7, dpi = 320)
-ggsave("nearbycombined.png", 
+ggsave("vax/nearbycombinedonedose.png", width = 8, height = 32/7, dpi = 320)
+ggsave("nearbycombinedonedose.png", 
        path = "../bzigterman.github.io/images/",
        width = 8, height = 32/7, dpi = 150)
 
