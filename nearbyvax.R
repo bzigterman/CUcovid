@@ -75,6 +75,46 @@ ggsave("nearby.png",
        path = "../bzigterman.github.io/images/",
        width = 8, height = 32/7, dpi = 150)
 
+# cleveland dot plot
+last_vax_nearby <- vax_nearby %>%
+  filter(Date == tail(Date, 1))
+ggplot(last_vax_nearby, aes(x = PctVaccinatedPopulation, 
+                            y = reorder(CountyName,
+                                        PctVaccinatedPopulation))) +
+  geom_segment(aes(yend = CountyName), xend = 0, colour = "grey50",
+               size = 1.5) +
+  geom_point(size = 3) +
+  geom_text(aes(label = percent(PctVaccinatedPopulation, .1)),
+            hjust = -.5,
+            size = 4,
+            family = "Barlow") +
+  #facet_grid(. ~ CountyName) +
+  # geom_text(data = filter(vax_nearby, as.Date(Date) == last(Date)),
+  #           aes(label = CountyName,
+  #               colour = CountyName),
+  #           hjust = 0,
+  #           family = "Barlow",
+  #           size = 4.6) +
+  scale_x_continuous(labels = percent,
+                     #position = "right",
+                     limits = c(0,max(last_vax_nearby$PctVaccinatedPopulation)),
+                     #   xlim = 0,
+                     expand = expansion(mult = c(0,.1))) +
+  # scale_x_date(expand = expansion(mult = c(0,.15))) +
+  xlab(NULL) +
+  ylab(NULL) +
+  theme_bw() +
+  ggtitle("Percent of Population Fully Vaccinated in Nearby Counties",
+          "Source: IDPH")+
+  theme(text = element_text(family = "Barlow"),
+        axis.text.y = element_text(size = 13),
+        axis.text.x = element_text(size = 13),
+        legend.position = "none",
+        panel.grid.major.y = element_blank(),  
+        #        panel.grid.minor.x = element_blank(),   
+        plot.title = element_text(size = 22, family = "Oswald")) 
+ggsave("vax/nearbycombined.png", width = 8, height = 32/7, dpi = 320)
+
 # todo
 # add new dose1 and new dose2 and percent of each dose for each county
 # before merging
