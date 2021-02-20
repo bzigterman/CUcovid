@@ -114,6 +114,10 @@ ggplot(last_vax_nearby, aes(x = PctVaccinatedPopulation,
         #        panel.grid.minor.x = element_blank(),   
         plot.title = element_text(size = 22, family = "Oswald")) 
 ggsave("vax/nearbycombined.png", width = 8, height = 32/7, dpi = 320)
+ggsave("nearbycombined.png", 
+       path = "../bzigterman.github.io/images/",
+       width = 8, height = 32/7, dpi = 150)
+
 
 # todo
 # add new dose1 and new dose2 and percent of each dose for each county
