@@ -287,6 +287,7 @@ ggplot(last_vax_nearby, aes(y = reorder(CountyName,
         panel.grid.major.y = element_blank(),  
         plot.title = element_text(size = 22, family = "Oswald")) 
 ggsave("vax/nearbybothdoses.png", width = 8, height = 32/7, dpi = 320)
+ggsave("vax/card/nearbybothdosesCard.png", width = 8, height = 1256/300, dpi = 320)
 ggsave("nearbybothdoses.png", 
        path = "../bzigterman.github.io/images/",
        width = 8, height = 32/7, dpi = 150)
