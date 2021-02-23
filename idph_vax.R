@@ -220,6 +220,50 @@ ggsave("VaccineProjection.png",
        path = "../bzigterman.github.io/images/",
        width = 8, height = 32/7, dpi = 150)
 
+
+# chart combining vaccines and cases
+idph_cases_champaign <- rio::import("https://idph.illinois.gov/DPHPublicInformation/api/COVID/GetCountyHistorical?countyName=Champaign",
+                                    format = "json") 
+idph_cases_champaign <- idph_cases_champaign$values %>%
+  mutate(population = champaignpop)  %>%
+  mutate(new_cases = confirmed_cases - lag(confirmed_cases)) %>%
+  mutate(new_deaths = deaths - lag(deaths)) %>%
+  mutate(avg_new_cases = rollmean(new_cases, k = 7, 
+                                  fill = NA, align = "right")) %>%
+  mutate(avg_new_deaths = rollmean(new_deaths, k = 7, 
+                                   fill = NA, align = "right"))  %>%
+  mutate(Date = ymd_hms(reportDate)) %>%
+  mutate(new_case_rate = (100000*avg_new_cases)/population) %>%
+  mutate(new_deaths_rate = (1000000*avg_new_deaths)/population)
+
+cases_and_vax <- full_join(CUcovid, idph_vax_champaign) %>%
+  select(avgnewcases, Date, AdministeredCount, ) %>%
+  pivot_longer(!Date, names_to = "vax_case", values_to = "count") %>%
+  mutate(vax_case = recode(vax_case, 
+                           "AdministeredCount" = "Vaccine Doses",
+                           "avgnewcases" = "Average New Cases"))
+
+ggplot(filter(cases_and_vax, Date > as.Date("2020-12-15")),
+       #cases_and_vax, 
+              aes(x = as.Date(Date),
+                               y = count)) +
+  geom_area() +
+  facet_grid(vax_case ~ ., scales = "free_y") +
+  ggtitle("Champaign County Cases and Vaccine Doses",
+          "Source: IDPH, CUPHD") +
+  xlab(NULL) +
+  ylab(NULL) +
+  scale_x_date(expand = c(0,.01)) +
+  scale_y_continuous(labels = comma,
+                  #   limits = c(0,60000),
+                     expand = expansion(mult = c(0,.05))
+                  ) +
+ # theme_classic() +
+  theme(text = element_text(family = "Barlow"),
+        axis.text.y = element_text(size = 13),
+        axis.text.x = element_text(size = 13),
+        plot.title = element_text(size = 18, family = "Oswald"))
+
 # todo
 # - [x] save the charts, prob replace the manual-made ones
 # - [x] save the data to idph folder
