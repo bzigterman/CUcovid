@@ -208,10 +208,10 @@ ggplot(last_vax_nearby, aes(x = PctVaccinatedPopulation,
         panel.grid.major.y = element_blank(),  
         #        panel.grid.minor.x = element_blank(),   
         plot.title = element_text(size = 22, family = "Oswald")) 
-ggsave("vax/nearbycombineddose2.png", width = 8, height = 32/7, dpi = 320)
-ggsave("nearbycombineddose2.png", 
-       path = "../bzigterman.github.io/images/",
-       width = 8, height = 32/7, dpi = 150)
+# ggsave("vax/nearbycombineddose2.png", width = 8, height = 32/7, dpi = 320)
+# ggsave("nearbycombineddose2.png", 
+#        path = "../bzigterman.github.io/images/",
+#        width = 8, height = 32/7, dpi = 150)
 
 # cleveland dot plot of dose 1
 last_vax_nearby <- vax_nearby %>%
@@ -254,10 +254,10 @@ ggplot(last_vax_nearby, aes(x = PercentDose1,
         panel.grid.major.y = element_blank(),  
         #        panel.grid.minor.x = element_blank(),   
         plot.title = element_text(size = 22, family = "Oswald")) 
-ggsave("vax/nearbycombinedonedose.png", width = 8, height = 32/7, dpi = 320)
-ggsave("nearbycombinedonedose.png", 
-       path = "../bzigterman.github.io/images/",
-       width = 8, height = 32/7, dpi = 150)
+# ggsave("vax/nearbycombinedonedose.png", width = 8, height = 32/7, dpi = 320)
+# ggsave("nearbycombinedonedose.png", 
+#        path = "../bzigterman.github.io/images/",
+#        width = 8, height = 32/7, dpi = 150)
 
 # combined cleveland dot
 last_vax_nearby <- vax_nearby %>%
@@ -327,7 +327,7 @@ ggplot(last_vax_nearby, aes(y = reorder(CountyName,
         panel.grid.major.y = element_blank(),  
         plot.title = element_text(size = 22, family = "Oswald")) 
 ggsave("vax/nearbybothdoses.png", width = 8, height = 32/7, dpi = 320)
-ggsave("vax/card/nearbybothdosesCard.png", width = 8, height = 1256/300, dpi = 320)
+#ggsave("vax/card/nearbybothdosesCard.png", width = 8, height = 1256/300, dpi = 320)
 ggsave("nearbybothdoses.png", 
        path = "../bzigterman.github.io/images/",
        width = 8, height = 32/7, dpi = 150)
