@@ -279,6 +279,10 @@ ggplot(filter(cases_and_vax, Date > as.Date("2020-12-15")),
         strip.background = element_blank(),
         plot.title = element_text(size = 18, family = "Oswald"))
 ggsave("vax/vaccinefacets.png", width = 8, height = 4.5, dpi = 320)
+ggsave("vaccinefacets.png", 
+       path = "../bzigterman.github.io/images/",
+       width = 8, height = 4.5, dpi = 150)
+
 
 # todo
 # - [x] save the charts, prob replace the manual-made ones
