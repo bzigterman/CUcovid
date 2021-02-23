@@ -177,3 +177,6 @@ ggsave("CU/CUdeaths.png", width = 8, height = 32/7, dpi = 320)
 ggsave("CUdeaths.png", 
        path = "../bzigterman.github.io/images/",
        width = 8, height = 32/7, dpi = 320)
+
+# todo
+# - add facet grid or wrap for the charts, use pivot longer to put in one table to align dates
