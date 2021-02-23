@@ -138,7 +138,7 @@ idph_cases_nearby <- full_join(idph_cases_champaign, idph_cases_vermilion) %>%
   full_join(idph_cases_douglas) %>%
   full_join(idph_cases_piatt) %>%
   full_join(idph_cases_iroquois) %>%
-  full_join(idph_cases_dewitt) %>%
+ # full_join(idph_cases_dewitt) %>%
  # full_join(idph_cases_macon) %>%
  # full_join(idph_cases_moultrie) %>%
   mutate(Date = ymd_hms(reportDate)) %>%
@@ -160,14 +160,14 @@ ggplot(idph_cases_nearby, aes(x = as.Date(Date), y = new_case_rate,
   scale_x_date(expand = expansion(mult = c(0,.15))) +
   xlab(NULL) +
   ylab(NULL) +
-  ggtitle("avg new cases over time in nearby counties",
-          "per 100,000. Source: IDPH")+
+  ggtitle("New Cases per 100,000 Residents in Nearby Counties",
+          "Seven-day moving average. Source: IDPH")+
   theme(text = element_text(family = "Barlow"),
         axis.text.y = element_text(size = 13),
         axis.text.x = element_text(size = 13),
         legend.position = "none",
         plot.title = element_text(size = 22, family = "Oswald")) 
-#ggsave("vax/nearby.png", width = 8, height = 32/7, dpi = 320)
+ggsave("region/nearbycases.png", width = 8, height = 32/7, dpi = 320)
 # ggsave("nearby.png", 
 #        path = "../bzigterman.github.io/images/",
 #        width = 8, height = 32/7, dpi = 150)
