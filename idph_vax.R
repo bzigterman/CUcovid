@@ -102,6 +102,7 @@ ggplot(idph_vax_champaign, aes(x = as.Date(Date),
   theme(text = element_text(family = "Barlow"),
         axis.text.y = element_text(size = 13),
         axis.text.x = element_text(size = 13),
+      #  panel.background = element_blank(),
         plot.title = element_text(size = 22, family = "Oswald")) 
 
 ggsave("vax/chamvax.png", width = 8, height = 32/7, dpi = 320)
@@ -237,7 +238,7 @@ idph_cases_champaign <- idph_cases_champaign$values %>%
   mutate(new_deaths_rate = (1000000*avg_new_deaths)/population)
 
 cases_and_vax <- full_join(CUcovid, idph_vax_champaign) %>%
-  select(avgnewcases, Date, AdministeredCount, ) %>%
+  select(avgnewcases, Date, AdministeredCount, Hospitalized, Active) %>%
   pivot_longer(!Date, names_to = "vax_case", values_to = "count") %>%
   mutate(vax_case = recode(vax_case, 
                            "AdministeredCount" = "Vaccine Doses",
@@ -247,9 +248,9 @@ ggplot(filter(cases_and_vax, Date > as.Date("2020-12-15")),
        #cases_and_vax, 
               aes(x = as.Date(Date),
                                y = count)) +
-  geom_area() +
+  geom_line() +
   facet_grid(vax_case ~ ., scales = "free_y") +
-  ggtitle("Champaign County Cases and Vaccine Doses",
+  ggtitle("Champaign County",
           "Source: IDPH, CUPHD") +
   xlab(NULL) +
   ylab(NULL) +
@@ -258,11 +259,17 @@ ggplot(filter(cases_and_vax, Date > as.Date("2020-12-15")),
                   #   limits = c(0,60000),
                      expand = expansion(mult = c(0,.05))
                   ) +
- # theme_classic() +
+  expand_limits(y = 0) +
+  #theme_classic() +
   theme(text = element_text(family = "Barlow"),
-        axis.text.y = element_text(size = 13),
-        axis.text.x = element_text(size = 13),
+        axis.text.y = element_text(size = 11),
+        #  axis.line.x = element_line(colour = "black"),
+        #panel.background = element_blank(),
+        axis.text.x = element_text(size = 11),
+        panel.grid.minor = element_blank(),
+        strip.background = element_blank(),
         plot.title = element_text(size = 18, family = "Oswald"))
+ggsave("vax/vaccinefacets.png", width = 4, height = 8, dpi = 320)
 
 # todo
 # - [x] save the charts, prob replace the manual-made ones
