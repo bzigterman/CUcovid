@@ -6,14 +6,18 @@ library(zoo)
 
 # get the data from google sheet
 uicovid <- read_sheet("1UUGDwV5qahPos-bhWUfzf4Y1WYXEh-I0JBOJaoGMrJs",
-                      sheet = 2)
+                      sheet = 2) %>%
+  mutate(avgnewcases = rollmean(New_Cases, k = 7, 
+                                fill = NA, align = "right")) %>%
+  mutate(avgnewtests = rollmean(New_Tests, k = 7, 
+                                fill = NA, align = "right")) 
 write.csv(uicovid,"data/uicovid.csv", row.names = FALSE)
 
 # new cases with 7 day avg
 ggplot(uicovid, aes(x = as.Date(Date), y = New_Cases)) +
   geom_col(fill = "#B45F06",
            alpha = .25) +
-  geom_line(aes(y = rollmean(New_Cases, 7, fill = TRUE, align = "right")),
+  geom_line(aes(y = avgnewcases),
             colour = "#B45F06",
             size = 1.5) +
   xlab(NULL) +
@@ -39,7 +43,7 @@ ggsave("UICasesWeb.png",
 ggplot(uicovid, aes(x = as.Date(Date), y = New_Tests)) +
   geom_col(fill = "#1C4587",
            alpha = .25) +
-  geom_line(aes(y = rollmean(New_Tests, 7, fill = TRUE, align = "right")),
+  geom_line(aes(y = avgnewtests),
             colour = "#1C4587",
             size = 1.5) +
   xlab(NULL) +
@@ -117,16 +121,13 @@ ggplot(uicovid, aes(x = Semester_day/7, y = New_Cases, colour = Semester)) +
   annotate("rect", xmin = -Inf, xmax = 0, ymin = 0, ymax = Inf,
            fill = "white") +
   geom_point(alpha = .25) +
-  geom_line(aes(y = rollmean(New_Cases, 7, fill = TRUE, align = "right")),
+  geom_line(aes(y = avgnewcases),
             size = 1.5) +
   xlab("Weeks into Semester") +
   ylab(NULL) +
   scale_y_continuous(labels = comma, 
                      position = "right",
-                     limits = c(0,max(rollmean(uicovid$New_Cases,
-                                               7,
-                                               fill = TRUE,
-                                               align = "right"))),
+                     limits = c(0,max(uicovid$avgnewcases, na.rm = TRUE)),
                      expand = expansion(mult = c(0,.05))) +
   scale_x_continuous(breaks = c(-2,0,4,8,12,16),
                      expand = expansion(mult = c(.01,.01))) +
