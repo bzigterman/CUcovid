@@ -273,9 +273,10 @@ ggplot(filter(cases_and_vax, Date > as.Date("2020-12-15")),
   theme(text = element_text(family = "Barlow"),
         axis.text.y = element_text(size = 10),
         #  axis.line.x = element_line(colour = "black"),
-      #  panel.background = element_blank(),
+        #  panel.background = element_blank(),
         axis.text.x = element_text(size = 8),
         panel.grid.minor = element_blank(),
+        strip.text = element_text(size = 11),
         strip.background = element_blank(),
         plot.title = element_text(size = 18, family = "Oswald"))
 ggsave("vax/vaccinefacets.png", width = 8, height = 4.5, dpi = 320)
