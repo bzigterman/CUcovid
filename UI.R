@@ -193,4 +193,5 @@ ggsave("UISemCompareTotal.png",
 
 
 # todo
-# save total cases comparison, change numbering on charts
+# [x] save total cases comparison
+# [ ] change numbering on charts
