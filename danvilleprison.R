@@ -8,7 +8,7 @@ library(scales)
 library(zoo)
 library(clipr)
 
-# get data from google sheet and save as csv
+# get data from google sheet and save as csv ----
 dville <- read_sheet("1K4RSNbuBPkOFgr18klpNL0vX-UUov7Ct1fRobOGZw6o",
                          sheet = 1) %>%
   select(date, Staff_current, Inmates_current) %>%
@@ -16,7 +16,7 @@ dville <- read_sheet("1K4RSNbuBPkOFgr18klpNL0vX-UUov7Ct1fRobOGZw6o",
   pivot_longer(!date, names_to = "who", values_to = "active")
 write.csv(dville,"data/dville.csv", row.names = FALSE)
 
-# chart of Danville prison cases
+# chart of Danville prison cases ----
 ggplot(dville, aes(x = as.Date(date),
                    y = active,
                    fill = who)) +
@@ -40,5 +40,5 @@ ggplot(dville, aes(x = as.Date(date),
         legend.background = element_blank(),
         legend.key = element_blank(),
         legend.text = element_text(size = 13))
-
+# save file
 ggsave("danville/dvilleprison.png", width = 8, height = 32/7, dpi = 320)

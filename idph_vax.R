@@ -8,7 +8,7 @@ library(scales)
 library(zoo)
 library(clipr)
 
-# import and clean data
+# import and clean data ----
 idph_vax_champaign <- rio::import("https://idph.illinois.gov/DPHPublicInformation/api/COVIDExport/GetVaccineAdministration?format=csv&countyName=Champaign",
                                   format = "csv") %>%
   mutate(Date = mdy_hms(Report_Date)) %>%
@@ -39,7 +39,7 @@ idph_vax_champaign <- rio::import("https://idph.illinois.gov/DPHPublicInformatio
 write.csv(idph_vax_champaign,"idph/vax_champaign.csv", row.names = FALSE)
 write_clip(tail(idph_vax_champaign$Text, n = 1)) # paste text to clipboard
 
-# new vaccines administered chart copy
+# new vaccines administered chart copy ----
 ggplot(idph_vax_champaign, 
        aes(x = as.Date(Date), y = AdministeredCountChange)) +
   geom_col(fill = "#674EA7",
@@ -66,7 +66,7 @@ ggsave("NewVaccinesWeb.png",
        path = "../bzigterman.github.io/images/",
        width = 8, height = 32/7, dpi = 150)
 
-# first and second dose comparison chart
+# first and second dose comparison chart ----
 ggplot(idph_vax_champaign, aes(x = as.Date(Date),
                 y = PersonsDose1))  +
   geom_area(colour = "#674EA7",
@@ -110,7 +110,7 @@ ggsave("VaccinesWeb.png",
        path = "../bzigterman.github.io/images/",
        width = 8, height = 32/7, dpi = 150)
 
-# first dose projection
+# first dose projection ----
 avgdose1change <- mean(tail(idph_vax_champaign$Dose1Change,7), na.rm = TRUE)
 xmin <- max(as.Date(idph_vax_champaign$Date))
 xmax <- as.Date("2023-04-01")
@@ -138,7 +138,7 @@ full_vax <- projected %>%
 
 write_clip(paste("In the past week, an average of ",comma(avgdose1change)," new Champaign County residents received their first dose of the COVID-19 vaccine each day.\n\nIf that pace continued, half of Champaign County residents could recive their first dose by ",month(half_vax$Date, label = TRUE, abbr = FALSE)," ",mday(half_vax$Date),", and the entire county would be vaccinated around ",month(full_vax$Date, label = TRUE, abbr = FALSE)," ",mday(full_vax$Date),".\n\nOf course, the pace is expected to vary as more vaccines are approved, shipments vary, people hesitate and eligibility expands.\n\nAlready, ",percent(current_vax$PercentDose1)," of Champaign County residents have received their first dose, according to the Illinois Department of Public Health.\n\nBy comparison, half the country is expected to receive its first COVID-19 dose around xx, according to The New York Times. https://www.nytimes.com/interactive/2020/us/covid-19-vaccine-doses.html",sep="")) # paste text to clipboard
 
-# plot
+# projection plot 
 ggplot(idph_vax_champaign, aes(x = as.Date(Date),
                                y = PercentDose1)) +
   geom_line(colour = "#800080", # actual line 
@@ -222,7 +222,7 @@ ggsave("VaccineProjection.png",
        width = 8, height = 32/7, dpi = 150)
 
 
-# chart combining vaccines and cases
+# chart combining vaccines and cases ----
 idph_cases_champaign <- rio::import("https://idph.illinois.gov/DPHPublicInformation/api/COVID/GetCountyHistorical?countyName=Champaign",
                                     format = "json") 
 idph_cases_champaign <- idph_cases_champaign$values %>%
@@ -285,7 +285,7 @@ ggsave("vaccinefacets.png",
        width = 8, height = 4.5, dpi = 150)
 
 
-# todo
+# todo ----
 # - [x] save the charts, prob replace the manual-made ones
 # - [x] save the data to idph folder
 # - [x] generate text
