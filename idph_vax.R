@@ -247,7 +247,7 @@ cases_and_vax <- full_join(CUcovid, idph_vax_champaign) %>%
                            "Quarantined" = "2. Currently Quarantined",
                            "Hospitalized" = "3. Currently Hospitalized",
                            "avgnewdead" = "4. Average New Deaths",
-                           "AdministeredCountRollAvg" = "5. New Vaccine Doses"))
+                           "AdministeredCountRollAvg" = "5. Average New Vaccine Doses"))
 
 ggplot(filter(cases_and_vax, Date > as.Date("2020-12-15")),
        #cases_and_vax, 
@@ -260,7 +260,7 @@ ggplot(filter(cases_and_vax, Date > as.Date("2020-12-15")),
           "Sources: IDPH, CUPHD") +
   xlab(NULL) +
   ylab(NULL) +
-  scale_x_date(expand = c(0,.01)) +
+  scale_x_date(expand = c(0,0)) +
   scale_y_continuous(labels = comma,
                   #   limits = c(0,60000),
                      expand = expansion(mult = c(0,.05))
