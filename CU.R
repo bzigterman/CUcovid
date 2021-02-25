@@ -15,7 +15,8 @@ CUcovid <- read_sheet("1UUGDwV5qahPos-bhWUfzf4Y1WYXEh-I0JBOJaoGMrJs",
   mutate(avgnewhospitalized = rollmean(Hospitalized, k = 7, 
                                        fill = NA, align = "right")) %>%
   mutate(avgnewdead = rollmean(New_Deceased, k = 7, 
-                               fill = NA, align = "right"))
+                               fill = NA, align = "right")) %>%
+  mutate(weeklydead = avgnewdead * 7)
 write.csv(CUcovid,"data/CUcovid.csv", row.names = FALSE)
 CUcovidactive <- CUcovid %>%
   select(Date, Hospitalized, Not_hospitalized) %>%

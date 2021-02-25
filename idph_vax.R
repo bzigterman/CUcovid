@@ -239,14 +239,14 @@ idph_cases_champaign <- idph_cases_champaign$values %>%
 
 cases_and_vax <- full_join(CUcovid, idph_vax_champaign) %>%
   select(avgnewcases, Date, AdministeredCount, Hospitalized,
-         Quarantined, avgnewdead, AdministeredCountRollAvg) %>%
+         Quarantined, weeklydead, AdministeredCountRollAvg) %>%
   pivot_longer(!Date, names_to = "vax_case", values_to = "count") %>%
   mutate(vax_case = recode(vax_case, 
                            "AdministeredCount" = "6. Total Vaccine Doses",
                            "avgnewcases" = "1. Average New Cases",
                            "Quarantined" = "2. Currently Quarantined",
                            "Hospitalized" = "3. Currently Hospitalized",
-                           "avgnewdead" = "4. Average New Deaths",
+                           "weeklydead" = "4. New Deaths (Past Week)",
                            "AdministeredCountRollAvg" = "5. Average New Vaccine Doses"))
 
 ggplot(filter(cases_and_vax, Date > as.Date("2020-12-15")),
