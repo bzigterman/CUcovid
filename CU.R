@@ -5,7 +5,7 @@ library(scales)
 library(zoo)
 library(tidyverse)
 
-# get the data from google sheet
+# get the data from google sheet ----
 CUcovid <- read_sheet("1UUGDwV5qahPos-bhWUfzf4Y1WYXEh-I0JBOJaoGMrJs",
                       sheet = 1) %>%
   mutate(avgnewcases = rollmean(New_cases, k = 7, 
@@ -22,7 +22,7 @@ CUcovidactive <- CUcovid %>%
   select(Date, Hospitalized, Not_hospitalized) %>%
   pivot_longer(!Date, names_to = "Active", values_to = "count")
 
-# new cases with 7 day avg
+# new cases with 7 day avg ----
 ggplot(CUcovid, aes(x = as.Date(Date), y = New_cases)) +
   geom_col(fill = "#B45F06",
            alpha = .25) +
@@ -49,7 +49,7 @@ ggsave("CUCasesWeb.png",
        path = "../bzigterman.github.io/images/",
        width = 8, height = 32/7, dpi = 320)
 
-# new tests with 7 day avg
+# new tests with 7 day avg ----
 ggplot(CUcovid, aes(x = as.Date(Date), y = New_tests)) +
   geom_col(fill = "#1C4587",
            alpha = .25) +
@@ -76,7 +76,7 @@ ggsave("CUTestsWeb.png",
        path = "../bzigterman.github.io/images/",
        width = 8, height = 32/7, dpi = 320)
 
-# stacked geom_area of active cases
+# stacked geom_area of active cases ----
 ggplot(CUcovidactive, aes(x = as.Date(Date), y = count, fill = Active)) +
   geom_area(position = position_stack(reverse = TRUE)) +
   xlab(NULL) +
@@ -104,7 +104,7 @@ ggsave("CUactiveWeb.png",
        path = "../bzigterman.github.io/images/",
        width = 8, height = 32/7, dpi = 320)
 
-# hospitalizations
+# hospitalizations ----
 ggplot(filter(CUcovid, Hospitalized != is.null(TRUE)), 
               aes(x = as.Date(Date), y = Hospitalized)) +
   geom_col(fill = "#ff5f1a",
@@ -130,7 +130,7 @@ ggsave("CUhospitalizedWeb.png",
        path = "../bzigterman.github.io/images/",
        width = 8, height = 32/7, dpi = 320)
 
-# quarantined
+# quarantined ----
 ggplot(filter(CUcovid, Quarantined != is.null(TRUE)), 
        aes(x = as.Date(Date), y = Quarantined)) +
   geom_col(fill = "#009e89",
@@ -155,7 +155,7 @@ ggsave("CUquarantinedWeb.png",
        path = "../bzigterman.github.io/images/",
        width = 8, height = 32/7, dpi = 320)
 
-# deaths
+# deaths ----
 ggplot(CUcovid, 
        aes(x = as.Date(Date), y = New_Deceased)) +
   geom_col(fill = "#d90000",
@@ -179,5 +179,5 @@ ggsave("CUdeaths.png",
        path = "../bzigterman.github.io/images/",
        width = 8, height = 32/7, dpi = 320)
 
-# todo
+# todo ----
 # - [x] add facet grid or wrap for the charts, use pivot longer to put in one table to align dates
