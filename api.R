@@ -19,6 +19,10 @@ hospitalization <- GET("https://idph.illinois.gov/DPHPublicInformation/api/COVID
 content(hospitalization)
 hospitalization <- fromJSON(content(hospitalization, "text"))
 regionhosp <- hospitalization$regionValues
+ltc <- GET("https://idph.illinois.gov/DPHPublicInformation/api/COVID/GetLTCData")
+content(ltc)
+ltc <- fromJSON(content(ltc, "text"))
+ltc <- ltc$FacilityValues
 
 ?fromJSON
 ?GET
