@@ -261,7 +261,7 @@ ggplot(filter(cases_and_vax, Date > as.Date("2020-12-15")),
   xlab(NULL) +
   ylab(NULL) +
   scale_x_date(expand = c(0,0)) +
-  scale_y_continuous(labels = comma,
+  scale_y_continuous(labels = label_comma(accuracy = 1),
                   #   limits = c(0,60000),
                      expand = expansion(mult = c(0,.05))
                   ) +
