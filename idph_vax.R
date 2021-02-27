@@ -246,7 +246,7 @@ cases_and_vax <- full_join(CUcovid, idph_vax_champaign) %>%
                            "avgnewcases" = "1. Average New Cases",
                            "Quarantined" = "2. Currently Quarantined",
                            "Hospitalized" = "3. Currently Hospitalized",
-                           "weeklydead" = "4. New Deaths in Past Week",
+                           "weeklydead" = "4. Deaths in Past Week",
                            "AdministeredCountRollAvg" = "5. Average New Vaccine Doses"))
 
 ggplot(filter(cases_and_vax, Date > as.Date("2020-12-15")),
