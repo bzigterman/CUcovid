@@ -199,9 +199,10 @@ ggsave("UISemCompareTotal.png",
 
 # combined semester comparisons
 combined <- semcomparenew + semcomparetotal
-combined[[1]] <- combined[[1]] + ggtitle("New Cases","With seven-day moving average") +
+combined[[1]] <- combined[[1]] + ggtitle("New Cases by Semester",
+                                         "With seven-day moving average") +
   theme(legend.position = "none") 
-combined[[2]] <- combined[[2]] + ggtitle("Total Cases") +
+combined[[2]] <- combined[[2]] + ggtitle("Total Cases by Semester") +
   theme(legend.position = c(-.015,.85))
 combined
 ggsave("UI/SemCompareCombined.png", width = 8, height = 4.5, dpi = 320)
