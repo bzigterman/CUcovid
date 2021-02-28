@@ -3,6 +3,7 @@ library(dplyr)
 library(ggplot2)
 library(scales)
 library(zoo)
+library(patchwork)
 
 # get the data from google sheet
 uicovid <- read_sheet("1UUGDwV5qahPos-bhWUfzf4Y1WYXEh-I0JBOJaoGMrJs",
@@ -116,7 +117,7 @@ ggsave("UIPositivityWeb.png", # save to my website
 # ggsave("4TweetUITotals.png", width = 8, height = 32/7, dpi = 150)
 
 # fall vs spring semester new cases
-ggplot(uicovid, aes(x = Semester_day/7, y = New_Cases, colour = Semester)) +
+semcomparenew <- ggplot(uicovid, aes(x = Semester_day/7, y = New_Cases, colour = Semester)) +
   #geom_vline(xintercept = 0, colour = "grey50") +
   annotate("rect", xmin = -Inf, xmax = 0, ymin = 0, ymax = Inf,
            fill = "white") +
@@ -146,6 +147,7 @@ ggplot(uicovid, aes(x = Semester_day/7, y = New_Cases, colour = Semester)) +
         legend.background = element_blank(),
         legend.key = element_blank(),
         legend.text = element_text(size = 13)) 
+semcomparenew
 
 ggsave("UI/1UISemCompare.png", width = 8, height = 32/7, dpi = 320)
 ggsave("UISemCompare.png", 
@@ -153,7 +155,10 @@ ggsave("UISemCompare.png",
        width = 8, height = 32/7, dpi = 320)
 
 # fall vs spring semester total cases
-ggplot(uicovid, aes(x = Semester_day/7, y = Sem_totals, colour = Semester)) +
+semcomparetotal <- ggplot(uicovid, 
+                          aes(x = Semester_day/7, 
+                              y = Sem_totals, 
+                              colour = Semester)) +
   annotate("rect", xmin = -Inf, xmax = 0, ymin = 0, ymax = Inf,
            fill = "white") +
   geom_line(size = 1.5) +
@@ -185,12 +190,21 @@ ggplot(uicovid, aes(x = Semester_day/7, y = Sem_totals, colour = Semester)) +
         legend.background = element_blank(),
         legend.key = element_blank(),
         legend.text = element_text(size = 13)) 
+semcomparetotal
 
 ggsave("UI/UISemCompareTotal.png", width = 8, height = 32/7, dpi = 320)
 ggsave("UISemCompareTotal.png", 
        path = "../bzigterman.github.io/images/",
        width = 8, height = 32/7, dpi = 320)
 
+# combined semester comparisons
+combined <- semcomparenew + semcomparetotal
+combined[[1]] <- combined[[1]] + ggtitle("New Cases","With seven-day moving average") +
+  theme(legend.position = "none") 
+combined[[2]] <- combined[[2]] + ggtitle("Total Cases") +
+  theme(legend.position = c(-.015,.85))
+combined
+ggsave("UI/SemCompareCombined.png", width = 8, height = 4.5, dpi = 320)
 
 # todo
 # [x] save total cases comparison
