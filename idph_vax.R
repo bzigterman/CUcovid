@@ -76,7 +76,7 @@ ggplot(idph_vax_champaign, aes(x = as.Date(Date),
             colour = "#674EA7",
             fill = "#674EA7",
             alpha = 1) +
-  geom_text(aes(label = paste("First dose:",
+  geom_text(aes(label = paste("Partially vaccinated:",
                                percent(PercentDose1, accuracy = .1))),
              data = tail(idph_vax_champaign, 1),
              size = 4,
@@ -138,7 +138,7 @@ full_vax <- projected %>%
 
 write_clip(paste("In the past week, an average of ",comma(avgdose1change)," new Champaign County residents received their first dose of the COVID-19 vaccine each day.\n\nIf that pace continued, half of Champaign County residents could recive their first dose by ",month(half_vax$Date, label = TRUE, abbr = FALSE)," ",mday(half_vax$Date),", and the entire county would be vaccinated around ",month(full_vax$Date, label = TRUE, abbr = FALSE)," ",mday(full_vax$Date),".\n\nOf course, the pace is expected to vary as more vaccines are approved, shipments vary, people hesitate and eligibility expands.\n\nAlready, ",percent(current_vax$PercentDose1)," of Champaign County residents have received their first dose, according to the Illinois Department of Public Health.\n\nBy comparison, half the country is expected to receive its first COVID-19 dose around xx, according to The New York Times. https://www.nytimes.com/interactive/2020/us/covid-19-vaccine-doses.html",sep="")) # paste text to clipboard
 
-# projection plot 
+# first dose projection plot 
 ggplot(idph_vax_champaign, aes(x = as.Date(Date),
                                y = PercentDose1)) +
   geom_line(colour = "#800080", # actual line 
@@ -221,6 +221,118 @@ ggsave("VaccineProjection.png",
        path = "../bzigterman.github.io/images/",
        width = 8, height = 32/7, dpi = 150)
 
+# fully vaccinated projection ----
+
+avgdose2change <- mean(tail(idph_vax_champaign$Dose2Change,7), na.rm = TRUE)
+xmin <- max(as.Date(idph_vax_champaign$Date))
+xmax <- as.Date("2023-04-01")
+ymin <- max(idph_vax_champaign$PersonsFullyVaccinated)
+projected_full <- data.frame(Date = seq(xmin, xmax, by = "day"))
+projected_full$PersonsFullyVaccinated <- seq(ymin,
+                              by = avgdose2change,
+                              length.out = nrow(projected_full))
+projected_full <- projected_full %>%
+  filter(PersonsFullyVaccinated <209983) %>%
+  mutate(PctVaccinatedPopulation = PersonsFullyVaccinated/209983)
+
+# points
+current_vax <- idph_vax_champaign %>%
+  tail(1)
+half_vax <- projected_full %>%
+  filter(PctVaccinatedPopulation >.5) %>%
+  head(1)
+eighty_vax <- projected_full %>%
+  filter(PctVaccinatedPopulation >.8) %>%
+  head(1)
+full_vax <- projected_full %>%
+  filter(PctVaccinatedPopulation >.99) %>%
+  tail(1)
+
+# write_clip(paste("In the past week, an average of ",comma(avgdose1change)," new Champaign County residents received their first dose of the COVID-19 vaccine each day.\n\nIf that pace continued, half of Champaign County residents could recive their first dose by ",month(half_vax$Date, label = TRUE, abbr = FALSE)," ",mday(half_vax$Date),", and the entire county would be vaccinated around ",month(full_vax$Date, label = TRUE, abbr = FALSE)," ",mday(full_vax$Date),".\n\nOf course, the pace is expected to vary as more vaccines are approved, shipments vary, people hesitate and eligibility expands.\n\nAlready, ",percent(current_vax$PercentDose1)," of Champaign County residents have received their first dose, according to the Illinois Department of Public Health.\n\nBy comparison, half the country is expected to receive its first COVID-19 dose around xx, according to The New York Times. https://www.nytimes.com/interactive/2020/us/covid-19-vaccine-doses.html",sep="")) # paste text to clipboard
+
+# first dose projection plot 
+ggplot(idph_vax_champaign, aes(x = as.Date(Date),
+                               y = PctVaccinatedPopulation)) +
+  geom_line(colour = "#800080", # actual line 
+            size = 1.5) +
+  geom_line(data = projected_full, # projected line
+            aes(x = as.Date(Date),
+                y = PctVaccinatedPopulation),
+            linetype = "dashed",
+            size = 1.5, 
+            colour = "#008040") +
+  geom_point(data = current_vax, # current point
+             aes(x = as.Date(Date),
+                 y = PctVaccinatedPopulation),
+             shape = 21,
+             colour = "#800080",
+             size = 2.5,
+             fill = "white",
+             stroke = 1.5) +
+  geom_text(data = current_vax, # current label
+            aes(x = as.Date(Date),
+                y = PctVaccinatedPopulation,
+                label = paste(percent(PctVaccinatedPopulation),
+                              "are already fully vaccinated")),
+            family = "Barlow",
+            hjust = -.05,
+            vjust = 1.5,
+            size = 4.4) +
+  geom_point(data = half_vax, # half point projection point
+             aes(x = as.Date(Date),
+                 y = PctVaccinatedPopulation),
+             shape = 21,
+             colour = "#008040",
+             size = 2.5,
+             fill = "white",
+             stroke = 1.5) +
+  geom_text(data = half_vax, # half point projection label
+            aes(x = as.Date(Date),
+                y = PctVaccinatedPopulation,
+                label = paste("At current pace:\n50% by",
+                              month(Date, label = TRUE, abbr = FALSE),
+                              mday(Date))),
+            family = "Barlow",
+            hjust = 1.1,
+            vjust = -0.3,
+            size = 4.4) +
+  geom_point(data = eighty_vax, # eighty pct point projection point
+             aes(x = as.Date(Date),
+                 y = PctVaccinatedPopulation),
+             shape = 21,
+             colour = "#008040",
+             size = 2.5,
+             fill = "white",
+             stroke = 1.5) +
+  geom_text(data = eighty_vax, # eighty pct point projection label
+            aes(x = as.Date(Date),
+                y = PctVaccinatedPopulation,
+                label = paste("At current pace:\n80% by",
+                              month(Date, label = TRUE, abbr = FALSE),
+                              mday(Date))),
+            family = "Barlow",
+            hjust = 1.1,
+            vjust = -0.3,
+            size = 4.4) +
+  xlab(NULL) +
+  ylab(NULL) +
+  scale_y_continuous(labels = percent, 
+                     position = "right",
+                     limits = c(0,1),
+                     expand = expansion(mult = c(0,0))) +
+  scale_x_date(expand = c(0,0)) +
+  ggtitle("When a Percent of Champaign County Residents Might Be Fully Vaccinated",
+          "Based on average new final doses administered over the past week. Source: IDPH") +
+  theme(text = element_text(family = "Barlow"),
+        axis.text.y = element_text(size = 13),
+        axis.text.x = element_text(size = 13),
+        plot.title = element_text(size = 18, family = "Oswald")) 
+
+ggsave("vax/FullVaccineProjection.png", width = 8, height = 32/7, dpi = 320)
+ggsave("FullVaccineProjection.png",
+       path = "../bzigterman.github.io/images/",
+       width = 8, height = 32/7, dpi = 150)
+
 
 # chart combining vaccines and cases ----
 idph_cases_champaign <- rio::import("https://idph.illinois.gov/DPHPublicInformation/api/COVID/GetCountyHistorical?countyName=Champaign",
@@ -289,3 +401,4 @@ ggsave("vaccinefacets.png",
 # - [x] save the charts, prob replace the manual-made ones
 # - [x] save the data to idph folder
 # - [x] generate text
+# - [ ] second dose projection
