@@ -195,3 +195,4 @@ ggsave("UISemCompareTotal.png",
 # todo
 # [x] save total cases comparison
 # [ ] change numbering on charts
+# [ ] make side by side image of two good ui charts
