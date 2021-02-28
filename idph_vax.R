@@ -40,26 +40,38 @@ write.csv(idph_vax_champaign,"idph/vax_champaign.csv", row.names = FALSE)
 write_clip(tail(idph_vax_champaign$Text, n = 1)) # paste text to clipboard
 
 # new vaccines administered chart copy ----
-ggplot(idph_vax_champaign, 
-       aes(x = as.Date(Date), y = AdministeredCountChange)) +
-  geom_col(fill = "#674EA7",
-           alpha = .25) +
-  geom_line(aes(y = AdministeredCountRollAvg),
-            colour = "#674EA7",
-            size = 1.5) +
+pivoted_vax_champaign <- idph_vax_champaign %>%
+  select(Date, Dose1Change, Dose2Change) %>%
+  pivot_longer(!Date, names_to = "Dose", values_to = "doses")
+
+#?pivot_longer
+         
+ggplot(pivoted_vax_champaign, 
+       aes(x = as.Date(Date), y = doses)) +
+  geom_col(aes(fill = Dose)) +
+  geom_line(data = idph_vax_champaign,
+            aes(y = AdministeredCountRollAvg),
+            colour = "black",
+            size = 1.4) +
   xlab(NULL) +
   ylab(NULL) +
   scale_y_continuous(labels = comma, 
                      position = "right",
                      expand = expansion(mult = c(0,.05))) +
   scale_x_date(expand = c(0,0)) +
-  guides(fill = FALSE) +
+  scale_fill_manual(values = c("#BEB3D9","#7D67B4"),
+                    labels = c("First", "Final")) +
+  #guides(fill = guide_legend(title = NULL)) +
   ggtitle("New Vaccine Doses Administered in Champaign County",
           "With seven-day moving average. Source: IDPH")+
   theme(text = element_text(family = "Barlow"),
         axis.text.y = element_text(size = 13),
         axis.text.x = element_text(size = 13),
-        plot.title = element_text(size = 22, family = "Oswald")) 
+        plot.title = element_text(size = 22, family = "Oswald"),
+        legend.position = c(.15,.75),
+        legend.background = element_blank(),
+        legend.key = element_blank(),
+        legend.text = element_text(size = 13)) 
 
 ggsave("vax/NewVaccines.png", width = 8, height = 32/7, dpi = 320)
 ggsave("NewVaccinesWeb.png", 
