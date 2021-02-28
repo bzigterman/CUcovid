@@ -148,7 +148,7 @@ full_vax <- projected %>%
   filter(PercentDose1 >.99) %>%
   tail(1)
 
-write_clip(paste("In the past week, an average of ",comma(avgdose1change)," new Champaign County residents received their first dose of the COVID-19 vaccine each day.\n\nIf that pace continued, half of Champaign County residents could recive their first dose by ",month(half_vax$Date, label = TRUE, abbr = FALSE)," ",mday(half_vax$Date),", and the entire county would be vaccinated around ",month(full_vax$Date, label = TRUE, abbr = FALSE)," ",mday(full_vax$Date),".\n\nOf course, the pace is expected to vary as more vaccines are approved, shipments vary, people hesitate and eligibility expands.\n\nAlready, ",percent(current_vax$PercentDose1)," of Champaign County residents have received their first dose, according to the Illinois Department of Public Health.\n\nBy comparison, half the country is expected to receive its first COVID-19 dose around xx, according to The New York Times. https://www.nytimes.com/interactive/2020/us/covid-19-vaccine-doses.html",sep="")) # paste text to clipboard
+write_clip(paste("In the past week, an average of ",comma(avgdose1change)," new Champaign County residents received their first dose of the two-dose COVID-19 vaccines each day.\n\nIf that pace continued, half of Champaign County residents could be partially vaccinated by ",month(half_vax$Date, label = TRUE, abbr = FALSE)," ",mday(half_vax$Date),", and the entire county would be partially vaccinated around ",month(full_vax$Date, label = TRUE, abbr = FALSE)," ",mday(full_vax$Date),".\n\nOf course, the pace is expected to vary as more vaccines are approved, shipments vary, people hesitate and eligibility expands.\n\nAlready, ",percent(current_vax$PercentDose1)," of Champaign County residents have been partially vaccinated, according to the Illinois Department of Public Health.\n\nBy comparison, half the country is expected to receive its first COVID-19 dose around xx, according to The New York Times. https://www.nytimes.com/interactive/2020/us/covid-19-vaccine-doses.html",sep="")) # paste text to clipboard
 
 # first dose projection plot 
 ggplot(idph_vax_champaign, aes(x = as.Date(Date),
@@ -173,7 +173,7 @@ ggplot(idph_vax_champaign, aes(x = as.Date(Date),
              aes(x = as.Date(Date),
                  y = PercentDose1,
                  label = paste(percent(PercentDose1),
-                               "have already received first dose")),
+                               "have been partially vaccinated")),
             family = "Barlow",
             hjust = -.05,
             vjust = 1.5,
@@ -221,7 +221,7 @@ ggplot(idph_vax_champaign, aes(x = as.Date(Date),
                      limits = c(0,1),
                      expand = expansion(mult = c(0,0))) +
   scale_x_date(expand = c(0,0)) +
-  ggtitle("When a Percent of Champaign County Residents Might Receive First Vaccine Dose",
+  ggtitle("When a Percent of Champaign County Residents Might Be Partially Vaccinated",
           "Based on average new first doses administered over the past week. Source: IDPH") +
   theme(text = element_text(family = "Barlow"),
         axis.text.y = element_text(size = 13),
