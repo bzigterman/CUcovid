@@ -100,7 +100,7 @@ ggplot(idph_vax_champaign, aes(x = as.Date(Date),
                  label = paste("Fully vaccinated:",
                                percent(PctVaccinatedPopulation, accuracy = .1))),
              size = 4,
-             hjust = 1.2,
+             hjust = 1.1,
              vjust = 0,
              family = "Barlow") +
   xlab(NULL) +
