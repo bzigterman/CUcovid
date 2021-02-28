@@ -27,8 +27,5 @@ ltc <- ltc$FacilityValues
 ?fromJSON
 ?GET
 
-uifile <- rio::import("https://uofi.app.box.com/s/nrrnx2fn6sqt4hhuh2ckq2u6z5o4zmqg/file/780293011768", format = "csv")
-
-
 # todos ----w
 # [ ] cdc api
