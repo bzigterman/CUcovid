@@ -102,6 +102,7 @@ ggplot(regioncovid, aes(x = as.Date(Date))) +
              colour = "#481567ff",
              alpha = .25) +
   geom_line(aes(y = rollmean(UIpositives, 
+                        #     na.rm = TRUE,
                              7, 
                              fill = TRUE, 
                              align = "right"),
@@ -111,6 +112,7 @@ ggplot(regioncovid, aes(x = as.Date(Date))) +
   geom_line(aes(y = rollmean(ChampaignCoNoUIpositives, 
                              7, 
                              fill = TRUE, 
+                          #   na.rm = TRUE,
                              align = "right"),
                 colour = "Non-University of Illinois"),
             #colour = "#741B47",
@@ -127,6 +129,7 @@ ggplot(regioncovid, aes(x = as.Date(Date))) +
                      limits = c(0,max(rollmean(regioncovid$UIpositives,
                                                7,
                                                fill = TRUE,
+                                             #  na.rm = TRUE,
                                                align = "right"))),
                      expand = expansion(mult = c(0,.05))) +
   scale_x_date(expand = expansion(mult = c(.01,.01))) +
@@ -140,11 +143,11 @@ ggplot(regioncovid, aes(x = as.Date(Date))) +
         legend.background = element_blank(),
         legend.key = element_blank(),
         legend.text = element_text(size = 13)) 
-ggsave("region/2ChampaignCoCasesSplit.png", 
-       width = 8, height = 32/7, dpi = 320)
-ggsave("ChampaignCoCasesSplitWeb.png", 
-       path = "../bzigterman.github.io/images/",
-       width = 8, height = 32/7, dpi = 320)
+# ggsave("region/2ChampaignCoCasesSplit.png", 
+#        width = 8, height = 32/7, dpi = 320)
+# ggsave("ChampaignCoCasesSplitWeb.png", 
+#        path = "../bzigterman.github.io/images/",
+#        width = 8, height = 32/7, dpi = 320)
 
 # chart of seven day positivity without UI tests
 ggplot(regioncovid, aes(x = as.Date(Date))) +
@@ -219,11 +222,11 @@ ggplot(regioncovid, aes(x = as.Date(Date))) +
         legend.background = element_blank(),
         legend.key = element_blank(),
         legend.text = element_text(size = 13)) 
-ggsave("region/4statepositivity.png", 
-       width = 8, height = 32/7, dpi = 320)
-ggsave("statepositivityWeb.png", 
-       path = "../bzigterman.github.io/images/",
-       width = 8, height = 32/7, dpi = 320)
+# ggsave("region/4statepositivity.png", 
+#        width = 8, height = 32/7, dpi = 320)
+# ggsave("statepositivityWeb.png", 
+#        path = "../bzigterman.github.io/images/",
+#        width = 8, height = 32/7, dpi = 320)
 
 # todo
 # - make the hospitalizations charts geom_area
