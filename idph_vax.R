@@ -375,6 +375,7 @@ ggplot(filter(cases_and_vax, Date > as.Date("2020-12-15")),
   scale_x_date(expand = c(0,0)) +
   scale_y_continuous(labels = label_comma(accuracy = 1),
                   #   limits = c(0,60000),
+                  position = "right",
                      expand = expansion(mult = c(0,.05))
                   ) +
   expand_limits(y = 0) +
@@ -402,3 +403,4 @@ ggsave("vaccinefacets.png",
 # - [x] save the data to idph folder
 # - [x] generate text
 # - [ ] second dose projection
+# - [ ] use pivot longer to make projections
