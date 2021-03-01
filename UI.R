@@ -210,4 +210,4 @@ ggsave("UI/SemCompareCombined.png", width = 8, height = 4.5, dpi = 320)
 # todo
 # [x] save total cases comparison
 # [ ] change numbering on charts
-# [ ] make side by side image of two good ui charts
+# [x] make side by side image of two good ui charts
