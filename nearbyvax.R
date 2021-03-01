@@ -11,6 +11,10 @@ library(clipr)
 c("Champaign","Vermilion","Ford","Edgar","Douglas","Piatt","Iroquois",
   "De%20Witt","Macon","Moultrie")
 
+region6 <- c("Iroquois", "Ford", "De%20Witt", "Piatt", "Champaign", "Vermilion", "Macon", "Moultrie", "Douglas", "Edgar", "Shelby", "Coles", "Cumberland", "Clark", "Fayette", "Effingham", "Jasper", "Crawford", "Clay", "Richland", "Lawrence") 
+
+lefttodo <-  c("Shelby", "Coles", "Cumberland", "Clark", "Fayette", "Effingham", "Jasper", "Crawford", "Clay", "Richland", "Lawrence")
+
 # set population variables
 champaignpop <- 209983
 vermilionpop <- 76806
