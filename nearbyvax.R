@@ -315,6 +315,7 @@ ggplot(last_vax_nearby, aes(y = reorder(CountyName,
             size = 3.5,
             family = "Barlow") +
   scale_x_continuous(labels = percent,
+                     #position = "top",
                      limits = c(0,1),
                      expand = expansion(mult = c(0,.05))) +
   xlab(NULL) +
