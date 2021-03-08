@@ -46,8 +46,8 @@ ggplot(idph_region6, aes(x = as.Date(Date), y = COVIDHospitalBedsInUse)) +
                      expand = expansion(mult = c(0,.05))) +
   scale_x_date(expand = c(0,0)) +
   guides(fill = FALSE) +
-  ggtitle("Hospital Beds in Use for COVID-19 in Region 6",
-          "Source: IDPH")+
+  labs(title = "Hospital Beds in Use for COVID-19 in Region 6",
+       caption =  "Source: IDPH")+
   theme(text = element_text(family = "Barlow"),
         axis.text.y = element_text(size = 13),
         axis.text.x = element_text(size = 13),

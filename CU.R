@@ -38,8 +38,9 @@ ggplot(CUcovid, aes(x = as.Date(Date), y = New_cases)) +
                      expand = expansion(mult = c(0,.05))) +
   scale_x_date(expand = c(0,0)) +
   #guides(fill = FALSE) +
-  ggtitle("New Cases in Champaign County",
-          "With seven-day moving average. Source: CUPHD")+
+  labs(title = "New Cases in Champaign County",
+       subtitle =   "With seven-day moving average",
+       caption = "Source: CUPHD")+
   theme(text = element_text(family = "Barlow"),
         axis.text.y = element_text(size = 13),
         axis.text.x = element_text(size = 13),

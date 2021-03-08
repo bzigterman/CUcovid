@@ -62,8 +62,9 @@ ggplot(pivoted_vax_champaign,
   scale_fill_manual(values = c("#BEB3D9","#7D67B4"),
                     labels = c("First", "Final")) +
   #guides(fill = guide_legend(title = NULL)) +
-  ggtitle("New Vaccine Doses Administered in Champaign County",
-          "With seven-day moving average. Source: IDPH")+
+  labs(title = "New Vaccine Doses Administered in Champaign County",
+       subtitle =  "With seven-day moving average", 
+       caption = "Source: IDPH")+
   theme(text = element_text(family = "Barlow"),
         axis.text.y = element_text(size = 13),
         axis.text.x = element_text(size = 13),
@@ -109,8 +110,9 @@ ggplot(idph_vax_champaign, aes(x = as.Date(Date),
                      position = "right",
                      expand = expansion(mult = c(0,.05))) +
   scale_x_date(expand = c(0,0)) +
-  ggtitle("People Vaccinated in Champaign County",
-          "With percent of total population. Source: IDPH") +
+  labs(title = "People Vaccinated in Champaign County",
+       subtitle = "With percent of total population.",
+       caption = "Source: IDPH") +
   theme(text = element_text(family = "Barlow"),
         axis.text.y = element_text(size = 13),
         axis.text.x = element_text(size = 13),
@@ -221,8 +223,9 @@ ggplot(idph_vax_champaign, aes(x = as.Date(Date),
                      limits = c(0,1),
                      expand = expansion(mult = c(0,0))) +
   scale_x_date(expand = c(0,0)) +
-  ggtitle("When a Percent of Champaign County Residents Might Be Partially Vaccinated",
-          "Based on average new first doses administered over the past week. Source: IDPH") +
+  labs(title = "When a Percent of Champaign County Residents Might Be Partially Vaccinated",
+         subtitle = "Based on average new first doses administered over the past week",
+       caption = "Source: IDPH") +
   theme(text = element_text(family = "Barlow"),
         axis.text.y = element_text(size = 13),
         axis.text.x = element_text(size = 13),
@@ -333,8 +336,9 @@ ggplot(idph_vax_champaign, aes(x = as.Date(Date),
                      limits = c(0,1),
                      expand = expansion(mult = c(0,0))) +
   scale_x_date(expand = c(0,0)) +
-  ggtitle("When a Percent of Champaign County Residents Might Be Fully Vaccinated",
-          "Based on average new final doses administered over the past week. Source: IDPH") +
+  labs(title = "When a Percent of Champaign County Residents Might Be Fully Vaccinated",
+       subtitle = "Based on average new final doses administered over the past week",
+       caption = "Source: IDPH") +
   theme(text = element_text(family = "Barlow"),
         axis.text.y = element_text(size = 13),
         axis.text.x = element_text(size = 13),
