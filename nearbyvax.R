@@ -141,16 +141,16 @@ ggplot(vax_nearby, aes(x = as.Date(Date), y = PctVaccinatedPopulation,
         axis.text.x = element_text(size = 13),
         legend.position = "none",
         plot.title = element_text(size = 22, family = "Oswald")) 
-ggsave("vax/nearbydose2.png", width = 8, height = 32/7, dpi = 320)
-ggsave("nearbydose2.png", 
-       path = "../bzigterman.github.io/images/",
-       width = 8, height = 32/7, dpi = 150)
+# ggsave("vax/nearbydose2.png", width = 8, height = 32/7, dpi = 320)
+# ggsave("nearbydose2.png", 
+#        path = "../bzigterman.github.io/images/",
+#        width = 8, height = 32/7, dpi = 150)
 
-?geom_text_repel
-?geom_rect
-max(vax_nearby$Date)
-ymd(tail(vax_nearby$Date,1))
-last_day <- filter(vax_nearby, as.Date(Date) == last(Date))
+#?geom_text_repel
+#?geom_rect
+#max(vax_nearby$Date)
+#ymd(tail(vax_nearby$Date,1))
+#last_day <- filter(vax_nearby, as.Date(Date) == last(Date))
 # line chart comparing all counties dose 2, with ggrepel ----
 ggplot(vax_nearby, aes(x = as.Date(Date), y = PctVaccinatedPopulation,
                        group = CountyName,
@@ -176,7 +176,8 @@ ggplot(vax_nearby, aes(x = as.Date(Date), y = PctVaccinatedPopulation,
                   hjust = "left", direction="y",
                   family = "Barlow",
                   size = 4.6)+
-  scale_y_continuous(labels = percent, 
+  scale_y_continuous(#labels = percent, 
+                     labels = label_percent(accuracy = 1),
                      # position = "right",
                      expand = expansion(mult = c(0,.05))) +
   scale_x_date(expand = expansion(mult = c(0,.25))) +
@@ -188,7 +189,11 @@ ggplot(vax_nearby, aes(x = as.Date(Date), y = PctVaccinatedPopulation,
         axis.text.x = element_text(size = 13),
         legend.position = "none",
         plot.title = element_text(size = 22, family = "Oswald")) 
-ggsave("vax/nearbydose2repellabels.png", width = 8, height = 32/7, dpi = 320)
+
+ggsave("vax/nearbydose2.png", width = 8, height = 32/7, dpi = 320)
+ggsave("nearbydose2.png", 
+       path = "../bzigterman.github.io/images/",
+       width = 8, height = 32/7, dpi = 150)
 
 # line chart comparing all counties dose 1, with ggrepel ----
 ggplot(vax_nearby, aes(x = as.Date(Date), y = PercentDose1,
@@ -215,7 +220,8 @@ ggplot(vax_nearby, aes(x = as.Date(Date), y = PercentDose1,
                   hjust = "left", direction="y",
                   family = "Barlow",
                   size = 4.6)+
-  scale_y_continuous(labels = percent, 
+  scale_y_continuous(#labels = percent, 
+                     labels = label_percent(accuracy = 1),
                      # position = "right",
                      expand = expansion(mult = c(0,.05))) +
   scale_x_date(expand = expansion(mult = c(0,.25))) +
@@ -227,7 +233,11 @@ ggplot(vax_nearby, aes(x = as.Date(Date), y = PercentDose1,
         axis.text.x = element_text(size = 13),
         legend.position = "none",
         plot.title = element_text(size = 22, family = "Oswald")) 
-ggsave("vax/nearbydose1repellabels.png", width = 8, height = 32/7, dpi = 320)
+
+ggsave("vax/nearbydose1.png", width = 8, height = 32/7, dpi = 320)
+ggsave("nearbydose1.png", 
+       path = "../bzigterman.github.io/images/",
+       width = 8, height = 32/7, dpi = 150)
 
 # line chart of dose 1 ----
 ggplot(vax_nearby, aes(x = as.Date(Date), y = PercentDose1,
@@ -251,10 +261,10 @@ ggplot(vax_nearby, aes(x = as.Date(Date), y = PercentDose1,
         axis.text.x = element_text(size = 13),
         legend.position = "none",
         plot.title = element_text(size = 22, family = "Oswald")) 
-ggsave("vax/nearbydose1.png", width = 8, height = 32/7, dpi = 320)
-ggsave("nearbydose1.png", 
-       path = "../bzigterman.github.io/images/",
-       width = 8, height = 32/7, dpi = 150)
+# ggsave("vax/nearbydose1.png", width = 8, height = 32/7, dpi = 320)
+# ggsave("nearbydose1.png", 
+#        path = "../bzigterman.github.io/images/",
+#        width = 8, height = 32/7, dpi = 150)
 
 
 
