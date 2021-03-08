@@ -7,6 +7,9 @@ library(ggplot2)
 library(scales)
 library(zoo)
 library(clipr)
+library(ggrepel)
+
+# get data ready ----
 
 c("Champaign","Vermilion","Ford","Edgar","Douglas","Piatt","Iroquois",
   "De%20Witt","Macon","Moultrie")
@@ -115,13 +118,14 @@ vax_nearby <- full_join(vax_champaign, vax_vermilion) %>%
  # mutate(Dose1Change = PersonsDose1 - lag(PersonsDose1)) %>%
 #  mutate(Dose2Change = PersonsFullyVaccinated - lag(PersonsFullyVaccinated))
 
-# line chart comparing all the counties for dose 2
+# line chart comparing all the counties for dose 2 ----
 ggplot(vax_nearby, aes(x = as.Date(Date), y = PctVaccinatedPopulation,
                        colour = CountyName)) +
   geom_line() +
   geom_text(data = filter(vax_nearby, as.Date(Date) == last(Date)),
             aes(label = CountyName,
                 colour = CountyName),
+            #   direction = "y",
             hjust = 0,
             family = "Barlow",
             size = 4.6) +
@@ -142,7 +146,90 @@ ggsave("nearbydose2.png",
        path = "../bzigterman.github.io/images/",
        width = 8, height = 32/7, dpi = 150)
 
-# line chart of dose 1
+?geom_text_repel
+?geom_rect
+max(vax_nearby$Date)
+ymd(tail(vax_nearby$Date,1))
+last_day <- filter(vax_nearby, as.Date(Date) == last(Date))
+# line chart comparing all counties dose 2, with ggrepel ----
+ggplot(vax_nearby, aes(x = as.Date(Date), y = PctVaccinatedPopulation,
+                       group = CountyName,
+                       colour = CountyName)) +
+  # geom_rect(
+  #           aes(xmin = as.Date(ymd(tail(Date,1))), xmax = Inf, 
+  #           ymin = 0, ymax = Inf),
+  #           colour = "white",
+  #           fill = "white"
+  #           ) +
+  # annotate("rect", 
+  #          xmin = as.Date("2021-03-06"), xmax = Inf, 
+  #          ymin = 0, ymax = Inf,
+  #          fill = "white") +
+  geom_line() +
+  geom_text_repel(data = filter(vax_nearby, as.Date(Date) == last(Date)),
+                  aes(label = CountyName,
+                      colour = CountyName),
+                  nudge_x = 6,
+                  #segment.curvature = -0.1,
+                  segment.color = 'grey60',
+                  #segment.curvature = -0.1,
+                  hjust = "left", direction="y",
+                  family = "Barlow",
+                  size = 4.6)+
+  scale_y_continuous(labels = percent, 
+                     # position = "right",
+                     expand = expansion(mult = c(0,.05))) +
+  scale_x_date(expand = expansion(mult = c(0,.25))) +
+  xlab(NULL) +
+  ylab(NULL) +
+  ggtitle("Percent of Population Fully Vaccinated in Nearby Counties")+
+  theme(text = element_text(family = "Barlow"),
+        axis.text.y = element_text(size = 13),
+        axis.text.x = element_text(size = 13),
+        legend.position = "none",
+        plot.title = element_text(size = 22, family = "Oswald")) 
+ggsave("vax/nearbydose2repellabels.png", width = 8, height = 32/7, dpi = 320)
+
+# line chart comparing all counties dose 1, with ggrepel ----
+ggplot(vax_nearby, aes(x = as.Date(Date), y = PercentDose1,
+                       group = CountyName,
+                       colour = CountyName)) +
+  # geom_rect(
+  #           aes(xmin = as.Date(ymd(tail(Date,1))), xmax = Inf, 
+  #           ymin = 0, ymax = Inf),
+  #           colour = "white",
+  #           fill = "white"
+  #           ) +
+  # annotate("rect", 
+  #          xmin = as.Date("2021-03-06"), xmax = Inf, 
+  #          ymin = 0, ymax = Inf,
+  #          fill = "white") +
+  geom_line() +
+  geom_text_repel(data = filter(vax_nearby, as.Date(Date) == last(Date)),
+                  aes(label = CountyName,
+                      colour = CountyName),
+                  nudge_x = 6,
+                  #segment.curvature = -0.1,
+                  segment.color = 'grey60',
+                  #segment.curvature = -0.1,
+                  hjust = "left", direction="y",
+                  family = "Barlow",
+                  size = 4.6)+
+  scale_y_continuous(labels = percent, 
+                     # position = "right",
+                     expand = expansion(mult = c(0,.05))) +
+  scale_x_date(expand = expansion(mult = c(0,.25))) +
+  xlab(NULL) +
+  ylab(NULL) +
+  ggtitle("Percent of Population Partially Vaccinated in Nearby Counties")+
+  theme(text = element_text(family = "Barlow"),
+        axis.text.y = element_text(size = 13),
+        axis.text.x = element_text(size = 13),
+        legend.position = "none",
+        plot.title = element_text(size = 22, family = "Oswald")) 
+ggsave("vax/nearbydose1repellabels.png", width = 8, height = 32/7, dpi = 320)
+
+# line chart of dose 1 ----
 ggplot(vax_nearby, aes(x = as.Date(Date), y = PercentDose1,
                        colour = CountyName)) +
   geom_line() +
@@ -171,7 +258,7 @@ ggsave("nearbydose1.png",
 
 
 
-# cleveland dot plot of dose 2
+# cleveland dot plot of dose 2 ----
 last_vax_nearby <- vax_nearby %>%
   filter(Date == tail(Date, 1))
 ggplot(last_vax_nearby, aes(x = PctVaccinatedPopulation, 
@@ -263,7 +350,7 @@ ggplot(last_vax_nearby, aes(x = PercentDose1,
 #        path = "../bzigterman.github.io/images/",
 #        width = 8, height = 32/7, dpi = 150)
 
-# combined cleveland dot
+# combined cleveland dot ----
 last_vax_nearby <- vax_nearby %>%
   filter(Date == tail(Date, 1)) %>%
   arrange(desc(PercentDose1))
