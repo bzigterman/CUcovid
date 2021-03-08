@@ -135,7 +135,8 @@ ggplot(vax_nearby, aes(x = as.Date(Date), y = PctVaccinatedPopulation,
   scale_x_date(expand = expansion(mult = c(0,.15))) +
   xlab(NULL) +
   ylab(NULL) +
-  ggtitle("Percent of Population Fully Vaccinated in Nearby Counties")+
+  labs(title ="Percent of Population Fully Vaccinated in Nearby Counties",
+       caption = "Source: IDPH")+
   theme(text = element_text(family = "Barlow"),
         axis.text.y = element_text(size = 13),
         axis.text.x = element_text(size = 13),
@@ -183,7 +184,8 @@ ggplot(vax_nearby, aes(x = as.Date(Date), y = PctVaccinatedPopulation,
   scale_x_date(expand = expansion(mult = c(0,.25))) +
   xlab(NULL) +
   ylab(NULL) +
-  ggtitle("Percent of Population Fully Vaccinated in Nearby Counties")+
+  labs(title = "Percent of Population Fully Vaccinated in Nearby Counties",
+       caption = "Source: IDPH")+
   theme(text = element_text(family = "Barlow"),
         axis.text.y = element_text(size = 13),
         axis.text.x = element_text(size = 13),
@@ -227,7 +229,8 @@ ggplot(vax_nearby, aes(x = as.Date(Date), y = PercentDose1,
   scale_x_date(expand = expansion(mult = c(0,.25))) +
   xlab(NULL) +
   ylab(NULL) +
-  ggtitle("Percent of Population Partially Vaccinated in Nearby Counties")+
+  labs(title = "Percent of Population Partially Vaccinated in Nearby Counties",
+       caption = "Source: IDPH")+
   theme(text = element_text(family = "Barlow"),
         axis.text.y = element_text(size = 13),
         axis.text.x = element_text(size = 13),
@@ -298,8 +301,8 @@ ggplot(last_vax_nearby, aes(x = PctVaccinatedPopulation,
   xlab(NULL) +
   ylab(NULL) +
   theme_classic() +
-  ggtitle("Percent of Population Fully Vaccinated in Nearby Counties",
-          "Source: IDPH")+
+  labs(title = "Percent of Population Fully Vaccinated in Nearby Counties",
+        caption =  "Source: IDPH")+
   theme(text = element_text(family = "Barlow"),
         axis.text.y = element_text(size = 13),
         axis.text.x = element_text(size = 13),
@@ -418,8 +421,8 @@ ggplot(last_vax_nearby, aes(y = reorder(CountyName,
   xlab(NULL) +
   ylab(NULL) +
   theme_classic() +
-  ggtitle("Percent of Population Vaccinated in Nearby Counties",
-          "Source: IDPH")+
+  labs(title = "Percent of Population Vaccinated in Nearby Counties",
+        caption =  "Source: IDPH")+
   theme(text = element_text(family = "Barlow"),
         axis.text.y = element_text(size = 13),
         axis.text.x = element_text(size = 13),
