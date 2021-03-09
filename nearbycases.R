@@ -134,13 +134,13 @@ idph_cases_moultrie <- idph_cases_moultrie$values %>%
 
 idph_cases_nearby <- full_join(idph_cases_champaign, idph_cases_vermilion) %>%
   full_join(idph_cases_ford) %>%
- # full_join(idph_cases_edgar) %>%
+  full_join(idph_cases_edgar) %>%
   full_join(idph_cases_douglas) %>%
   full_join(idph_cases_piatt) %>%
   full_join(idph_cases_iroquois) %>%
- # full_join(idph_cases_dewitt) %>%
- # full_join(idph_cases_macon) %>%
- # full_join(idph_cases_moultrie) %>%
+  full_join(idph_cases_dewitt) %>%
+  full_join(idph_cases_macon) %>%
+  full_join(idph_cases_moultrie) %>%
   mutate(Date = ymd_hms(reportDate)) %>%
   mutate(new_case_rate = (100000*avg_new_cases)/population) %>%
   mutate(new_deaths_rate = (1000000*avg_new_deaths)/population)
@@ -149,15 +149,37 @@ idph_cases_nearby <- full_join(idph_cases_champaign, idph_cases_vermilion) %>%
 ggplot(idph_cases_nearby, aes(x = as.Date(Date), y = new_case_rate,
                        colour = CountyName)) +
   geom_line() +
-  geom_text(data = filter(idph_cases_nearby, as.Date(Date) == last(Date)),
-            aes(label = CountyName,
-                colour = CountyName),
-            hjust = 0,
-            family = "Barlow") +
+  # geom_text(data = filter(idph_cases_nearby, as.Date(Date) == last(Date)),
+  #           aes(label = CountyName,
+  #               colour = CountyName),
+  #           hjust = 0,
+  #           family = "Barlow") +
+  # geom_text_repel(data = filter(idph_cases_nearby, as.Date(Date) == last(Date)),
+  #                 aes(label = paste0("  ", CountyName)),
+  #                 nudge_x = 800,
+  #                 #segment.curvature = 0.1,
+  #                 segment.color = 'grey60',
+  #                 #segment.curvature = -0.1,
+  #                 hjust = "left", direction="y",
+  #                 family = "Barlow",
+  #                 size = 4.6)+
+  geom_text_repel(data = filter(idph_cases_nearby, as.Date(Date) == last(Date)),
+                  aes(label = CountyName),
+                  nudge_x = 800,
+                  segment.curvature = 0.1,
+                  segment.color = 'grey60',
+                  #segment.ncp = 2,
+                  #segment.angle = 90,
+                  #segment.shape = .1,
+                  #segment.alpha = 0,
+                  #segment.curvature = -0.1,
+                  hjust = "left", direction="y",
+                  family = "Barlow",
+                  size = 4.6)+
   scale_y_continuous(labels = comma, 
-                     position = "right",
+                     #position = "right",
                      expand = expansion(mult = c(0,.05))) +
-  scale_x_date(expand = expansion(mult = c(0,.15))) +
+  scale_x_date(expand = expansion(mult = c(0,.3))) +
   xlab(NULL) +
   ylab(NULL) +
   labs(title = "New Cases per 100,000 Residents in Nearby Counties",
