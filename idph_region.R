@@ -47,7 +47,7 @@ ggplot(idph_region6, aes(x = as.Date(Date), y = COVIDHospitalBedsInUse)) +
   scale_x_date(expand = c(0,0)) +
   guides(fill = FALSE) +
   labs(title = "Hospital Beds in Use for COVID-19 in Region 6",
-       caption =  "Source: IDPH")+
+       caption =  "Source: Illinois Department of Public Health")+
   theme(text = element_text(family = "Barlow"),
         axis.text.y = element_text(size = 13),
         axis.text.x = element_text(size = 13),
@@ -73,8 +73,9 @@ ggplot(idph_region6, aes(x = as.Date(Date), y = CLIAdmissions_RollingAvg)) +
                      expand = expansion(mult = c(0,.05))) +
   scale_x_date(expand = c(0,0)) +
   guides(fill = FALSE) +
-  ggtitle("Average New Hospitalizations in Region 6",
-          "Seven-day moving average. Source: IDPH")+
+  labs(title = "Average New Hospitalizations in Region 6",
+       subtitle =  "With seven-day moving average",
+       caption = "Source: Illinois Department of Public Health")+
   theme(text = element_text(family = "Barlow"),
         axis.text.y = element_text(size = 13),
         axis.text.x = element_text(size = 13),
@@ -99,8 +100,9 @@ ggplot(idph_region6, aes(x = as.Date(Date), y = PositiveTests)) +
                      expand = expansion(mult = c(0,.05))) +
   scale_x_date(expand = c(0,0)) +
   guides(fill = FALSE) +
-  ggtitle("New Cases in Region 6",
-          "With seven-day moving average. Source: IDPH")+
+  labs(title = "New Cases in Region 6",
+       subtitle =  "With seven-day moving average",
+       caption = "Source: Illinois Department of Public Health")+
   theme(text = element_text(family = "Barlow"),
         axis.text.y = element_text(size = 13),
         axis.text.x = element_text(size = 13),

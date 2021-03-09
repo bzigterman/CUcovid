@@ -160,8 +160,9 @@ ggplot(idph_cases_nearby, aes(x = as.Date(Date), y = new_case_rate,
   scale_x_date(expand = expansion(mult = c(0,.15))) +
   xlab(NULL) +
   ylab(NULL) +
-  ggtitle("New Cases per 100,000 Residents in Nearby Counties",
-          "Seven-day moving average. Source: IDPH")+
+  labs(title = "New Cases per 100,000 Residents in Nearby Counties",
+       subtitle = "Seven-day moving average",
+       caption = "Source: Illinois Department of Public Health")+
   theme(text = element_text(family = "Barlow"),
         axis.text.y = element_text(size = 13),
         axis.text.x = element_text(size = 13),
@@ -187,7 +188,8 @@ ggplot(idph_cases_nearby, aes(x = as.Date(Date), y = new_deaths_rate,
   scale_x_date(expand = expansion(mult = c(0,.15))) +
   xlab(NULL) +
   ylab(NULL) +
-  ggtitle("avg new deaths over time in nearby counties")+
+  labs(title = "avg new deaths over time in nearby counties",
+       caption = "Source: Illinois Department of Public Health")+
   theme(text = element_text(family = "Barlow"),
         axis.text.y = element_text(size = 13),
         axis.text.x = element_text(size = 13),

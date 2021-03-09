@@ -28,8 +28,9 @@ ggplot(uicovid, aes(x = as.Date(Date), y = New_Cases)) +
                      expand = expansion(mult = c(0,.05))) +
   scale_x_date(expand = c(0,0)) +
   guides(fill = FALSE) +
-  ggtitle("New Cases at the University of Illinois",
-          "With seven-day moving average")+
+  labs(title = "New Cases at the University of Illinois",
+       subtitle =   "With seven-day moving average",
+       caption  = "Source: University of Illinois")+
   theme(text = element_text(family = "Barlow"),
         axis.text.y = element_text(size = 13),
         axis.text.x = element_text(size = 13),
@@ -54,8 +55,9 @@ ggplot(uicovid, aes(x = as.Date(Date), y = New_Tests)) +
                      expand = expansion(mult = c(0,.05))) +
   scale_x_date(expand = c(0,0)) +
   guides(fill = FALSE) +
-  ggtitle("New Tests at the University of Illinois",
-          "With seven-day moving average")+
+  labs(title = "New Tests at the University of Illinois",
+       subtitle =  "With seven-day moving average",
+       caption  = "Source: University of Illinois")+
   theme(text = element_text(family = "Barlow"),
         axis.text.y = element_text(size = 13),
         axis.text.x = element_text(size = 13),
@@ -81,8 +83,9 @@ ggplot(uicovid, aes(x = as.Date(Date), y = positivity)) +
                      expand = expansion(mult = c(0,.05))) +
   scale_x_date(expand = expansion(mult = c(.01,.01))) +
   guides(fill = FALSE) +
-  ggtitle("Test Positivity at the University of Illinois",
-          "With seven-day moving average")+
+  labs(title = "Test Positivity at the University of Illinois",
+       subtitle =  "With seven-day moving average",
+       caption  = "Source: University of Illinois")+
   theme(text = element_text(family = "Barlow"),
         axis.text.y = element_text(size = 13),
         axis.text.x = element_text(size = 13),
@@ -137,8 +140,9 @@ semcomparenew <- ggplot(uicovid, aes(x = Semester_day/7, y = New_Cases, colour =
   scale_colour_brewer(breaks = c("Fall","Spring"),
                       palette = "Set1",
                       guide = guide_legend(title = NULL)) +
-  ggtitle("Fall vs. Spring Semester at the University of Illinois",
-          "New cases with seven-day moving average")+
+  labs(title = "Fall vs. Spring Semester at the University of Illinois",
+       subtitle =  "New cases with seven-day moving average",
+       caption  = "Source: University of Illinois")+
   theme(text = element_text(family = "Barlow"),
         axis.text.y = element_text(size = 13),
         axis.text.x = element_text(size = 13),
@@ -180,8 +184,9 @@ semcomparetotal <- ggplot(uicovid,
   scale_colour_brewer(breaks = c("Fall","Spring"),
                       palette = "Set1",
                       guide = guide_legend(title = NULL)) +
-  ggtitle("Total Cases by Semester at the University of Illinois",
-          "Beginning two weeks before classes start")+
+  labs(title = "Total Cases by Semester at the University of Illinois",
+       subtitle =   "Beginning two weeks before classes start",
+       caption  = "Source: University of Illinois")+
   theme(text = element_text(family = "Barlow"),
         axis.text.y = element_text(size = 13),
         axis.text.x = element_text(size = 13),
@@ -199,10 +204,12 @@ ggsave("UISemCompareTotal.png",
 
 # combined semester comparisons
 combined <- semcomparenew + semcomparetotal
-combined[[1]] <- combined[[1]] + ggtitle("New Cases by Semester",
-                                         "With seven-day moving average") +
+combined[[1]] <- combined[[1]] + labs(title = "New Cases by Semester",
+                                      subtitle =    "With seven-day moving average",
+                                      caption = "") +
   theme(legend.position = "none") 
-combined[[2]] <- combined[[2]] + ggtitle("Total Cases by Semester") +
+combined[[2]] <- combined[[2]] + labs(title = "Total Cases by Semester",
+                                      caption  = "Source: University of Illinois") +
   theme(legend.position = c(-.015,.9))
 combined
 ggsave("UI/SemCompareCombined.png", width = 8, height = 4.5, dpi = 320)

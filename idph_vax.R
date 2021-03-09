@@ -64,7 +64,7 @@ ggplot(pivoted_vax_champaign,
   #guides(fill = guide_legend(title = NULL)) +
   labs(title = "New Vaccine Doses Administered in Champaign County",
        subtitle =  "With seven-day moving average", 
-       caption = "Source: IDPH")+
+       caption = "Source: Illinois Department of Public Health")+
   theme(text = element_text(family = "Barlow"),
         axis.text.y = element_text(size = 13),
         axis.text.x = element_text(size = 13),
@@ -112,7 +112,7 @@ ggplot(idph_vax_champaign, aes(x = as.Date(Date),
   scale_x_date(expand = c(0,0)) +
   labs(title = "People Vaccinated in Champaign County",
        subtitle = "With percent of total population.",
-       caption = "Source: IDPH") +
+       caption = "Source: Illinois Department of Public Health") +
   theme(text = element_text(family = "Barlow"),
         axis.text.y = element_text(size = 13),
         axis.text.x = element_text(size = 13),
@@ -225,7 +225,7 @@ ggplot(idph_vax_champaign, aes(x = as.Date(Date),
   scale_x_date(expand = c(0,0)) +
   labs(title = "When a Percent of Champaign County Residents Might Be Partially Vaccinated",
          subtitle = "Based on average new first doses administered over the past week",
-       caption = "Source: IDPH") +
+       caption = "Source: Illinois Department of Public Health") +
   theme(text = element_text(family = "Barlow"),
         axis.text.y = element_text(size = 13),
         axis.text.x = element_text(size = 13),
@@ -338,7 +338,7 @@ ggplot(idph_vax_champaign, aes(x = as.Date(Date),
   scale_x_date(expand = c(0,0)) +
   labs(title = "When a Percent of Champaign County Residents Might Be Fully Vaccinated",
        subtitle = "Based on average new final doses administered over the past week",
-       caption = "Source: IDPH") +
+       caption = "Source: Illinois Department of Public Health") +
   theme(text = element_text(family = "Barlow"),
         axis.text.y = element_text(size = 13),
         axis.text.x = element_text(size = 13),
@@ -385,7 +385,7 @@ ggplot(filter(cases_and_vax, Date > as.Date("2020-12-15")),
   geom_line() +
   facet_wrap(~ vax_case, scales = "free_y") +
   labs(title = "Key Metrics for Champaign County since Vaccinations Began Dec. 16",
-       caption = "Sources: IDPH, CUPHD") +
+       caption = "Source: Illinois Department of Public Health, Champaign-Urbana Public Health District") +
   xlab(NULL) +
   ylab(NULL) +
   scale_x_date(expand = c(0,0)) +

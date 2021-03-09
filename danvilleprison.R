@@ -30,8 +30,8 @@ ggplot(dville, aes(x = as.Date(date),
   scale_x_date(expand = c(0,0)) +
   scale_fill_brewer(palette = "Dark2",
                     labels = c("Inmates","Staff")) +
-  ggtitle("Active Cases at the Danville Prison",
-          "Source: Illinois Department of Corrections") +
+  labs(title = "Active Cases at the Danville Prison",
+       caption =  "Source: Illinois Department of Corrections") +
   theme(text = element_text(family = "Barlow"),
         axis.text.y = element_text(size = 13),
         axis.text.x = element_text(size = 13),
