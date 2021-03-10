@@ -190,6 +190,7 @@ ggplot(idph_cases_nearby, aes(x = as.Date(Date), y = new_case_rate,
         axis.text.y = element_text(size = 13),
         axis.text.x = element_text(size = 13),
         legend.position = "none",
+        plot.caption = element_text(colour = "grey50"),
         plot.title = element_text(size = 22, family = "Oswald")) 
 ggsave("region/nearbycases.png", width = 8, height = 32/7, dpi = 320)
 # ggsave("nearby.png", 
@@ -217,6 +218,7 @@ ggplot(idph_cases_nearby, aes(x = as.Date(Date), y = new_deaths_rate,
         axis.text.y = element_text(size = 13),
         axis.text.x = element_text(size = 13),
         legend.position = "none",
+        plot.caption = element_text(colour = "grey50"),
         plot.title = element_text(size = 22, family = "Oswald")) 
 
   

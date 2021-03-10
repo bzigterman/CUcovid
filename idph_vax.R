@@ -69,6 +69,7 @@ ggplot(pivoted_vax_champaign,
         axis.text.y = element_text(size = 13),
         axis.text.x = element_text(size = 13),
         plot.title = element_text(size = 22, family = "Oswald"),
+        plot.caption = element_text(colour = "grey50"),
         legend.position = c(.15,.75),
         legend.background = element_blank(),
         legend.key = element_blank(),
@@ -117,6 +118,7 @@ ggplot(idph_vax_champaign, aes(x = as.Date(Date),
         axis.text.y = element_text(size = 13),
         axis.text.x = element_text(size = 13),
       #  panel.background = element_blank(),
+      plot.caption = element_text(colour = "grey50"),
         plot.title = element_text(size = 22, family = "Oswald")) 
 
 ggsave("vax/chamvax.png", width = 8, height = 32/7, dpi = 320)
@@ -229,6 +231,7 @@ ggplot(idph_vax_champaign, aes(x = as.Date(Date),
   theme(text = element_text(family = "Barlow"),
         axis.text.y = element_text(size = 13),
         axis.text.x = element_text(size = 13),
+        plot.caption = element_text(colour = "grey50"),
         plot.title = element_text(size = 18, family = "Oswald")) 
 
 ggsave("vax/VaccineProjection.png", width = 8, height = 32/7, dpi = 320)
@@ -342,6 +345,7 @@ ggplot(idph_vax_champaign, aes(x = as.Date(Date),
   theme(text = element_text(family = "Barlow"),
         axis.text.y = element_text(size = 13),
         axis.text.x = element_text(size = 13),
+        plot.caption = element_text(colour = "grey50"),
         plot.title = element_text(size = 18, family = "Oswald")) 
 
 ggsave("vax/FullVaccineProjection.png", width = 8, height = 32/7, dpi = 320)
@@ -407,6 +411,7 @@ ggplot(filter(cases_and_vax, Date > as.Date("2020-12-15")),
         panel.grid.minor = element_blank(),
         strip.text = element_text(size = 11),
         strip.background = element_blank(),
+        plot.caption = element_text(colour = "grey50"),
         plot.title = element_text(size = 18, family = "Oswald"))
 ggsave("vax/vaccinefacets.png", width = 8, height = 4.5, dpi = 320)
 ggsave("vaccinefacets.png", 

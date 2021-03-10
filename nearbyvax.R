@@ -141,6 +141,7 @@ ggplot(vax_nearby, aes(x = as.Date(Date), y = PctVaccinatedPopulation,
         axis.text.y = element_text(size = 13),
         axis.text.x = element_text(size = 13),
         legend.position = "none",
+        plot.caption = element_text(colour = "grey50"),
         plot.title = element_text(size = 22, family = "Oswald")) 
 # ggsave("vax/nearbydose2.png", width = 8, height = 32/7, dpi = 320)
 # ggsave("nearbydose2.png", 
@@ -191,6 +192,7 @@ ggplot(vax_nearby, aes(x = as.Date(Date), y = PctVaccinatedPopulation,
         axis.text.y = element_text(size = 13),
         axis.text.x = element_text(size = 13),
         legend.position = "none",
+        plot.caption = element_text(colour = "grey50"),
         plot.title = element_text(size = 22, family = "Oswald")) 
 
 ggsave("vax/nearbydose2.png", width = 8, height = 32/7, dpi = 320)
@@ -237,6 +239,7 @@ ggplot(vax_nearby, aes(x = as.Date(Date), y = PercentDose1,
         axis.text.y = element_text(size = 13),
         axis.text.x = element_text(size = 13),
         legend.position = "none",
+        plot.caption = element_text(colour = "grey50"),
         plot.title = element_text(size = 22, family = "Oswald")) 
 
 ggsave("vax/nearbydose1.png", width = 8, height = 32/7, dpi = 320)
@@ -266,6 +269,7 @@ ggplot(vax_nearby, aes(x = as.Date(Date), y = PercentDose1,
         axis.text.y = element_text(size = 13),
         axis.text.x = element_text(size = 13),
         legend.position = "none",
+        plot.caption = element_text(colour = "grey50"),
         plot.title = element_text(size = 22, family = "Oswald")) 
 # ggsave("vax/nearbydose1.png", width = 8, height = 32/7, dpi = 320)
 # ggsave("nearbydose1.png", 
@@ -314,6 +318,7 @@ ggplot(last_vax_nearby, aes(x = PctVaccinatedPopulation,
         legend.position = "none",
         panel.grid.major.y = element_blank(),  
         #        panel.grid.minor.x = element_blank(),   
+        plot.caption = element_text(colour = "grey50"),
         plot.title = element_text(size = 22, family = "Oswald")) 
 # ggsave("vax/nearbycombineddose2.png", width = 8, height = 32/7, dpi = 320)
 # ggsave("nearbycombineddose2.png", 
@@ -360,6 +365,7 @@ ggplot(last_vax_nearby, aes(x = PercentDose1,
         legend.position = "none",
         panel.grid.major.y = element_blank(),  
         #        panel.grid.minor.x = element_blank(),   
+        plot.caption = element_text(colour = "grey50"),
         plot.title = element_text(size = 22, family = "Oswald")) 
 # ggsave("vax/nearbycombinedonedose.png", width = 8, height = 32/7, dpi = 320)
 # ggsave("nearbycombinedonedose.png", 
@@ -433,6 +439,7 @@ ggplot(last_vax_nearby, aes(y = reorder(CountyName,
         axis.ticks.y = element_blank(),
         legend.position = "none",
         panel.grid.major.y = element_blank(),  
+        plot.caption = element_text(colour = "grey50"),
         plot.title = element_text(size = 22, family = "Oswald")) 
 ggsave("vax/nearbybothdoses.png", width = 8, height = 32/7, dpi = 320)
 #ggsave("vax/card/nearbybothdosesCard.png", width = 8, height = 1256/300, dpi = 320)
