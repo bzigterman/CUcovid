@@ -44,7 +44,7 @@ ggplot(CUcovid, aes(x = as.Date(Date), y = New_cases)) +
   theme(text = element_text(family = "Barlow"),
         axis.text.y = element_text(size = 13),
         axis.text.x = element_text(size = 13),
-        plot.caption = element_text(colour = "grey50"),
+        plot.caption = element_text(colour = "grey40"),
         plot.title = element_text(size = 22, family = "Oswald")) 
 ggsave("CU/CUCases.png", width = 8, height = 32/7, dpi = 320)
 ggsave("CUCasesWeb.png", 
@@ -73,7 +73,7 @@ ggplot(CUcovid, aes(x = as.Date(Date), y = New_tests)) +
   theme(text = element_text(family = "Barlow"),
         axis.text.y = element_text(size = 13),
         axis.text.x = element_text(size = 13),
-        plot.caption = element_text(colour = "grey50"),
+        plot.caption = element_text(colour = "grey40"),
         plot.title = element_text(size = 22, family = "Oswald")) 
 ggsave("CU/CUTests.png", width = 8, height = 32/7, dpi = 320)
 ggsave("CUTestsWeb.png", 
@@ -98,7 +98,7 @@ ggplot(CUcovidactive, aes(x = as.Date(Date), y = count, fill = Active)) +
   theme(text = element_text(family = "Barlow"),
         axis.text.y = element_text(size = 13),
         axis.text.x = element_text(size = 13),
-        plot.caption = element_text(colour = "grey50"),
+        plot.caption = element_text(colour = "grey40"),
         plot.title = element_text(size = 22, family = "Oswald"),
         legend.position = c(.25,.75),
         legend.background = element_blank(),
@@ -130,7 +130,7 @@ ggplot(filter(CUcovid, Hospitalized != is.null(TRUE)),
   theme(text = element_text(family = "Barlow"),
         axis.text.y = element_text(size = 13),
         axis.text.x = element_text(size = 13),
-        plot.caption = element_text(colour = "grey50"),
+        plot.caption = element_text(colour = "grey40"),
         plot.title = element_text(size = 22, family = "Oswald")) 
 ggsave("CU/CUhospitalized.png", width = 8, height = 32/7, dpi = 320)
 ggsave("CUhospitalizedWeb.png", 
@@ -156,7 +156,7 @@ ggplot(filter(CUcovid, Quarantined != is.null(TRUE)),
   theme(text = element_text(family = "Barlow"),
         axis.text.y = element_text(size = 13),
         axis.text.x = element_text(size = 13),
-        plot.caption = element_text(colour = "grey50"),
+        plot.caption = element_text(colour = "grey40"),
         plot.title = element_text(size = 22, family = "Oswald")) 
 ggsave("CU/CUquarantined.png", width = 8, height = 32/7, dpi = 320)
 ggsave("CUquarantinedWeb.png", 
@@ -182,7 +182,7 @@ ggplot(CUcovid,
   theme(text = element_text(family = "Barlow"),
         axis.text.y = element_text(size = 13),
         axis.text.x = element_text(size = 13),
-        plot.caption = element_text(colour = "grey50"),
+        plot.caption = element_text(colour = "grey40"),
         plot.title = element_text(size = 22, family = "Oswald")) 
 ggsave("CU/CUdeaths.png", width = 8, height = 32/7, dpi = 320)
 ggsave("CUdeaths.png", 

@@ -34,7 +34,7 @@ ggplot(uicovid, aes(x = as.Date(Date), y = New_Cases)) +
   theme(text = element_text(family = "Barlow"),
         axis.text.y = element_text(size = 13),
         axis.text.x = element_text(size = 13),
-        plot.caption = element_text(colour = "grey50"),
+        plot.caption = element_text(colour = "grey40"),
         plot.title = element_text(size = 22, family = "Oswald")) 
 ggsave("UI/2UICases.png", width = 8, height = 32/7, dpi = 320)
 ggsave("UICasesWeb.png", 
@@ -62,7 +62,7 @@ ggplot(uicovid, aes(x = as.Date(Date), y = New_Tests)) +
   theme(text = element_text(family = "Barlow"),
         axis.text.y = element_text(size = 13),
         axis.text.x = element_text(size = 13),
-        plot.caption = element_text(colour = "grey50"),
+        plot.caption = element_text(colour = "grey40"),
         plot.title = element_text(size = 22, family = "Oswald")) 
 ggsave("UI/3UITests.png", width = 8, height = 32/7, dpi = 320)
 ggsave("UITestsWeb.png", 
@@ -91,7 +91,7 @@ ggplot(uicovid, aes(x = as.Date(Date), y = positivity)) +
   theme(text = element_text(family = "Barlow"),
         axis.text.y = element_text(size = 13),
         axis.text.x = element_text(size = 13),
-        plot.caption = element_text(colour = "grey50"),
+        plot.caption = element_text(colour = "grey40"),
         plot.title = element_text(size = 22, family = "Oswald")) 
 ggsave("UI/4UIPositivity.png", width = 8, height = 32/7, dpi = 320)
 ggsave("UIPositivityWeb.png", # save to my website
@@ -149,7 +149,7 @@ semcomparenew <- ggplot(uicovid, aes(x = Semester_day/7, y = New_Cases, colour =
   theme(text = element_text(family = "Barlow"),
         axis.text.y = element_text(size = 13),
         axis.text.x = element_text(size = 13),
-        plot.caption = element_text(colour = "grey50"),
+        plot.caption = element_text(colour = "grey40"),
         plot.title = element_text(size = 22, family = "Oswald"),
         legend.position = c(.058,.85),
         legend.background = element_blank(),
@@ -194,7 +194,7 @@ semcomparetotal <- ggplot(uicovid,
   theme(text = element_text(family = "Barlow"),
         axis.text.y = element_text(size = 13),
         axis.text.x = element_text(size = 13),
-        plot.caption = element_text(colour = "grey50"),
+        plot.caption = element_text(colour = "grey40"),
         plot.title = element_text(size = 22, family = "Oswald"),
         legend.position = c(.058,.85),
         legend.background = element_blank(),
