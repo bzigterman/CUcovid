@@ -46,10 +46,10 @@ ggplot(CUcovid, aes(x = as.Date(Date), y = New_cases)) +
         axis.text.x = element_text(size = 13),
         plot.caption = element_text(colour = "grey40"),
         plot.title = element_text(size = 22, family = "Oswald")) 
-ggsave("CU/CUCases.png", width = 8, height = 32/7, dpi = 320)
+ggsave("CU/CUCases.png", width = 8, height = 8*(628/1200), dpi = 320)
 ggsave("CUCasesWeb.png", 
        path = "../bzigterman.github.io/images/",
-       width = 8, height = 32/7, dpi = 320)
+       width = 8, height = 8*(628/1200), dpi = 320)
 
 # new tests with 7 day avg ----
 ggplot(CUcovid, aes(x = as.Date(Date), y = New_tests)) +
@@ -75,10 +75,10 @@ ggplot(CUcovid, aes(x = as.Date(Date), y = New_tests)) +
         axis.text.x = element_text(size = 13),
         plot.caption = element_text(colour = "grey40"),
         plot.title = element_text(size = 22, family = "Oswald")) 
-ggsave("CU/CUTests.png", width = 8, height = 32/7, dpi = 320)
+ggsave("CU/CUTests.png", width = 8, height = 8*(628/1200), dpi = 320)
 ggsave("CUTestsWeb.png", 
        path = "../bzigterman.github.io/images/",
-       width = 8, height = 32/7, dpi = 320)
+       width = 8, height = 8*(628/1200), dpi = 320)
 
 # stacked geom_area of active cases ----
 ggplot(CUcovidactive, aes(x = as.Date(Date), y = count, fill = Active)) +
@@ -104,10 +104,10 @@ ggplot(CUcovidactive, aes(x = as.Date(Date), y = count, fill = Active)) +
         legend.background = element_blank(),
         legend.key = element_blank(),
         legend.text = element_text(size = 13)) 
-ggsave("CU/CUactive.png", width = 8, height = 32/7, dpi = 320)
+ggsave("CU/CUactive.png", width = 8, height = 8*(628/1200), dpi = 320)
 ggsave("CUactiveWeb.png", 
        path = "../bzigterman.github.io/images/",
-       width = 8, height = 32/7, dpi = 320)
+       width = 8, height = 8*(628/1200), dpi = 320)
 
 # hospitalizations ----
 ggplot(filter(CUcovid, Hospitalized != is.null(TRUE)), 
@@ -132,10 +132,10 @@ ggplot(filter(CUcovid, Hospitalized != is.null(TRUE)),
         axis.text.x = element_text(size = 13),
         plot.caption = element_text(colour = "grey40"),
         plot.title = element_text(size = 22, family = "Oswald")) 
-ggsave("CU/CUhospitalized.png", width = 8, height = 32/7, dpi = 320)
+ggsave("CU/CUhospitalized.png", width = 8, height = 8*(628/1200), dpi = 320)
 ggsave("CUhospitalizedWeb.png", 
        path = "../bzigterman.github.io/images/",
-       width = 8, height = 32/7, dpi = 320)
+       width = 8, height = 8*(628/1200), dpi = 320)
 
 # quarantined ----
 ggplot(filter(CUcovid, Quarantined != is.null(TRUE)), 
@@ -158,10 +158,10 @@ ggplot(filter(CUcovid, Quarantined != is.null(TRUE)),
         axis.text.x = element_text(size = 13),
         plot.caption = element_text(colour = "grey40"),
         plot.title = element_text(size = 22, family = "Oswald")) 
-ggsave("CU/CUquarantined.png", width = 8, height = 32/7, dpi = 320)
+ggsave("CU/CUquarantined.png", width = 8, height = 8*(628/1200), dpi = 320)
 ggsave("CUquarantinedWeb.png", 
        path = "../bzigterman.github.io/images/",
-       width = 8, height = 32/7, dpi = 320)
+       width = 8, height = 8*(628/1200), dpi = 320)
 
 # deaths ----
 ggplot(CUcovid, 
@@ -184,10 +184,10 @@ ggplot(CUcovid,
         axis.text.x = element_text(size = 13),
         plot.caption = element_text(colour = "grey40"),
         plot.title = element_text(size = 22, family = "Oswald")) 
-ggsave("CU/CUdeaths.png", width = 8, height = 32/7, dpi = 320)
+ggsave("CU/CUdeaths.png", width = 8, height = 8*(628/1200), dpi = 320)
 ggsave("CUdeaths.png", 
        path = "../bzigterman.github.io/images/",
-       width = 8, height = 32/7, dpi = 320)
+       width = 8, height = 8*(628/1200), dpi = 320)
 
 # todo ----
 # - [x] add facet grid or wrap for the charts, use pivot longer to put in one table to align dates

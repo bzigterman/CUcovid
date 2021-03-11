@@ -55,10 +55,10 @@ ggplot(idph_region6, aes(x = as.Date(Date), y = COVIDHospitalBedsInUse)) +
         plot.title = element_text(size = 22, family = "Oswald")) 
 
 ggsave("region/region6hospitalbeds.png", 
-       width = 8, height = 32/7, dpi = 320)
+       width = 8, height = 8*(628/1200), dpi = 320)
 ggsave("region6hospitalbeds.png", 
        path = "../bzigterman.github.io/images/",
-       width = 8, height = 32/7, dpi = 320)
+       width = 8, height = 8*(628/1200), dpi = 320)
 
 
 # region 6 new hospitalizations in use chart
@@ -83,10 +83,10 @@ ggplot(idph_region6, aes(x = as.Date(Date), y = CLIAdmissions_RollingAvg)) +
         plot.caption = element_text(colour = "grey40"),
         plot.title = element_text(size = 22, family = "Oswald")) 
 ggsave("region/region6newhospital.png", 
-       width = 8, height = 32/7, dpi = 320)
+       width = 8, height = 8*(628/1200), dpi = 320)
 ggsave("region6newhospital.png", 
        path = "../bzigterman.github.io/images/",
-       width = 8, height = 32/7, dpi = 320)
+       width = 8, height = 8*(628/1200), dpi = 320)
 
 # new cases chart for region 6
 ggplot(idph_region6, aes(x = as.Date(Date), y = PositiveTests)) +
@@ -111,8 +111,8 @@ ggplot(idph_region6, aes(x = as.Date(Date), y = PositiveTests)) +
         plot.caption = element_text(colour = "grey40"),
         plot.title = element_text(size = 22, family = "Oswald")) 
 ggsave("region/region6newcases.png", 
-       width = 8, height = 32/7, dpi = 320)
+       width = 8, height = 8*(628/1200), dpi = 320)
 ggsave("region6newcases.png", 
        path = "../bzigterman.github.io/images/",
-       width = 8, height = 32/7, dpi = 320)
+       width = 8, height = 8*(628/1200), dpi = 320)
 

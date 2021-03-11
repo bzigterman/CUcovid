@@ -36,11 +36,11 @@ ggplot(uicovid, aes(x = as.Date(Date), y = New_Cases)) +
         axis.text.x = element_text(size = 13),
         plot.caption = element_text(colour = "grey40"),
         plot.title = element_text(size = 22, family = "Oswald")) 
-ggsave("UI/2UICases.png", width = 8, height = 32/7, dpi = 320)
+ggsave("UI/2UICases.png", width = 8, height = 8*(628/1200), dpi = 320)
 ggsave("UICasesWeb.png", 
        path = "../bzigterman.github.io/images/",
-       width = 8, height = 32/7, dpi = 320)
-# ggsave("1TweetUICases.png", width = 8, height = 32/7, dpi = 150)
+       width = 8, height = 8*(628/1200), dpi = 320)
+# ggsave("1TweetUICases.png", width = 8, height = 8*(628/1200), dpi = 150)
 
 # new tests with 7 day avg
 ggplot(uicovid, aes(x = as.Date(Date), y = New_Tests)) +
@@ -64,11 +64,11 @@ ggplot(uicovid, aes(x = as.Date(Date), y = New_Tests)) +
         axis.text.x = element_text(size = 13),
         plot.caption = element_text(colour = "grey40"),
         plot.title = element_text(size = 22, family = "Oswald")) 
-ggsave("UI/3UITests.png", width = 8, height = 32/7, dpi = 320)
+ggsave("UI/3UITests.png", width = 8, height = 8*(628/1200), dpi = 320)
 ggsave("UITestsWeb.png", 
        path = "../bzigterman.github.io/images/",
-       width = 8, height = 32/7, dpi = 320)
-# ggsave("2TweetUITests.png", width = 8, height = 32/7, dpi = 150)
+       width = 8, height = 8*(628/1200), dpi = 320)
+# ggsave("2TweetUITests.png", width = 8, height = 8*(628/1200), dpi = 150)
 
 # positivity with 7 day avg
 ggplot(uicovid, aes(x = as.Date(Date), y = positivity)) +
@@ -93,11 +93,11 @@ ggplot(uicovid, aes(x = as.Date(Date), y = positivity)) +
         axis.text.x = element_text(size = 13),
         plot.caption = element_text(colour = "grey40"),
         plot.title = element_text(size = 22, family = "Oswald")) 
-ggsave("UI/4UIPositivity.png", width = 8, height = 32/7, dpi = 320)
+ggsave("UI/4UIPositivity.png", width = 8, height = 8*(628/1200), dpi = 320)
 ggsave("UIPositivityWeb.png", # save to my website
        path = "../bzigterman.github.io/images/",
-       width = 8, height = 32/7, dpi = 320)
-# ggsave("3TweetUIPositivity.png", width = 8, height = 32/7, dpi = 150)
+       width = 8, height = 8*(628/1200), dpi = 320)
+# ggsave("3TweetUIPositivity.png", width = 8, height = 8*(628/1200), dpi = 150)
 
 # # bar chart/table of this year vs last year
 # uicovidbyyear <- read_sheet("1UUGDwV5qahPos-bhWUfzf4Y1WYXEh-I0JBOJaoGMrJs",
@@ -119,8 +119,8 @@ ggsave("UIPositivityWeb.png", # save to my website
 #     axis.text.y = element_text(size = 30),
 #     plot.title = element_text(size = 25, family = "Oswald")
 #   )
-# ggsave("UITotals.png", width = 8, height = 32/7, dpi = 320)
-# ggsave("4TweetUITotals.png", width = 8, height = 32/7, dpi = 150)
+# ggsave("UITotals.png", width = 8, height = 8*(628/1200), dpi = 320)
+# ggsave("4TweetUITotals.png", width = 8, height = 8*(628/1200), dpi = 150)
 
 # fall vs spring semester new cases
 semcomparenew <- ggplot(uicovid, aes(x = Semester_day/7, y = New_Cases, colour = Semester)) +
@@ -157,10 +157,10 @@ semcomparenew <- ggplot(uicovid, aes(x = Semester_day/7, y = New_Cases, colour =
         legend.text = element_text(size = 13)) 
 semcomparenew
 
-ggsave("UI/1UISemCompare.png", width = 8, height = 32/7, dpi = 320)
+ggsave("UI/1UISemCompare.png", width = 8, height = 8*(628/1200), dpi = 320)
 ggsave("UISemCompare.png", 
        path = "../bzigterman.github.io/images/",
-       width = 8, height = 32/7, dpi = 320)
+       width = 8, height = 8*(628/1200), dpi = 320)
 
 # fall vs spring semester total cases
 semcomparetotal <- ggplot(uicovid, 
@@ -202,10 +202,10 @@ semcomparetotal <- ggplot(uicovid,
         legend.text = element_text(size = 13)) 
 semcomparetotal
 
-ggsave("UI/UISemCompareTotal.png", width = 8, height = 32/7, dpi = 320)
+ggsave("UI/UISemCompareTotal.png", width = 8, height = 8*(628/1200), dpi = 320)
 ggsave("UISemCompareTotal.png", 
        path = "../bzigterman.github.io/images/",
-       width = 8, height = 32/7, dpi = 320)
+       width = 8, height = 8*(628/1200), dpi = 320)
 
 # combined semester comparisons
 combined <- semcomparenew + semcomparetotal

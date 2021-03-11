@@ -75,10 +75,10 @@ ggplot(pivoted_vax_champaign,
         legend.key = element_blank(),
         legend.text = element_text(size = 13)) 
 
-ggsave("vax/NewVaccines.png", width = 8, height = 32/7, dpi = 320)
+ggsave("vax/NewVaccines.png", width = 8, height = 8*(628/1200), dpi = 320)
 ggsave("NewVaccinesWeb.png", 
        path = "../bzigterman.github.io/images/",
-       width = 8, height = 32/7, dpi = 150)
+       width = 8, height = 8*(628/1200), dpi = 150)
 
 # first and second dose comparison chart ----
 ggplot(idph_vax_champaign, aes(x = as.Date(Date),
@@ -121,10 +121,10 @@ ggplot(idph_vax_champaign, aes(x = as.Date(Date),
       plot.caption = element_text(colour = "grey40"),
         plot.title = element_text(size = 22, family = "Oswald")) 
 
-ggsave("vax/chamvax.png", width = 8, height = 32/7, dpi = 320)
+ggsave("vax/chamvax.png", width = 8, height = 8*(628/1200), dpi = 320)
 ggsave("VaccinesWeb.png", 
        path = "../bzigterman.github.io/images/",
-       width = 8, height = 32/7, dpi = 150)
+       width = 8, height = 8*(628/1200), dpi = 150)
 
 # first dose projection ----
 avgdose1change <- mean(tail(idph_vax_champaign$Dose1Change,7), na.rm = TRUE)
@@ -234,10 +234,10 @@ ggplot(idph_vax_champaign, aes(x = as.Date(Date),
         plot.caption = element_text(colour = "grey40"),
         plot.title = element_text(size = 18, family = "Oswald")) 
 
-ggsave("vax/VaccineProjection.png", width = 8, height = 32/7, dpi = 320)
+ggsave("vax/VaccineProjection.png", width = 8, height = 8*(628/1200), dpi = 320)
 ggsave("VaccineProjection.png", 
        path = "../bzigterman.github.io/images/",
-       width = 8, height = 32/7, dpi = 150)
+       width = 8, height = 8*(628/1200), dpi = 150)
 
 # fully vaccinated projection ----
 
@@ -348,10 +348,10 @@ ggplot(idph_vax_champaign, aes(x = as.Date(Date),
         plot.caption = element_text(colour = "grey40"),
         plot.title = element_text(size = 18, family = "Oswald")) 
 
-ggsave("vax/FullVaccineProjection.png", width = 8, height = 32/7, dpi = 320)
+ggsave("vax/FullVaccineProjection.png", width = 8, height = 8*(628/1200), dpi = 320)
 ggsave("FullVaccineProjection.png",
        path = "../bzigterman.github.io/images/",
-       width = 8, height = 32/7, dpi = 150)
+       width = 8, height = 8*(628/1200), dpi = 150)
 
 
 # chart combining vaccines and cases ----

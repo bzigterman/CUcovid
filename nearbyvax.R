@@ -143,10 +143,10 @@ ggplot(vax_nearby, aes(x = as.Date(Date), y = PctVaccinatedPopulation,
         legend.position = "none",
         plot.caption = element_text(colour = "grey40"),
         plot.title = element_text(size = 22, family = "Oswald")) 
-# ggsave("vax/nearbydose2.png", width = 8, height = 32/7, dpi = 320)
+# ggsave("vax/nearbydose2.png", width = 8, height = 8*(628/1200), dpi = 320)
 # ggsave("nearbydose2.png", 
 #        path = "../bzigterman.github.io/images/",
-#        width = 8, height = 32/7, dpi = 150)
+#        width = 8, height = 8*(628/1200), dpi = 150)
 
 #?geom_text_repel
 #?geom_rect
@@ -195,10 +195,10 @@ ggplot(vax_nearby, aes(x = as.Date(Date), y = PctVaccinatedPopulation,
         plot.caption = element_text(colour = "grey40"),
         plot.title = element_text(size = 22, family = "Oswald")) 
 
-ggsave("vax/nearbydose2.png", width = 8, height = 32/7, dpi = 320)
+ggsave("vax/nearbydose2.png", width = 8, height = 8*(628/1200), dpi = 320)
 ggsave("nearbydose2.png", 
        path = "../bzigterman.github.io/images/",
-       width = 8, height = 32/7, dpi = 150)
+       width = 8, height = 8*(628/1200), dpi = 150)
 
 # line chart comparing all counties dose 1, with ggrepel ----
 ggplot(vax_nearby, aes(x = as.Date(Date), y = PercentDose1,
@@ -242,10 +242,10 @@ ggplot(vax_nearby, aes(x = as.Date(Date), y = PercentDose1,
         plot.caption = element_text(colour = "grey40"),
         plot.title = element_text(size = 22, family = "Oswald")) 
 
-ggsave("vax/nearbydose1.png", width = 8, height = 32/7, dpi = 320)
+ggsave("vax/nearbydose1.png", width = 8, height = 8*(628/1200), dpi = 320)
 ggsave("nearbydose1.png", 
        path = "../bzigterman.github.io/images/",
-       width = 8, height = 32/7, dpi = 150)
+       width = 8, height = 8*(628/1200), dpi = 150)
 
 # line chart of dose 1 ----
 ggplot(vax_nearby, aes(x = as.Date(Date), y = PercentDose1,
@@ -271,10 +271,10 @@ ggplot(vax_nearby, aes(x = as.Date(Date), y = PercentDose1,
         legend.position = "none",
         plot.caption = element_text(colour = "grey40"),
         plot.title = element_text(size = 22, family = "Oswald")) 
-# ggsave("vax/nearbydose1.png", width = 8, height = 32/7, dpi = 320)
+# ggsave("vax/nearbydose1.png", width = 8, height = 8*(628/1200), dpi = 320)
 # ggsave("nearbydose1.png", 
 #        path = "../bzigterman.github.io/images/",
-#        width = 8, height = 32/7, dpi = 150)
+#        width = 8, height = 8*(628/1200), dpi = 150)
 
 
 
@@ -320,10 +320,10 @@ ggplot(last_vax_nearby, aes(x = PctVaccinatedPopulation,
         #        panel.grid.minor.x = element_blank(),   
         plot.caption = element_text(colour = "grey40"),
         plot.title = element_text(size = 22, family = "Oswald")) 
-# ggsave("vax/nearbycombineddose2.png", width = 8, height = 32/7, dpi = 320)
+# ggsave("vax/nearbycombineddose2.png", width = 8, height = 8*(628/1200), dpi = 320)
 # ggsave("nearbycombineddose2.png", 
 #        path = "../bzigterman.github.io/images/",
-#        width = 8, height = 32/7, dpi = 150)
+#        width = 8, height = 8*(628/1200), dpi = 150)
 
 # cleveland dot plot of dose 1
 last_vax_nearby <- vax_nearby %>%
@@ -367,10 +367,10 @@ ggplot(last_vax_nearby, aes(x = PercentDose1,
         #        panel.grid.minor.x = element_blank(),   
         plot.caption = element_text(colour = "grey40"),
         plot.title = element_text(size = 22, family = "Oswald")) 
-# ggsave("vax/nearbycombinedonedose.png", width = 8, height = 32/7, dpi = 320)
+# ggsave("vax/nearbycombinedonedose.png", width = 8, height = 8*(628/1200), dpi = 320)
 # ggsave("nearbycombinedonedose.png", 
 #        path = "../bzigterman.github.io/images/",
-#        width = 8, height = 32/7, dpi = 150)
+#        width = 8, height = 8*(628/1200), dpi = 150)
 
 # combined cleveland dot ----
 last_vax_nearby <- vax_nearby %>%
@@ -441,11 +441,11 @@ ggplot(last_vax_nearby, aes(y = reorder(CountyName,
         panel.grid.major.y = element_blank(),  
         plot.caption = element_text(colour = "grey40"),
         plot.title = element_text(size = 22, family = "Oswald")) 
-ggsave("vax/nearbybothdoses.png", width = 8, height = 32/7, dpi = 320)
+ggsave("vax/nearbybothdoses.png", width = 8, height = 8*(628/1200), dpi = 320)
 #ggsave("vax/card/nearbybothdosesCard.png", width = 8, height = 1256/300, dpi = 320)
 ggsave("nearbybothdoses.png", 
        path = "../bzigterman.github.io/images/",
-       width = 8, height = 32/7, dpi = 150)
+       width = 8, height = 8*(628/1200), dpi = 150)
 
 
 # todo

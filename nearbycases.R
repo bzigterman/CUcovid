@@ -2,6 +2,16 @@ library(tidyverse)
 library(lubridate)
 library(httr)
 library(jsonlite)
+library(rio)
+library(tidyverse)
+library(lubridate)
+library(googlesheets4)
+library(dplyr)
+library(ggplot2)
+library(scales)
+library(zoo)
+library(clipr)
+library(ggrepel)
 # path = "https://idph.illinois.gov/DPHPublicInformation/api/COVIDExport/GetCountyRates"
 # champaign_test <- GET("https://idph.illinois.gov/DPHPublicInformation/api/COVID/GetCountyRates?countyName=Champaign")
 # champaign_test <- rio::import("https://idph.illinois.gov/DPHPublicInformation/api/COVID/GetCountyRates",
@@ -166,9 +176,9 @@ ggplot(idph_cases_nearby, aes(x = as.Date(Date), y = new_case_rate,
   geom_text_repel(data = filter(idph_cases_nearby, as.Date(Date) == last(Date)),
                   aes(label = CountyName),
                   nudge_x = 800,
-                  segment.curvature = .1,
+                  #segment.curvature = .1,
                   segment.color = 'grey60',
-                  #segment.inflect = TRUE,
+                  segment.inflect = TRUE,
                   #segment.ncp = 3,
                   #segment.angle = 179,
                   #segment.shape = .1,
@@ -192,10 +202,10 @@ ggplot(idph_cases_nearby, aes(x = as.Date(Date), y = new_case_rate,
         legend.position = "none",
         plot.caption = element_text(colour = "grey40"),
         plot.title = element_text(size = 22, family = "Oswald")) 
-ggsave("region/nearbycases.png", width = 8, height = 32/7, dpi = 320)
+ggsave("region/nearbycases.png", width = 8, height = 8*(628/1200), dpi = 320)
 # ggsave("nearby.png", 
 #        path = "../bzigterman.github.io/images/",
-#        width = 8, height = 32/7, dpi = 150)
+#        width = 8, height = 8*(628/1200), dpi = 150)
 
 # chart comparing deaths
 ggplot(idph_cases_nearby, aes(x = as.Date(Date), y = new_deaths_rate,

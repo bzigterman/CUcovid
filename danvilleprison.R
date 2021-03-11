@@ -42,4 +42,4 @@ ggplot(dville, aes(x = as.Date(date),
         legend.key = element_blank(),
         legend.text = element_text(size = 13))
 # save file
-ggsave("danville/dvilleprison.png", width = 8, height = 32/7, dpi = 320)
+ggsave("danville/dvilleprison.png", width = 8, height = 8*(628/1200), dpi = 320)
