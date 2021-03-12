@@ -94,7 +94,9 @@ ggplot(idph_vax_champaign, aes(x = as.Date(Date),
                                percent(PercentDose1, accuracy = .1))),
              data = tail(idph_vax_champaign, 1),
              size = 4,
-             hjust = 1.3,
+             hjust = 1.8,
+            vjust = 16.5,
+            colour = "black",
              family = "Barlow") +
   geom_text(data = tail(idph_vax_champaign, 1),
              aes(x = as.Date(Date), 
@@ -103,7 +105,8 @@ ggplot(idph_vax_champaign, aes(x = as.Date(Date),
                                percent(PctVaccinatedPopulation, accuracy = .1))),
              size = 4,
              hjust = 1.1,
-             vjust = 0,
+             vjust = 15,
+            colour = "white",
              family = "Barlow") +
   xlab(NULL) +
   ylab(NULL) +
