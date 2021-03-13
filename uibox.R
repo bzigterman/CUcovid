@@ -8,8 +8,13 @@ box_auth()
 box_dl(file_id = "780293011768",
        file_name = "illinois_shield_covid_data-2021-02-25.csv")
 ?box_read_csv
-box_read_csv(file_id = "15570872085")
-box_dl(file_id = "ib24tvzc7jo88fw81bkuzr17gfadbdc6")
+box_read_csv(file_id = "780293011768")
+box_dl(file_id = "781566755894")
 ?box_ls
 box_ls(dir_id = "0")
-GET("https://api.box.com/2.0/files/780293011768/content/")
+GET("https://api.box.com/2.0/files/781566755894/content/")
+#https://uofi.app.box.com/s/nrrnx2fn6sqt4hhuh2ckq2u6z5o4zmqg/file/781566755894
+box_collab_get(dir_id = "nrrnx2fn6sqt4hhuh2ckq2u6z5o4zmqg",
+               file_id = "781566755894")
+box_dl(file_id = "781566755894")
+box_dl(file_id = "781566755894")
