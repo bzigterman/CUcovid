@@ -380,17 +380,19 @@ topcounty <- head(last_vax_nearby$CountyName,1)
 
 ggplot(last_vax_nearby, aes(y = reorder(CountyName,
                                         PercentDose1))) +
+ 
+  geom_segment(aes(x = PercentDose1, # line segment to dose1%
+                   yend = CountyName),
+               xend = 0, 
+               colour = "#d8cee8",
+               size = 3.4, # was 2
+               #alpha = .3
+               ) +
   geom_segment(aes(x = PctVaccinatedPopulation, # first line segment to dose2
                    yend = CountyName), 
                xend = 0, 
                colour = "#674EA7",
-               size = 3.4) + # was 3.6
-  geom_segment(aes(x = PercentDose1, # line segment to dose1%
-                   yend = CountyName),
-               xend = 0, 
-               colour = "#674EA7",
-               size = 3.4, # was 2
-               alpha = .3) +
+               size = 3.4) + # was 3.6 +
   geom_text(data = filter(last_vax_nearby, # label for all but top county dose1
                           CountyName != topcounty),
             aes(x = PercentDose1,

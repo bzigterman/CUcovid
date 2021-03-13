@@ -83,9 +83,10 @@ ggsave("NewVaccinesWeb.png",
 # first and second dose comparison chart ----
 ggplot(idph_vax_champaign, aes(x = as.Date(Date),
                 y = PersonsDose1))  +
-  geom_area(colour = "#674EA7",
+  geom_area(#colour = "#BEB3D9",
             fill = "#674EA7",
-            alpha = .3) +
+            alpha = .3
+            ) +
   geom_area(aes(x = as.Date(Date), y = PersonsFullyVaccinated),
             colour = "#674EA7",
             fill = "#674EA7",
