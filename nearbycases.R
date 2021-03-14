@@ -18,7 +18,7 @@ library(ggrepel)
 #                               format = "json") 
 
 
-# set population variables
+# set population variables ----
 champaignpop <- 209983
 vermilionpop <- 76806
 fordpop <- 13264
@@ -155,7 +155,7 @@ idph_cases_nearby <- full_join(idph_cases_champaign, idph_cases_vermilion) %>%
   mutate(new_case_rate = (100000*avg_new_cases)/population) %>%
   mutate(new_deaths_rate = (1000000*avg_new_deaths)/population)
 
-# chart comparing cases
+# chart comparing cases ----
 ggplot(idph_cases_nearby, aes(x = as.Date(Date), y = new_case_rate,
                        colour = CountyName)) +
   geom_line() +
@@ -177,7 +177,7 @@ ggplot(idph_cases_nearby, aes(x = as.Date(Date), y = new_case_rate,
                   aes(label = CountyName),
                   nudge_x = 800,
                   #segment.curvature = .1,
-                  segment.color = 'grey60',
+                  segment.color = 'grey70',
                   segment.inflect = TRUE,
                   #segment.ncp = 3,
                   #segment.angle = 179,
@@ -188,14 +188,15 @@ ggplot(idph_cases_nearby, aes(x = as.Date(Date), y = new_case_rate,
                   family = "Barlow",
                   size = 4.6)+
   scale_y_continuous(labels = comma, 
-                     #position = "right",
+                     position = "right",
                      expand = expansion(mult = c(0,.05))) +
   scale_x_date(expand = expansion(mult = c(0,.3))) +
   xlab(NULL) +
   ylab(NULL) +
   labs(title = "New Cases per 100,000 Residents in Nearby Counties",
-       subtitle = "Seven-day moving average",
+       subtitle = "With seven-day moving average",
        caption = "Source: Illinois Department of Public Health")+
+  theme_minimal() +
   theme(text = element_text(family = "Barlow"),
         axis.text.y = element_text(size = 13),
         axis.text.x = element_text(size = 13),
