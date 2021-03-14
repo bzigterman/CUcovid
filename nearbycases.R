@@ -201,7 +201,7 @@ ggplot(idph_cases_nearby, aes(x = as.Date(Date), y = new_case_rate,
         legend.position = "none",
         plot.caption = element_text(colour = "grey40"),
         plot.title = element_text(size = 22, family = "Oswald")) 
-ggsave("region/nearbycases.png", width = 8, height = 8*(628/1200), dpi = 320)
+#ggsave("region/nearbycases.png", width = 8, height = 8*(628/1200), dpi = 320)
 # ggsave("nearby.png", 
 #        path = "../bzigterman.github.io/images/",
 #        width = 8, height = 8*(628/1200), dpi = 150)
