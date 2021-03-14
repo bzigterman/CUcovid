@@ -430,13 +430,17 @@ ggplot(filter(cases_and_vax, Date > as.Date("2020-12-15")),
   scale_colour_manual(guide = FALSE,
                       values = c("#B45F06","#009e89","#ff5f1a",
                                  "#d90000","#674EA7","#674EA7")) +
+  #theme_minimal() +
   #theme_classic() +
   theme(text = element_text(family = "Barlow"),
         axis.text.y = element_text(size = 10),
         #  axis.line.x = element_line(colour = "black"),
         #  panel.background = element_blank(),
         axis.text.x = element_text(size = 8),
+        #axis.ticks = 
         panel.grid.minor = element_blank(),
+        #panel.grid = element_blank(),
+        #panel.border = element_rect(colour = "grey", fill = NA),
         strip.text = element_text(size = 11),
         strip.background = element_blank(),
         plot.caption = element_text(colour = "grey40"),
