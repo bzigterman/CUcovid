@@ -1,9 +1,10 @@
 library(googlesheets4)
-library(dplyr)
-library(ggplot2)
+#library(dplyr)
+#library(ggplot2)
 library(scales)
 library(zoo)
 library(patchwork)
+library(tidyverse)
 
 # get the data from google sheet
 uicovid <- read_sheet("1UUGDwV5qahPos-bhWUfzf4Y1WYXEh-I0JBOJaoGMrJs",
