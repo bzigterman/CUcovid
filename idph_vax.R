@@ -84,8 +84,8 @@ ggsave("NewVaccinesWeb.png",
 ggplot(idph_vax_champaign, aes(x = as.Date(Date)))  +
   geom_area(aes(y = PercentDose1),
             #colour = "#BEB3D9",
-            fill = "#674EA7",
-            alpha = .3) +
+            fill = "#d8cee8",
+            alpha = 1) +
   geom_area(aes(y = PctVaccinatedPopulation),
             colour = "#674EA7",
             fill = "#674EA7",
@@ -141,7 +141,7 @@ xlab(NULL) +
   labs(title = "Percent of Champaign County Vaccinated",
        # subtitle = "With percent of total population.",
        caption = "Source: Illinois Department of Public Health") +
-  #theme_minimal() +
+  theme_minimal() +
   theme(text = element_text(family = "Barlow"),
         axis.text.y = element_text(size = 13),
         axis.text.x = element_text(size = 13),
