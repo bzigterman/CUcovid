@@ -141,6 +141,7 @@ xlab(NULL) +
   labs(title = "Percent of Champaign County Vaccinated",
        # subtitle = "With percent of total population.",
        caption = "Source: Illinois Department of Public Health") +
+  #theme_minimal() +
   theme(text = element_text(family = "Barlow"),
         axis.text.y = element_text(size = 13),
         axis.text.x = element_text(size = 13),
