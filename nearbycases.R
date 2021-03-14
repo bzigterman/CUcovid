@@ -196,7 +196,7 @@ ggplot(idph_cases_nearby, aes(x = as.Date(Date), y = new_case_rate,
   labs(title = "New Cases per 100,000 Residents in Nearby Counties",
        subtitle = "With seven-day moving average",
        caption = "Source: Illinois Department of Public Health")+
-  theme_minimal() +
+ # theme_minimal() +
   theme(text = element_text(family = "Barlow"),
         axis.text.y = element_text(size = 13),
         axis.text.x = element_text(size = 13),
