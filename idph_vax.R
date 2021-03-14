@@ -81,48 +81,71 @@ ggsave("NewVaccinesWeb.png",
        width = 8, height = 8*(628/1200), dpi = 150)
 
 # first and second dose comparison chart ----
-ggplot(idph_vax_champaign, aes(x = as.Date(Date),
-                y = PersonsDose1))  +
-  geom_area(#colour = "#BEB3D9",
+ggplot(idph_vax_champaign, aes(x = as.Date(Date)))  +
+  geom_area(aes(y = PercentDose1),
+            #colour = "#BEB3D9",
             fill = "#674EA7",
-            alpha = .3
-            ) +
-  geom_area(aes(x = as.Date(Date), y = PersonsFullyVaccinated),
+            alpha = .3) +
+  geom_area(aes(y = PctVaccinatedPopulation),
             colour = "#674EA7",
             fill = "#674EA7",
             alpha = 1) +
-  geom_text(aes(label = paste("Partially vaccinated:",
-                               percent(PercentDose1, accuracy = .1))),
-             data = tail(idph_vax_champaign, 1),
-             size = 4,
-             hjust = 1.8,
-            vjust = 16.5,
-            colour = "black",
-             family = "Barlow") +
-  geom_text(data = tail(idph_vax_champaign, 1),
-             aes(x = as.Date(Date), 
-                 y = PersonsFullyVaccinated,
-                 label = paste("Fully vaccinated:",
-                               percent(PctVaccinatedPopulation, accuracy = .1))),
-             size = 4,
-             hjust = 1.1,
-             vjust = 15,
-            colour = "white",
-             family = "Barlow") +
-  xlab(NULL) +
+  annotate("text",
+           x = as.Date("2021-02-14"),
+           y = .12,
+           label = "Partially \nvaccinated",
+           # label = paste("Partially \nvaccinated:\n",
+           #               percent(tail(idph_vax_champaign, 1)$PercentDose1,
+           #                       accuracy = .1)),
+           colour = "black",
+           family = "Barlow",
+           # fontface = "bold",
+           # hjust = 0
+           size = 6) +
+  annotate("text",
+           x = as.Date("2021-03-03"),
+           y = .07,
+           label = "Fully \nvaccinated",
+           # label = paste("Fully \nvaccinated:\n",
+           #               percent(tail(idph_vax_champaign, 1)$PctVaccinatedPopulation,
+           #                       accuracy = .1)),
+           colour = "white",
+           family = "Barlow",
+           # fontface = "bold",
+           # hjust = 1
+           size = 6) +
+  # geom_text(aes(label = paste("Partially vaccinated:",
+  #                              percent(PercentDose1, accuracy = .1))),
+  #            data = tail(idph_vax_champaign, 1),
+  #            size = 4,
+  #            hjust = 1.8,
+  #           vjust = 16.5,
+  #           colour = "black",
+  #            family = "Barlow") +
+  # geom_text(data = tail(idph_vax_champaign, 1),
+  #            aes(x = as.Date(Date), 
+  #                y = PersonsFullyVaccinated,
+#                label = paste("Fully vaccinated:",
+#                              percent(PctVaccinatedPopulation, accuracy = .1))),
+#            size = 4,
+#            hjust = 1.1,
+#            vjust = 15,
+#           colour = "white",
+#            family = "Barlow") +
+xlab(NULL) +
   ylab(NULL) +
-  scale_y_continuous(labels = comma, 
+  scale_y_continuous(labels = label_percent(accuracy = 1), 
                      position = "right",
                      expand = expansion(mult = c(0,.05))) +
   scale_x_date(expand = c(0,0)) +
-  labs(title = "People Vaccinated in Champaign County",
-       subtitle = "With percent of total population.",
+  labs(title = "Percent of Champaign County Vaccinated",
+       # subtitle = "With percent of total population.",
        caption = "Source: Illinois Department of Public Health") +
   theme(text = element_text(family = "Barlow"),
         axis.text.y = element_text(size = 13),
         axis.text.x = element_text(size = 13),
-      #  panel.background = element_blank(),
-      plot.caption = element_text(colour = "grey40"),
+        #  panel.background = element_blank(),
+        plot.caption = element_text(colour = "grey40"),
         plot.title = element_text(size = 22, family = "Oswald")) 
 
 ggsave("vax/chamvax.png", width = 8, height = 8*(628/1200), dpi = 320)
