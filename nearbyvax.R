@@ -201,6 +201,8 @@ ggsave("nearbydose2.png",
        width = 8, height = 8*(628/1200), dpi = 150)
 
 # line chart comparing all counties dose 1, with ggrepel ----
+#as.Date("2021-03-03")
+#as.Date(ymd(tail(vax_nearby$Date,1)))
 ggplot(vax_nearby, aes(x = as.Date(Date), y = PercentDose1,
                        group = CountyName,
                        colour = CountyName)) +
@@ -210,8 +212,9 @@ ggplot(vax_nearby, aes(x = as.Date(Date), y = PercentDose1,
   #           colour = "white",
   #           fill = "white"
   #           ) +
-  # annotate("rect", 
-  #          xmin = as.Date("2021-03-06"), xmax = Inf, 
+  # annotate("rect",
+  #          xmin = as.Date(ymd(tail(vax_nearby$Date,1))), 
+  #          xmax = Inf,
   #          ymin = 0, ymax = Inf,
   #          fill = "white") +
   geom_line() +
