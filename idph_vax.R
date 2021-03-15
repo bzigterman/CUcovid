@@ -59,12 +59,13 @@ ggplot(pivoted_vax_champaign,
                      position = "right",
                      expand = expansion(mult = c(0,.05))) +
   scale_x_date(expand = c(0,0)) +
-  scale_fill_manual(values = c("#BEB3D9","#7D67B4"),
+  scale_fill_manual(values = c("#d8cee8","#7D67B4"),
                     labels = c("First", "Final")) +
   #guides(fill = guide_legend(title = NULL)) +
   labs(title = "New Vaccine Doses Administered in Champaign County",
        subtitle =  "With seven-day moving average", 
        caption = "Source: Illinois Department of Public Health")+
+  theme_minimal() +
   theme(text = element_text(family = "Barlow"),
         axis.text.y = element_text(size = 13),
         axis.text.x = element_text(size = 13),
@@ -182,7 +183,7 @@ full_vax <- projected %>%
 
 write_clip(paste("In the past week, an average of ",comma(avgdose1change)," new Champaign County residents received their first dose of the two-dose COVID-19 vaccines each day.\n\nIf that pace continued, half of Champaign County residents could be partially vaccinated by ",month(half_vax$Date, label = TRUE, abbr = FALSE)," ",mday(half_vax$Date),", and the entire county would be partially vaccinated around ",month(full_vax$Date, label = TRUE, abbr = FALSE)," ",mday(full_vax$Date),".\n\nOf course, the pace is expected to vary as more vaccines are approved, shipments vary, people hesitate and eligibility expands.\n\nAlready, ",percent(current_vax$PercentDose1)," of Champaign County residents have been partially vaccinated, according to the Illinois Department of Public Health.\n\nBy comparison, half the country is expected to receive its first COVID-19 dose around xx, according to The New York Times. https://www.nytimes.com/interactive/2020/us/covid-19-vaccine-doses.html",sep="")) # paste text to clipboard
 
-# first dose projection plot 
+# first dose projection plot ----
 ggplot(idph_vax_champaign, aes(x = as.Date(Date),
                                y = PercentDose1)) +
   geom_line(colour = "#800080", # actual line 
