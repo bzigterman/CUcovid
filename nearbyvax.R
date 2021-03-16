@@ -401,7 +401,7 @@ ggplot(last_vax_nearby, aes(y = reorder(CountyName,
             aes(x = PercentDose1,
                 label = percent(PercentDose1, .1)),
             hjust = -.25,
-            size = 4,
+            size = 4.5,
             family = "Barlow") +
   geom_text(data = filter(last_vax_nearby, # label for top county, dose1
                           CountyName == topcounty),
@@ -409,7 +409,7 @@ ggplot(last_vax_nearby, aes(y = reorder(CountyName,
                 label = paste(percent(PercentDose1, .1),
                               "partially vaccinated")),
             hjust = -0.06,
-            size = 4,
+            size = 4.5,
             family = "Barlow") +
   geom_text(data = filter(last_vax_nearby, # label for all but top county, dose2
                           CountyName != topcounty),
