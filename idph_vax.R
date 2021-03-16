@@ -417,7 +417,7 @@ ggplot(filter(cases_and_vax, Date > as.Date("2020-12-15")),
                   colour = vax_case)) +
   geom_line() +
   facet_wrap(~ vax_case, scales = "free_y") +
-  labs(title = "Key Metrics for Champaign County Since Vaccinations Began Dec. 16",
+  labs(title = "COVID-19 Metrics for Champaign County Since Vaccinations Began Dec. 16",
        caption = "Sources: Illinois Department of Public Health, Champaign-Urbana Public Health District") +
   xlab(NULL) +
   ylab(NULL) +
