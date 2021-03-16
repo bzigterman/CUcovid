@@ -435,7 +435,7 @@ ggplot(last_vax_nearby, aes(y = reorder(CountyName,
   xlab(NULL) +
   ylab(NULL) +
   theme_classic() +
-  labs(title = "Percent of Population Vaccinated in Nearby Counties",
+  labs(title = "Percent of Total Population Vaccinated in Nearby Counties",
         caption =  "Source: Illinois Department of Public Health")+
   theme(text = element_text(family = "Barlow"),
         axis.text.y = element_text(size = 13),
