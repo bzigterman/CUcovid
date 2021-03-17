@@ -13,6 +13,9 @@ rates <- fromJSON(content(rates, "text"))
 rates
 path <- "api/COVIDExport/GetCountyRates"
 
+counties_current <- GET("https://idph.illinois.gov/DPHPublicInformation/api/COVIDExport/GetCountyTestResults")
+
+content(counties_current)
 # GET(url, path = "api/COVID/GetHospitalizationResults")
 # GET("https://idph.illinois.gov/DPHPublicInformation/api/COVID/GetHospitalizationResults")
 # hospitalization <- GET("https://idph.illinois.gov/DPHPublicInformation/api/COVID/GetHospitalizationResults")
