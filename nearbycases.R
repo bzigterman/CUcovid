@@ -206,7 +206,7 @@ ggsave("region/nearbycases.png", width = 8, height = 8*(628/1200), dpi = 320)
 #        path = "../bzigterman.github.io/images/",
 #        width = 8, height = 8*(628/1200), dpi = 150)
 
-# chart comparing deaths
+# chart comparing deaths ----
 ggplot(idph_cases_nearby, aes(x = as.Date(Date), y = new_deaths_rate,
                               colour = CountyName)) +
   geom_line() +
