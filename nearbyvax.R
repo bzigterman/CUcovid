@@ -495,7 +495,7 @@ ggplot(last_vax_nearby, aes(y = reorder(CountyName,
                 label = percent(PctVaccinatedPopulation, .1)),
             hjust = 1.1,
             #vjust = -.9,
-            size = 4,
+            size = 3.5,
             colour = "white",
             family = "Barlow") +
   geom_text(data = filter(last_vax_nearby, # label for top county, dose2
@@ -506,7 +506,7 @@ ggplot(last_vax_nearby, aes(y = reorder(CountyName,
                               )),
             hjust = 1.01,
             #vjust = -.9,
-            size = 4,
+            size = 3.5,
             colour = "white",
             family = "Barlow") +
   scale_x_continuous(labels = percent,
