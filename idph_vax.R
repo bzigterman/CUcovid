@@ -399,12 +399,12 @@ idph_cases_champaign <- idph_cases_champaign$values %>%
   mutate(new_deaths_rate = (1000000*avg_new_deaths)/population)
 
 cases_and_vax <- full_join(CUcovid, idph_vax_champaign) %>%
-  select(avgnewcases, Date, AdministeredCount, Hospitalized,
+  select(Active, Date, AdministeredCount, Hospitalized,
          Quarantined, weeklydead, AdministeredCountRollAvg) %>%
   pivot_longer(!Date, names_to = "vax_case", values_to = "count") %>%
   mutate(vax_case = recode(vax_case, 
                            "AdministeredCount" = "6. Total Vaccine Doses",
-                           "avgnewcases" = "1. Average New Cases",
+                           "Active" = "1. Active Cases",
                            "Quarantined" = "2. Currently Quarantined",
                            "Hospitalized" = "3. Currently Hospitalized",
                            "weeklydead" = "4. Deaths in Past Week",
