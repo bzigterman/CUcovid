@@ -452,6 +452,82 @@ ggsave("nearbybothdoses.png",
        path = "../bzigterman.github.io/images/",
        width = 8, height = 8*(628/1200), dpi = 150)
 
+# combined cleveland dot, with wider bars and interior labels ----
+
+last_vax_nearby <- vax_nearby %>%
+  filter(Date == tail(Date, 1)) %>%
+  arrange(desc(PercentDose1))
+topcounty <- head(last_vax_nearby$CountyName,1)
+
+ggplot(last_vax_nearby, aes(y = reorder(CountyName,
+                                        PercentDose1))) +
+  
+  geom_segment(aes(x = PercentDose1, # line segment to dose1%
+                   yend = CountyName),
+               xend = 0, 
+               colour = "#d8cee8",
+               size = 9, # was 2
+               #alpha = .3
+  ) +
+  geom_segment(aes(x = PctVaccinatedPopulation, # first line segment to dose2
+                   yend = CountyName), 
+               xend = 0, 
+               colour = "#674EA7",
+               size = 9) + # was 3.6 +
+  geom_text(data = filter(last_vax_nearby, # label for all but top county dose1
+                          CountyName != topcounty),
+            aes(x = PercentDose1,
+                label = percent(PercentDose1, .1)),
+            hjust = -.1,
+            size = 4.5,
+            family = "Barlow") +
+  geom_text(data = filter(last_vax_nearby, # label for top county, dose1
+                          CountyName == topcounty),
+            aes(x = PercentDose1,
+                label = paste(percent(PercentDose1, .1),
+                              "partially vaccinated")),
+            hjust = -0.03,
+            size = 4.5,
+            family = "Barlow") +
+  geom_text(data = filter(last_vax_nearby, # label for all but top county, dose2
+                          CountyName != topcounty),
+            aes(x = PctVaccinatedPopulation,
+                label = percent(PctVaccinatedPopulation, .1)),
+            hjust = 1.1,
+            #vjust = -.9,
+            size = 4,
+            colour = "white",
+            family = "Barlow") +
+  geom_text(data = filter(last_vax_nearby, # label for top county, dose2
+                          CountyName == topcounty),
+            aes(x = PctVaccinatedPopulation,
+                label = paste("Fully vaccinated:",
+                              percent(PctVaccinatedPopulation, .1)
+                              )),
+            hjust = 1.01,
+            #vjust = -.9,
+            size = 4,
+            colour = "white",
+            family = "Barlow") +
+  scale_x_continuous(labels = percent,
+                     #position = "top",
+                     limits = c(0,1),
+                     expand = expansion(mult = c(0,.05))) +
+  xlab(NULL) +
+  ylab(NULL) +
+  theme_classic() +
+  labs(title = "Percent of Total Population Vaccinated in Nearby Counties",
+       caption =  "Source: Illinois Department of Public Health")+
+  theme(text = element_text(family = "Barlow"),
+        axis.text.y = element_text(size = 13),
+        axis.text.x = element_text(size = 13),
+        axis.line.x = element_blank(),
+        axis.ticks.y = element_blank(),
+        legend.position = "none",
+        panel.grid.major.y = element_blank(),  
+        plot.caption = element_text(colour = "grey40"),
+        plot.title = element_text(size = 22, family = "Oswald")) 
+
 
 # todo
 # add new dose1 and new dose2 and percent of each dose for each county
