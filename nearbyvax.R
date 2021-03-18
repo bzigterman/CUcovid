@@ -29,6 +29,7 @@ iroquoispop <- 27604
 dewittpop <- 15769
 maconpop <- 104712
 moultriepop <- 14717
+illinoispop <- 12741080
 
 
 # import and clean data
@@ -103,6 +104,14 @@ vax_moultrie <- rio::import("https://idph.illinois.gov/DPHPublicInformation/api/
   mutate(Dose1Change = PersonsDose1 - lag(PersonsDose1)) %>%
   mutate(Dose2Change = PersonsFullyVaccinated - lag(PersonsFullyVaccinated)) 
 
+vax_illinois <- rio::import("https://idph.illinois.gov/DPHPublicInformation/api/COVIDExport/GetVaccineAdministration?format=csv&countyName=Illinois",
+                            format = "csv") %>%
+  mutate(population = illinoispop)  %>%
+  mutate(PersonsDose1 = AdministeredCount - PersonsFullyVaccinated) %>%
+  mutate(Dose1Change = PersonsDose1 - lag(PersonsDose1)) %>%
+  mutate(Dose2Change = PersonsFullyVaccinated - lag(PersonsFullyVaccinated)) 
+
+
 vax_nearby <- full_join(vax_champaign, vax_vermilion) %>%
   full_join(vax_ford) %>%
   full_join(vax_edgar) %>%
@@ -112,6 +121,7 @@ vax_nearby <- full_join(vax_champaign, vax_vermilion) %>%
   full_join(vax_dewitt) %>%
   full_join(vax_macon) %>%
   full_join(vax_moultrie) %>%
+  #full_join(vax_illinois) %>%
   mutate(Date = mdy_hms(Report_Date)) %>%
 #  mutate(PersonsDose1 = AdministeredCount - PersonsFullyVaccinated) %>%
   mutate(PercentDose1 = PersonsDose1/population) #%>%
