@@ -243,7 +243,7 @@ ggplot(vax_nearby, aes(x = as.Date(Date), y = PercentDose1,
                      labels = label_percent(accuracy = 1),
                      # position = "right",
                      expand = expansion(mult = c(0,.05))) +
-  scale_x_date(expand = expansion(mult = c(0,.25))) +
+  scale_x_date(expand = expansion(mult = c(0,.35))) +
   xlab(NULL) +
   ylab(NULL) +
   labs(title = "Percent of Population Partially Vaccinated in Nearby Counties",
