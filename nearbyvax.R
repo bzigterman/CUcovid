@@ -246,7 +246,7 @@ ggplot(vax_nearby, aes(x = as.Date(Date), y = PercentDose1,
   scale_x_date(expand = expansion(mult = c(0,.35))) +
   xlab(NULL) +
   ylab(NULL) +
-  labs(title = "Percent of Population Partially Vaccinated in Nearby Counties",
+  labs(title = "Percent with At Least One Vaccine Dose in Nearby Counties",
        caption = "Source: Illinois Department of Public Health")+
   theme(text = element_text(family = "Barlow"),
         axis.text.y = element_text(size = 13),
@@ -368,7 +368,7 @@ ggplot(last_vax_nearby, aes(x = PercentDose1,
   xlab(NULL) +
   ylab(NULL) +
   theme_classic() +
-  labs(title = "Percent of Population with One Dose in Nearby Counties",
+  labs(title = "Percent of Population with At Least One Dose in Nearby Counties",
         caption = "Source: Illinois Department of Public Health")+
   theme(text = element_text(family = "Barlow"),
         axis.text.y = element_text(size = 13),
@@ -417,7 +417,7 @@ ggplot(last_vax_nearby, aes(y = reorder(CountyName,
                           CountyName == topcounty),
             aes(x = PercentDose1,
                 label = paste(percent(PercentDose1, .1),
-                              "partially vaccinated")),
+                              "with at least one dose")),
             hjust = -0.06,
             size = 4.5,
             family = "Barlow") +
