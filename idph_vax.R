@@ -94,7 +94,7 @@ ggplot(idph_vax_champaign, aes(x = as.Date(Date)))  +
   annotate("text",
            x = as.Date("2021-02-14"),
            y = .12,
-           label = "Partially \nvaccinated",
+           label = "At least \none dose",
            # label = paste("Partially \nvaccinated:\n",
            #               percent(tail(idph_vax_champaign, 1)$PercentDose1,
            #                       accuracy = .1)),
@@ -135,9 +135,12 @@ ggplot(idph_vax_champaign, aes(x = as.Date(Date)))  +
 #            family = "Barlow") +
 xlab(NULL) +
   ylab(NULL) +
-  scale_y_continuous(labels = label_percent(accuracy = 1), 
+  scale_y_continuous(labels = label_percent(accuracy = .1), 
                      position = "right",
-                     expand = expansion(mult = c(0,.05))) +
+                     expand = expansion(mult = c(0,.05)),
+                     breaks = c(0,.15,
+                                max(idph_vax_champaign$PctVaccinatedPopulation),
+                                max(idph_vax_champaign$PercentDose1))) +
   scale_x_date(expand = c(0,0)) +
   labs(title = "Percent of Champaign County Vaccinated",
        # subtitle = "With percent of total population.",
@@ -146,6 +149,8 @@ xlab(NULL) +
   theme(text = element_text(family = "Barlow"),
         axis.text.y = element_text(size = 13),
         axis.text.x = element_text(size = 13),
+        panel.grid = element_blank(),
+        #panel.grid.minor.y = element_blank(),
         #  panel.background = element_blank(),
         plot.caption = element_text(colour = "grey40"),
         plot.title = element_text(size = 22, family = "Oswald")) 
