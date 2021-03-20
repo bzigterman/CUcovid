@@ -138,7 +138,7 @@ xlab(NULL) +
   scale_y_continuous(labels = label_percent(accuracy = .1), 
                      position = "right",
                      expand = expansion(mult = c(0,.05)),
-                     breaks = c(0,.15,
+                     breaks = c(0,
                                 max(idph_vax_champaign$PctVaccinatedPopulation),
                                 max(idph_vax_champaign$PercentDose1))) +
   scale_x_date(expand = c(0,0)) +
