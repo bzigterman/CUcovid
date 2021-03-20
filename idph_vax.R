@@ -104,7 +104,7 @@ ggplot(idph_vax_champaign, aes(x = as.Date(Date)))  +
            # hjust = 0
            size = 6) +
   annotate("text",
-           x = as.Date("2021-03-03"),
+           x = as.Date("2021-03-10"),
            y = .07,
            label = "Fully \nvaccinated",
            # label = paste("Fully \nvaccinated:\n",
