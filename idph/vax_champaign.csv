@@ -1,283 +1,286 @@
 "CountyName","AdministeredCount","AdministeredCountChange","AdministeredCountRollAvg","PersonsFullyVaccinated","Report_Date","PctVaccinatedPopulation","Date","PersonsDose1","PercentDose1","Dose1Change","Dose2Change","Text"
 "Champaign",8,8,1,0,"12/16/2020 12:00:00 AM",0,2020-12-16,8,3.80983222451341e-05,NA,NA,"8 total doses administered in the past day, up 8 from the day before. 
-8 have received the first dose, up NA from the day before. 0.0% of the population has received first dose. 
-0 have received both doses, up NA from the day before. 0.0% of the population is fully vaccinated."
+8 have received at least one dose, up NA from the day before. 0.0% of the population has received at least one dose. 
+0 have been fully vaccinated, up NA from the day before. 0.0% of the population has been fully vaccinated."
 "Champaign",191,183,27,0,"12/17/2020 12:00:00 AM",0,2020-12-17,191,0.000909597443602577,183,0,"191 total doses administered in the past day, up 183 from the day before. 
-191 have received the first dose, up 183 from the day before. 0.1% of the population has received first dose. 
-0 have received both doses, up 0 from the day before. 0.0% of the population is fully vaccinated."
+191 have received at least one dose, up 183 from the day before. 0.1% of the population has received at least one dose. 
+0 have been fully vaccinated, up 0 from the day before. 0.0% of the population has been fully vaccinated."
 "Champaign",477,286,68,0,"12/18/2020 12:00:00 AM",0,2020-12-18,477,0.00227161246386612,286,0,"477 total doses administered in the past day, up 286 from the day before. 
-477 have received the first dose, up 286 from the day before. 0.2% of the population has received first dose. 
-0 have received both doses, up 0 from the day before. 0.0% of the population is fully vaccinated."
+477 have received at least one dose, up 286 from the day before. 0.2% of the population has received at least one dose. 
+0 have been fully vaccinated, up 0 from the day before. 0.0% of the population has been fully vaccinated."
 "Champaign",480,3,69,0,"12/19/2020 12:00:00 AM",0,2020-12-19,480,0.00228589933470805,3,0,"480 total doses administered in the past day, up 3 from the day before. 
-480 have received the first dose, up 3 from the day before. 0.2% of the population has received first dose. 
-0 have received both doses, up 0 from the day before. 0.0% of the population is fully vaccinated."
+480 have received at least one dose, up 3 from the day before. 0.2% of the population has received at least one dose. 
+0 have been fully vaccinated, up 0 from the day before. 0.0% of the population has been fully vaccinated."
 "Champaign",481,1,69,0,"12/20/2020 12:00:00 AM",0,2020-12-20,481,0.00229066162498869,1,0,"481 total doses administered in the past day, up 1 from the day before. 
-481 have received the first dose, up 1 from the day before. 0.2% of the population has received first dose. 
-0 have received both doses, up 0 from the day before. 0.0% of the population is fully vaccinated."
+481 have received at least one dose, up 1 from the day before. 0.2% of the population has received at least one dose. 
+0 have been fully vaccinated, up 0 from the day before. 0.0% of the population has been fully vaccinated."
 "Champaign",482,1,69,0,"12/21/2020 12:00:00 AM",0,2020-12-21,482,0.00229542391526933,1,0,"482 total doses administered in the past day, up 1 from the day before. 
-482 have received the first dose, up 1 from the day before. 0.2% of the population has received first dose. 
-0 have received both doses, up 0 from the day before. 0.0% of the population is fully vaccinated."
+482 have received at least one dose, up 1 from the day before. 0.2% of the population has received at least one dose. 
+0 have been fully vaccinated, up 0 from the day before. 0.0% of the population has been fully vaccinated."
 "Champaign",510,28,73,0,"12/22/2020 12:00:00 AM",0,2020-12-22,510,0.0024287680431273,28,0,"510 total doses administered in the past day, up 28 from the day before. 
-510 have received the first dose, up 28 from the day before. 0.2% of the population has received first dose. 
-0 have received both doses, up 0 from the day before. 0.0% of the population is fully vaccinated."
+510 have received at least one dose, up 28 from the day before. 0.2% of the population has received at least one dose. 
+0 have been fully vaccinated, up 0 from the day before. 0.0% of the population has been fully vaccinated."
 "Champaign",1009,499,143,0,"12/23/2020 12:00:00 AM",0,2020-12-23,1009,0.00480515089316754,499,0,"1,009 total doses administered in the past day, up 499 from the day before. 
-1,009 have received the first dose, up 499 from the day before. 0.5% of the population has received first dose. 
-0 have received both doses, up 0 from the day before. 0.0% of the population is fully vaccinated."
+1,009 have received at least one dose, up 499 from the day before. 0.5% of the population has received at least one dose. 
+0 have been fully vaccinated, up 0 from the day before. 0.0% of the population has been fully vaccinated."
 "Champaign",1388,379,171,0,"12/24/2020 12:00:00 AM",0,2020-12-24,1388,0.00661005890953077,379,0,"1,388 total doses administered in the past day, up 379 from the day before. 
-1,388 have received the first dose, up 379 from the day before. 0.7% of the population has received first dose. 
-0 have received both doses, up 0 from the day before. 0.0% of the population is fully vaccinated."
+1,388 have received at least one dose, up 379 from the day before. 0.7% of the population has received at least one dose. 
+0 have been fully vaccinated, up 0 from the day before. 0.0% of the population has been fully vaccinated."
 "Champaign",1683,295,172,0,"12/25/2020 12:00:00 AM",0,2020-12-25,1683,0.00801493454232009,295,0,"1,683 total doses administered in the past day, up 295 from the day before. 
-1,683 have received the first dose, up 295 from the day before. 0.8% of the population has received first dose. 
-0 have received both doses, up 0 from the day before. 0.0% of the population is fully vaccinated."
+1,683 have received at least one dose, up 295 from the day before. 0.8% of the population has received at least one dose. 
+0 have been fully vaccinated, up 0 from the day before. 0.0% of the population has been fully vaccinated."
 "Champaign",1856,173,197,0,"12/26/2020 12:00:00 AM",0,2020-12-26,1856,0.00883881076087112,173,0,"1,856 total doses administered in the past day, up 173 from the day before. 
-1,856 have received the first dose, up 173 from the day before. 0.9% of the population has received first dose. 
-0 have received both doses, up 0 from the day before. 0.0% of the population is fully vaccinated."
+1,856 have received at least one dose, up 173 from the day before. 0.9% of the population has received at least one dose. 
+0 have been fully vaccinated, up 0 from the day before. 0.0% of the population has been fully vaccinated."
 "Champaign",1857,1,197,0,"12/27/2020 12:00:00 AM",0,2020-12-27,1857,0.00884357305115176,1,0,"1,857 total doses administered in the past day, up 1 from the day before. 
-1,857 have received the first dose, up 1 from the day before. 0.9% of the population has received first dose. 
-0 have received both doses, up 0 from the day before. 0.0% of the population is fully vaccinated."
+1,857 have received at least one dose, up 1 from the day before. 0.9% of the population has received at least one dose. 
+0 have been fully vaccinated, up 0 from the day before. 0.0% of the population has been fully vaccinated."
 "Champaign",2045,188,223,0,"12/28/2020 12:00:00 AM",0,2020-12-28,2045,0.00973888362391241,188,0,"2,045 total doses administered in the past day, up 188 from the day before. 
-2,045 have received the first dose, up 188 from the day before. 1.0% of the population has received first dose. 
-0 have received both doses, up 0 from the day before. 0.0% of the population is fully vaccinated."
+2,045 have received at least one dose, up 188 from the day before. 1.0% of the population has received at least one dose. 
+0 have been fully vaccinated, up 0 from the day before. 0.0% of the population has been fully vaccinated."
 "Champaign",2201,156,242,0,"12/29/2020 12:00:00 AM",0,2020-12-29,2201,0.0104818009076925,156,0,"2,201 total doses administered in the past day, up 156 from the day before. 
-2,201 have received the first dose, up 156 from the day before. 1.0% of the population has received first dose. 
-0 have received both doses, up 0 from the day before. 0.0% of the population is fully vaccinated."
+2,201 have received at least one dose, up 156 from the day before. 1.0% of the population has received at least one dose. 
+0 have been fully vaccinated, up 0 from the day before. 0.0% of the population has been fully vaccinated."
 "Champaign",2800,599,256,0,"12/30/2020 12:00:00 AM",0,2020-12-30,2800,0.0133344127857969,599,0,"2,800 total doses administered in the past day, up 599 from the day before. 
-2,800 have received the first dose, up 599 from the day before. 1.3% of the population has received first dose. 
-0 have received both doses, up 0 from the day before. 0.0% of the population is fully vaccinated."
+2,800 have received at least one dose, up 599 from the day before. 1.3% of the population has received at least one dose. 
+0 have been fully vaccinated, up 0 from the day before. 0.0% of the population has been fully vaccinated."
 "Champaign",3239,439,264,0,"12/31/2020 12:00:00 AM",0,2020-12-31,3239,0.0154250582189987,439,0,"3,239 total doses administered in the past day, up 439 from the day before. 
-3,239 have received the first dose, up 439 from the day before. 1.5% of the population has received first dose. 
-0 have received both doses, up 0 from the day before. 0.0% of the population is fully vaccinated."
+3,239 have received at least one dose, up 439 from the day before. 1.5% of the population has received at least one dose. 
+0 have been fully vaccinated, up 0 from the day before. 0.0% of the population has been fully vaccinated."
 "Champaign",3545,306,266,0,"1/1/2021 12:00:00 AM",0,2021-01-01,3545,0.0168823190448751,306,0,"3,545 total doses administered in the past day, up 306 from the day before. 
-3,545 have received the first dose, up 306 from the day before. 1.7% of the population has received first dose. 
-0 have received both doses, up 0 from the day before. 0.0% of the population is fully vaccinated."
+3,545 have received at least one dose, up 306 from the day before. 1.7% of the population has received at least one dose. 
+0 have been fully vaccinated, up 0 from the day before. 0.0% of the population has been fully vaccinated."
 "Champaign",3933,388,297,0,"1/2/2021 12:00:00 AM",0,2021-01-02,3933,0.0187300876737641,388,0,"3,933 total doses administered in the past day, up 388 from the day before. 
-3,933 have received the first dose, up 388 from the day before. 1.9% of the population has received first dose. 
-0 have received both doses, up 0 from the day before. 0.0% of the population is fully vaccinated."
+3,933 have received at least one dose, up 388 from the day before. 1.9% of the population has received at least one dose. 
+0 have been fully vaccinated, up 0 from the day before. 0.0% of the population has been fully vaccinated."
 "Champaign",4317,384,351,0,"1/3/2021 12:00:00 AM",0,2021-01-03,4317,0.0205588071415305,384,0,"4,317 total doses administered in the past day, up 384 from the day before. 
-4,317 have received the first dose, up 384 from the day before. 2.1% of the population has received first dose. 
-0 have received both doses, up 0 from the day before. 0.0% of the population is fully vaccinated."
+4,317 have received at least one dose, up 384 from the day before. 2.1% of the population has received at least one dose. 
+0 have been fully vaccinated, up 0 from the day before. 0.0% of the population has been fully vaccinated."
 "Champaign",4880,563,405,0,"1/4/2021 12:00:00 AM",0,2021-01-04,4880,0.0232399765695318,563,0,"4,880 total doses administered in the past day, up 563 from the day before. 
-4,880 have received the first dose, up 563 from the day before. 2.3% of the population has received first dose. 
-0 have received both doses, up 0 from the day before. 0.0% of the population is fully vaccinated."
+4,880 have received at least one dose, up 563 from the day before. 2.3% of the population has received at least one dose. 
+0 have been fully vaccinated, up 0 from the day before. 0.0% of the population has been fully vaccinated."
 "Champaign",5389,509,455,1,"1/5/2021 12:00:00 AM",4.76229028064177e-06,2021-01-05,5388,0.0256592200320978,508,1,"5,389 total doses administered in the past day, up 509 from the day before. 
-5,388 have received the first dose, up 508 from the day before. 2.6% of the population has received first dose. 
-1 have received both doses, up 1 from the day before. 0.0% of the population is fully vaccinated."
+5,388 have received at least one dose, up 508 from the day before. 2.6% of the population has received at least one dose. 
+1 have been fully vaccinated, up 1 from the day before. 0.0% of the population has been fully vaccinated."
 "Champaign",5724,335,418,8,"1/6/2021 12:00:00 AM",3.80983222451341e-05,2021-01-06,5716,0.0272212512441483,328,7,"5,724 total doses administered in the past day, up 335 from the day before. 
-5,716 have received the first dose, up 328 from the day before. 2.7% of the population has received first dose. 
-8 have received both doses, up 7 from the day before. 0.0% of the population is fully vaccinated."
+5,716 have received at least one dose, up 328 from the day before. 2.7% of the population has received at least one dose. 
+8 have been fully vaccinated, up 7 from the day before. 0.0% of the population has been fully vaccinated."
 "Champaign",6026,302,398,198,"1/7/2021 12:00:00 AM",0.00094293347556707,2021-01-07,5828,0.0277546277555802,112,190,"6,026 total doses administered in the past day, up 302 from the day before. 
-5,828 have received the first dose, up 112 from the day before. 2.8% of the population has received first dose. 
-198 have received both doses, up 190 from the day before. 0.1% of the population is fully vaccinated."
+5,828 have received at least one dose, up 112 from the day before. 2.8% of the population has received at least one dose. 
+198 have been fully vaccinated, up 190 from the day before. 0.1% of the population has been fully vaccinated."
 "Champaign",6512,486,424,480,"1/8/2021 12:00:00 AM",0.00228589933470805,2021-01-08,6032,0.0287261349728311,204,282,"6,512 total doses administered in the past day, up 486 from the day before. 
-6,032 have received the first dose, up 204 from the day before. 2.9% of the population has received first dose. 
-480 have received both doses, up 282 from the day before. 0.2% of the population is fully vaccinated."
+6,032 have received at least one dose, up 204 from the day before. 2.9% of the population has received at least one dose. 
+480 have been fully vaccinated, up 282 from the day before. 0.2% of the population has been fully vaccinated."
 "Champaign",6944,432,430,483,"1/9/2021 12:00:00 AM",0.00230018620554997,2021-01-09,6461,0.0307691575032265,429,3,"6,944 total doses administered in the past day, up 432 from the day before. 
-6,461 have received the first dose, up 429 from the day before. 3.1% of the population has received first dose. 
-483 have received both doses, up 3 from the day before. 0.2% of the population is fully vaccinated."
+6,461 have received at least one dose, up 429 from the day before. 3.1% of the population has received at least one dose. 
+483 have been fully vaccinated, up 3 from the day before. 0.2% of the population has been fully vaccinated."
 "Champaign",7226,282,416,483,"1/10/2021 12:00:00 AM",0.00230018620554997,2021-01-10,6743,0.0321121233623674,282,0,"7,226 total doses administered in the past day, up 282 from the day before. 
-6,743 have received the first dose, up 282 from the day before. 3.2% of the population has received first dose. 
-483 have received both doses, up 0 from the day before. 0.2% of the population is fully vaccinated."
+6,743 have received at least one dose, up 282 from the day before. 3.2% of the population has received at least one dose. 
+483 have been fully vaccinated, up 0 from the day before. 0.2% of the population has been fully vaccinated."
 "Champaign",7327,101,350,499,"1/11/2021 12:00:00 AM",0.00237638285004024,2021-01-11,6828,0.032516918036222,85,16,"7,327 total doses administered in the past day, up 101 from the day before. 
-6,828 have received the first dose, up 85 from the day before. 3.3% of the population has received first dose. 
-499 have received both doses, up 16 from the day before. 0.2% of the population is fully vaccinated."
+6,828 have received at least one dose, up 85 from the day before. 3.3% of the population has received at least one dose. 
+499 have been fully vaccinated, up 16 from the day before. 0.2% of the population has been fully vaccinated."
 "Champaign",8219,892,404,525,"1/12/2021 12:00:00 AM",0.00250020239733693,2021-01-12,7694,0.0366410614192577,866,26,"8,219 total doses administered in the past day, up 892 from the day before. 
-7,694 have received the first dose, up 866 from the day before. 3.7% of the population has received first dose. 
-525 have received both doses, up 26 from the day before. 0.3% of the population is fully vaccinated."
+7,694 have received at least one dose, up 866 from the day before. 3.7% of the population has received at least one dose. 
+525 have been fully vaccinated, up 26 from the day before. 0.3% of the population has been fully vaccinated."
 "Champaign",9658,1439,562,923,"1/13/2021 12:00:00 AM",0.00439559392903235,2021-01-13,8735,0.0415986056014058,1041,398,"9,658 total doses administered in the past day, up 1,439 from the day before. 
-8,735 have received the first dose, up 1,041 from the day before. 4.2% of the population has received first dose. 
-923 have received both doses, up 398 from the day before. 0.4% of the population is fully vaccinated."
+8,735 have received at least one dose, up 1,041 from the day before. 4.2% of the population has received at least one dose. 
+923 have been fully vaccinated, up 398 from the day before. 0.4% of the population has been fully vaccinated."
 "Champaign",11124,1466,728,1382,"1/14/2021 12:00:00 AM",0.00658148516784692,2021-01-14,9742,0.0463942319140121,1007,459,"11,124 total doses administered in the past day, up 1,466 from the day before. 
-9,742 have received the first dose, up 1,007 from the day before. 4.6% of the population has received first dose. 
-1,382 have received both doses, up 459 from the day before. 0.7% of the population is fully vaccinated."
+9,742 have received at least one dose, up 1,007 from the day before. 4.6% of the population has received at least one dose. 
+1,382 have been fully vaccinated, up 459 from the day before. 0.7% of the population has been fully vaccinated."
 "Champaign",12008,884,785,1817,"1/15/2021 12:00:00 AM",0.00865308143992609,2021-01-15,10191,0.0485325002500202,449,435,"12,008 total doses administered in the past day, up 884 from the day before. 
-10,191 have received the first dose, up 449 from the day before. 4.9% of the population has received first dose. 
-1,817 have received both doses, up 435 from the day before. 0.9% of the population is fully vaccinated."
+10,191 have received at least one dose, up 449 from the day before. 4.9% of the population has received at least one dose. 
+1,817 have been fully vaccinated, up 435 from the day before. 0.9% of the population has been fully vaccinated."
 "Champaign",12321,313,768,2018,"1/16/2021 12:00:00 AM",0.00961030178633508,2021-01-16,10303,0.0490658767614521,112,201,"12,321 total doses administered in the past day, up 313 from the day before. 
-10,303 have received the first dose, up 112 from the day before. 4.9% of the population has received first dose. 
-2,018 have received both doses, up 201 from the day before. 1.0% of the population is fully vaccinated."
+10,303 have received at least one dose, up 112 from the day before. 4.9% of the population has received at least one dose. 
+2,018 have been fully vaccinated, up 201 from the day before. 1.0% of the population has been fully vaccinated."
 "Champaign",12410,89,741,2025,"1/17/2021 12:00:00 AM",0.00964363781829958,2021-01-17,10385,0.0494563845644647,82,7,"12,410 total doses administered in the past day, up 89 from the day before. 
-10,385 have received the first dose, up 82 from the day before. 4.9% of the population has received first dose. 
-2,025 have received both doses, up 7 from the day before. 1.0% of the population is fully vaccinated."
+10,385 have received at least one dose, up 82 from the day before. 4.9% of the population has received at least one dose. 
+2,025 have been fully vaccinated, up 7 from the day before. 1.0% of the population has been fully vaccinated."
 "Champaign",12697,287,767,2031,"1/18/2021 12:00:00 AM",0.00967221155998343,2021-01-18,10666,0.0507945881333251,281,6,"12,697 total doses administered in the past day, up 287 from the day before. 
-10,666 have received the first dose, up 281 from the day before. 5.1% of the population has received first dose. 
-2,031 have received both doses, up 6 from the day before. 1.0% of the population is fully vaccinated."
+10,666 have received at least one dose, up 281 from the day before. 5.1% of the population has received at least one dose. 
+2,031 have been fully vaccinated, up 6 from the day before. 1.0% of the population has been fully vaccinated."
 "Champaign",14107,1410,841,2037,"1/19/2021 12:00:00 AM",0.00970078530166728,2021-01-19,12070,0.0574808436873461,1404,6,"14,107 total doses administered in the past day, up 1,410 from the day before. 
-12,070 have received the first dose, up 1,404 from the day before. 5.7% of the population has received first dose. 
-2,037 have received both doses, up 6 from the day before. 1.0% of the population is fully vaccinated."
+12,070 have received at least one dose, up 1,404 from the day before. 5.7% of the population has received at least one dose. 
+2,037 have been fully vaccinated, up 6 from the day before. 1.0% of the population has been fully vaccinated."
 "Champaign",15592,1485,848,2177,"1/20/2021 12:00:00 AM",0.0103675059409571,2021-01-20,13415,0.0638861241148093,1345,140,"15,592 total doses administered in the past day, up 1,485 from the day before. 
-13,415 have received the first dose, up 1,345 from the day before. 6.4% of the population has received first dose. 
-2,177 have received both doses, up 140 from the day before. 1.0% of the population is fully vaccinated."
+13,415 have received at least one dose, up 1,345 from the day before. 6.4% of the population has received at least one dose. 
+2,177 have been fully vaccinated, up 140 from the day before. 1.0% of the population has been fully vaccinated."
 "Champaign",16895,1303,824,2202,"1/21/2021 12:00:00 AM",0.0104865631979732,2021-01-21,14693,0.0699723310934695,1278,25,"16,895 total doses administered in the past day, up 1,303 from the day before. 
-14,693 have received the first dose, up 1,278 from the day before. 7.0% of the population has received first dose. 
-2,202 have received both doses, up 25 from the day before. 1.0% of the population is fully vaccinated."
+14,693 have received at least one dose, up 1,278 from the day before. 7.0% of the population has received at least one dose. 
+2,202 have been fully vaccinated, up 25 from the day before. 1.0% of the population has been fully vaccinated."
 "Champaign",18348,1453,906,2330,"1/22/2021 12:00:00 AM",0.0110961363538953,2021-01-22,16018,0.0762823657153198,1325,128,"18,348 total doses administered in the past day, up 1,453 from the day before. 
-16,018 have received the first dose, up 1,325 from the day before. 7.6% of the population has received first dose. 
-2,330 have received both doses, up 128 from the day before. 1.1% of the population is fully vaccinated."
+16,018 have received at least one dose, up 1,325 from the day before. 7.6% of the population has received at least one dose. 
+2,330 have been fully vaccinated, up 128 from the day before. 1.1% of the population has been fully vaccinated."
 "Champaign",18671,323,907,2334,"1/23/2021 12:00:00 AM",0.0111151855150179,2021-01-23,16337,0.0778015363148445,319,4,"18,671 total doses administered in the past day, up 323 from the day before. 
-16,337 have received the first dose, up 319 from the day before. 7.8% of the population has received first dose. 
-2,334 have received both doses, up 4 from the day before. 1.1% of the population is fully vaccinated."
+16,337 have received at least one dose, up 319 from the day before. 7.8% of the population has received at least one dose. 
+2,334 have been fully vaccinated, up 4 from the day before. 1.1% of the population has been fully vaccinated."
 "Champaign",18688,17,897,2334,"1/24/2021 12:00:00 AM",0.0111151855150179,2021-01-24,16354,0.0778824952496154,17,0,"18,688 total doses administered in the past day, up 17 from the day before. 
-16,354 have received the first dose, up 17 from the day before. 7.8% of the population has received first dose. 
-2,334 have received both doses, up 0 from the day before. 1.1% of the population is fully vaccinated."
+16,354 have received at least one dose, up 17 from the day before. 7.8% of the population has received at least one dose. 
+2,334 have been fully vaccinated, up 0 from the day before. 1.1% of the population has been fully vaccinated."
 "Champaign",18847,159,879,2354,"1/25/2021 12:00:00 AM",0.0112104313206307,2021-01-25,16493,0.0785444535986247,139,20,"18,847 total doses administered in the past day, up 159 from the day before. 
-16,493 have received the first dose, up 139 from the day before. 7.9% of the population has received first dose. 
-2,354 have received both doses, up 20 from the day before. 1.1% of the population is fully vaccinated."
+16,493 have received at least one dose, up 139 from the day before. 7.9% of the population has received at least one dose. 
+2,354 have been fully vaccinated, up 20 from the day before. 1.1% of the population has been fully vaccinated."
 "Champaign",21135,2288,1004,2520,"1/26/2021 12:00:00 AM",0.0120009715072173,2021-01-26,18615,0.0886500335741465,2122,166,"21,135 total doses administered in the past day, up 2,288 from the day before. 
-18,615 have received the first dose, up 2,122 from the day before. 8.9% of the population has received first dose. 
-2,520 have received both doses, up 166 from the day before. 1.2% of the population is fully vaccinated."
+18,615 have received at least one dose, up 2,122 from the day before. 8.9% of the population has received at least one dose. 
+2,520 have been fully vaccinated, up 166 from the day before. 1.2% of the population has been fully vaccinated."
 "Champaign",23621,2486,1147,3009,"1/27/2021 12:00:00 AM",0.0143297314544511,2021-01-27,20612,0.0981603272645881,1997,489,"23,621 total doses administered in the past day, up 2,486 from the day before. 
-20,612 have received the first dose, up 1,997 from the day before. 9.8% of the population has received first dose. 
-3,009 have received both doses, up 489 from the day before. 1.4% of the population is fully vaccinated."
+20,612 have received at least one dose, up 1,997 from the day before. 9.8% of the population has received at least one dose. 
+3,009 have been fully vaccinated, up 489 from the day before. 1.4% of the population has been fully vaccinated."
 "Champaign",26135,2514,1320,3475,"1/28/2021 12:00:00 AM",0.0165489587252301,2021-01-28,22660,0.107913497759342,2048,466,"26,135 total doses administered in the past day, up 2,514 from the day before. 
-22,660 have received the first dose, up 2,048 from the day before. 10.8% of the population has received first dose. 
-3,475 have received both doses, up 466 from the day before. 1.7% of the population is fully vaccinated."
+22,660 have received at least one dose, up 2,048 from the day before. 10.8% of the population has received at least one dose. 
+3,475 have been fully vaccinated, up 466 from the day before. 1.7% of the population has been fully vaccinated."
 "Champaign",27412,1277,1295,3895,"1/29/2021 12:00:00 AM",0.0185491206430997,2021-01-29,23517,0.111994780529852,857,420,"27,412 total doses administered in the past day, up 1,277 from the day before. 
-23,517 have received the first dose, up 857 from the day before. 11.2% of the population has received first dose. 
-3,895 have received both doses, up 420 from the day before. 1.9% of the population is fully vaccinated."
+23,517 have received at least one dose, up 857 from the day before. 11.2% of the population has received at least one dose. 
+3,895 have been fully vaccinated, up 420 from the day before. 1.9% of the population has been fully vaccinated."
 "Champaign",28345,933,1382,4356,"1/30/2021 12:00:00 AM",0.0207445364624755,2021-01-30,23989,0.114242581542315,472,461,"28,345 total doses administered in the past day, up 933 from the day before. 
-23,989 have received the first dose, up 472 from the day before. 11.4% of the population has received first dose. 
-4,356 have received both doses, up 461 from the day before. 2.1% of the population is fully vaccinated."
+23,989 have received at least one dose, up 472 from the day before. 11.4% of the population has received at least one dose. 
+4,356 have been fully vaccinated, up 461 from the day before. 2.1% of the population has been fully vaccinated."
 "Champaign",29489,1144,1543,4805,"1/31/2021 12:00:00 AM",0.0228828047984837,2021-01-31,24684,0.117552373287361,695,449,"29,489 total doses administered in the past day, up 1,144 from the day before. 
-24,684 have received the first dose, up 695 from the day before. 11.8% of the population has received first dose. 
-4,805 have received both doses, up 449 from the day before. 2.3% of the population is fully vaccinated."
+24,684 have received at least one dose, up 695 from the day before. 11.8% of the population has received at least one dose. 
+4,805 have been fully vaccinated, up 449 from the day before. 2.3% of the population has been fully vaccinated."
 "Champaign",30360,871,1645,5216,"2/1/2021 12:00:00 AM",0.0248401061038275,2021-02-01,25144,0.119743026816457,460,411,"30,360 total doses administered in the past day, up 871 from the day before. 
-25,144 have received the first dose, up 460 from the day before. 12.0% of the population has received first dose. 
-5,216 have received both doses, up 411 from the day before. 2.5% of the population is fully vaccinated."
+25,144 have received at least one dose, up 460 from the day before. 12.0% of the population has received at least one dose. 
+5,216 have been fully vaccinated, up 411 from the day before. 2.5% of the population has been fully vaccinated."
 "Champaign",32682,2322,1650,5848,"2/2/2021 12:00:00 AM",0.027849873561193,2021-02-02,26834,0.127791297390741,1690,632,"32,682 total doses administered in the past day, up 2,322 from the day before. 
-26,834 have received the first dose, up 1,690 from the day before. 12.8% of the population has received first dose. 
-5,848 have received both doses, up 632 from the day before. 2.8% of the population is fully vaccinated."
+26,834 have received at least one dose, up 1,690 from the day before. 12.8% of the population has received at least one dose. 
+5,848 have been fully vaccinated, up 632 from the day before. 2.8% of the population has been fully vaccinated."
 "Champaign",34792,2110,1596,6256,"2/3/2021 12:00:00 AM",0.0297928879956949,2021-02-03,28536,0.135896715448393,1702,408,"34,792 total doses administered in the past day, up 2,110 from the day before. 
-28,536 have received the first dose, up 1,702 from the day before. 13.6% of the population has received first dose. 
-6,256 have received both doses, up 408 from the day before. 3.0% of the population is fully vaccinated."
+28,536 have received at least one dose, up 1,702 from the day before. 13.6% of the population has received at least one dose. 
+6,256 have been fully vaccinated, up 408 from the day before. 3.0% of the population has been fully vaccinated."
 "Champaign",37430,2638,1614,6832,"2/4/2021 12:00:00 AM",0.0325359671973445,2021-02-04,30598,0.145716558007077,2062,576,"37,430 total doses administered in the past day, up 2,638 from the day before. 
-30,598 have received the first dose, up 2,062 from the day before. 14.6% of the population has received first dose. 
-6,832 have received both doses, up 576 from the day before. 3.3% of the population is fully vaccinated."
+30,598 have received at least one dose, up 2,062 from the day before. 14.6% of the population has received at least one dose. 
+6,832 have been fully vaccinated, up 576 from the day before. 3.3% of the population has been fully vaccinated."
 "Champaign",39892,2462,1783,7429,"2/5/2021 12:00:00 AM",0.0353790544948877,2021-02-05,32463,0.154598229380474,1865,597,"39,892 total doses administered in the past day, up 2,462 from the day before. 
-32,463 have received the first dose, up 1,865 from the day before. 15.5% of the population has received first dose. 
-7,429 have received both doses, up 597 from the day before. 3.5% of the population is fully vaccinated."
+32,463 have received at least one dose, up 1,865 from the day before. 15.5% of the population has received at least one dose. 
+7,429 have been fully vaccinated, up 597 from the day before. 3.5% of the population has been fully vaccinated."
 "Champaign",41395,1503,1864,7690,"2/6/2021 12:00:00 AM",0.0366220122581352,2021-02-06,33705,0.160512993909031,1242,261,"41,395 total doses administered in the past day, up 1,503 from the day before. 
-33,705 have received the first dose, up 1,242 from the day before. 16.1% of the population has received first dose. 
-7,690 have received both doses, up 261 from the day before. 3.7% of the population is fully vaccinated."
+33,705 have received at least one dose, up 1,242 from the day before. 16.1% of the population has received at least one dose. 
+7,690 have been fully vaccinated, up 261 from the day before. 3.7% of the population has been fully vaccinated."
 "Champaign",42041,646,1793,7691,"2/7/2021 12:00:00 AM",0.0366267745484158,2021-02-07,34350,0.163584671140045,645,1,"42,041 total doses administered in the past day, up 646 from the day before. 
-34,350 have received the first dose, up 645 from the day before. 16.4% of the population has received first dose. 
-7,691 have received both doses, up 1 from the day before. 3.7% of the population is fully vaccinated."
+34,350 have received at least one dose, up 645 from the day before. 16.4% of the population has received at least one dose. 
+7,691 have been fully vaccinated, up 1 from the day before. 3.7% of the population has been fully vaccinated."
 "Champaign",43528,1487,1881,8353,"2/8/2021 12:00:00 AM",0.0397794107142007,2021-02-08,35175,0.167513560621574,825,662,"43,528 total doses administered in the past day, up 1,487 from the day before. 
-35,175 have received the first dose, up 825 from the day before. 16.8% of the population has received first dose. 
-8,353 have received both doses, up 662 from the day before. 4.0% of the population is fully vaccinated."
+35,175 have received at least one dose, up 825 from the day before. 16.8% of the population has received at least one dose. 
+8,353 have been fully vaccinated, up 662 from the day before. 4.0% of the population has been fully vaccinated."
 "Champaign",44615,1087,1705,8722,"2/9/2021 12:00:00 AM",0.0415366958277575,2021-02-09,35893,0.170932885043075,718,369,"44,615 total doses administered in the past day, up 1,087 from the day before. 
-35,893 have received the first dose, up 718 from the day before. 17.1% of the population has received first dose. 
-8,722 have received both doses, up 369 from the day before. 4.2% of the population is fully vaccinated."
+35,893 have received at least one dose, up 718 from the day before. 17.1% of the population has received at least one dose. 
+8,722 have been fully vaccinated, up 369 from the day before. 4.2% of the population has been fully vaccinated."
 "Champaign",46758,2143,1709,9899,"2/10/2021 12:00:00 AM",0.0471419114880728,2021-02-10,36859,0.175533257454175,966,1177,"46,758 total doses administered in the past day, up 2,143 from the day before. 
-36,859 have received the first dose, up 966 from the day before. 17.6% of the population has received first dose. 
-9,899 have received both doses, up 1,177 from the day before. 4.7% of the population is fully vaccinated."
+36,859 have received at least one dose, up 966 from the day before. 17.6% of the population has received at least one dose. 
+9,899 have been fully vaccinated, up 1,177 from the day before. 4.7% of the population has been fully vaccinated."
 "Champaign",49191,2433,1680,10695,"2/11/2021 12:00:00 AM",0.0509326945514637,2021-02-11,38496,0.183329126643585,1637,796,"49,191 total doses administered in the past day, up 2,433 from the day before. 
-38,496 have received the first dose, up 1,637 from the day before. 18.3% of the population has received first dose. 
-10,695 have received both doses, up 796 from the day before. 5.1% of the population is fully vaccinated."
+38,496 have received at least one dose, up 1,637 from the day before. 18.3% of the population has received at least one dose. 
+10,695 have been fully vaccinated, up 796 from the day before. 5.1% of the population has been fully vaccinated."
 "Champaign",51399,2208,1644,11511,"2/12/2021 12:00:00 AM",0.0548187234204674,2021-02-12,39888,0.189958234714239,1392,816,"51,399 total doses administered in the past day, up 2,208 from the day before. 
-39,888 have received the first dose, up 1,392 from the day before. 19.0% of the population has received first dose. 
-11,511 have received both doses, up 816 from the day before. 5.5% of the population is fully vaccinated."
+39,888 have received at least one dose, up 1,392 from the day before. 19.0% of the population has received at least one dose. 
+11,511 have been fully vaccinated, up 816 from the day before. 5.5% of the population has been fully vaccinated."
 "Champaign",52668,1269,1610,11739,"2/13/2021 12:00:00 AM",0.0559045256044537,2021-02-13,40929,0.194915778896387,1041,228,"52,668 total doses administered in the past day, up 1,269 from the day before. 
-40,929 have received the first dose, up 1,041 from the day before. 19.5% of the population has received first dose. 
-11,739 have received both doses, up 228 from the day before. 5.6% of the population is fully vaccinated."
+40,929 have received at least one dose, up 1,041 from the day before. 19.5% of the population has received at least one dose. 
+11,739 have been fully vaccinated, up 228 from the day before. 5.6% of the population has been fully vaccinated."
 "Champaign",53441,773,1629,11769,"2/14/2021 12:00:00 AM",0.056047394312873,2021-02-14,41672,0.198454160574904,743,30,"53,441 total doses administered in the past day, up 773 from the day before. 
-41,672 have received the first dose, up 743 from the day before. 19.8% of the population has received first dose. 
-11,769 have received both doses, up 30 from the day before. 5.6% of the population is fully vaccinated."
+41,672 have received at least one dose, up 743 from the day before. 19.8% of the population has received at least one dose. 
+11,769 have been fully vaccinated, up 30 from the day before. 5.6% of the population has been fully vaccinated."
 "Champaign",53899,458,1482,11929,"2/15/2021 12:00:00 AM",0.0568093607577756,2021-02-15,41970,0.199873323078535,298,160,"53,899 total doses administered in the past day, up 458 from the day before. 
-41,970 have received the first dose, up 298 from the day before. 20.0% of the population has received first dose. 
-11,929 have received both doses, up 160 from the day before. 5.7% of the population is fully vaccinated."
+41,970 have received at least one dose, up 298 from the day before. 20.0% of the population has received at least one dose. 
+11,929 have been fully vaccinated, up 160 from the day before. 5.7% of the population has been fully vaccinated."
 "Champaign",54998,1099,1483,12754,"2/16/2021 12:00:00 AM",0.0607382502393051,2021-02-16,42244,0.201178190615431,274,825,"54,998 total doses administered in the past day, up 1,099 from the day before. 
-42,244 have received the first dose, up 274 from the day before. 20.1% of the population has received first dose. 
-12,754 have received both doses, up 825 from the day before. 6.1% of the population is fully vaccinated."
+42,244 have received at least one dose, up 274 from the day before. 20.1% of the population has received at least one dose. 
+12,754 have been fully vaccinated, up 825 from the day before. 6.1% of the population has been fully vaccinated."
 "Champaign",57465,2467,1530,13710,"2/17/2021 12:00:00 AM",0.0652909997475986,2021-02-17,43755,0.20837401122948,1511,956,"57,465 total doses administered in the past day, up 2,467 from the day before. 
-43,755 have received the first dose, up 1,511 from the day before. 20.8% of the population has received first dose. 
-13,710 have received both doses, up 956 from the day before. 6.5% of the population is fully vaccinated."
+43,755 have received at least one dose, up 1,511 from the day before. 20.8% of the population has received at least one dose. 
+13,710 have been fully vaccinated, up 956 from the day before. 6.5% of the population has been fully vaccinated."
 "Champaign",59618,2153,1490,14786,"2/18/2021 12:00:00 AM",0.0704152240895692,2021-02-18,44832,0.213502997861732,1077,1076,"59,618 total doses administered in the past day, up 2,153 from the day before. 
-44,832 have received the first dose, up 1,077 from the day before. 21.4% of the population has received first dose. 
-14,786 have received both doses, up 1,076 from the day before. 7.0% of the population is fully vaccinated."
+44,832 have received at least one dose, up 1,077 from the day before. 21.4% of the population has received at least one dose. 
+14,786 have been fully vaccinated, up 1,076 from the day before. 7.0% of the population has been fully vaccinated."
 "Champaign",61740,2122,1477,15691,"2/19/2021 12:00:00 AM",0.07472509679355,2021-02-19,46049,0.219298705133273,1217,905,"61,740 total doses administered in the past day, up 2,122 from the day before. 
-46,049 have received the first dose, up 1,217 from the day before. 21.9% of the population has received first dose. 
-15,691 have received both doses, up 905 from the day before. 7.5% of the population is fully vaccinated."
+46,049 have received at least one dose, up 1,217 from the day before. 21.9% of the population has received at least one dose. 
+15,691 have been fully vaccinated, up 905 from the day before. 7.5% of the population has been fully vaccinated."
 "Champaign",61750,10,1297,15692,"2/20/2021 12:00:00 AM",0.0747298590838306,2021-02-20,46058,0.219341565745798,9,1,"61,750 total doses administered in the past day, up 10 from the day before. 
-46,058 have received the first dose, up 9 from the day before. 21.9% of the population has received first dose. 
-15,692 have received both doses, up 1 from the day before. 7.5% of the population is fully vaccinated."
+46,058 have received at least one dose, up 9 from the day before. 21.9% of the population has received at least one dose. 
+15,692 have been fully vaccinated, up 1 from the day before. 7.5% of the population has been fully vaccinated."
 "Champaign",63258,1508,1402,15771,"2/21/2021 12:00:00 AM",0.0751060800160013,2021-02-21,47487,0.226146878556836,1429,79,"63,258 total doses administered in the past day, up 1,508 from the day before. 
-47,487 have received the first dose, up 1,429 from the day before. 22.6% of the population has received first dose. 
-15,771 have received both doses, up 79 from the day before. 7.5% of the population is fully vaccinated."
+47,487 have received at least one dose, up 1,429 from the day before. 22.6% of the population has received at least one dose. 
+15,771 have been fully vaccinated, up 79 from the day before. 7.5% of the population has been fully vaccinated."
 "Champaign",64530,1272,1519,16539,"2/22/2021 12:00:00 AM",0.0787635189515342,2021-02-22,47991,0.228547072858279,504,768,"64,530 total doses administered in the past day, up 1,272 from the day before. 
-47,991 have received the first dose, up 504 from the day before. 22.9% of the population has received first dose. 
-16,539 have received both doses, up 768 from the day before. 7.9% of the population is fully vaccinated."
+47,991 have received at least one dose, up 504 from the day before. 22.9% of the population has received at least one dose. 
+16,539 have been fully vaccinated, up 768 from the day before. 7.9% of the population has been fully vaccinated."
 "Champaign",65289,759,1470,17056,"2/23/2021 12:00:00 AM",0.081225623026626,2021-02-23,48233,0.229699547106194,242,517,"65,289 total doses administered in the past day, up 759 from the day before. 
-48,233 have received the first dose, up 242 from the day before. 23.0% of the population has received first dose. 
-17,056 have received both doses, up 517 from the day before. 8.1% of the population is fully vaccinated."
+48,233 have received at least one dose, up 242 from the day before. 23.0% of the population has received at least one dose. 
+17,056 have been fully vaccinated, up 517 from the day before. 8.1% of the population has been fully vaccinated."
 "Champaign",68581,3292,1588,20135,"2/24/2021 12:00:00 AM",0.095888714800722,2021-02-24,48446,0.230713914935971,213,3079,"68,581 total doses administered in the past day, up 3,292 from the day before. 
-48,446 have received the first dose, up 213 from the day before. 23.1% of the population has received first dose. 
-20,135 have received both doses, up 3,079 from the day before. 9.6% of the population is fully vaccinated."
+48,446 have received at least one dose, up 213 from the day before. 23.1% of the population has received at least one dose. 
+20,135 have been fully vaccinated, up 3,079 from the day before. 9.6% of the population has been fully vaccinated."
 "Champaign",72204,3623,1798,23462,"2/25/2021 12:00:00 AM",0.111732854564417,2021-02-25,48742,0.232123552859041,296,3327,"72,204 total doses administered in the past day, up 3,623 from the day before. 
-48,742 have received the first dose, up 296 from the day before. 23.2% of the population has received first dose. 
-23,462 have received both doses, up 3,327 from the day before. 11.2% of the population is fully vaccinated."
+48,742 have received at least one dose, up 296 from the day before. 23.2% of the population has received at least one dose. 
+23,462 have been fully vaccinated, up 3,327 from the day before. 11.2% of the population has been fully vaccinated."
 "Champaign",75041,2837,1900,26192,"2/26/2021 12:00:00 AM",0.124733907030569,2021-02-26,48849,0.23263311791907,107,2730,"75,041 total doses administered in the past day, up 2,837 from the day before. 
-48,849 have received the first dose, up 107 from the day before. 23.3% of the population has received first dose. 
-26,192 have received both doses, up 2,730 from the day before. 12.5% of the population is fully vaccinated."
+48,849 have received at least one dose, up 107 from the day before. 23.3% of the population has received at least one dose. 
+26,192 have been fully vaccinated, up 2,730 from the day before. 12.5% of the population has been fully vaccinated."
 "Champaign",76681,1640,2133,27717,"2/27/2021 12:00:00 AM",0.131996399708548,2021-02-27,48964,0.233180781301343,115,1525,"76,681 total doses administered in the past day, up 1,640 from the day before. 
-48,964 have received the first dose, up 115 from the day before. 23.3% of the population has received first dose. 
-27,717 have received both doses, up 1,525 from the day before. 13.2% of the population is fully vaccinated."
+48,964 have received at least one dose, up 115 from the day before. 23.3% of the population has received at least one dose. 
+27,717 have been fully vaccinated, up 1,525 from the day before. 13.2% of the population has been fully vaccinated."
 "Champaign",78041,1360,2112,28942,"2/28/2021 12:00:00 AM",0.137830205302334,2021-02-28,49099,0.23382369048923,135,1225,"78,041 total doses administered in the past day, up 1,360 from the day before. 
-49,099 have received the first dose, up 135 from the day before. 23.4% of the population has received first dose. 
-28,942 have received both doses, up 1,225 from the day before. 13.8% of the population is fully vaccinated."
+49,099 have received at least one dose, up 135 from the day before. 23.4% of the population has received at least one dose. 
+28,942 have been fully vaccinated, up 1,225 from the day before. 13.8% of the population has been fully vaccinated."
 "Champaign",80079,2038,2221,30660,"3/1/2021 12:00:00 AM",0.146011820004477,2021-03-01,49419,0.235347623379035,320,1718,"80,079 total doses administered in the past day, up 2,038 from the day before. 
-49,419 have received the first dose, up 320 from the day before. 23.5% of the population has received first dose. 
-30,660 have received both doses, up 1,718 from the day before. 14.6% of the population is fully vaccinated."
+49,419 have received at least one dose, up 320 from the day before. 23.5% of the population has received at least one dose. 
+30,660 have been fully vaccinated, up 1,718 from the day before. 14.6% of the population has been fully vaccinated."
 "Champaign",82142,2063,2408,32192,"3/2/2021 12:00:00 AM",0.15330764871442,2021-03-02,49950,0.237876399518056,531,1532,"82,142 total doses administered in the past day, up 2,063 from the day before. 
-49,950 have received the first dose, up 531 from the day before. 23.8% of the population has received first dose. 
-32,192 have received both doses, up 1,532 from the day before. 15.3% of the population is fully vaccinated."
+49,950 have received at least one dose, up 531 from the day before. 23.8% of the population has received at least one dose. 
+32,192 have been fully vaccinated, up 1,532 from the day before. 15.3% of the population has been fully vaccinated."
 "Champaign",84000,1858,2203,33431,"3/3/2021 12:00:00 AM",0.159208126372135,2021-03-03,50569,0.240824257201773,619,1239,"84,000 total doses administered in the past day, up 1,858 from the day before. 
-50,569 have received the first dose, up 619 from the day before. 24.1% of the population has received first dose. 
-33,431 have received both doses, up 1,239 from the day before. 15.9% of the population is fully vaccinated."
+50,569 have received at least one dose, up 619 from the day before. 24.1% of the population has received at least one dose. 
+33,431 have been fully vaccinated, up 1,239 from the day before. 15.9% of the population has been fully vaccinated."
 "Champaign",86078,2078,1982,35246,"3/4/2021 12:00:00 AM",0.1678516832315,2021-03-04,50832,0.242076739545582,263,1815,"86,078 total doses administered in the past day, up 2,078 from the day before. 
-50,832 have received the first dose, up 263 from the day before. 24.2% of the population has received first dose. 
-35,246 have received both doses, up 1,815 from the day before. 16.8% of the population is fully vaccinated."
+50,832 have received at least one dose, up 263 from the day before. 24.2% of the population has received at least one dose. 
+35,246 have been fully vaccinated, up 1,815 from the day before. 16.8% of the population has been fully vaccinated."
 "Champaign",87418,1340,1768,36181,"3/5/2021 12:00:00 AM",0.1723044246439,2021-03-05,51237,0.244005467109242,405,935,"87,418 total doses administered in the past day, up 1,340 from the day before. 
-51,237 have received the first dose, up 405 from the day before. 24.4% of the population has received first dose. 
-36,181 have received both doses, up 935 from the day before. 17.2% of the population is fully vaccinated."
+51,237 have received at least one dose, up 405 from the day before. 24.4% of the population has received at least one dose. 
+36,181 have been fully vaccinated, up 935 from the day before. 17.2% of the population has been fully vaccinated."
 "Champaign",88746,1328,1724,37047,"3/6/2021 12:00:00 AM",0.176428568026936,2021-03-06,51699,0.246205645218899,462,866,"88,746 total doses administered in the past day, up 1,328 from the day before. 
-51,699 have received the first dose, up 462 from the day before. 24.6% of the population has received first dose. 
-37,047 have received both doses, up 866 from the day before. 17.6% of the population is fully vaccinated."
+51,699 have received at least one dose, up 462 from the day before. 24.6% of the population has received at least one dose. 
+37,047 have been fully vaccinated, up 866 from the day before. 17.6% of the population has been fully vaccinated."
 "Champaign",89076,330,1576,37310,"3/7/2021 12:00:00 AM",0.177681050370744,2021-03-07,51766,0.246524718667702,67,263,"89,076 total doses administered in the past day, up 330 from the day before. 
-51,766 have received the first dose, up 67 from the day before. 24.7% of the population has received first dose. 
-37,310 have received both doses, up 263 from the day before. 17.8% of the population is fully vaccinated."
+51,766 have received at least one dose, up 67 from the day before. 24.7% of the population has received at least one dose. 
+37,310 have been fully vaccinated, up 263 from the day before. 17.8% of the population has been fully vaccinated."
 "Champaign",89904,828,1404,37935,"3/8/2021 12:00:00 AM",0.180657481796145,2021-03-08,51969,0.247491463594672,203,625,"89,904 total doses administered in the past day, up 828 from the day before. 
-51,969 have received the first dose, up 203 from the day before. 24.7% of the population has received first dose. 
-37,935 have received both doses, up 625 from the day before. 18.1% of the population is fully vaccinated."
+51,969 have received at least one dose, up 203 from the day before. 24.7% of the population has received at least one dose. 
+37,935 have been fully vaccinated, up 625 from the day before. 18.1% of the population has been fully vaccinated."
 "Champaign",91147,1243,1286,38205,"3/9/2021 12:00:00 AM",0.181943300171919,2021-03-09,52942,0.252125172037736,973,270,"91,147 total doses administered in the past day, up 1,243 from the day before. 
-52,942 have received the first dose, up 973 from the day before. 25.2% of the population has received first dose. 
-38,205 have received both doses, up 270 from the day before. 18.2% of the population is fully vaccinated."
+52,942 have received at least one dose, up 973 from the day before. 25.2% of the population has received at least one dose. 
+38,205 have been fully vaccinated, up 270 from the day before. 18.2% of the population has been fully vaccinated."
 "Champaign",92683,1536,1240,39319,"3/10/2021 12:00:00 AM",0.187248491544554,2021-03-10,53364,0.254134858536167,422,1114,"92,683 total doses administered in the past day, up 1,536 from the day before. 
-53,364 have received the first dose, up 422 from the day before. 25.4% of the population has received first dose. 
-39,319 have received both doses, up 1,114 from the day before. 18.7% of the population is fully vaccinated."
+53,364 have received at least one dose, up 422 from the day before. 25.4% of the population has received at least one dose. 
+39,319 have been fully vaccinated, up 1,114 from the day before. 18.7% of the population has been fully vaccinated."
 "Champaign",92957,274,983,39420,"3/11/2021 12:00:00 AM",0.187729482862898,2021-03-11,53537,0.254958734754718,173,101,"92,957 total doses administered in the past day, up 274 from the day before. 
-53,537 have received the first dose, up 173 from the day before. 25.5% of the population has received first dose. 
-39,420 have received both doses, up 101 from the day before. 18.8% of the population is fully vaccinated."
+53,537 have received at least one dose, up 173 from the day before. 25.5% of the population has received at least one dose. 
+39,420 have been fully vaccinated, up 101 from the day before. 18.8% of the population has been fully vaccinated."
 "Champaign",93977,1020,937,40027,"3/12/2021 12:00:00 AM",0.190620193063248,2021-03-12,53950,0.256925560640623,413,607,"93,977 total doses administered in the past day, up 1,020 from the day before. 
-53,950 have received the first dose, up 413 from the day before. 25.7% of the population has received first dose. 
-40,027 have received both doses, up 607 from the day before. 19.1% of the population is fully vaccinated."
+53,950 have received at least one dose, up 413 from the day before. 25.7% of the population has received at least one dose. 
+40,027 have been fully vaccinated, up 607 from the day before. 19.1% of the population has been fully vaccinated."
 "Champaign",94579,602,833,40426,"3/13/2021 12:00:00 AM",0.192520346885224,2021-03-13,54153,0.257892305567594,203,399,"94,579 total doses administered in the past day, up 602 from the day before. 
-54,153 have received the first dose, up 203 from the day before. 25.8% of the population has received first dose. 
-40,426 have received both doses, up 399 from the day before. 19.3% of the population is fully vaccinated."
+54,153 have received at least one dose, up 203 from the day before. 25.8% of the population has received at least one dose. 
+40,426 have been fully vaccinated, up 399 from the day before. 19.3% of the population has been fully vaccinated."
 "Champaign",95573,994,928,41321,"3/14/2021 12:00:00 AM",0.196782596686398,2021-03-14,54252,0.258363772305377,99,895,"95,573 total doses administered in the past day, up 994 from the day before. 
-54,252 have received the first dose, up 99 from the day before. 25.8% of the population has received first dose. 
-41,321 have received both doses, up 895 from the day before. 19.7% of the population is fully vaccinated."
+54,252 have received at least one dose, up 99 from the day before. 25.8% of the population has received at least one dose. 
+41,321 have been fully vaccinated, up 895 from the day before. 19.7% of the population has been fully vaccinated."
 "Champaign",97215,1642,1044,42104,"3/15/2021 12:00:00 AM",0.200511469976141,2021-03-15,55111,0.262454579656448,859,783,"97,215 total doses administered in the past day, up 1,642 from the day before. 
-55,111 have received the first dose, up 859 from the day before. 26.2% of the population has received first dose. 
-42,104 have received both doses, up 783 from the day before. 20.1% of the population is fully vaccinated."
+55,111 have received at least one dose, up 859 from the day before. 26.2% of the population has received at least one dose. 
+42,104 have been fully vaccinated, up 783 from the day before. 20.1% of the population has been fully vaccinated."
 "Champaign",98771,1556,1089,43336,"3/16/2021 12:00:00 AM",0.206378611601892,2021-03-16,55435,0.263997561707376,324,1232,"98,771 total doses administered in the past day, up 1,556 from the day before. 
-55,435 have received the first dose, up 324 from the day before. 26.4% of the population has received first dose. 
-43,336 have received both doses, up 1,232 from the day before. 20.6% of the population is fully vaccinated."
+55,435 have received at least one dose, up 324 from the day before. 26.4% of the population has received at least one dose. 
+43,336 have been fully vaccinated, up 1,232 from the day before. 20.6% of the population has been fully vaccinated."
 "Champaign",100192,1421,1073,44060,"3/17/2021 12:00:00 AM",0.209826509765076,2021-03-17,56132,0.267316878032984,697,724,"100,192 total doses administered in the past day, up 1,421 from the day before. 
-56,132 have received the first dose, up 697 from the day before. 26.7% of the population has received first dose. 
-44,060 have received both doses, up 724 from the day before. 21.0% of the population is fully vaccinated."
+56,132 have received at least one dose, up 697 from the day before. 26.7% of the population has received at least one dose. 
+44,060 have been fully vaccinated, up 724 from the day before. 21.0% of the population has been fully vaccinated."
 "Champaign",102627,2435,1381,44848,"3/18/2021 12:00:00 AM",0.213579194506222,2021-03-18,57779,0.275160370125201,1647,788,"102,627 total doses administered in the past day, up 2,435 from the day before. 
-57,779 have received the first dose, up 1,647 from the day before. 27.5% of the population has received first dose. 
-44,848 have received both doses, up 788 from the day before. 21.4% of the population is fully vaccinated."
+57,779 have received at least one dose, up 1,647 from the day before. 27.5% of the population has received at least one dose. 
+44,848 have been fully vaccinated, up 788 from the day before. 21.4% of the population has been fully vaccinated."
 "Champaign",105086,2459,1587,45696,"3/19/2021 12:00:00 AM",0.217617616664206,2021-03-19,59390,0.282832419767314,1611,848,"105,086 total doses administered in the past day, up 2,459 from the day before. 
-59,390 have received the first dose, up 1,611 from the day before. 28.3% of the population has received first dose. 
-45,696 have received both doses, up 848 from the day before. 21.8% of the population is fully vaccinated."
+59,390 have received at least one dose, up 1,611 from the day before. 28.3% of the population has received at least one dose. 
+45,696 have been fully vaccinated, up 848 from the day before. 21.8% of the population has been fully vaccinated."
+"Champaign",105851,765,1610,46008,"3/20/2021 12:00:00 AM",0.219103451231766,2021-03-20,59843,0.284989737264445,453,312,"105,851 total doses administered in the past day, up 765 from the day before. 
+59,843 have received at least one dose, up 453 from the day before. 28.5% of the population has received at least one dose. 
+46,008 have been fully vaccinated, up 312 from the day before. 21.9% of the population has been fully vaccinated."
