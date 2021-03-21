@@ -21,19 +21,19 @@ idph_vax_champaign <- rio::import("https://idph.illinois.gov/DPHPublicInformatio
                       comma(AdministeredCountChange, accuracy = 1), 
                       " from the day before. \n",
                       comma(PersonsDose1, accuracy = 1),
-                      " have received the first dose, up ",
+                      " have received at least one dose, up ",
                       comma(Dose1Change, accuracy = 1),
                       " from the day before. ",
                       percent(PercentDose1,
                               accuracy = .1),
-                      " of the population has received first dose. \n",
+                      " of the population has received at least one dose. \n",
                       comma(PersonsFullyVaccinated, accuracy = 1),
-                      " have received both doses, up ",
+                      " have been fully vaccinated, up ",
                       comma(Dose2Change, accuracy = 1),
                       " from the day before. ",
                       percent(PctVaccinatedPopulation,
                               accuracy = .1),
-                      " of the population is fully vaccinated.",
+                      " of the population has been fully vaccinated.",
                       sep = ""))
 
 write.csv(idph_vax_champaign,"idph/vax_champaign.csv", row.names = FALSE)
@@ -186,7 +186,7 @@ full_vax <- projected %>%
   filter(PercentDose1 >.99) %>%
   tail(1)
 
-write_clip(paste("In the past week, an average of ",comma(avgdose1change)," new Champaign County residents received their first dose of the two-dose COVID-19 vaccines each day.\n\nIf that pace continued, half of Champaign County residents could be partially vaccinated by ",month(half_vax$Date, label = TRUE, abbr = FALSE)," ",mday(half_vax$Date),", and the entire county would be partially vaccinated around ",month(full_vax$Date, label = TRUE, abbr = FALSE)," ",mday(full_vax$Date),".\n\nOf course, the pace is expected to vary as more vaccines are approved, shipments vary, people hesitate and eligibility expands.\n\nAlready, ",percent(current_vax$PercentDose1)," of Champaign County residents have been partially vaccinated, according to the Illinois Department of Public Health.\n\nBy comparison, half the country is expected to receive its first COVID-19 dose around xx, according to The New York Times. https://www.nytimes.com/interactive/2020/us/covid-19-vaccine-doses.html",sep="")) # paste text to clipboard
+#write_clip(paste("In the past week, an average of ",comma(avgdose1change)," new Champaign County residents received their first dose of the two-dose COVID-19 vaccines each day.\n\nIf that pace continued, half of Champaign County residents could be partially vaccinated by ",month(half_vax$Date, label = TRUE, abbr = FALSE)," ",mday(half_vax$Date),", and the entire county would be partially vaccinated around ",month(full_vax$Date, label = TRUE, abbr = FALSE)," ",mday(full_vax$Date),".\n\nOf course, the pace is expected to vary as more vaccines are approved, shipments vary, people hesitate and eligibility expands.\n\nAlready, ",percent(current_vax$PercentDose1)," of Champaign County residents have been partially vaccinated, according to the Illinois Department of Public Health.\n\nBy comparison, half the country is expected to receive its first COVID-19 dose around xx, according to The New York Times. https://www.nytimes.com/interactive/2020/us/covid-19-vaccine-doses.html",sep="")) # paste text to clipboard
 
 # first dose projection plot ----
 ggplot(idph_vax_champaign, aes(x = as.Date(Date),
