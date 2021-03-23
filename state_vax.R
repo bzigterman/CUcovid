@@ -5,6 +5,7 @@ library(googlesheets4)
 library(scales)
 library(zoo)
 library(clipr)
+library(patchwork)
 
 # import and clean data ----
 illinoispop <- 12741080
@@ -23,8 +24,8 @@ pivoted_vax_IL <- vax_IL %>%
   select(Date, Dose1Change, Dose2Change) %>%
   pivot_longer(!Date, names_to = "Dose", values_to = "doses")
 
-# chart of new doses
-ggplot(pivoted_vax_IL, 
+# chart of new doses ----
+ILNewVaccines <- ggplot(pivoted_vax_IL, 
        aes(x = as.Date(Date), y = doses)) +
   geom_col(aes(fill = Dose)) +
   geom_line(data = vax_IL,
@@ -54,6 +55,7 @@ ggplot(pivoted_vax_IL,
         legend.background = element_blank(),
         legend.key = element_blank(),
         legend.text = element_text(size = 13)) 
+ILNewVaccines
 
 ggsave("vax/ILNewVaccines.png", width = 8, height = 8*(628/1200), dpi = 320)
 ggsave("ILNewVaccinesWeb.png", 
@@ -61,7 +63,7 @@ ggsave("ILNewVaccinesWeb.png",
        width = 8, height = 8*(628/1200), dpi = 150)
 
 # first and second dose comparison chart ----
-ggplot(vax_IL, aes(x = as.Date(Date)))  +
+ILvax <- ggplot(vax_IL, aes(x = as.Date(Date)))  +
   geom_area(aes(y = PercentDose1),
             fill = "#d8cee8",
             alpha = 1) +
@@ -101,8 +103,13 @@ ggplot(vax_IL, aes(x = as.Date(Date)))  +
         panel.background = element_blank(),
         plot.caption = element_text(colour = "grey40"),
         plot.title = element_text(size = 22, family = "Oswald")) 
+ILvax
 
 ggsave("vax/ILvax.png", width = 8, height = 8*(628/1200), dpi = 320)
 ggsave("ILVaccinesWeb.png", 
        path = "../bzigterman.github.io/images/",
        width = 8, height = 8*(628/1200), dpi = 150)
+
+# combined chart ----
+ILNewVaccines + ILvax
+ggsave("vax/combinedILvax.png", width = 8, height = 8*(628/1200), dpi = 320)
