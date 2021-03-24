@@ -72,19 +72,21 @@ ILvax <- ggplot(vax_IL, aes(x = as.Date(Date)))  +
             fill = "#674EA7",
             alpha = 1) +
   annotate("text",
-           x = as.Date("2021-02-15"),
-           y = .07,
+           x = as.Date("2021-03-04"),
+           y = .13,
            label = "At least \none dose",
            colour = "black",
            family = "Barlow",
-           size = 6) +
+           size = 6,
+           angle = 20) +
   annotate("text",
            x = as.Date("2021-03-12"),
            y = .05,
            label = "Fully \nvaccinated",
            colour = "white",
            family = "Barlow",
-           size = 6) +
+           size = 6,
+           angle = 20) +
   xlab(NULL) +
   ylab(NULL) +
   scale_y_continuous(labels = label_percent(accuracy = .1), 
