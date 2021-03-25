@@ -410,16 +410,16 @@ ggplot(last_vax_nearby, aes(y = reorder(CountyName,
                           CountyName != topcounty),
             aes(x = PercentDose1,
                 label = percent(PercentDose1, .1)),
-            hjust = -.25,
-            size = 4.5,
+            hjust = -.2,
+            size = 3.5,
             family = "Barlow") +
   geom_text(data = filter(last_vax_nearby, # label for top county, dose1
                           CountyName == topcounty),
             aes(x = PercentDose1,
                 label = paste(percent(PercentDose1, .1),
                               "has received at least one dose")),
-            hjust = -0.05,
-            size = 4.5,
+            hjust = -0.04,
+            size = 3.5,
             family = "Barlow") +
   geom_text(data = filter(last_vax_nearby, # label for all but top county, dose2
                           CountyName != topcounty),
@@ -476,45 +476,45 @@ ggplot(last_vax_nearby, aes(y = reorder(CountyName,
                    yend = CountyName),
                xend = 0, 
                colour = "#d8cee8",
-               size = 9, # was 2
+               size = 8, # was 2
                #alpha = .3
   ) +
   geom_segment(aes(x = PctVaccinatedPopulation, # first line segment to dose2
                    yend = CountyName), 
                xend = 0, 
                colour = "#674EA7",
-               size = 9) + # was 3.6 +
+               size = 8) + # was 3.6 +
   geom_text(data = filter(last_vax_nearby, # label for all but top county dose1
                           CountyName != topcounty),
             aes(x = PercentDose1,
-                label = percent(PercentDose1, .1)),
+                label = percent(PercentDose1, 1)),
             hjust = -.1,
-            size = 4.5,
+            size = 3.5,
             family = "Barlow") +
   geom_text(data = filter(last_vax_nearby, # label for top county, dose1
                           CountyName == topcounty),
             aes(x = PercentDose1,
-                label = paste(percent(PercentDose1, .1),
-                              "partially vaccinated")),
+                label = paste(percent(PercentDose1, 1),
+                              "has received at least one dose")),
             hjust = -0.03,
-            size = 4.5,
+            size = 3.5,
             family = "Barlow") +
   geom_text(data = filter(last_vax_nearby, # label for all but top county, dose2
                           CountyName != topcounty),
-            aes(x = PctVaccinatedPopulation,
-                label = percent(PctVaccinatedPopulation, .1)),
-            hjust = 1.1,
+            aes(x = PctVaccinatedPopulation/2,
+                label = percent(PctVaccinatedPopulation, 1)),
+            #hjust = 1.1,
             #vjust = -.9,
             size = 3.5,
             colour = "white",
             family = "Barlow") +
   geom_text(data = filter(last_vax_nearby, # label for top county, dose2
                           CountyName == topcounty),
-            aes(x = PctVaccinatedPopulation,
+            aes(x = PctVaccinatedPopulation/2,
                 label = paste("Fully vaccinated:",
-                              percent(PctVaccinatedPopulation, .1)
+                              percent(PctVaccinatedPopulation, 1)
                               )),
-            hjust = 1.01,
+            #hjust = 1.01,
             #vjust = -.9,
             size = 3.5,
             colour = "white",
