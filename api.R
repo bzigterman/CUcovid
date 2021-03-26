@@ -15,6 +15,12 @@ path <- "api/COVIDExport/GetCountyRates"
 
 counties_current <- GET("https://idph.illinois.gov/DPHPublicInformation/api/COVIDExport/GetCountyTestResults")
 
+counties_vax <- GET("https://idph.illinois.gov/DPHPublicInformation/api/COVIDVaccine/getVaccineAdministrationCurrent")
+counties_vax <- fromJSON(content(counties_vax, "text"))
+counties_vax <- counties_vax$VaccineAdministration
+counties_vax
+write.csv(counties_vax,"vax/current_counties_vax.csv", row.names = FALSE)
+
 content(counties_current)
 # GET(url, path = "api/COVID/GetHospitalizationResults")
 # GET("https://idph.illinois.gov/DPHPublicInformation/api/COVID/GetHospitalizationResults")

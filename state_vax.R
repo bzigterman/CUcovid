@@ -20,6 +20,14 @@ vax_IL <- rio::import("https://idph.illinois.gov/DPHPublicInformation/api/COVIDE
 
 write.csv(vax_IL,"idph/vax_IL.csv", row.names = FALSE)
 
+counties_vax <- GET("https://idph.illinois.gov/DPHPublicInformation/api/COVIDVaccine/getVaccineAdministrationCurrent")
+counties_vax <- fromJSON(content(counties_vax, "text"))
+counties_vax <- counties_vax$VaccineAdministration
+counties_vax <- counties_vax %>%
+  select(CountyName, PctVaccinatedPopulation)
+write.csv(counties_vax,"vax/current_counties_vax.csv", row.names = FALSE)
+
+
 pivoted_vax_IL <- vax_IL %>%
   select(Date, Dose1Change, Dose2Change) %>%
   pivot_longer(!Date, names_to = "Dose", values_to = "doses")
