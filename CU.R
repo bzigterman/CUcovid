@@ -16,7 +16,12 @@ CUcovid <- read_sheet("1UUGDwV5qahPos-bhWUfzf4Y1WYXEh-I0JBOJaoGMrJs",
                                        fill = NA, align = "right")) %>%
   mutate(avgnewdead = rollmean(New_Deceased, k = 7, 
                                fill = NA, align = "right")) %>%
-  mutate(weeklydead = avgnewdead * 7)
+  mutate(weeklydead = avgnewdead * 7) %>%
+  mutate(biweeklydead = rollmean(New_Deceased, k = 14, 
+                               fill = NA, align = "right")*14) %>%
+  mutate(monthlydead = rollmean(New_Deceased, k = 31, 
+                                 fill = NA, align = "right")*31) 
+  
 write.csv(CUcovid,"data/CUcovid.csv", row.names = FALSE)
 CUcovidactive <- CUcovid %>%
   select(Date, Hospitalized, Not_hospitalized) %>%
