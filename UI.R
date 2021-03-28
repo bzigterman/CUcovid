@@ -21,7 +21,7 @@ ggplot(uicovid, aes(x = as.Date(Date), y = New_Cases)) +
            alpha = .25) +
   geom_line(aes(y = avgnewcases),
             colour = "#B45F06",
-            size = 1.5) +
+            size = 1) +
   xlab(NULL) +
   ylab(NULL) +
   scale_y_continuous(labels = comma, 
@@ -49,7 +49,7 @@ ggplot(uicovid, aes(x = as.Date(Date), y = New_Tests)) +
            alpha = .25) +
   geom_line(aes(y = avgnewtests),
             colour = "#1C4587",
-            size = 1.5) +
+            size = 1) +
   xlab(NULL) +
   ylab(NULL) +
   scale_y_continuous(labels = comma, 
@@ -77,7 +77,7 @@ ggplot(uicovid, aes(x = as.Date(Date), y = positivity)) +
              alpha = .25) +
   geom_line(aes(y = Week_avg_pos),
             colour = "#1C4587",
-            size = 1.5) +
+            size = 1) +
   xlab(NULL) +
   ylab(NULL) +
   scale_y_continuous(labels = percent, 
@@ -130,7 +130,7 @@ semcomparenew <- ggplot(uicovid, aes(x = Semester_day/7, y = New_Cases, colour =
            fill = "white") +
   geom_point(alpha = .25) +
   geom_line(aes(y = avgnewcases),
-            size = 1.5) +
+            size = 1) +
   xlab("Weeks into Semester") +
   ylab(NULL) +
   scale_y_continuous(labels = comma, 
@@ -170,7 +170,7 @@ semcomparetotal <- ggplot(uicovid,
                               colour = Semester)) +
   annotate("rect", xmin = -Inf, xmax = 0, ymin = 0, ymax = Inf,
            fill = "white") +
-  geom_line(size = 1.5) +
+  geom_line(size = 1) +
 #  geom_line(aes(y = rollmean(Total_cases, 7, fill = TRUE, align = "right")),
  #           size = 1.5) +
   xlab("Weeks into Semester") +
