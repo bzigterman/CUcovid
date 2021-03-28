@@ -81,7 +81,7 @@ ggplot(pivoted_vax_champaign,
 ggsave("vax/NewVaccines.png", width = 8, height = 8*(628/1200), dpi = 320)
 ggsave("NewVaccinesWeb.png", 
        path = "../bzigterman.github.io/images/",
-       width = 8, height = 8*(628/1200), dpi = 150)
+       width = 8, height = 8*(628/1200), dpi = 320)
 
 # first and second dose comparison chart ----
 ggplot(idph_vax_champaign, aes(x = as.Date(Date)))  +
@@ -160,7 +160,7 @@ xlab(NULL) +
 ggsave("vax/chamvax.png", width = 8, height = 8*(628/1200), dpi = 320)
 ggsave("VaccinesWeb.png", 
        path = "../bzigterman.github.io/images/",
-       width = 8, height = 8*(628/1200), dpi = 150)
+       width = 8, height = 8*(628/1200), dpi = 320)
 
 # first dose projection ----
 avgdose1change <- mean(tail(idph_vax_champaign$Dose1Change,7), na.rm = TRUE)
@@ -273,7 +273,7 @@ ggplot(idph_vax_champaign, aes(x = as.Date(Date),
 ggsave("vax/VaccineProjection.png", width = 8, height = 8*(628/1200), dpi = 320)
 ggsave("VaccineProjection.png", 
        path = "../bzigterman.github.io/images/",
-       width = 8, height = 8*(628/1200), dpi = 150)
+       width = 8, height = 8*(628/1200), dpi = 320)
 
 # fully vaccinated projection ----
 
@@ -387,7 +387,7 @@ ggplot(idph_vax_champaign, aes(x = as.Date(Date),
 ggsave("vax/FullVaccineProjection.png", width = 8, height = 8*(628/1200), dpi = 320)
 ggsave("FullVaccineProjection.png",
        path = "../bzigterman.github.io/images/",
-       width = 8, height = 8*(628/1200), dpi = 150)
+       width = 8, height = 8*(628/1200), dpi = 320)
 
 
 # chart combining vaccines and cases ----
@@ -459,7 +459,7 @@ ggplot(filter(cases_and_vax, Date > as.Date("2020-12-15")),
 ggsave("vax/vaccinefacets.png", width = 8, height = 4.5, dpi = 320)
 ggsave("vaccinefacets.png", 
        path = "../bzigterman.github.io/images/",
-       width = 8, height = 4.5, dpi = 150)
+       width = 8, height = 4.5, dpi = 320)
 
 
 # todo ----

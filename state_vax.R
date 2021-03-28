@@ -69,7 +69,7 @@ ILNewVaccines
 ggsave("vax/ILNewVaccines.png", width = 8, height = 8*(628/1200), dpi = 320)
 ggsave("ILNewVaccinesWeb.png", 
        path = "../bzigterman.github.io/images/",
-       width = 8, height = 8*(628/1200), dpi = 150)
+       width = 8, height = 8*(628/1200), dpi = 320)
 
 # first and second dose comparison chart ----
 ILvax <- ggplot(vax_IL, aes(x = as.Date(Date)))  +
@@ -119,7 +119,7 @@ ILvax
 ggsave("vax/ILvax.png", width = 8, height = 8*(628/1200), dpi = 320)
 ggsave("ILVaccinesWeb.png", 
        path = "../bzigterman.github.io/images/",
-       width = 8, height = 8*(628/1200), dpi = 150)
+       width = 8, height = 8*(628/1200), dpi = 320)
 
 # combined chart ----
 ILNewVaccines + ILvax
