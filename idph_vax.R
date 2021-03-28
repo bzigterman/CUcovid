@@ -2,8 +2,6 @@ library(rio)
 library(tidyverse)
 library(lubridate)
 library(googlesheets4)
-#library(dplyr)
-#library(ggplot2)
 library(scales)
 library(zoo)
 library(clipr)
@@ -52,7 +50,7 @@ ggplot(pivoted_vax_champaign,
   geom_line(data = idph_vax_champaign,
             aes(y = AdministeredCountRollAvg),
             colour = "black",
-            size = 1.4) +
+            size = 1) +
   xlab(NULL) +
   ylab(NULL) +
   scale_y_continuous(labels = comma, 
