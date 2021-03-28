@@ -39,7 +39,7 @@ ILNewVaccines <- ggplot(pivoted_vax_IL,
   geom_line(data = vax_IL,
             aes(y = AdministeredCountRollAvg),
             colour = "black",
-            size = 1.4) +
+            size = 1) +
   xlab(NULL) +
   ylab(NULL) +
   scale_y_continuous(labels = comma, 
