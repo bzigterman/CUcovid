@@ -33,7 +33,7 @@ ggplot(CUcovid, aes(x = as.Date(Date), y = New_cases)) +
            alpha = .25) +
   geom_line(aes(y = avgnewcases),
             colour = "#B45F06",
-            size = 1.5) +
+            size = 1) +
   xlab(NULL) +
   ylab(NULL) +
   scale_y_continuous(labels = comma, 
@@ -62,7 +62,7 @@ ggplot(CUcovid, aes(x = as.Date(Date), y = New_tests)) +
            alpha = .25) +
   geom_line(aes(y = avgnewtests),
             colour = "#1C4587",
-            size = 1.5) +
+            size = 1) +
   xlab(NULL) +
   ylab(NULL) +
   scale_y_continuous(labels = comma, 
@@ -121,7 +121,7 @@ ggplot(filter(CUcovid, Hospitalized != is.null(TRUE)),
            alpha = .25) +
   geom_line(aes(y = avgnewhospitalized),
             colour = "#ff5f1a",
-            size = 1.5) +
+            size = 1) +
   xlab(NULL) +
   ylab(NULL) +
   scale_y_continuous(labels = comma, 
@@ -149,7 +149,7 @@ ggplot(filter(CUcovid, Quarantined != is.null(TRUE)),
            alpha = .25) +
   geom_line(aes(y = Quarantined),
             colour = "#009e89",
-            size = 1.5) +
+            size = 1) +
   xlab(NULL) +
   ylab(NULL) +
   scale_y_continuous(labels = comma, 
@@ -175,7 +175,7 @@ ggplot(CUcovid,
            alpha = .25) +
   geom_line(aes(y = avgnewdead),
             colour = "#d90000",
-            size = 1.5) +
+            size = 1) +
   xlab(NULL) +
   ylab(NULL) +
   scale_y_continuous(position = "right",
