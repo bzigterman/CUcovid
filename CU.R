@@ -153,9 +153,13 @@ ggsave("CUhospitalizedWeb.png",
 # quarantined ----
 ggplot(filter(CUcovid, Quarantined != is.null(TRUE)), 
        aes(x = as.Date(Date), y = Quarantined)) +
-  geom_col(fill = "#009e89",
-           alpha = .25) +
-  geom_line(aes(y = Quarantined),
+  # geom_col(fill = "#009e89",
+  #          alpha = .25) +
+  # geom_line(aes(y = Quarantined),
+  #           colour = "#009e89",
+  #           size = 1) +
+  geom_area(fill = "#009e89",
+            alpha = .25,
             colour = "#009e89",
             size = 1) +
   xlab(NULL) +
