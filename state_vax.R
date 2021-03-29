@@ -7,7 +7,7 @@ library(zoo)
 library(clipr)
 library(patchwork)
 
-# import and clean data ----
+# import and clean vaccine data ----
 illinoispop <- 12741080
 
 vax_IL <- rio::import("https://idph.illinois.gov/DPHPublicInformation/api/COVIDExport/GetVaccineAdministration?format=csv&countyName=Illinois",
@@ -121,6 +121,77 @@ ggsave("ILVaccinesWeb.png",
        path = "../bzigterman.github.io/images/",
        width = 8, height = 8*(628/1200), dpi = 320)
 
-# combined chart ----
-ILNewVaccines + ILvax
-ggsave("vax/combinedILvax.png", width = 8, height = 8*(628/1200), dpi = 320)
+# import state case data ----
+
+idph_cases_IL <- rio::import("https://idph.illinois.gov/DPHPublicInformation/api/COVID/GetCountyHistorical?countyName=Illinois",
+                                    format = "json") 
+idph_cases_IL <- idph_cases_IL$values %>%
+  mutate(population = illinoispop)  %>%
+  mutate(new_cases = confirmed_cases - lag(confirmed_cases)) %>%
+  mutate(new_deaths = deaths - lag(deaths)) %>%
+  mutate(avg_new_cases = rollmean(new_cases, k = 7, 
+                                  fill = NA, align = "right")) %>%
+  mutate(avg_new_deaths = rollmean(new_deaths, k = 7, 
+                                   fill = NA, align = "right")) %>%
+  mutate(Date = ymd_hms(reportDate))
+
+# state new cases ----
+ggplot(idph_cases_IL, aes(x = as.Date(Date), y = new_cases)) +
+  geom_col(fill = "#B45F06",
+           alpha = .25) +
+  geom_line(aes(y = avg_new_cases),
+            colour = "#B45F06",
+            size = 1) +
+  xlab(NULL) +
+  ylab(NULL) +
+  scale_y_continuous(labels = comma, 
+                     position = "right",
+                     expand = expansion(mult = c(0,.05))) +
+  scale_x_date(expand = c(0,0)) +
+  guides(fill = FALSE) +
+  labs(title = "New Cases in Illinois",
+       subtitle =  "With seven-day moving average",
+       caption = "Source: Illinois Department of Public Health")+
+  theme(text = element_text(family = "Barlow"),
+        axis.text.y = element_text(size = 13),
+        axis.text.x = element_text(size = 13),
+        panel.background = element_blank(),
+        panel.grid.major.y = element_line(colour = "grey93"),
+        plot.caption = element_text(colour = "grey40"),
+        plot.title = element_text(size = 22, family = "Oswald")) 
+
+ggsave("vax/IL_new_cases.png", width = 8, height = 8*(628/1200), dpi = 320)
+ggsave("IL_new_cases.png", 
+       path = "../bzigterman.github.io/images/",
+       width = 8, height = 8*(628/1200), dpi = 320)
+
+# state new deaths ----
+ggplot(idph_cases_IL, aes(x = as.Date(Date), y = new_deaths)) +
+  geom_col(fill = "#d90000",
+           alpha = .25) +
+  geom_line(aes(y = avg_new_deaths),
+            colour = "#d90000",
+            size = 1) +
+  xlab(NULL) +
+  ylab(NULL) +
+  scale_y_continuous(labels = comma, 
+                     position = "right",
+                     expand = expansion(mult = c(0,.05))) +
+  scale_x_date(expand = c(0,0)) +
+  guides(fill = FALSE) +
+  labs(title = "New Deaths in Illinois",
+       subtitle =  "With seven-day moving average",
+       caption = "Source: Illinois Department of Public Health")+
+  theme(text = element_text(family = "Barlow"),
+        axis.text.y = element_text(size = 13),
+        axis.text.x = element_text(size = 13),
+        panel.background = element_blank(),
+        panel.grid.major.y = element_line(colour = "grey93"),
+        plot.caption = element_text(colour = "grey40"),
+        plot.title = element_text(size = 22, family = "Oswald")) 
+
+ggsave("vax/IL_new_deaths.png", width = 8, height = 8*(628/1200), dpi = 320)
+ggsave("IL_new_deaths.png", 
+       path = "../bzigterman.github.io/images/",
+       width = 8, height = 8*(628/1200), dpi = 320)
+
