@@ -51,6 +51,8 @@ ggplot(idph_region6, aes(x = as.Date(Date), y = COVIDHospitalBedsInUse)) +
   theme(text = element_text(family = "Barlow"),
         axis.text.y = element_text(size = 13),
         axis.text.x = element_text(size = 13),
+        panel.background = element_blank(),
+        panel.grid.major.y = element_line(colour = "grey93"),
         plot.caption = element_text(colour = "grey40"),
         plot.title = element_text(size = 22, family = "Oswald")) 
 
@@ -80,6 +82,8 @@ ggplot(idph_region6, aes(x = as.Date(Date), y = CLIAdmissions_RollingAvg)) +
   theme(text = element_text(family = "Barlow"),
         axis.text.y = element_text(size = 13),
         axis.text.x = element_text(size = 13),
+        panel.background = element_blank(),
+        panel.grid.major.y = element_line(colour = "grey93"),
         plot.caption = element_text(colour = "grey40"),
         plot.title = element_text(size = 22, family = "Oswald")) 
 ggsave("region/region6newhospital.png", 
@@ -108,6 +112,8 @@ ggplot(idph_region6, aes(x = as.Date(Date), y = PositiveTests)) +
   theme(text = element_text(family = "Barlow"),
         axis.text.y = element_text(size = 13),
         axis.text.x = element_text(size = 13),
+        panel.background = element_blank(),
+        panel.grid.major.y = element_line(colour = "grey93"),
         plot.caption = element_text(colour = "grey40"),
         plot.title = element_text(size = 22, family = "Oswald")) 
 ggsave("region/region6newcases.png", 

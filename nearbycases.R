@@ -175,7 +175,7 @@ ggplot(idph_cases_nearby, aes(x = as.Date(Date), y = new_case_rate,
                   aes(label = CountyName),
                   nudge_x = 800,
                   #segment.curvature = .1,
-                  segment.color = 'grey70',
+                  segment.color = 'grey',
                   segment.inflect = TRUE,
                   #segment.ncp = 3,
                   #segment.angle = 179,
@@ -186,7 +186,7 @@ ggplot(idph_cases_nearby, aes(x = as.Date(Date), y = new_case_rate,
                   family = "Barlow",
                   size = 4.6)+
   scale_y_continuous(labels = comma, 
-                     position = "right",
+                     #position = "right",
                      expand = expansion(mult = c(0,.05))) +
   scale_x_date(expand = expansion(mult = c(0,.3))) +
   xlab(NULL) +
@@ -199,6 +199,8 @@ ggplot(idph_cases_nearby, aes(x = as.Date(Date), y = new_case_rate,
         axis.text.y = element_text(size = 13),
         axis.text.x = element_text(size = 13),
         legend.position = "none",
+        panel.background = element_blank(),
+        panel.grid.major.y = element_line(colour = "grey93"),
         plot.caption = element_text(colour = "grey40"),
         plot.title = element_text(size = 22, family = "Oswald")) 
 ggsave("region/nearbycases.png", width = 8, height = 8*(628/1200), dpi = 320)
