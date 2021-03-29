@@ -482,14 +482,14 @@ ggplot(last_vax_nearby, aes(y = reorder(CountyName,
                    yend = CountyName),
                xend = 0, 
                colour = "#d8cee8",
-               size = 7.5, # was 2
+               size = 7.7, # was 2
                #alpha = .3
   ) +
   geom_segment(aes(x = PctVaccinatedPopulation, # first line segment to dose2
                    yend = CountyName), 
                xend = 0, 
                colour = "#674EA7",
-               size = 7.5) + # was 3.6 +
+               size = 7.7) + # was 3.6 +
   geom_text(data = filter(last_vax_nearby, # label for all but top county dose1
                           CountyName != topcounty),
             aes(x = PercentDose1,
@@ -502,25 +502,25 @@ ggplot(last_vax_nearby, aes(y = reorder(CountyName,
             aes(x = PercentDose1,
                 label = paste(percent(PercentDose1, .1),
                               "has received at least one dose")),
-            hjust = -0.03,
+            hjust = -0.02,
             size = 3.5,
             family = "Barlow") +
   geom_text(data = filter(last_vax_nearby, # label for all but top county, dose2
                           CountyName != topcounty),
-            aes(x = PctVaccinatedPopulation/2,
+            aes(x = PctVaccinatedPopulation,
                 label = percent(PctVaccinatedPopulation, .1)),
-            #hjust = 1.1,
+            hjust = 1.1,
             #vjust = -.9,
             size = 3.5,
             colour = "white",
             family = "Barlow") +
   geom_text(data = filter(last_vax_nearby, # label for top county, dose2
                           CountyName == topcounty),
-            aes(x = PctVaccinatedPopulation/2,
+            aes(x = PctVaccinatedPopulation,
                 label = paste("Fully vaccinated:",
                               percent(PctVaccinatedPopulation, .1)
                               )),
-            #hjust = 1.01,
+            hjust = 1.02,
             #vjust = -.9,
             size = 3.5,
             colour = "white",
