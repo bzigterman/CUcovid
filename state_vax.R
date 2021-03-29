@@ -160,7 +160,7 @@ ggplot(idph_cases_IL, aes(x = as.Date(Date), y = new_cases)) +
         plot.caption = element_text(colour = "grey40"),
         plot.title = element_text(size = 22, family = "Oswald")) 
 
-ggsave("vax/IL_new_cases.png", width = 8, height = 8*(628/1200), dpi = 320)
+ggsave("region/IL_new_cases.png", width = 8, height = 8*(628/1200), dpi = 320)
 ggsave("IL_new_cases.png", 
        path = "../bzigterman.github.io/images/",
        width = 8, height = 8*(628/1200), dpi = 320)
@@ -190,7 +190,7 @@ ggplot(idph_cases_IL, aes(x = as.Date(Date), y = new_deaths)) +
         plot.caption = element_text(colour = "grey40"),
         plot.title = element_text(size = 22, family = "Oswald")) 
 
-ggsave("vax/IL_new_deaths.png", width = 8, height = 8*(628/1200), dpi = 320)
+ggsave("region/IL_new_deaths.png", width = 8, height = 8*(628/1200), dpi = 320)
 ggsave("IL_new_deaths.png", 
        path = "../bzigterman.github.io/images/",
        width = 8, height = 8*(628/1200), dpi = 320)
