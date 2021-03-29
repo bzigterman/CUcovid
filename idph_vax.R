@@ -448,6 +448,8 @@ ggplot(filter(cases_and_vax, Date > as.Date("2020-12-15")),
         #axis.line.x = element_line(colour = "grey"),
         #axis.ticks = 
         panel.grid.minor = element_blank(),
+        panel.background = element_blank(),
+        panel.grid.major.y = element_line(colour = "grey93"),
         #panel.grid = element_blank(),
         #panel.border = element_rect(colour = "grey", fill = NA),
         strip.text = element_text(size = 11),
