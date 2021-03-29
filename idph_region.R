@@ -29,9 +29,13 @@ write.csv(idph_region6noUI,"idph/region6noUI.csv", row.names = FALSE)
 # region 6 hospital beds in use chart
 
 ggplot(idph_region6, aes(x = as.Date(Date), y = COVIDHospitalBedsInUse)) +
-  geom_col(fill = "#910000",
-           alpha = .25) +
-  geom_line(colour = "#910000",
+  # geom_col(fill = "#910000",
+  #          alpha = .25) +
+  # geom_line(colour = "#910000",
+  #           size = 1) +
+  geom_area(fill = "#910000",
+            colour = "#910000",
+            alpha = .25,
             size = 1) +
   # geom_line(aes(y = rollmean(COVIDHospitalBedsInUse, 
   #                            7, 
@@ -65,9 +69,13 @@ ggsave("region6hospitalbeds.png",
 
 # region 6 new hospitalizations in use chart
 ggplot(idph_region6, aes(x = as.Date(Date), y = CLIAdmissions_RollingAvg)) +
-  geom_col(fill = "#660101",
-           alpha = .25) +
-  geom_line(colour = "#660101",
+  # geom_col(fill = "#660101",
+  #          alpha = .25) +
+  # geom_line(colour = "#660101",
+  #           size = 1) +
+  geom_area(colour = "#660101",
+            fill = "#660101",
+            alpha = .25,
             size = 1) +
   xlab(NULL) +
   ylab(NULL) +
