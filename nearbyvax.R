@@ -436,9 +436,9 @@ ggplot(last_vax_nearby, aes(y = reorder(CountyName,
   geom_text(data = filter(last_vax_nearby, # label for top county, dose2
                           CountyName == topcounty),
             aes(x = PctVaccinatedPopulation,
-                label = paste(percent(PctVaccinatedPopulation, .1),
-                              "fully vaccinated")),
-            hjust = .15,
+                label = paste("Fully vaccinated:",percent(PctVaccinatedPopulation, .1)
+                              )),
+            hjust = .85,
             vjust = -.9,
             size = 3.5,
             family = "Barlow") +
@@ -455,17 +455,18 @@ ggplot(last_vax_nearby, aes(y = reorder(CountyName,
         axis.text.y = element_text(size = 13),
         axis.text.x = element_text(size = 13),
         axis.line.x = element_blank(),
+        #axis.line.y = element_line(colour = "grey40"),
         axis.ticks.y = element_blank(),
         legend.position = "none",
         panel.grid.major.y = element_blank(),  
         panel.grid.major.x = element_line(colour = "grey93"),
         plot.caption = element_text(colour = "grey40"),
         plot.title = element_text(size = 22, family = "Oswald")) 
-ggsave("vax/nearbybothdoses.png", width = 8, height = 8*(628/1200), dpi = 320)
-#ggsave("vax/card/nearbybothdosesCard.png", width = 8, height = 1256/300, dpi = 320)
-ggsave("nearbybothdoses.png", 
-       path = "../bzigterman.github.io/images/",
-       width = 8, height = 8*(628/1200), dpi = 320)
+# ggsave("vax/nearbybothdoses.png", width = 8, height = 8*(628/1200), dpi = 320)
+# #ggsave("vax/card/nearbybothdosesCard.png", width = 8, height = 1256/300, dpi = 320)
+# ggsave("nearbybothdoses.png", 
+#        path = "../bzigterman.github.io/images/",
+#        width = 8, height = 8*(628/1200), dpi = 320)
 
 # combined cleveland dot, with wider bars and interior labels ----
 
@@ -481,25 +482,25 @@ ggplot(last_vax_nearby, aes(y = reorder(CountyName,
                    yend = CountyName),
                xend = 0, 
                colour = "#d8cee8",
-               size = 8, # was 2
+               size = 7.5, # was 2
                #alpha = .3
   ) +
   geom_segment(aes(x = PctVaccinatedPopulation, # first line segment to dose2
                    yend = CountyName), 
                xend = 0, 
                colour = "#674EA7",
-               size = 8) + # was 3.6 +
+               size = 7.5) + # was 3.6 +
   geom_text(data = filter(last_vax_nearby, # label for all but top county dose1
                           CountyName != topcounty),
             aes(x = PercentDose1,
-                label = percent(PercentDose1, 1)),
+                label = percent(PercentDose1, .1)),
             hjust = -.1,
             size = 3.5,
             family = "Barlow") +
   geom_text(data = filter(last_vax_nearby, # label for top county, dose1
                           CountyName == topcounty),
             aes(x = PercentDose1,
-                label = paste(percent(PercentDose1, 1),
+                label = paste(percent(PercentDose1, .1),
                               "has received at least one dose")),
             hjust = -0.03,
             size = 3.5,
@@ -507,7 +508,7 @@ ggplot(last_vax_nearby, aes(y = reorder(CountyName,
   geom_text(data = filter(last_vax_nearby, # label for all but top county, dose2
                           CountyName != topcounty),
             aes(x = PctVaccinatedPopulation/2,
-                label = percent(PctVaccinatedPopulation, 1)),
+                label = percent(PctVaccinatedPopulation, .1)),
             #hjust = 1.1,
             #vjust = -.9,
             size = 3.5,
@@ -517,7 +518,7 @@ ggplot(last_vax_nearby, aes(y = reorder(CountyName,
                           CountyName == topcounty),
             aes(x = PctVaccinatedPopulation/2,
                 label = paste("Fully vaccinated:",
-                              percent(PctVaccinatedPopulation, 1)
+                              percent(PctVaccinatedPopulation, .1)
                               )),
             #hjust = 1.01,
             #vjust = -.9,
@@ -543,6 +544,12 @@ ggplot(last_vax_nearby, aes(y = reorder(CountyName,
         panel.grid.major.y = element_blank(),  
         plot.caption = element_text(colour = "grey40"),
         plot.title = element_text(size = 22, family = "Oswald")) 
+
+ggsave("vax/nearbybothdoses.png", width = 8, height = 8*(628/1200), dpi = 320)
+#ggsave("vax/card/nearbybothdosesCard.png", width = 8, height = 1256/300, dpi = 320)
+ggsave("nearbybothdoses.png", 
+       path = "../bzigterman.github.io/images/",
+       width = 8, height = 8*(628/1200), dpi = 320)
 
 
 # todo
