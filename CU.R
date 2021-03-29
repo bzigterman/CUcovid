@@ -111,7 +111,7 @@ ggplot(CUcovidactive, aes(x = as.Date(Date), y = count, fill = Active)) +
         plot.title = element_text(size = 22, family = "Oswald"),
         panel.background = element_blank(),
         panel.grid.major.y = element_line(colour = "grey93"),
-        legend.position = c(.25,.75),
+        legend.position = c(.25,.62),
         legend.background = element_blank(),
         legend.key = element_blank(),
         legend.text = element_text(size = 13)) 
