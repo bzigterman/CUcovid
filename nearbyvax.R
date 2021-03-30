@@ -619,7 +619,7 @@ ggplot(data = vax_nearby_facet,
   ylab(NULL) +
   #guides(fill = guide_legend(reverse = TRUE)) +
   facet_wrap(~ CountyName) + 
-  labs(title = "Percent of Population Vaccinated in Nearby Counties",
+  labs(title = "Percent of Total Population Vaccinated in Nearby Counties",
        #subtitle =  "With seven-day moving average",
        caption = "Source: Illinois Department of Public Health")+
   theme(text = element_text(family = "Barlow"),
