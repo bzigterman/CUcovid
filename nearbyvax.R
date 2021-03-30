@@ -114,6 +114,13 @@ vax_coles <- rio::import("https://idph.illinois.gov/DPHPublicInformation/api/COV
   mutate(Dose1Change = PersonsDose1 - lag(PersonsDose1)) %>%
   mutate(Dose2Change = PersonsFullyVaccinated - lag(PersonsFullyVaccinated)) 
 
+vax_mclean <- rio::import("https://idph.illinois.gov/DPHPublicInformation/api/COVIDExport/GetVaccineAdministration?format=csv&countyName=McLean",
+                         format = "csv") %>%
+  mutate(population = mcleanpop)  %>%
+  mutate(PersonsDose1 = AdministeredCount - PersonsFullyVaccinated) %>%
+  mutate(Dose1Change = PersonsDose1 - lag(PersonsDose1)) %>%
+  mutate(Dose2Change = PersonsFullyVaccinated - lag(PersonsFullyVaccinated)) 
+
 vax_illinois <- rio::import("https://idph.illinois.gov/DPHPublicInformation/api/COVIDExport/GetVaccineAdministration?format=csv&countyName=Illinois",
                             format = "csv") %>%
   mutate(population = illinoispop)  %>%
@@ -131,8 +138,9 @@ vax_nearby <- full_join(vax_champaign, vax_vermilion) %>%
   full_join(vax_dewitt) %>%
   full_join(vax_macon) %>%
   full_join(vax_moultrie) %>%
+  #full_join(vax_mclean) %>%
   #full_join(vax_coles) %>%
-  #full_join(vax_illinois) %>%
+  full_join(vax_illinois) %>%
   mutate(Date = mdy_hms(Report_Date)) %>%
 #  mutate(PersonsDose1 = AdministeredCount - PersonsFullyVaccinated) %>%
   mutate(PercentDose1 = PersonsDose1/population) %>%
@@ -589,12 +597,17 @@ vax_nearby_facet$CountyName <- factor(vax_nearby_facet$CountyName,
 ggplot(data = vax_nearby_facet,
        aes(x = as.Date(Date),
            y = Percent,
-           fill = Doses)) +
-  geom_area() +
+           fill = Doses,
+           colour = Doses)) +
+  geom_area(alpha = .75) +
   scale_fill_manual(labels = c("At least one dose",
                                  "Fully vaccinated"),
                     values = c("#d8cee8","#674EA7"),
                     guide = guide_legend(title = NULL)) +
+  scale_colour_manual(labels = c("At least one dose",
+                                 "Fully vaccinated"),
+                      values = c("grey","#674EA7"),
+                      guide = guide_legend(title = NULL)) +
   scale_y_continuous(labels = percent,
                      position = "right"
                      # breaks = c(0,
@@ -612,7 +625,7 @@ ggplot(data = vax_nearby_facet,
   theme(text = element_text(family = "Barlow"),
         axis.text.y = element_text(size = 10),
         axis.text.x = element_text(size = 8),
-        legend.position = c(.65,.1),
+        legend.position = c(.9,.1),
         legend.background = element_blank(),
         legend.key = element_blank(),
         #legend.text = element_text(size = 13),
