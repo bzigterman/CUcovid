@@ -606,7 +606,7 @@ ggplot(data = vax_nearby_facet,
                     guide = guide_legend(title = NULL)) +
   scale_colour_manual(labels = c("At least one dose",
                                  "Fully vaccinated"),
-                      values = c("grey","#674EA7"),
+                      values = c("#d8cee8","#674EA7"),
                       guide = guide_legend(title = NULL)) +
   scale_y_continuous(labels = percent,
                      position = "right"
