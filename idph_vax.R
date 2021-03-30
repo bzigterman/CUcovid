@@ -419,9 +419,9 @@ cases_and_vax <- full_join(CUcovid, idph_vax_champaign) %>%
 
 ggplot(filter(cases_and_vax, Date > as.Date("2020-12-15")),
        #cases_and_vax, 
-              aes(x = as.Date(Date),
-                               y = count,
-                  colour = vax_case)) +
+       aes(x = as.Date(Date),
+           y = count,
+           colour = vax_case)) +
   geom_line() +
   facet_wrap(~ vax_case, scales = "free_y") +
   labs(title = "COVID-19 Metrics for Champaign County Since Vaccinations Began Dec. 16",
@@ -430,10 +430,10 @@ ggplot(filter(cases_and_vax, Date > as.Date("2020-12-15")),
   ylab(NULL) +
   scale_x_date(expand = c(0,0)) +
   scale_y_continuous(labels = label_comma(accuracy = 1),
-                  #   limits = c(0,60000),
-                  position = "right",
+                     #   limits = c(0,60000),
+                     position = "right",
                      expand = expansion(mult = c(0,.05))
-                  ) +
+  ) +
   expand_limits(y = 0) +
   scale_colour_manual(guide = FALSE,
                       values = c("#B45F06","#009e89","#ff5f1a",
