@@ -617,6 +617,7 @@ ggplot(data = vax_nearby_facet,
   scale_x_date(expand = c(0,0)) +
   xlab(NULL) +
   ylab(NULL) +
+  #expand_limits(y = 0) +
   #guides(fill = guide_legend(reverse = TRUE)) +
   facet_wrap(~ CountyName) + 
   labs(title = "Percent of Total Population Vaccinated",
