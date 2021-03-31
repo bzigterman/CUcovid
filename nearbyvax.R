@@ -217,7 +217,7 @@ ggplot(vax_nearby, aes(x = as.Date(Date), y = PctVaccinatedPopulation,
   scale_x_date(expand = expansion(mult = c(0,.35))) +
   xlab(NULL) +
   ylab(NULL) +
-  labs(title = "Percent of Population Fully Vaccinated in Nearby Counties",
+  labs(title = "Percent of Population Fully Vaccinated",
        caption = "Source: Illinois Department of Public Health")+
   theme(text = element_text(family = "Barlow"),
         axis.text.y = element_text(size = 13),
@@ -269,7 +269,7 @@ ggplot(vax_nearby, aes(x = as.Date(Date), y = PercentDose1,
   scale_x_date(expand = expansion(mult = c(0,.35))) +
   xlab(NULL) +
   ylab(NULL) +
-  labs(title = "Percent with At Least One Vaccine Dose in Nearby Counties",
+  labs(title = "Percent of Population with At Least One Vaccine Dose",
        caption = "Source: Illinois Department of Public Health")+
   theme(text = element_text(family = "Barlow"),
         axis.text.y = element_text(size = 13),
@@ -301,7 +301,7 @@ ggplot(vax_nearby, aes(x = as.Date(Date), y = PercentDose1,
   scale_x_date(expand = expansion(mult = c(0,.15))) +
   xlab(NULL) +
   ylab(NULL) +
-  labs(title = "Percent of Population Partially Vaccinated in Nearby Counties",
+  labs(title = "Percent of Population Partially Vaccinated",
        caption = "Source: Illinois Department of Public Health")+
   theme(text = element_text(family = "Barlow"),
         axis.text.y = element_text(size = 13),
@@ -346,7 +346,7 @@ ggplot(last_vax_nearby, aes(x = PctVaccinatedPopulation,
   xlab(NULL) +
   ylab(NULL) +
   theme_classic() +
-  labs(title = "Percent of Population Fully Vaccinated in Nearby Counties",
+  labs(title = "Percent of Population Fully Vaccinated",
         caption =  "Source: Illinois Department of Public Health")+
   theme(text = element_text(family = "Barlow"),
         axis.text.y = element_text(size = 13),
@@ -393,7 +393,7 @@ ggplot(last_vax_nearby, aes(x = PercentDose1,
   xlab(NULL) +
   ylab(NULL) +
   theme_classic() +
-  labs(title = "Percent of Population with At Least One Dose in Nearby Counties",
+  labs(title = "Percent of Population with At Least One Dose",
         caption = "Source: Illinois Department of Public Health")+
   theme(text = element_text(family = "Barlow"),
         axis.text.y = element_text(size = 13),
@@ -470,7 +470,7 @@ ggplot(last_vax_nearby, aes(y = reorder(CountyName,
   xlab(NULL) +
   ylab(NULL) +
   theme_classic() +
-  labs(title = "Percent of Total Population Vaccinated in Nearby Counties",
+  labs(title = "Percent of Total Population Vaccinated",
         caption =  "Source: Illinois Department of Public Health")+
   theme(text = element_text(family = "Barlow"),
         axis.text.y = element_text(size = 13),
@@ -553,7 +553,7 @@ ggplot(last_vax_nearby, aes(y = reorder(CountyName,
   xlab(NULL) +
   ylab(NULL) +
   theme_classic() +
-  labs(title = "Percent of Total Population Vaccinated in Nearby Counties",
+  labs(title = "Percent of Total Population Vaccinated",
        caption =  "Source: Illinois Department of Public Health")+
   theme(text = element_text(family = "Barlow"),
         axis.text.y = element_text(size = 13),
@@ -619,7 +619,7 @@ ggplot(data = vax_nearby_facet,
   ylab(NULL) +
   #guides(fill = guide_legend(reverse = TRUE)) +
   facet_wrap(~ CountyName) + 
-  labs(title = "Percent of Total Population Vaccinated in Nearby Counties",
+  labs(title = "Percent of Total Population Vaccinated",
        #subtitle =  "With seven-day moving average",
        caption = "Source: Illinois Department of Public Health")+
   theme(text = element_text(family = "Barlow"),
@@ -637,11 +637,11 @@ ggplot(data = vax_nearby_facet,
         plot.caption = element_text(colour = "grey40"),
         plot.title = element_text(size = 18, family = "Oswald"))
 
-ggsave("vax/nearbyfacet.png", width = 8, height = 8*(628/1200), dpi = 320)
+ggsave("vax/nearbyfacet.png", width = 8, height = 6, dpi = 320)
 #ggsave("vax/card/nearbybothdosesCard.png", width = 8, height = 1256/300, dpi = 320)
 ggsave("nearbyfacet.png", 
        path = "../bzigterman.github.io/images/",
-       width = 8, height = 4.5, dpi = 320)
+       width = 8, height = 6, dpi = 320)
 
 #?facet_wrap
 # todo
