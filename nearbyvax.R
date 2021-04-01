@@ -636,7 +636,7 @@ ggplot(data = vax_nearby_facet,
         strip.text = element_text(size = 11),
         strip.background = element_blank(),
         plot.caption = element_text(colour = "grey40"),
-        plot.title = element_text(size = 18, family = "Oswald"))
+        plot.title = element_text(size = 24, family = "Oswald"))
 
 ggsave("vax/nearbyfacet.png", width = 8, height = 6, dpi = 320)
 #ggsave("vax/card/nearbybothdosesCard.png", width = 8, height = 1256/300, dpi = 320)
