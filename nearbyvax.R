@@ -599,7 +599,7 @@ ggplot(data = vax_nearby_facet,
            y = Percent,
            fill = Doses,
            colour = Doses)) +
-  geom_area(alpha = .75) +
+  geom_area(alpha = .7) +
   scale_fill_manual(labels = c("At least one dose",
                                  "Fully vaccinated"),
                     values = c("#d8cee8","#674EA7"),
