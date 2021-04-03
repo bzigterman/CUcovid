@@ -16,11 +16,13 @@ CUcovid <- read_sheet("1UUGDwV5qahPos-bhWUfzf4Y1WYXEh-I0JBOJaoGMrJs",
                                        fill = NA, align = "right")) %>%
   mutate(avgnewdead = rollmean(New_Deceased, k = 7, 
                                fill = NA, align = "right")) %>%
+  mutate(avgmonthlynewdead = rollmean(New_Deceased, k = 31, 
+                                      fill = NA, align = "right")) %>%
   mutate(weeklydead = avgnewdead * 7) %>%
   mutate(biweeklydead = rollmean(New_Deceased, k = 14, 
-                               fill = NA, align = "right")*14) %>%
+                                 fill = NA, align = "right")*14) %>%
   mutate(monthlydead = rollmean(New_Deceased, k = 31, 
-                                 fill = NA, align = "right")*31) 
+                                fill = NA, align = "right")*31) 
   
 write.csv(CUcovid,"data/CUcovid.csv", row.names = FALSE)
 CUcovidactive <- CUcovid %>%
@@ -187,7 +189,7 @@ ggplot(CUcovid,
        aes(x = as.Date(Date), y = New_Deceased)) +
   geom_col(fill = "#d90000",
            alpha = .25) +
-  geom_line(aes(y = avgnewdead),
+  geom_line(aes(y = avgmonthlynewdead),
             colour = "#d90000",
             size = 1) +
   xlab(NULL) +
@@ -196,7 +198,7 @@ ggplot(CUcovid,
                      expand = expansion(mult = c(0,.05))) +
   scale_x_date(expand = c(0,0)) +
   labs(title = "New Deaths in Champaign County",
-          subtitle = "With seven-day moving average",
+          subtitle = "With monthly moving average",
        caption = "Source: Champaign-Urbana Public Health District")+
   theme(text = element_text(family = "Barlow"),
         axis.text.y = element_text(size = 13),
