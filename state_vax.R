@@ -166,7 +166,7 @@ ggsave("IL_new_cases.png",
        width = 8, height = 8*(628/1200), dpi = 320)
 
 # state new deaths ----
-ggplot(idph_cases_IL, aes(x = as.Date(Date), y = new_deaths)) +
+state_deaths <- ggplot(idph_cases_IL, aes(x = as.Date(Date), y = new_deaths)) +
   geom_col(fill = "#d90000",
            alpha = .25) +
   geom_line(aes(y = avg_new_deaths),
@@ -189,9 +189,11 @@ ggplot(idph_cases_IL, aes(x = as.Date(Date), y = new_deaths)) +
         panel.grid.major.y = element_line(colour = "grey93"),
         plot.caption = element_text(colour = "grey40"),
         plot.title = element_text(size = 22, family = "Oswald")) 
-
+state_deaths
 ggsave("region/IL_new_deaths.png", width = 8, height = 8*(628/1200), dpi = 320)
 ggsave("IL_new_deaths.png", 
        path = "../bzigterman.github.io/images/",
        width = 8, height = 8*(628/1200), dpi = 320)
 
+library(plotly)
+ggplotly(state_deaths)
