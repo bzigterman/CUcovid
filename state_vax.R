@@ -195,5 +195,5 @@ ggsave("IL_new_deaths.png",
        path = "../bzigterman.github.io/images/",
        width = 8, height = 8*(628/1200), dpi = 320)
 
-library(plotly)
-ggplotly(state_deaths)
+# library(plotly)
+# ggplotly(state_deaths)
