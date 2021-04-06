@@ -635,6 +635,7 @@ ggplot(data = vax_nearby_facet,
         panel.grid.major.y = element_line(colour = "grey93"),
         strip.text = element_text(size = 11),
         strip.background = element_blank(),
+        #strip.placement = "outside",
         plot.caption = element_text(colour = "grey40"),
         plot.title = element_text(size = 24, family = "Oswald"))
 
