@@ -648,14 +648,14 @@ ggsave("nearbyfacet.png",
 
 
 # geofacet grid ----
-mygrid <- data.frame(
+nearbygrid <- data.frame(
   name = c("Ford", "Iroquois", "McLean", "De Witt", "Champaign", "Vermilion", "Piatt", "Douglas", "Edgar", "Macon", "Moultrie"),
   code = c("Ford", "Iroquois", "McLean", "De Witt", "Champaign", "Vermilion", "Piatt", "Douglas", "Edgar", "Macon", "Moultrie"),
   row = c(1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3),
   col = c(3, 4, 2, 1, 3, 4, 2, 3, 4, 1, 2),
   stringsAsFactors = FALSE
 )
-write_csv(mygrid,"mygrid.csv")
+write_csv(nearbygrid,"nearbygrid.csv")
 #geofacet::grid_preview(mygrid)
 ggplot(data = vax_nearby_facet,
        aes(x = as.Date(Date),
@@ -682,7 +682,7 @@ ggplot(data = vax_nearby_facet,
   ylab(NULL) +
   #expand_limits(y = 0) +
   #guides(fill = guide_legend(reverse = TRUE)) +
-  facet_geo(~ CountyName, grid = mygrid) + 
+  facet_geo(~ CountyName, grid = nearbygrid) + 
   labs(title = "Percent of Total Population Vaccinated in Nearby Counties",
        #subtitle =  "With seven-day moving average",
        caption = "Source: Illinois Department of Public Health. Note: Counties organized geographically.")+
