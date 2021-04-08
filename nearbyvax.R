@@ -2,6 +2,7 @@ library(rio)
 library(tidyverse)
 library(lubridate)
 library(googlesheets4)
+library(geofacet)
 #library(dplyr)
 #library(ggplot2)
 library(scales)
@@ -138,9 +139,9 @@ vax_nearby <- full_join(vax_champaign, vax_vermilion) %>%
   full_join(vax_dewitt) %>%
   full_join(vax_macon) %>%
   full_join(vax_moultrie) %>%
-  #full_join(vax_mclean) %>%
+  full_join(vax_mclean) %>%
   #full_join(vax_coles) %>%
-  full_join(vax_illinois) %>%
+  #full_join(vax_illinois) %>%
   mutate(Date = mdy_hms(Report_Date)) %>%
 #  mutate(PersonsDose1 = AdministeredCount - PersonsFullyVaccinated) %>%
   mutate(PercentDose1 = PersonsDose1/population) %>%
@@ -622,7 +623,7 @@ ggplot(data = vax_nearby_facet,
   facet_wrap(~ CountyName) + 
   labs(title = "Percent of Total Population Vaccinated in Nearby Counties",
        #subtitle =  "With seven-day moving average",
-       caption = "Source: Illinois Department of Public Health")+
+       caption = "Source: Illinois Department of Public Health. Note: Counties organized in descending order.")+
   theme(text = element_text(family = "Barlow"),
         axis.text.y = element_text(size = 10),
         axis.text.x = element_text(size = 8),
@@ -644,6 +645,68 @@ ggsave("vax/nearbyfacet.png", width = 8, height = 6, dpi = 320)
 ggsave("nearbyfacet.png", 
        path = "../bzigterman.github.io/images/",
        width = 8, height = 6, dpi = 320)
+
+
+# geofacet grid ----
+mygrid <- data.frame(
+  name = c("Ford", "Iroquois", "McLean", "De Witt", "Champaign", "Vermilion", "Piatt", "Douglas", "Edgar", "Macon", "Moultrie"),
+  code = c("Ford", "Iroquois", "Mclean", "De Witt", "Champaign", "Vermilion", "Piatt", "Douglas", "Edgar", "Macon", "Moultrie"),
+  row = c(1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3),
+  col = c(3, 4, 2, 1, 3, 4, 2, 3, 4, 1, 2),
+  stringsAsFactors = FALSE
+)
+write_csv(mygrid,"mygrid.csv")
+#geofacet::grid_preview(mygrid)
+ggplot(data = vax_nearby_facet,
+       aes(x = as.Date(Date),
+           y = Percent,
+           fill = Doses,
+           colour = Doses)) +
+  geom_area(alpha = .6) +
+  scale_fill_manual(labels = c("At least one dose",
+                               "Fully vaccinated"),
+                    values = c("#d8cee8","#674EA7"),
+                    guide = guide_legend(title = NULL)) +
+  scale_colour_manual(labels = c("At least one dose",
+                                 "Fully vaccinated"),
+                      values = c("#A897CC","#674EA7"),
+                      guide = guide_legend(title = NULL)) +
+  scale_y_continuous(labels = percent,
+                     position = "right"
+                     # breaks = c(0,
+                     #            max(vax_nearby_facet$Percent),
+                     #            max(vax_nearby_facet$PercentDose1))
+  ) +
+  scale_x_date(expand = c(0,0)) +
+  xlab(NULL) +
+  ylab(NULL) +
+  #expand_limits(y = 0) +
+  #guides(fill = guide_legend(reverse = TRUE)) +
+  facet_geo(~ CountyName, grid = mygrid) + 
+  labs(title = "Percent of Total Population Vaccinated in Nearby Counties",
+       #subtitle =  "With seven-day moving average",
+       caption = "Source: Illinois Department of Public Health. Note: Counties organized geographically.")+
+  theme(text = element_text(family = "Barlow"),
+        axis.text.y = element_text(size = 10),
+        axis.text.x = element_text(size = 8),
+        legend.position = c(.1,.9),
+        legend.background = element_blank(),
+        legend.key = element_blank(),
+        #legend.text = element_text(size = 13),
+        panel.grid.minor = element_blank(),
+        panel.background = element_blank(),
+        panel.grid.major.y = element_line(colour = "grey93"),
+        strip.text = element_text(size = 11),
+        strip.background = element_blank(),
+        #strip.placement = "outside",
+        plot.caption = element_text(colour = "grey40"),
+        plot.title = element_text(size = 24, family = "Oswald"))
+
+ggsave("vax/nearbygeofacet.png", width = 8, height = 6, dpi = 320)
+ggsave("nearbygeofacet.png", 
+       path = "../bzigterman.github.io/images/",
+       width = 8, height = 6, dpi = 320)
+
 
 #?facet_wrap
 # todo
