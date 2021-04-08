@@ -650,7 +650,7 @@ ggsave("nearbyfacet.png",
 # geofacet grid ----
 mygrid <- data.frame(
   name = c("Ford", "Iroquois", "McLean", "De Witt", "Champaign", "Vermilion", "Piatt", "Douglas", "Edgar", "Macon", "Moultrie"),
-  code = c("Ford", "Iroquois", "Mclean", "De Witt", "Champaign", "Vermilion", "Piatt", "Douglas", "Edgar", "Macon", "Moultrie"),
+  code = c("Ford", "Iroquois", "McLean", "De Witt", "Champaign", "Vermilion", "Piatt", "Douglas", "Edgar", "Macon", "Moultrie"),
   row = c(1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3),
   col = c(3, 4, 2, 1, 3, 4, 2, 3, 4, 1, 2),
   stringsAsFactors = FALSE
