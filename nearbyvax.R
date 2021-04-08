@@ -642,9 +642,9 @@ ggplot(data = vax_nearby_facet,
 
 #ggsave("vax/nearbyfacet.png", width = 8, height = 6, dpi = 320)
 #ggsave("vax/card/nearbybothdosesCard.png", width = 8, height = 1256/300, dpi = 320)
-# ggsave("nearbyfacet.png", 
-#        path = "../bzigterman.github.io/images/",
-#        width = 8, height = 6, dpi = 320)
+ggsave("nearbyfacet.png",
+       path = "../bzigterman.github.io/images/",
+       width = 8, height = 6, dpi = 320)
 
 
 # geofacet grid ----
