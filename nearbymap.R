@@ -211,3 +211,5 @@ ggsave("map/case_rate_nearby.png", width = 5, height = 5, dpi = 320)
 ggsave("case_rate_nearby.png", 
        path = "../bzigterman.github.io/images/",
        width = 5, height = 5, dpi = 320)
+
+
