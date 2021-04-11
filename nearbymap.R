@@ -37,6 +37,7 @@ options(tigris_use_cache = TRUE)
 #   #coord_sf(crs = 26911) + 
 #   scale_fill_viridis_c(option = "magma") 
 
+# get county shapefile ----
 il_counties <- get_acs(state = "IL", geography = "county", 
                        variables = "B19013_001", geometry = TRUE)
 
@@ -51,6 +52,7 @@ il_counties <- get_acs(state = "IL", geography = "county",
 # names(last_vax_nearby)
 # names(il_counties)
 
+# combine vaccine data and shapefile ----
 last_vax_nearby_map <- last_vax_nearby %>%
   mutate(GEOID = fips("IL", county = CountyName))
 
@@ -59,6 +61,7 @@ nearby_vax_merged <- merge(il_counties, last_vax_nearby_map,
 
 #names(nearby_vax_merged)
 
+# make nearby cities shapefile ----
 nearby_cities <- read_csv("map/nearby_cities.csv")
 nearby_cities_sf <- st_as_sf(nearby_cities, coords = c("lng", "lat"), remove = FALSE, 
                      crs = 4326, agr = "constant")
@@ -68,7 +71,7 @@ nearby_cities_sf <- st_as_sf(nearby_cities, coords = c("lng", "lat"), remove = F
 #   geom_text(data = nearby_cities_sf, aes(x = lng, y = lat, label = city), 
 #             size = 3.9, col = "black", fontface = "bold") 
 
-
+# plot nearby vaccines ----
 ggplot(data = nearby_vax_merged) + 
   geom_sf(data = nearby_vax_merged,
           mapping = aes(fill = PctVaccinatedPopulation),
@@ -158,10 +161,53 @@ ggsave("pct_fully_vax_nearby.png",
 #         plot.title = element_text(size = 22, family = "Oswald")) 
 
 
-# read shp file
+# combine case data and shapefile ---- 
+#last_cases_nearby
+last_cases_nearby_map <- last_cases_nearby %>%
+  mutate(GEOID = fips("IL", county = CountyName))
 
-# map data to shp file
+nearby_cases_merged <- merge(il_counties, last_cases_nearby_map,
+                           by = "GEOID")
 
-# select only nearby counties
-
-# plot map
+# plot nearby cases
+ggplot(data = nearby_cases_merged) + 
+  geom_sf(data = nearby_cases_merged,
+          mapping = aes(fill = new_case_rate),
+          # color = "grey",
+          size = .25) +
+  scale_fill_gradient(low = "white",
+                      high = "#B45F06",
+                     # labels = percent,
+                      guide = guide_legend(title = NULL)) +
+  geom_sf(data = nearby_cities_sf, size = .5) +
+  geom_text(data = nearby_cities_sf, aes(x = lng, y = lat, label = city), 
+            size = 2.9, col = "black", family = "Barlow",
+            nudge_y = .06) +
+  # geom_text(data = last_cases_nearby_map,
+  #           aes(x = latitude, y = longitude, label = CountyName),
+  #           size = 2.9,
+  #           col = "black",
+  #           family = "Barlow") +
+  labs(title = "New Cases per 100,000 Residents",
+       caption =  "Source: Illinois Department of Public Health")+
+  #theme_minimal() +
+  theme(text = element_text(family = "Barlow"),
+        axis.text = element_blank(),
+        axis.line.x = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank(),
+        #panel.grid.major.x = element_line(colour = "grey93"),
+        #legend.position = "none",
+        panel.grid.major = element_blank(),  
+        legend.position = c(.1,.9),
+        legend.background = element_blank(),
+        legend.key = element_blank(),
+        panel.background = element_blank(),
+        #legend.text = element_text(size = 13),
+        plot.caption = element_text(colour = "grey40"),
+        plot.title = element_text(size = 22, family = "Oswald")) 
+ggsave("region/case_rate_nearby.png", width = 5, height = 5, dpi = 320)
+ggsave("map/case_rate_nearby.png", width = 5, height = 5, dpi = 320)
+ggsave("case_rate_nearby.png", 
+       path = "../bzigterman.github.io/images/",
+       width = 5, height = 5, dpi = 320)
