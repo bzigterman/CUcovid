@@ -115,7 +115,7 @@ ggsave("pct_fully_vax_nearby.png",
 # plot nearby with at least one dose ----
 ggplot(data = nearby_vax_merged) + 
   geom_sf(data = nearby_vax_merged,
-          mapping = aes(fill = PctVaccinatedPopulation),
+          mapping = aes(fill = PercentDose1),
           # color = "grey",
           size = .25) +
   scale_fill_gradient(low = "#d8cee8",
