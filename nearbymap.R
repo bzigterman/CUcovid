@@ -78,14 +78,15 @@ ggplot(data = nearby_vax_merged) +
           mapping = aes(fill = PctVaccinatedPopulation),
          # color = "grey",
           size = .25) +
-  scale_fill_gradient(low = "#d8cee8",
+  scale_fill_gradient(low = "#EEEBF5",
                       high = "#674EA7",
                       labels = percent,
                       guide = guide_legend(title = NULL)) +
   geom_sf(data = nearby_cities_sf, size = .5) +
   geom_text(data = nearby_cities_sf, aes(x = lng, y = lat, label = city), 
             size = 2.9, col = "black", family = "Barlow",
-            nudge_y = .06) +
+            nudge_y = .05,
+            nudge_x = -.02) +
   labs(title = "Percent Fully Vaccinated",
        caption =  "Source: Illinois Department of Public Health")+
   #theme_minimal() +
@@ -105,7 +106,6 @@ ggplot(data = nearby_vax_merged) +
         plot.caption = element_text(colour = "grey40"),
         plot.title = element_text(size = 22, family = "Oswald")) 
 
-  
 ggsave("vax/pct_fully_vax_nearby.png", width = 5, height = 5, dpi = 320)
 ggsave("map/pct_fully_vax_nearby.png", width = 5, height = 5, dpi = 320)
 ggsave("pct_fully_vax_nearby.png", 
@@ -118,14 +118,15 @@ ggplot(data = nearby_vax_merged) +
           mapping = aes(fill = PercentDose1),
           # color = "grey",
           size = .25) +
-  scale_fill_gradient(low = "#d8cee8",
+  scale_fill_gradient(low = "#EEEBF5",
                       high = "#674EA7",
                       labels = percent,
                       guide = guide_legend(title = NULL)) +
   geom_sf(data = nearby_cities_sf, size = .5) +
   geom_text(data = nearby_cities_sf, aes(x = lng, y = lat, label = city), 
             size = 2.9, col = "black", family = "Barlow",
-            nudge_y = .06) +
+            nudge_y = .05,
+            nudge_x = -.02) +
   labs(title = "Percent With At Least One Dose",
        caption =  "Source: Illinois Department of Public Health")+
   #theme_minimal() +
@@ -210,20 +211,21 @@ last_cases_nearby_map <- last_cases_nearby %>%
 nearby_cases_merged <- merge(il_counties, last_cases_nearby_map,
                            by = "GEOID")
 
-# plot nearby cases
+# plot nearby cases ----
 ggplot(data = nearby_cases_merged) + 
   geom_sf(data = nearby_cases_merged,
           mapping = aes(fill = new_case_rate),
           # color = "grey",
           size = .25) +
-  scale_fill_gradient(low = "white",
+  scale_fill_gradient(low = "#F7EDE3",
                       high = "#B45F06",
                       # labels = percent,
                       guide = guide_legend(title = NULL)) +
   geom_sf(data = nearby_cities_sf, size = .5) +
   geom_text(data = nearby_cities_sf, aes(x = lng, y = lat, label = city), 
             size = 2.9, col = "black", family = "Barlow",
-            nudge_y = .06) +
+            nudge_y = .05,
+            nudge_x = -.02) +
   # geom_text(data = last_cases_nearby_map,
   #           aes(x = latitude, y = longitude, label = CountyName),
   #           size = 2.9,
