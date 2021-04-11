@@ -6,6 +6,7 @@ library(tmap)
 library(tidycensus)
 library(ggmap)
 library(ggspatial)
+library(patchwork)
 options(tigris_use_cache = TRUE)
 
 
@@ -71,7 +72,7 @@ nearby_cities_sf <- st_as_sf(nearby_cities, coords = c("lng", "lat"), remove = F
 #   geom_text(data = nearby_cities_sf, aes(x = lng, y = lat, label = city), 
 #             size = 3.9, col = "black", fontface = "bold") 
 
-# plot nearby vaccines ----
+# plot nearby fully vaccinated ----
 ggplot(data = nearby_vax_merged) + 
   geom_sf(data = nearby_vax_merged,
           mapping = aes(fill = PctVaccinatedPopulation),
@@ -108,6 +109,46 @@ ggplot(data = nearby_vax_merged) +
 ggsave("vax/pct_fully_vax_nearby.png", width = 5, height = 5, dpi = 320)
 ggsave("map/pct_fully_vax_nearby.png", width = 5, height = 5, dpi = 320)
 ggsave("pct_fully_vax_nearby.png", 
+       path = "../bzigterman.github.io/images/",
+       width = 5, height = 5, dpi = 320)
+
+# plot nearby with at least one dose ----
+ggplot(data = nearby_vax_merged) + 
+  geom_sf(data = nearby_vax_merged,
+          mapping = aes(fill = PctVaccinatedPopulation),
+          # color = "grey",
+          size = .25) +
+  scale_fill_gradient(low = "#d8cee8",
+                      high = "#674EA7",
+                      labels = percent,
+                      guide = guide_legend(title = NULL)) +
+  geom_sf(data = nearby_cities_sf, size = .5) +
+  geom_text(data = nearby_cities_sf, aes(x = lng, y = lat, label = city), 
+            size = 2.9, col = "black", family = "Barlow",
+            nudge_y = .06) +
+  labs(title = "Percent With At Least One Dose",
+       caption =  "Source: Illinois Department of Public Health")+
+  #theme_minimal() +
+  theme(text = element_text(family = "Barlow"),
+        axis.text = element_blank(),
+        axis.line.x = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank(),
+        #panel.grid.major.x = element_line(colour = "grey93"),
+        #legend.position = "none",
+        panel.grid.major = element_blank(),  
+        legend.position = c(.1,.9),
+        legend.background = element_blank(),
+        legend.key = element_blank(),
+        panel.background = element_blank(),
+        #legend.text = element_text(size = 13),
+        plot.caption = element_text(colour = "grey40"),
+        plot.title = element_text(size = 22, family = "Oswald")) 
+
+
+ggsave("vax/pct_partial_vax_nearby.png", width = 5, height = 5, dpi = 320)
+ggsave("map/pct_partial_vax_nearby.png", width = 5, height = 5, dpi = 320)
+ggsave("pct_partial_vax_nearby.png", 
        path = "../bzigterman.github.io/images/",
        width = 5, height = 5, dpi = 320)
 
