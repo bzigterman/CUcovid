@@ -27,6 +27,10 @@ iroquoispop <- 27604
 dewittpop <- 15769
 maconpop <- 104712
 moultriepop <- 14717
+illinoispop <- 12741080
+colespop <- 50885
+mcleanpop <- 172828
+
 
 
 c("Champaign","Vermilion","Ford","Edgar","Douglas","Piatt","Iroquois",
@@ -57,11 +61,15 @@ idph_cases_vermilion <- idph_cases_vermilion$values %>%
                                    fill = NA, align = "right")) 
 
 idph_cases_ford <- rio::import("https://idph.illinois.gov/DPHPublicInformation/api/COVID/GetCountyHistorical?countyName=Ford",
-                                    format = "json") 
+                                format = "json") 
 idph_cases_ford <- idph_cases_ford$values %>%
-  mutate(population = fordpop) %>%
+  mutate(population = edgarpop) %>%
   mutate(new_cases = confirmed_cases - lag(confirmed_cases)) %>%
-  mutate(new_deaths = deaths - lag(deaths)) 
+  mutate(new_deaths = deaths - lag(deaths))  %>%
+  mutate(avg_new_cases = rollmean(new_cases, k = 7, 
+                                  fill = NA, align = "right")) %>%
+  mutate(avg_new_deaths = rollmean(new_deaths, k = 7, 
+                                   fill = NA, align = "right")) 
 
 idph_cases_edgar <- rio::import("https://idph.illinois.gov/DPHPublicInformation/api/COVID/GetCountyHistorical?countyName=Edgar",
                                     format = "json") 
@@ -140,6 +148,17 @@ idph_cases_moultrie <- idph_cases_moultrie$values %>%
   mutate(avg_new_deaths = rollmean(new_deaths, k = 7, 
                                    fill = NA, align = "right")) 
 
+idph_cases_mclean <- rio::import("https://idph.illinois.gov/DPHPublicInformation/api/COVID/GetCountyHistorical?countyName=McLean",
+                                   format = "json") 
+idph_cases_mclean <- idph_cases_mclean$values %>%
+  mutate(population = mcleanpop) %>%
+  mutate(new_cases = confirmed_cases - lag(confirmed_cases)) %>%
+  mutate(new_deaths = deaths - lag(deaths))  %>%
+  mutate(avg_new_cases = rollmean(new_cases, k = 7, 
+                                  fill = NA, align = "right")) %>%
+  mutate(avg_new_deaths = rollmean(new_deaths, k = 7, 
+                                   fill = NA, align = "right")) 
+
 idph_cases_nearby <- full_join(idph_cases_champaign, idph_cases_vermilion) %>%
   full_join(idph_cases_ford) %>%
   full_join(idph_cases_edgar) %>%
@@ -149,9 +168,15 @@ idph_cases_nearby <- full_join(idph_cases_champaign, idph_cases_vermilion) %>%
   full_join(idph_cases_dewitt) %>%
   full_join(idph_cases_macon) %>%
   full_join(idph_cases_moultrie) %>%
+  full_join(idph_cases_mclean) %>%
   mutate(Date = ymd_hms(reportDate)) %>%
   mutate(new_case_rate = (100000*avg_new_cases)/population) %>%
   mutate(new_deaths_rate = (1000000*avg_new_deaths)/population)
+
+last_cases_nearby <- idph_cases_nearby %>%
+  filter(Date == tail(Date, 1)) %>%
+  arrange(desc(new_deaths_rate))
+
 
 # chart comparing cases ----
 ggplot(idph_cases_nearby, aes(x = as.Date(Date), y = new_case_rate,
