@@ -177,7 +177,7 @@ ggplot(data = nearby_cases_merged) +
           size = .25) +
   scale_fill_gradient(low = "white",
                       high = "#B45F06",
-                     # labels = percent,
+                      # labels = percent,
                       guide = guide_legend(title = NULL)) +
   geom_sf(data = nearby_cities_sf, size = .5) +
   geom_text(data = nearby_cities_sf, aes(x = lng, y = lat, label = city), 
