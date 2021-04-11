@@ -120,6 +120,7 @@ ggplot(data = nearby_vax_merged) +
         plot.title = element_text(size = 22, family = "Oswald")) 
 
   
+ggsave("vax/pct_fully_vax_nearby.png", width = 5, height = 5, dpi = 320)
 ggsave("map/pct_fully_vax_nearby.png", width = 5, height = 5, dpi = 320)
 ggsave("pct_fully_vax_nearby.png", 
        path = "../bzigterman.github.io/images/",
