@@ -73,7 +73,7 @@ nearby_cities_sf <- st_as_sf(nearby_cities, coords = c("lng", "lat"), remove = F
 #             size = 3.9, col = "black", fontface = "bold") 
 
 # plot nearby fully vaccinated ----
-ggplot(data = nearby_vax_merged) + 
+pct_fully_vax_nearby <- ggplot(data = nearby_vax_merged) + 
   geom_sf(data = nearby_vax_merged,
           mapping = aes(fill = PctVaccinatedPopulation),
          # color = "grey",
@@ -87,7 +87,7 @@ ggplot(data = nearby_vax_merged) +
             size = 2.9, col = "black", family = "Barlow",
             nudge_y = .05,
             nudge_x = -.02) +
-  labs(title = "Percent Fully Vaccinated",
+  labs(title = "Percent of Population Fully Vaccinated",
        caption =  "Source: Illinois Department of Public Health")+
   #theme_minimal() +
   theme(text = element_text(family = "Barlow"),
@@ -104,7 +104,8 @@ ggplot(data = nearby_vax_merged) +
         panel.background = element_blank(),
         #legend.text = element_text(size = 13),
         plot.caption = element_text(colour = "grey40"),
-        plot.title = element_text(size = 22, family = "Oswald")) 
+        plot.title = element_text(size = 16, family = "Oswald")) 
+pct_fully_vax_nearby
 
 ggsave("vax/pct_fully_vax_nearby.png", width = 5, height = 5, dpi = 320)
 ggsave("map/pct_fully_vax_nearby.png", width = 5, height = 5, dpi = 320)
@@ -113,7 +114,7 @@ ggsave("pct_fully_vax_nearby.png",
        width = 5, height = 5, dpi = 320)
 
 # plot nearby with at least one dose ----
-ggplot(data = nearby_vax_merged) + 
+pct_partial_vax_nearby <- ggplot(data = nearby_vax_merged) + 
   geom_sf(data = nearby_vax_merged,
           mapping = aes(fill = PercentDose1),
           # color = "grey",
@@ -127,7 +128,7 @@ ggplot(data = nearby_vax_merged) +
             size = 2.9, col = "black", family = "Barlow",
             nudge_y = .05,
             nudge_x = -.02) +
-  labs(title = "Percent With At Least One Dose",
+  labs(title = "Percent of Population With At Least One Dose",
        caption =  "Source: Illinois Department of Public Health")+
   #theme_minimal() +
   theme(text = element_text(family = "Barlow"),
@@ -144,8 +145,8 @@ ggplot(data = nearby_vax_merged) +
         panel.background = element_blank(),
         #legend.text = element_text(size = 13),
         plot.caption = element_text(colour = "grey40"),
-        plot.title = element_text(size = 22, family = "Oswald")) 
-
+        plot.title = element_text(size = 16, family = "Oswald")) 
+pct_partial_vax_nearby
 
 ggsave("vax/pct_partial_vax_nearby.png", width = 5, height = 5, dpi = 320)
 ggsave("map/pct_partial_vax_nearby.png", width = 5, height = 5, dpi = 320)
@@ -212,7 +213,7 @@ nearby_cases_merged <- merge(il_counties, last_cases_nearby_map,
                            by = "GEOID")
 
 # plot nearby cases ----
-ggplot(data = nearby_cases_merged) + 
+case_rate_nearby <- ggplot(data = nearby_cases_merged) + 
   geom_sf(data = nearby_cases_merged,
           mapping = aes(fill = new_case_rate),
           # color = "grey",
@@ -248,11 +249,25 @@ ggplot(data = nearby_cases_merged) +
         panel.background = element_blank(),
         #legend.text = element_text(size = 13),
         plot.caption = element_text(colour = "grey40"),
-        plot.title = element_text(size = 22, family = "Oswald")) 
+        plot.title = element_text(size = 16, family = "Oswald")) 
+case_rate_nearby
+
 ggsave("region/case_rate_nearby.png", width = 5, height = 5, dpi = 320)
 ggsave("map/case_rate_nearby.png", width = 5, height = 5, dpi = 320)
 ggsave("case_rate_nearby.png", 
        path = "../bzigterman.github.io/images/",
        width = 5, height = 5, dpi = 320)
 
+pct_fully_vax_nearby + 
+  theme(plot.title = element_text(size = 14, family = "Oswald"),
+       # legend.text = element_text(size = 10),
+        legend.position = "left") +
+  case_rate_nearby +
+  theme(plot.title = element_text(size = 14, family = "Oswald"),
+      #  legend.text = element_text(size = 10),
+        legend.position = "right") 
 
+ggsave("map/combined_case_vax.png", 
+       width = 8, 
+       height = 8*(628/1200), 
+       dpi = 320)
