@@ -29,13 +29,13 @@ options(tigris_use_cache = TRUE)
 
 
 
-champaign_county <- get_acs(state = "IL", county = "Champaign", geography = "tract", 
-                  variables = "B19013_001", geometry = TRUE)
-champaign_county %>%
-  ggplot(aes(fill = estimate)) + 
-  geom_sf(color = NA) + 
-  #coord_sf(crs = 26911) + 
-  scale_fill_viridis_c(option = "magma") 
+# champaign_county <- get_acs(state = "IL", county = "Champaign", geography = "tract", 
+#                   variables = "B19013_001", geometry = TRUE)
+# champaign_county %>%
+#   ggplot(aes(fill = estimate)) + 
+#   geom_sf(color = NA) + 
+#   #coord_sf(crs = 26911) + 
+#   scale_fill_viridis_c(option = "magma") 
 
 il_counties <- get_acs(state = "IL", geography = "county", 
                        variables = "B19013_001", geometry = TRUE)
