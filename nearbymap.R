@@ -302,3 +302,9 @@ ggsave("map/combined_case_vax.png",
        width = 8, 
        height = 8*(628/1200), 
        dpi = 320)
+ggsave("combined_case_vax.png", 
+       path = "../bzigterman.github.io/images/",
+       width = 8, 
+       height = 8*(628/1200), 
+       dpi = 320)
+
