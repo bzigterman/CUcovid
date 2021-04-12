@@ -58,7 +58,19 @@ last_vax_nearby_map <- last_vax_nearby %>%
   mutate(GEOID = fips("IL", county = CountyName))
 
 nearby_vax_merged <- merge(il_counties, last_vax_nearby_map,
-                           by = "GEOID")
+                           by = "GEOID") #%>%
+  # mutate(full_pct_cat = cut(PctVaccinatedPopulation, 
+  #                           breaks=c(-Inf, 0.2, 0.22,.24, Inf), 
+  #                           labels=c("Less than 20%",
+  #                                    "20-22%",
+  #                                    "22-24%",
+  #                                    "Greater than 24%")))
+         
+
+
+         
+
+
 
 #names(nearby_vax_merged)
 
@@ -76,19 +88,26 @@ nearby_cities_sf <- st_as_sf(nearby_cities, coords = c("lng", "lat"), remove = F
 pct_fully_vax_nearby <- ggplot(data = nearby_vax_merged) + 
   geom_sf(data = nearby_vax_merged,
           mapping = aes(fill = PctVaccinatedPopulation),
-         # color = "grey",
+          # color = "grey",
           size = .25) +
+  # scale_fill_manual(values = colorRampPalette(c("#EEEBF5","#674EA7"))(4),
+  #                   #low = "#EEEBF5",
+  #                   # high = "#674EA7",
+  #                   #labels = percent,
+  #                   guide = guide_legend(title = NULL)) +
   scale_fill_gradient(low = "#EEEBF5",
                       high = "#674EA7",
                       labels = percent,
-                      guide = guide_legend(title = NULL)) +
+                      #guide = guide_legend(title = "% Fully Vaccinated")
+                      ) +
   geom_sf(data = nearby_cities_sf, size = .5) +
-  geom_text(data = nearby_cities_sf, aes(x = lng, y = lat, label = city), 
+  geom_text(data = nearby_cities_sf, aes(x = lng, y = lat, label = city),
             size = 2.9, col = "black", family = "Barlow",
             nudge_y = .05,
             nudge_x = -.02) +
   labs(title = "Percent of Population Fully Vaccinated",
-       caption =  "Source: Illinois Department of Public Health")+
+       caption =  "Source: Illinois Department of Public Health",
+       fill = NULL)+
   #theme_minimal() +
   theme(text = element_text(family = "Barlow"),
         axis.text = element_blank(),
@@ -98,9 +117,12 @@ pct_fully_vax_nearby <- ggplot(data = nearby_vax_merged) +
         #panel.grid.major.x = element_line(colour = "grey93"),
         #legend.position = "none",
         panel.grid.major = element_blank(),  
-        legend.position = c(.1,.9),
+        legend.position = c(.1,.885),
+        #legend.direction = "horizontal",
         legend.background = element_blank(),
         legend.key = element_blank(),
+        legend.key.size = unit(.5, "cm"),
+        #legend.key.size = .9,
         panel.background = element_blank(),
         #legend.text = element_text(size = 13),
         plot.caption = element_text(colour = "grey40"),
@@ -122,14 +144,16 @@ pct_partial_vax_nearby <- ggplot(data = nearby_vax_merged) +
   scale_fill_gradient(low = "#EEEBF5",
                       high = "#674EA7",
                       labels = percent,
-                      guide = guide_legend(title = NULL)) +
+                      #guide = guide_legend(title = NULL)
+                      ) +
   geom_sf(data = nearby_cities_sf, size = .5) +
   geom_text(data = nearby_cities_sf, aes(x = lng, y = lat, label = city), 
             size = 2.9, col = "black", family = "Barlow",
             nudge_y = .05,
             nudge_x = -.02) +
   labs(title = "Percent of Population With At Least One Dose",
-       caption =  "Source: Illinois Department of Public Health")+
+       caption =  "Source: Illinois Department of Public Health",
+       fill = NULL)+
   #theme_minimal() +
   theme(text = element_text(family = "Barlow"),
         axis.text = element_blank(),
@@ -139,9 +163,10 @@ pct_partial_vax_nearby <- ggplot(data = nearby_vax_merged) +
         #panel.grid.major.x = element_line(colour = "grey93"),
         #legend.position = "none",
         panel.grid.major = element_blank(),  
-        legend.position = c(.1,.9),
+        legend.position = c(.1,.885),
         legend.background = element_blank(),
         legend.key = element_blank(),
+        legend.key.size = unit(.5, "cm"),
         panel.background = element_blank(),
         #legend.text = element_text(size = 13),
         plot.caption = element_text(colour = "grey40"),
@@ -221,7 +246,8 @@ case_rate_nearby <- ggplot(data = nearby_cases_merged) +
   scale_fill_gradient(low = "#F7EDE3",
                       high = "#B45F06",
                       # labels = percent,
-                      guide = guide_legend(title = NULL)) +
+                      # guide = guide_legend(title = NULL)
+                      ) +
   geom_sf(data = nearby_cities_sf, size = .5) +
   geom_text(data = nearby_cities_sf, aes(x = lng, y = lat, label = city), 
             size = 2.9, col = "black", family = "Barlow",
@@ -233,7 +259,8 @@ case_rate_nearby <- ggplot(data = nearby_cases_merged) +
   #           col = "black",
   #           family = "Barlow") +
   labs(title = "New Cases per 100,000 Residents",
-       caption =  "Source: Illinois Department of Public Health")+
+       caption =  "Source: Illinois Department of Public Health",
+       fill = NULL)+
   #theme_minimal() +
   theme(text = element_text(family = "Barlow"),
         axis.text = element_blank(),
@@ -246,6 +273,7 @@ case_rate_nearby <- ggplot(data = nearby_cases_merged) +
         legend.position = c(.1,.9),
         legend.background = element_blank(),
         legend.key = element_blank(),
+        legend.key.size = unit(.5, "cm"),
         panel.background = element_blank(),
         #legend.text = element_text(size = 13),
         plot.caption = element_text(colour = "grey40"),
