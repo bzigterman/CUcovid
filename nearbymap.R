@@ -287,6 +287,9 @@ ggsave("case_rate_nearby.png",
        width = 5, height = 5, dpi = 320)
 
 pct_fully_vax_nearby + 
+  labs(title = "Percent of Population Fully Vaccinated",
+       caption =  "",
+       fill = NULL)+
   theme(plot.title = element_text(size = 14, family = "Oswald"),
        # legend.text = element_text(size = 10),
         legend.position = "left") +
