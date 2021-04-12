@@ -86,11 +86,12 @@ ggplot(idph_vax_champaign, aes(x = as.Date(Date)))  +
   geom_area(aes(y = PercentDose1),
             #colour = "#BEB3D9",
             fill = "#d8cee8",
-            alpha = 1) +
+            colour = "#A897CC",
+            alpha = .6) +
   geom_area(aes(y = PctVaccinatedPopulation),
             colour = "#674EA7",
             fill = "#674EA7",
-            alpha = 1) +
+            alpha = .6) +
   annotate("text",
            x = as.Date("2021-02-14"),
            y = .12,
