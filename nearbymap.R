@@ -129,7 +129,7 @@ pct_fully_vax_nearby <- ggplot(data = nearby_vax_merged) +
         plot.title = element_text(size = 16, family = "Oswald")) 
 pct_fully_vax_nearby
 
-#ggsave("vax/pct_fully_vax_nearby.png", width = 5, height = 5, dpi = 320)
+ggsave("vax/pct_fully_vax_nearby.png", width = 5, height = 5, dpi = 320)
 ggsave("map/pct_fully_vax_nearby.png", width = 5, height = 5, dpi = 320)
 ggsave("pct_fully_vax_nearby.png", 
        path = "../bzigterman.github.io/images/",
@@ -173,7 +173,7 @@ pct_partial_vax_nearby <- ggplot(data = nearby_vax_merged) +
         plot.title = element_text(size = 16, family = "Oswald")) 
 pct_partial_vax_nearby
 
-ggsave("vax/pct_partial_vax_nearby.png", width = 5, height = 5, dpi = 320)
+#ggsave("vax/pct_partial_vax_nearby.png", width = 5, height = 5, dpi = 320)
 ggsave("map/pct_partial_vax_nearby.png", width = 5, height = 5, dpi = 320)
 ggsave("pct_partial_vax_nearby.png", 
        path = "../bzigterman.github.io/images/",
