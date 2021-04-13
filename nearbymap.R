@@ -286,6 +286,7 @@ ggsave("case_rate_nearby.png",
        path = "../bzigterman.github.io/images/",
        width = 5, height = 5, dpi = 320)
 
+# combined fully vax and case rate ----
 pct_fully_vax_nearby + 
   labs(title = "Percent of Population Fully Vaccinated",
        caption =  "",
@@ -308,3 +309,59 @@ ggsave("combined_case_vax.png",
        height = 8*(628/1200), 
        dpi = 320)
 
+# combined partial and fully vax ----
+pct_partial_vax_nearby + 
+  labs(title = "Percent With At Least One Dose",
+       caption =  "",
+       fill = NULL)+
+  theme(plot.title = element_text(size = 14, family = "Oswald"),
+        # legend.text = element_text(size = 10),
+        legend.position = "left") +
+  pct_fully_vax_nearby +
+  theme(plot.title = element_text(size = 14, family = "Oswald"),
+        #  legend.text = element_text(size = 10),
+        legend.position = "right") 
+
+ggsave("map/combined_partial_full_vax.png", 
+       width = 8, 
+       height = 8*(628/1200), 
+       dpi = 320)
+ggsave("combined_partial_full_vax.png", 
+       path = "../bzigterman.github.io/images/",
+       width = 8, 
+       height = 8*(628/1200), 
+       dpi = 320)
+
+# combined partil and full vax and case rate ----
+pct_partial_vax_nearby + 
+  labs(title = "Percent With At Least One Dose",
+       caption =  "",
+       fill = NULL)+
+  theme(plot.title = element_text(size = 14, family = "Oswald"),
+        # legend.text = element_text(size = 10),
+        legend.key.size = unit(.3, "cm"),
+        legend.position = "right") +
+  pct_fully_vax_nearby +
+  labs(title = "Percent Fully Vaccinated",
+       caption =  "",
+       fill = NULL)+
+  theme(plot.title = element_text(size = 14, family = "Oswald"),
+        #  legend.text = element_text(size = 10),
+        legend.key.size = unit(.3, "cm"),
+        legend.position = "right") +
+  case_rate_nearby +
+  theme(plot.title = element_text(size = 14, family = "Oswald"),
+        #  legend.text = element_text(size = 10),
+        legend.key.size = unit(.3, "cm"),
+        legend.position = "right") 
+
+ggsave("map/combined_partial_full_vax_cases.png", 
+       width = 8, 
+       height = 8*(628/1200), 
+       dpi = 320)
+ggsave("combined_partial_full_vax_cases.png", 
+       path = "../bzigterman.github.io/images/",
+       width = 8, 
+       height = 8*(628/1200), 
+       dpi = 320)
+ 
