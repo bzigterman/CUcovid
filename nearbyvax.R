@@ -138,7 +138,7 @@ vax_nearby <- full_join(vax_champaign, vax_vermilion) %>%
   full_join(vax_iroquois) %>%
   full_join(vax_dewitt) %>%
   full_join(vax_macon) %>%
-  full_join(vax_moultrie) %>%
+  #full_join(vax_moultrie) %>%
   full_join(vax_mclean) %>%
   #full_join(vax_coles) %>%
   #full_join(vax_illinois) %>%
@@ -640,7 +640,7 @@ ggplot(data = vax_nearby_facet,
         plot.caption = element_text(colour = "grey40"),
         plot.title = element_text(size = 24, family = "Oswald"))
 
-#ggsave("vax/nearbyfacet.png", width = 8, height = 6, dpi = 320)
+ggsave("vax/nearbyfacet_desc.png", width = 8, height = 6, dpi = 320)
 #ggsave("vax/card/nearbybothdosesCard.png", width = 8, height = 1256/300, dpi = 320)
 ggsave("nearbyfacet.png",
        path = "../bzigterman.github.io/images/",
@@ -649,10 +649,10 @@ ggsave("nearbyfacet.png",
 
 # geofacet grid ----
 nearbygrid <- data.frame(
-  name = c("Ford", "Iroquois", "McLean", "De Witt", "Champaign", "Vermilion", "Piatt", "Douglas", "Edgar", "Macon", "Moultrie"),
-  code = c("Ford", "Iroquois", "McLean", "De Witt", "Champaign", "Vermilion", "Piatt", "Douglas", "Edgar", "Macon", "Moultrie"),
-  row = c(1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3),
-  col = c(3, 4, 2, 1, 3, 4, 2, 3, 4, 1, 2),
+  name = c("Ford", "Iroquois", "McLean", "De Witt", "Champaign", "Vermilion", "Piatt", "Douglas", "Edgar", "Macon"),
+  code = c("Ford", "Iroquois", "McLean", "De Witt", "Champaign", "Vermilion", "Piatt", "Douglas", "Edgar", "Macon"),
+  row = c(1, 1, 1, 2, 2, 2, 2, 3, 3, 3),
+  col = c(3, 4, 2, 1, 3, 4, 2, 3, 4, 1),
   stringsAsFactors = FALSE
 )
 write_csv(nearbygrid,"nearbygrid.csv")
