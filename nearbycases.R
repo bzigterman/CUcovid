@@ -167,7 +167,7 @@ idph_cases_nearby <- full_join(idph_cases_champaign, idph_cases_vermilion) %>%
   full_join(idph_cases_iroquois) %>%
   full_join(idph_cases_dewitt) %>%
   full_join(idph_cases_macon) %>%
-  full_join(idph_cases_moultrie) %>%
+  #full_join(idph_cases_moultrie) %>%
   full_join(idph_cases_mclean) %>%
   mutate(Date = ymd_hms(reportDate)) %>%
   mutate(new_case_rate = (100000*avg_new_cases)/population) %>%
