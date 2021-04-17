@@ -92,30 +92,30 @@ ggplot(idph_vax_champaign, aes(x = as.Date(Date)))  +
             colour = "#674EA7",
             fill = "#674EA7",
             alpha = .6) +
-  annotate("text",
-           x = as.Date("2021-02-14"),
-           y = .12,
-           label = "At least \none dose",
-           # label = paste("Partially \nvaccinated:\n",
-           #               percent(tail(idph_vax_champaign, 1)$PercentDose1,
-           #                       accuracy = .1)),
-           colour = "black",
-           family = "Barlow",
-           # fontface = "bold",
-           # hjust = 0
-           size = 6) +
-  annotate("text",
-           x = as.Date("2021-03-10"),
-           y = .07,
-           label = "Fully \nvaccinated",
-           # label = paste("Fully \nvaccinated:\n",
-           #               percent(tail(idph_vax_champaign, 1)$PctVaccinatedPopulation,
-           #                       accuracy = .1)),
-           colour = "white",
-           family = "Barlow",
-           # fontface = "bold",
-           # hjust = 1
-           size = 6) +
+  # annotate("text",
+  #          x = as.Date("2021-02-14"),
+  #          y = .12,
+  #          label = "At least \none dose",
+  #          # label = paste("Partially \nvaccinated:\n",
+  #          #               percent(tail(idph_vax_champaign, 1)$PercentDose1,
+  #          #                       accuracy = .1)),
+  #          colour = "black",
+  #          family = "Barlow",
+  #          # fontface = "bold",
+  #          # hjust = 0
+  #          size = 6) +
+  # annotate("text",
+  #          x = as.Date("2021-04-04"),
+  #          y = .14,
+  #          label = "Fully \nvaccinated",
+  #          # label = paste("Fully \nvaccinated:\n",
+  #          #               percent(tail(idph_vax_champaign, 1)$PctVaccinatedPopulation,
+  #          #                       accuracy = .1)),
+  #          colour = "white",
+  #          family = "Barlow",
+  #          # fontface = "bold",
+  #          # hjust = 1
+  #          size = 6) +
   # geom_text(aes(label = paste("Partially vaccinated:",
   #                              percent(PercentDose1, accuracy = .1))),
   #            data = tail(idph_vax_champaign, 1),
@@ -136,7 +136,8 @@ ggplot(idph_vax_champaign, aes(x = as.Date(Date)))  +
 #            family = "Barlow") +
 xlab(NULL) +
   ylab(NULL) +
-  scale_y_continuous(labels = label_percent(accuracy = .1), 
+  scale_y_continuous(labels =  c(0,paste(percent(max(idph_vax_champaign$PctVaccinatedPopulation),.1),"fully\nvaccinated"),
+                                 paste(percent(max(idph_vax_champaign$PercentDose1),.1),"with\nat least\none dose")), 
                      position = "right",
                      expand = expansion(mult = c(0,.05)),
                      breaks = c(0,
