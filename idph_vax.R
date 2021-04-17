@@ -136,7 +136,8 @@ ggplot(idph_vax_champaign, aes(x = as.Date(Date)))  +
 #            family = "Barlow") +
 xlab(NULL) +
   ylab(NULL) +
-  scale_y_continuous(labels =  c(0,paste(percent(max(idph_vax_champaign$PctVaccinatedPopulation),.1),"fully\nvaccinated"),
+  scale_y_continuous(labels =  c(0,
+                                 paste(percent(max(idph_vax_champaign$PctVaccinatedPopulation),.1),"fully\nvaccinated"),
                                  paste(percent(max(idph_vax_champaign$PercentDose1),.1),"with\nat least\none dose")), 
                      position = "right",
                      expand = expansion(mult = c(0,.05)),
