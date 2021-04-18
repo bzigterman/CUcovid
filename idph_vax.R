@@ -271,12 +271,12 @@ ggplot(idph_vax_champaign, aes(x = as.Date(Date),
         plot.caption = element_text(colour = "grey40"),
         plot.title = element_text(size = 18, family = "Oswald")) 
 
-ggsave("vax/VaccineProjection.png", width = 8, height = 8*(628/1200), dpi = 320)
+#ggsave("vax/VaccineProjection.png", width = 8, height = 8*(628/1200), dpi = 320)
 ggsave("VaccineProjection.png", 
        path = "../bzigterman.github.io/images/",
        width = 8, height = 8*(628/1200), dpi = 320)
 
-# fully vaccinated projection ----
+# full vax projection ----
 
 avgdose2change <- mean(tail(idph_vax_champaign$Dose2Change,7), na.rm = TRUE)
 xmin <- max(as.Date(idph_vax_champaign$Date))
@@ -305,7 +305,7 @@ full_vax <- projected_full %>%
 
 # write_clip(paste("In the past week, an average of ",comma(avgdose1change)," new Champaign County residents received their first dose of the COVID-19 vaccine each day.\n\nIf that pace continued, half of Champaign County residents could recive their first dose by ",month(half_vax$Date, label = TRUE, abbr = FALSE)," ",mday(half_vax$Date),", and the entire county would be vaccinated around ",month(full_vax$Date, label = TRUE, abbr = FALSE)," ",mday(full_vax$Date),".\n\nOf course, the pace is expected to vary as more vaccines are approved, shipments vary, people hesitate and eligibility expands.\n\nAlready, ",percent(current_vax$PercentDose1)," of Champaign County residents have received their first dose, according to the Illinois Department of Public Health.\n\nBy comparison, half the country is expected to receive its first COVID-19 dose around xx, according to The New York Times. https://www.nytimes.com/interactive/2020/us/covid-19-vaccine-doses.html",sep="")) # paste text to clipboard
 
-# first dose projection plot 
+# full vax projection plot ----
 ggplot(idph_vax_champaign, aes(x = as.Date(Date),
                                y = PctVaccinatedPopulation)) +
   geom_line(colour = "#800080", # actual line 
@@ -385,7 +385,7 @@ ggplot(idph_vax_champaign, aes(x = as.Date(Date),
         plot.caption = element_text(colour = "grey40"),
         plot.title = element_text(size = 18, family = "Oswald")) 
 
-ggsave("vax/FullVaccineProjection.png", width = 8, height = 8*(628/1200), dpi = 320)
+#ggsave("vax/FullVaccineProjection.png", width = 8, height = 8*(628/1200), dpi = 320)
 ggsave("FullVaccineProjection.png",
        path = "../bzigterman.github.io/images/",
        width = 8, height = 8*(628/1200), dpi = 320)

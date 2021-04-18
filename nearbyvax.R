@@ -702,7 +702,7 @@ ggplot(data = vax_nearby_facet,
         plot.caption = element_text(colour = "grey40"),
         plot.title = element_text(size = 24, family = "Oswald"))
 
-ggsave("vax/nearbygeofacet.png", width = 8, height = 6, dpi = 320)
+#ggsave("vax/nearbygeofacet.png", width = 8, height = 6, dpi = 320)
 ggsave("nearbygeofacet.png", 
        path = "../bzigterman.github.io/images/",
        width = 8, height = 6, dpi = 320)
