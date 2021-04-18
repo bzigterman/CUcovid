@@ -1,10 +1,16 @@
 zipurl <- "https://idph.illinois.gov/DPHPublicInformation/api/COVIDExport/GetZip?format=csv"
 countysnapshoturl <- "https://idph.illinois.gov/DPHPublicInformation/api/COVIDExport/GetCountyTestResults?format=csv"
 hospitalizationurl <- "https://idph.illinois.gov/DPHPublicInformation/api/COVIDExport/GetHospitalUtilizationResults?format=csv"
+countysnapshotvaxurl <- "https://idph.illinois.gov/DPHPublicInformation/api/COVIDVaccine/getVaccineAdministrationCurrent"
+
+# ilzips <- get_acs(state = "IL", geography = "zcta", 
+#                   variables = "B19013_001", geometry = TRUE)
 
 state_cases_map_csv <- rio::import(countysnapshoturl,
                              format = "csv") 
-
+state_vax_map_csv <- rio::import(countysnapshotvaxurl,
+                                   format = "json") 
+state_vax_map_csv <- state_vax_map_csv$VaccineAdministration
 
 ratesurl <- "https://idph.illinois.gov/DPHPublicInformation/api/COVIDExport/GetCountyRates?format=csv"
 
@@ -15,6 +21,18 @@ state_rates_csv <- rio::import(ratesurl,
   mutate(GEOID = fips("IL", county = County))
 state_rates_merged <- merge(il_counties, state_rates_csv,
                             by = "GEOID")
+
+state_vax_clean <- state_vax_map_csv %>%
+  filter(CountyName != "Unknown") %>%
+  filter(CountyName != "Chicago") %>%
+  filter(CountyName != "Illinois") %>%
+  filter(CountyName != "Out Of State") %>%
+  mutate(GEOID = fips("IL", county = CountyName))
+state_vax_merged <- merge(il_counties, state_vax_clean,
+                          by = "GEOID")
+
+il_zip_cases <- rio::import(zipurl,
+                            format = "csv") 
 
 # total case rate plot ----
 state_total_case_rate_map <- ggplot(data = state_rates_merged) + 
@@ -90,3 +108,35 @@ state_total_death_rate_map <- ggplot(data = state_rates_merged) +
         plot.title = element_text(size = 16, family = "Oswald")) 
 state_total_death_rate_map
 
+# fully vaccinated plot ----
+state_fully_vax_map <- ggplot(data = state_vax_merged) + 
+  geom_sf(data = state_vax_merged,
+          mapping = aes(fill = PctVaccinatedPopulation),
+          # color = "grey",
+          size = .25) +
+  scale_fill_gradient(low = "#EEEBF5",
+                      high = "#674EA7",
+                      labels = percent) +
+  labs(title = "Percent Fully Vaccinated",
+       caption =  "Source: Illinois Department of Public Health",
+       fill = NULL)+
+  #theme_minimal() +
+  theme(text = element_text(family = "Barlow"),
+        axis.text = element_blank(),
+        axis.line.x = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank(),
+        #panel.grid.major.x = element_line(colour = "grey93"),
+        #legend.position = "none",
+        panel.grid.major = element_blank(),  
+        legend.position = c(.1,.9),
+        legend.background = element_blank(),
+        legend.key = element_blank(),
+        legend.key.size = unit(.5, "cm"),
+        panel.background = element_blank(),
+        #legend.text = element_text(size = 13),
+        plot.caption = element_text(colour = "grey40"),
+        plot.title = element_text(size = 16, family = "Oswald")) 
+state_fully_vax_map
+
+state_total_death_rate_map + state_fully_vax_map
