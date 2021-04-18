@@ -34,6 +34,19 @@ state_vax_merged <- merge(il_counties, state_vax_clean,
 il_zip_cases <- rio::import(zipurl,
                             format = "csv") 
 
+# chicago_outline <- st_read(dsn = "Chicago",package = "sf")
+# chicago_outline <- system.file(dsn = "Chicago",package = "sf")
+# chicago_outline <- read_sf(dsn = "Chicago/geo_export_fed7fb1c-918b-490b-9aa3-4d19f22a3ca9.shp",package = "sf")
+# ?read_sf
+# chicago_outline <-rio::import("https://data.cityofchicago.org/resource/qqq8-j68g.json",
+#             format = "json") 
+# 
+# chicago_outline <- chicago_outline %>%
+#   mutate(NAME = name) %>%
+#   mutate(geometry = the_geom)
+# 
+# il_counties_chicago <- full_join(chicago_outline, il_counties)
+# ?full_join
 # total case rate plot ----
 state_total_case_rate_map <- ggplot(data = state_rates_merged) + 
   geom_sf(data = state_rates_merged,
