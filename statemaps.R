@@ -155,9 +155,11 @@ state_total_death_rate_map <- ggplot(data = state_rates_merged) +
           mapping = aes(fill = deaths_rate_per_10k),
           # color = "grey",
           size = .25) +
+  # scale_fill_gradientn(colours = plasma(100,direction = 1),
+  #                      labels = scales::comma) +
   scale_fill_gradient(low = "#FADBDB",
                       high = "#d90000",
-                      labels = comma) +
+                      labels = scales::comma) +
   labs(title = "Total Deaths per 100,000 Residents",
       # subtitle="Per 100,000 residents",
        caption =  "Source: Illinois Department of Public Health",
@@ -187,9 +189,11 @@ state_fully_vax_map <- ggplot(data = state_vax_merged) +
           mapping = aes(fill = PctVaccinatedPopulation),
           # color = "grey",
           size = .25) +
+  # scale_fill_gradientn(colours = cividis(100,direction = 1),
+  #                      labels = scales::percent) +
   scale_fill_gradient(low = "#EEEBF5",
                       high = "#674EA7",
-                      labels = percent) +
+                      labels = scales::percent) +
   labs(title = "Percent Fully Vaccinated",
        caption =  "Source: Illinois Department of Public Health",
        fill = NULL)+
@@ -211,7 +215,7 @@ state_fully_vax_map <- ggplot(data = state_vax_merged) +
         plot.caption = element_text(colour = "grey40"),
         plot.title = element_text(size = 16, family = "Oswald")) 
 state_fully_vax_map
-
+library(viridisLite)
 state_total_death_rate_map + 
   labs(title = "Total Deaths per 100,000 Residents",
       # subtitle="Per 100,000 residents",
