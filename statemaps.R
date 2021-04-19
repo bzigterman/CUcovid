@@ -228,7 +228,7 @@ state_total_death_rate_map +
         legend.position = "left") +
   state_fully_vax_map +
   theme(plot.title = element_text(size = 10, family = "Oswald"),
-        legend.position = "right") +
+        legend.position = "right")
   
 ggsave("map/IL_deaths_vax_map.png", width = 8, height = 8*(628/1200), dpi = 320)
 ggsave("IL_deaths_vax_map.png", 
