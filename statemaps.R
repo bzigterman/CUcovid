@@ -224,10 +224,12 @@ state_total_death_rate_map +
   labs(title = "Total Deaths per 100,000 Residents",
       # subtitle="Per 100,000 residents",
        caption =  "") +
-  theme(plot.title = element_text(size = 10, family = "Oswald"),
+  theme(plot.title = element_text(size = 10, family = "Oswald",
+                                  hjust = .5),
         legend.position = "left") +
   state_fully_vax_map +
-  theme(plot.title = element_text(size = 10, family = "Oswald"),
+  theme(plot.title = element_text(size = 10, family = "Oswald",
+                                  hjust = .5),
         legend.position = "right")
   
 ggsave("map/IL_deaths_vax_map.png", width = 8, height = 8*(628/1200), dpi = 320)
