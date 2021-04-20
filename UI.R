@@ -1,6 +1,4 @@
 library(googlesheets4)
-#library(dplyr)
-#library(ggplot2)
 library(scales)
 library(zoo)
 library(patchwork)

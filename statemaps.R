@@ -1,3 +1,13 @@
+library(maps)
+library(sf)
+library(tidyverse)
+library(usmap)
+#library(tmap)
+library(tidycensus)
+#library(ggmap)
+library(ggspatial)
+library(patchwork)
+options(tigris_use_cache = TRUE)
 
 # getshapefiles ready ----
 
