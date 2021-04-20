@@ -199,13 +199,12 @@ state_fully_vax_map <- ggplot(data = state_vax_merged) +
           mapping = aes(fill = PctVaccinatedPopulation),
           # color = "grey",
           size = .25) +
-   # scale_fill_gradientn(colours = c("#e5c7ff",
-   #                                  "#9e72c4",
-   #                                  "#703e9c",
-   #                                  "#6b2e8f",
-   #                                  "#4d166e"),
+   # scale_fill_gradientn(colours = c("#D9D3E9",
+   #                                  "#B3A7D3",
+   #                                  "#8D7ABD",
+   #                                  "#674EA7"),
    #                      labels = scales::percent) +
-  scale_fill_gradient(low = "#EEEBF5",
+  scale_fill_gradient(low = "#F3F1F8",
                       high = "#674EA7",
                       labels = scales::percent) +
   labs(title = "Percent Fully Vaccinated",
