@@ -72,3 +72,7 @@ write.csv(zip_pops_nearby, "zip_pops_nearby.csv")
 
 zc <- get_acs(geography = "zip code tabulation area", variables = "DECENNIALSF12010.P1")
 
+library(zipcodeR)
+champaignzips <- search_county("Champaign","IL") %>%
+  select(zipcode,major_city,post_office_city,county,population) %>%
+  mutate(ifzcta = is_zcta(zipcode))
