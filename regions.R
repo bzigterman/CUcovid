@@ -32,3 +32,43 @@ region 10: Cook
 
 region 11: Chicago
 
+
+
+nearbyzips <- c(61820,
+                61824)
+
+
+get_decennial(geography = zcta)
+get_decennial(geography = "zcta",
+              state = "IL",
+              county = "Champaign",
+              year = 2010,
+              variables = 61820,
+              summary_var = "P001001")
+get_estimates(geography = "zcta",
+              state = "IL",
+              county = "Champaign",
+              product = "population")
+
+get_acs(geography = "zip code tabulation area", 
+        state = "IL",
+        county = "Champaign",
+        zcta = 61701,
+        variables = "B01001",
+        summary_var = "B01001_001",
+        year = 2015)
+zip_pops <- get_acs(geography = "zip code tabulation area", 
+        state = "IL",
+        #county = "McLean",
+        year = 2019,
+        variables = "B01001_001"
+        #table = "B01001" 
+        ) 
+zip_pops_nearby <- zip_pops %>%
+  filter(GEOID %in% nearbyzips) %>%
+  select(GEOID, estimate)
+write.csv(zip_pops_nearby, "zip_pops_nearby.csv")
+  
+
+zc <- get_acs(geography = "zip code tabulation area", variables = "DECENNIALSF12010.P1")
+
