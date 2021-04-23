@@ -36,6 +36,9 @@ idph_vax_champaign <- rio::import("https://idph.illinois.gov/DPHPublicInformatio
 
 write.csv(idph_vax_champaign,"idph/vax_champaign.csv", row.names = FALSE)
 write_clip(tail(idph_vax_champaign$Text, n = 1)) # paste text to clipboard
+top_vax_days <- idph_vax_champaign %>%
+  arrange(desc(AdministeredCountChange)) %>%
+  select(AdministeredCountChange, Date)
 
 # new vaccines administered chart copy ----
 pivoted_vax_champaign <- idph_vax_champaign %>%
