@@ -521,7 +521,7 @@ ggplot(last_vax_nearby, aes(y = reorder(CountyName,
                           CountyName == topcounty),
             aes(x = PercentDose1,
                 label = paste(percent(PercentDose1, .1),
-                              "has received at least one dose")),
+                              "with at least one dose")),
             hjust = -0.02,
             size = 3.5,
             family = "Barlow") +
