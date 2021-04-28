@@ -11,6 +11,52 @@ cdc_county_vaccine <- cdc_county_vaccine %>%
 cdc_vaccines_geo_merged <- merge(cdc_county_vaccine,
                                  il_counties_clean,
                                  by = "GEOID")  
+cdc_vax_merged_longer <- cdc_vaccines_geo_merged %>%
+  select(County, 
+         Series_Complete_Pop_Pct,
+         Series_Complete_65PlusPop_Pct,
+         geometry) %>%
+  mutate(Total = Series_Complete_Pop_Pct) %>%
+  mutate(Seniors = Series_Complete_65PlusPop_Pct) %>%
+  pivot_longer(cols = c(Total,
+                        Seniors),
+               names_to = "age",
+               values_to = "percent") 
+
+# state cdc map facet
+cdc_vax_map <- ggplot(data = cdc_vax_merged_longer) +
+  geom_sf(data = cdc_vax_merged_longer,
+          mapping = aes(fill = percent/100,
+                        geometry = geometry),
+          size = .25) +
+  coord_sf(crs = st_crs(4326)) +
+  scale_fill_gradient(low = "#F3F1F8",
+                      high = "#674EA7",
+                      labels = scales::percent) +
+  labs(title = "Percent Vaccinated",
+       caption =  "Source: CDC",
+       fill = NULL)+
+  facet_wrap(~ age) +
+  theme(text = element_text(family = "Barlow"),
+        axis.text = element_blank(),
+        axis.line.x = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank(),
+        #panel.grid.major.x = element_line(colour = "grey93"),
+        legend.position = "right",
+        panel.grid.major = element_blank(),  
+        #legend.position = c(.1,.9),
+        legend.background = element_blank(),
+        legend.key = element_blank(),
+        legend.key.size = unit(.5, "cm"),
+        panel.background = element_blank(),
+        strip.text = element_text(size = 11),
+        strip.background = element_blank(),
+        #legend.text = element_text(size = 13),
+        plot.caption = element_text(colour = "grey40"),
+        plot.title = element_text(size = 16, family = "Oswald")) 
+
+cdc_vax_map
 
 # pct 65+ map
 cdc_total_vax_65 <- ggplot(data = cdc_vaccines_geo_merged) +
