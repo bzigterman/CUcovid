@@ -1,3 +1,5 @@
+# cdc vaccines ----
+
 cdc_county_vaccine_url <- "https://covid.cdc.gov/covid-data-tracker/COVIDData/getAjaxData?id=vaccination_county_condensed_data"
 cdc_county_vaccine <- rio::import(cdc_county_vaccine_url,
                                   format = "json")
@@ -158,3 +160,8 @@ ggsave("CDC_vax_combined.png",
        path = "../bzigterman.github.io/images/",
        width = 8, height = 8*(628/1200), dpi = 320)
 
+# cdc cases ----
+cdc_cases_url <- "https://covid.cdc.gov/covid-data-tracker/COVIDData/getAjaxData?id=US_MAP_DATA"
+cdc_cases <- rio::import(cdc_cases_url,
+                         format = "json")
+cdc_cases <- cdc_cases$US_MAP_DATA
