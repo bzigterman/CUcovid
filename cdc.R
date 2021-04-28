@@ -175,7 +175,7 @@ cdc_cases_merged <- merge(cdc_cases,
 
 cdc_cases_map <- ggplot(data = cdc_cases_merged) +
   geom_sf(data = cdc_cases_merged,
-          mapping = aes(fill = cases_per_100K_7_day_count_change,
+          mapping = aes(fill = cases_per_100K_7_day_count_change/7,
                         geometry = geometry),
           #crs = 4326,
           #crs = "NAD83",
@@ -185,7 +185,7 @@ cdc_cases_map <- ggplot(data = cdc_cases_merged) +
                       high = "#B45F06",
                       labels = scales::comma) +
   labs(title = "New Cases per 100,000 Residents",
-       subtitle = "Over past seven days",
+       subtitle = "Average over past seven days",
        caption =  "Source: CDC",
        fill = NULL)+
   #theme_minimal() +
@@ -213,12 +213,12 @@ ggsave("CDC_cases_IL.png",
 
 cdc_cases_map + 
   labs(title = "New Cases per 100,000 Residents",
-       subtitle = "Over past seven days",
+       subtitle = "Average over past seven days",
        caption =  NULL,
        fill = NULL)+
   theme(plot.title = element_text(size = 12)#,
         #legend.position = "left"
-        ) +
+  ) +
   cdc_total_vax +
   theme(plot.title = element_text(size = 12)) 
 ggsave("map/CDC_cases_vax_IL.png", width = 8, height = 8*(628/1200), dpi = 320)
