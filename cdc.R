@@ -101,7 +101,7 @@ cdc_total_vax +
   cdc_total_vax_65 +
   labs(title = NULL,
        subtitle = "65 and older",
-       caption =  NULL,
+       #caption =  NULL,
        fill = NULL) +
   theme(legend.position = "right",
         plot.subtitle = element_text(size = 12, 
