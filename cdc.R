@@ -161,7 +161,67 @@ ggsave("CDC_vax_combined.png",
        width = 8, height = 8*(628/1200), dpi = 320)
 
 # cdc cases ----
-cdc_cases_url <- "https://covid.cdc.gov/covid-data-tracker/COVIDData/getAjaxData?id=US_MAP_DATA"
+cdc_cases_url <- "https://covid.cdc.gov/covid-data-tracker/COVIDData/getAjaxData?id=integrated_county_latest_external_data"
 cdc_cases <- rio::import(cdc_cases_url,
                          format = "json")
-cdc_cases <- cdc_cases$US_MAP_DATA
+cdc_cases <- cdc_cases$integrated_county_latest_external_data
+cdc_cases <- cdc_cases %>%
+  filter(State_name == "Illinois") %>%
+  mutate(GEOID = fips_code)
+
+cdc_cases_merged <- merge(cdc_cases,
+                          il_counties_clean,
+                          by = "GEOID")
+
+cdc_cases_map <- ggplot(data = cdc_cases_merged) +
+  geom_sf(data = cdc_cases_merged,
+          mapping = aes(fill = cases_per_100K_7_day_count_change,
+                        geometry = geometry),
+          #crs = 4326,
+          #crs = "NAD83",
+          size = .25) +
+  coord_sf(crs = st_crs(4326)) +
+  scale_fill_gradient(low = "#F7EDE3",
+                      high = "#B45F06",
+                      labels = scales::comma) +
+  labs(title = "New Cases per 100,000 Residents",
+       subtitle = "Over past seven days",
+       caption =  "Source: CDC",
+       fill = NULL)+
+  #theme_minimal() +
+  theme(text = element_text(family = "Barlow"),
+        axis.text = element_blank(),
+        axis.line.x = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank(),
+        #panel.grid.major.x = element_line(colour = "grey93"),
+        legend.position = "right",
+        panel.grid.major = element_blank(),  
+        #legend.position = c(.1,.9),
+        legend.background = element_blank(),
+        legend.key = element_blank(),
+        legend.key.size = unit(.5, "cm"),
+        panel.background = element_blank(),
+        #legend.text = element_text(size = 13),
+        plot.caption = element_text(colour = "grey40"),
+        plot.title = element_text(size = 16, family = "Oswald")) 
+cdc_cases_map
+ggsave("map/CDC_cases_IL.png", width = 8, height = 8*(628/1200), dpi = 320)
+ggsave("CDC_cases_IL.png", 
+       path = "../bzigterman.github.io/images/",
+       width = 8, height = 8*(628/1200), dpi = 320)
+
+cdc_cases_map + 
+  labs(title = "New Cases per 100,000 Residents",
+       subtitle = "Over past seven days",
+       caption =  NULL,
+       fill = NULL)+
+  theme(plot.title = element_text(size = 12)#,
+        #legend.position = "left"
+        ) +
+  cdc_total_vax +
+  theme(plot.title = element_text(size = 12)) 
+ggsave("map/CDC_cases_vax_IL.png", width = 8, height = 8*(628/1200), dpi = 320)
+ggsave("CDC_cases_vax_IL.png", 
+       path = "../bzigterman.github.io/images/",
+       width = 8, height = 8*(628/1200), dpi = 320)
