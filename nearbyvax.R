@@ -607,7 +607,7 @@ ggplot(data = vax_nearby_facet,
                                  "Fully vaccinated"),
                       values = c("#A897CC","#674EA7"),
                       guide = guide_legend(title = NULL)) +
-  scale_y_continuous(labels = percent,
+  scale_y_continuous(labels = scales::label_percent(accuracy = 1.),
                      position = "right"
                      # breaks = c(0,
                      #            max(vax_nearby_facet$Percent),
@@ -669,7 +669,7 @@ ggplot(data = vax_nearby_facet,
                                  "Fully vaccinated"),
                       values = c("#A897CC","#674EA7"),
                       guide = guide_legend(title = NULL)) +
-  scale_y_continuous(labels = percent,
+  scale_y_continuous(labels = scales::label_percent(accuracy = 1.),
                      position = "right"
                      # breaks = c(0,
                      #            max(vax_nearby_facet$Percent),
