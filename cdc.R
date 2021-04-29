@@ -71,7 +71,7 @@ cdc_total_vax_65 <- ggplot(data = cdc_vaccines_geo_merged) +
   coord_sf(crs = st_crs(4326)) +
   scale_fill_gradient(low = "#F3F1F8",
                       high = "#674EA7",
-                      labels = scales::percent) +
+                      labels = scales::label_percent(accuracy = 1.)) +
   labs(title = "Percent Fully Vaccinated 65+",
        caption =  "Source: CDC",
        fill = NULL)+
@@ -110,7 +110,7 @@ cdc_total_vax <- ggplot(data = cdc_vaccines_geo_merged) +
   coord_sf(crs = st_crs(4326)) +
   scale_fill_gradient(low = "#F3F1F8",
                       high = "#674EA7",
-                      labels = scales::percent) +
+                      labels = scales::label_percent(accuracy = 1.)) +
   labs(title = "Percent Fully Vaccinated",
        caption =  "Source: CDC",
        fill = NULL)+
