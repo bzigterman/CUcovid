@@ -159,7 +159,7 @@ idph_cases_mclean <- idph_cases_mclean$values %>%
 
 idph_cases_nearby <- full_join(idph_cases_champaign, idph_cases_vermilion) %>%
   full_join(idph_cases_ford) %>%
-  full_join(idph_cases_edgar) %>%
+  #full_join(idph_cases_edgar) %>%
   full_join(idph_cases_douglas) %>%
   full_join(idph_cases_piatt) %>%
   full_join(idph_cases_iroquois) %>%

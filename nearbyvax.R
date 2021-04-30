@@ -130,7 +130,7 @@ vax_illinois <- rio::import("https://idph.illinois.gov/DPHPublicInformation/api/
 
 vax_nearby <- full_join(vax_champaign, vax_vermilion) %>%
   full_join(vax_ford) %>%
-  full_join(vax_edgar) %>%
+  #full_join(vax_edgar) %>%
   full_join(vax_douglas) %>%
   full_join(vax_piatt) %>%
   full_join(vax_iroquois) %>%
@@ -618,7 +618,7 @@ ggplot(data = vax_nearby_facet,
   ylab(NULL) +
   #expand_limits(y = 0) +
   #guides(fill = guide_legend(reverse = TRUE)) +
-  facet_wrap(~ CountyName) + 
+  facet_wrap(~ CountyName, ncol = 4) + 
   labs(title = "Percent of Total Population Vaccinated in Nearby Counties",
        #subtitle =  "With seven-day moving average",
        caption = "Source: Illinois Department of Public Health. Note: Counties organized in descending order.")+
@@ -647,10 +647,10 @@ ggsave("nearbyfacet.png",
 
 # geofacet grid ----
 nearbygrid <- data.frame(
-  name = c("Ford", "Iroquois", "McLean", "De Witt", "Champaign", "Vermilion", "Piatt", "Douglas", "Edgar", "Macon"),
-  code = c("Ford", "Iroquois", "McLean", "De Witt", "Champaign", "Vermilion", "Piatt", "Douglas", "Edgar", "Macon"),
-  row = c(1, 1, 1, 2, 2, 2, 2, 3, 3, 3),
-  col = c(3, 4, 2, 1, 3, 4, 2, 3, 4, 1),
+  name = c("Ford", "Iroquois", "McLean", "De Witt", "Champaign", "Vermilion", "Piatt", "Douglas", "Macon"),
+  code = c("Ford", "Iroquois", "McLean", "De Witt", "Champaign", "Vermilion", "Piatt", "Douglas", "Macon"),
+  row = c(1, 1, 1, 2, 2, 2, 2, 3, 3),
+  col = c(3, 4, 2, 1, 3, 4, 2, 3, 1),
   stringsAsFactors = FALSE
 )
 write_csv(nearbygrid,"nearbygrid.csv")
