@@ -7,7 +7,10 @@ cdc_county_vaccine <- cdc_county_vaccine$vaccination_county_condensed_data
 cdc_county_vaccine <- cdc_county_vaccine %>%
   filter(StateName == "Illinois") %>%
   filter(County != "Unknown County") %>%
-  mutate(GEOID = FIPS)
+  mutate(GEOID = FIPS) %>%
+  mutate(date = ymd(as_date(Date))) %>%
+  mutate(short_date = paste(month(date, label = TRUE, abbr = FALSE),
+                            mday(date)))
 
 
 cdc_vaccines_geo_merged <- merge(cdc_county_vaccine,
@@ -39,7 +42,8 @@ cdc_vax_map <- ggplot(data = cdc_vax_merged_longer) +
                       high = "#674EA7",
                       labels = scales::percent) +
   labs(title = "Percent Vaccinated",
-       caption =  "Source: CDC",
+       caption =  paste("Source: CDC. Data last updated",
+                        tail(cdc_vaccines_geo_merged$short_date,1)),
        fill = NULL)+
   facet_wrap(~ age) +
   theme(text = element_text(family = "Barlow"),
@@ -76,7 +80,8 @@ cdc_total_vax_65 <- ggplot(data = cdc_vaccines_geo_merged) +
                       high = "#674EA7",
                       labels = scales::label_percent(accuracy = 1.)) +
   labs(title = "Percent Fully Vaccinated 65+",
-       caption =  "Source: CDC",
+       caption =  paste("Source: CDC. Data last updated",
+                        tail(cdc_vaccines_geo_merged$short_date,1)),
        fill = NULL)+
   #theme_minimal() +
   theme(text = element_text(family = "Barlow"),
@@ -116,7 +121,8 @@ cdc_total_vax_18 <- ggplot(data = cdc_vaccines_geo_merged) +
                       high = "#674EA7",
                       labels = scales::label_percent(accuracy = 1.)) +
   labs(title = "Percent Fully Vaccinated 18+",
-       caption =  "Source: CDC",
+       caption =  paste("Source: CDC. Data last updated",
+                        tail(cdc_vaccines_geo_merged$short_date,1)),
        fill = NULL)+
   #theme_minimal() +
   theme(text = element_text(family = "Barlow"),
@@ -155,7 +161,8 @@ cdc_total_vax <- ggplot(data = cdc_vaccines_geo_merged) +
                       high = "#674EA7",
                       labels = scales::label_percent(accuracy = 1.)) +
   labs(title = "Percent Fully Vaccinated",
-       caption =  "Source: CDC",
+       caption =  paste("Source: CDC. Data last updated",
+                        tail(cdc_vaccines_geo_merged$short_date,1)),
        fill = NULL)+
   #theme_minimal() +
   theme(text = element_text(family = "Barlow"),
@@ -220,7 +227,11 @@ cdc_cases <- rio::import(cdc_cases_url,
 cdc_cases <- cdc_cases$integrated_county_latest_external_data
 cdc_cases <- cdc_cases %>%
   filter(State_name == "Illinois") %>%
-  mutate(GEOID = fips_code)
+  mutate(GEOID = fips_code) %>%
+  mutate(date = ymd(as_date(report_date))) %>%
+  mutate(short_date = paste(month(date, label = TRUE, abbr = FALSE),
+                            mday(date)))
+  
 
 cdc_cases_merged <- merge(cdc_cases,
                           il_counties_clean,
@@ -239,7 +250,8 @@ cdc_cases_map <- ggplot(data = cdc_cases_merged) +
                       labels = scales::comma) +
   labs(title = "New Cases per 100,000 Residents",
        subtitle = "Average over past seven days",
-       caption =  "Source: CDC",
+       caption =  paste("Source: CDC. Data last updated",
+                        tail(cdc_cases_merged$short_date,1)),
        fill = NULL)+
   #theme_minimal() +
   theme(text = element_text(family = "Barlow"),
@@ -264,6 +276,7 @@ ggsave("CDC_cases_IL.png",
        path = "../bzigterman.github.io/images/",
        width = 8, height = 8*(628/1200), dpi = 320)
 
+# combined cases and vax ----
 cdc_cases_map + 
   labs(title = "New Cases per 100,000 Residents",
        subtitle = "Average over past seven days",
