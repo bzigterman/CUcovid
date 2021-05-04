@@ -180,6 +180,7 @@ ggsave("CDC_vax_total.png",
        path = "../bzigterman.github.io/images/",
        width = 8, height = 8*(628/1200), dpi = 320)
 
+# combined vax maps ----
 cdc_total_vax + 
   labs(title = "Percent Fully Vaccinated",
        subtitle = "Total Population",
@@ -207,6 +208,7 @@ cdc_total_vax +
                                      hjust = .6))
   
 ggsave("map/CDC_vax_combined.png", width = 8, height = 8*(628/1200), dpi = 320)
+ggsave("vax/CDC_vax_combined.png", width = 8, height = 8*(628/1200), dpi = 320)
 ggsave("CDC_vax_combined.png", 
        path = "../bzigterman.github.io/images/",
        width = 8, height = 8*(628/1200), dpi = 320)
@@ -273,6 +275,7 @@ cdc_cases_map +
   cdc_total_vax +
   theme(plot.title = element_text(size = 12)) 
 ggsave("map/CDC_cases_vax_IL.png", width = 8, height = 8*(628/1200), dpi = 320)
+ggsave("region/CDC_cases_vax_IL.png", width = 8, height = 8*(628/1200), dpi = 320)
 ggsave("CDC_cases_vax_IL.png", 
        path = "../bzigterman.github.io/images/",
        width = 8, height = 8*(628/1200), dpi = 320)
