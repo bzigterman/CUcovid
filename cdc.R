@@ -345,6 +345,7 @@ cdc_transmission <- ggplot(data = cdc_cases_merged) +
         plot.title = element_text(size = 16, family = "Oswald")) 
 cdc_transmission 
 ggsave("map/cdc_transmission.png", width = 8, height = 8*(628/1200), dpi = 320)
+ggsave("region/cdc_transmission.png", width = 8, height = 8*(628/1200), dpi = 320)
 ggsave("cdc_transmission.png", 
        path = "../bzigterman.github.io/images/",
        width = 8, height = 8*(628/1200), dpi = 320)
