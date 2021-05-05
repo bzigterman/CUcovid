@@ -292,3 +292,51 @@ ggsave("region/CDC_cases_vax_IL.png", width = 8, height = 8*(628/1200), dpi = 32
 ggsave("CDC_cases_vax_IL.png", 
        path = "../bzigterman.github.io/images/",
        width = 8, height = 8*(628/1200), dpi = 320)
+
+# community transmission level
+cdc_transmission <- ggplot(data = cdc_cases_merged) +
+  geom_sf(data = cdc_cases_merged,
+          mapping = aes(fill = community_transmission_level,
+                        geometry = geometry),
+          #crs = 4326,
+          #crs = "NAD83",
+          size = .25) +
+  coord_sf(crs = st_crs(4326)) +
+  scale_fill_manual(limits = c("low","moderate","substantial","high"),
+                      values = c("lightgreen",
+                               "yellow",
+                               "orange",
+                               "red")) +
+  # scale_fill_gradient(low = "#F7EDE3",
+  #                     high = "#B45F06",
+  #                     labels = scales::comma) +
+  labs(title = "Community Transmission Level",
+       subtitle = "Community transmission levels are\ncalculated by the CDC based on\nnew cases per capita in the past week\nand test positivity.",
+       caption =  paste("Source: CDC. Data last updated",
+                        tail(cdc_cases_merged$short_date,1)),
+       fill = NULL)+
+  #theme_minimal() +
+  theme(text = element_text(family = "Barlow"),
+        axis.text = element_blank(),
+        axis.line.x = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank(),
+        #panel.grid.major.x = element_line(colour = "grey93"),
+        legend.position = "right",
+        panel.grid.major = element_blank(),  
+        #legend.position = c(.1,.9),
+        legend.background = element_blank(),
+        legend.key = element_blank(),
+        #plot.caption.position = "panel",
+        #plot.caption = element_text(hjust = 1),
+        legend.key.size = unit(.5, "cm"),
+        panel.background = element_blank(),
+        #legend.text = element_text(size = 13),
+        plot.caption = element_text(colour = "grey40"),
+        plot.title = element_text(size = 16, family = "Oswald")) 
+cdc_transmission 
+ggsave("map/cdc_transmission.png", width = 8, height = 8*(628/1200), dpi = 320)
+ggsave("region/cdc_transmission.png", width = 8, height = 8*(628/1200), dpi = 320)
+ggsave("cdc_transmission.png", 
+       path = "../bzigterman.github.io/images/",
+       width = 8, height = 8*(628/1200), dpi = 320)
