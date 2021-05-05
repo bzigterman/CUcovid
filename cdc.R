@@ -1,3 +1,6 @@
+library(RColorBrewer)
+
+
 # cdc vaccines ----
 
 cdc_county_vaccine_url <- "https://covid.cdc.gov/covid-data-tracker/COVIDData/getAjaxData?id=vaccination_county_condensed_data"
@@ -302,11 +305,17 @@ cdc_transmission <- ggplot(data = cdc_cases_merged) +
           #crs = "NAD83",
           size = .25) +
   coord_sf(crs = st_crs(4326)) +
-  scale_fill_manual(limits = c("low","moderate","substantial","high"),
-                      values = c("lightgreen",
-                               "yellow",
-                               "orange",
-                               "red")) +
+  # scale_fill_manual(limits = c("low","moderate","substantial","high"),
+  #                     values = c("lightgreen",
+  #                              "yellow",
+  #                              "orange",
+  #                              "red")) +
+  # scale_fill_viridis_d(limits = c("low","moderate","substantial","high"),
+  #                      option = "inferno",
+  #                      direction = -1) +
+  scale_fill_brewer(limits = c("low","moderate","substantial","high"),
+                    palette = "OrRd",
+                    direction = 1) +
   # scale_fill_gradient(low = "#F7EDE3",
   #                     high = "#B45F06",
   #                     labels = scales::comma) +
@@ -336,7 +345,6 @@ cdc_transmission <- ggplot(data = cdc_cases_merged) +
         plot.title = element_text(size = 16, family = "Oswald")) 
 cdc_transmission 
 ggsave("map/cdc_transmission.png", width = 8, height = 8*(628/1200), dpi = 320)
-ggsave("region/cdc_transmission.png", width = 8, height = 8*(628/1200), dpi = 320)
 ggsave("cdc_transmission.png", 
        path = "../bzigterman.github.io/images/",
        width = 8, height = 8*(628/1200), dpi = 320)
