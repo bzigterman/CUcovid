@@ -129,7 +129,7 @@ cdc_total_vax_65 <- ggplot(data = cdc_vaccines_geo_merged) +
           size = .25) +
   coord_sf(crs = st_crs(4326)) +
   scale_fill_brewer(
-    palette = "BuPu",
+    palette = "Purples",
     direction = 1) +
   # scale_fill_gradient(low = "#F3F1F8",
   #                     high = "#674EA7",
@@ -173,7 +173,7 @@ cdc_total_vax_18 <- ggplot(data = cdc_vaccines_geo_merged) +
           size = .25) +
   coord_sf(crs = st_crs(4326)) +
   scale_fill_brewer(
-    palette = "BuPu",
+    palette = "Purples",
     direction = 1) +
   # scale_fill_gradient(low = "#F3F1F8",
   #                     high = "#674EA7",
@@ -216,7 +216,7 @@ cdc_total_vax <- ggplot(data = cdc_vaccines_geo_merged) +
           size = .25) +
   coord_sf(crs = st_crs(4326)) +
   scale_fill_brewer(
-    palette = "BuPu",
+    palette = "Purples",
     direction = 1) +
   # scale_fill_gradient(low = "#F3F1F8",
   #                     high = "#674EA7",
