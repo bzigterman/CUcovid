@@ -13,8 +13,57 @@ cdc_county_vaccine <- cdc_county_vaccine %>%
   mutate(GEOID = FIPS) %>%
   mutate(date = ymd(as_date(Date))) %>%
   mutate(short_date = paste(month(date, label = TRUE, abbr = FALSE),
-                            mday(date)))
+                            mday(date))) %>%
+  mutate(total_class = 
+           cut(x = Series_Complete_Pop_Pct,
+               breaks = 5,
+               dig.lab = 2
+               #labels = c(paste(
+               #labels = quantile(Series_Complete_Pop_Pct)/100)
+           )) %>%
+  mutate(total_class_temp = gsub(pattern = "\\(|\\[|\\)|\\]", 
+                                 replacement = "", 
+                                 total_class)) %>%
+  separate(col = total_class_temp, into = c("lwr", "upr")) %>%
+  mutate(total_class_new = paste(lwr,"% - ", upr,"%", sep = "")) %>%
+  mutate(adult_class = 
+           cut(x = Series_Complete_18PlusPop_Pct,
+               breaks = 5,
+               dig.lab = 2
+               #labels = c(paste(
+               #labels = quantile(Series_Complete_Pop_Pct)/100)
+           )) %>%
+  mutate(adult_class_temp = gsub(pattern = "\\(|\\[|\\)|\\]", 
+                                 replacement = "", 
+                                 adult_class)) %>%
+  separate(col = adult_class_temp, into = c("lwr", "upr")) %>%
+  mutate(adult_class_new = paste(lwr,"% - ", upr,"%", sep = "")) %>%
+  mutate(senior_class = 
+           cut(x = Series_Complete_65PlusPop_Pct,
+               breaks = 5,
+               dig.lab = 2
+           )) %>%
+  mutate(senior_class_temp = gsub(pattern = "\\(|\\[|\\)|\\]", 
+                                  replacement = "", 
+                                  senior_class)) %>%
+  separate(col = senior_class_temp, into = c("lwr", "upr")) %>%
+  mutate(senior_class_new = paste(lwr,"% - ",upr,"%", sep = ""))
 
+# cut(x = cdc_county_vaccine$Series_Complete_65PlusPop_Pct,
+#     breaks = 5,
+#     dig.lab = 2)
+
+
+# labels <- levels(cut_interval(
+#   x = cdc_county_vaccine$Series_Complete_Pop_Pct,
+#   n = 5,
+#   dig.lab = 1))
+# labels
+
+# cdc_county_vaccine$
+# cut_interval(
+# ?cut
+# quantile(cdc_county_vaccine$Series_Complete_Pop_Pct)
 
 cdc_vaccines_geo_merged <- merge(cdc_county_vaccine,
                                  il_counties_clean,
@@ -34,7 +83,7 @@ cdc_vax_merged_longer <- cdc_vaccines_geo_merged %>%
                names_to = "age",
                values_to = "percent") 
 
-# state cdc map facet
+# state cdc map facet ----
 cdc_vax_map <- ggplot(data = cdc_vax_merged_longer) +
   geom_sf(data = cdc_vax_merged_longer,
           mapping = aes(fill = percent/100,
@@ -73,15 +122,18 @@ cdc_vax_map
 # pct 65+ map ----
 cdc_total_vax_65 <- ggplot(data = cdc_vaccines_geo_merged) +
   geom_sf(data = cdc_vaccines_geo_merged,
-          mapping = aes(fill = Series_Complete_65PlusPop_Pct/100,
+          mapping = aes(fill = senior_class_new,
                         geometry = geometry),
           #crs = 4326,
           #crs = "NAD83",
           size = .25) +
   coord_sf(crs = st_crs(4326)) +
-  scale_fill_gradient(low = "#F3F1F8",
-                      high = "#674EA7",
-                      labels = scales::label_percent(accuracy = 1.)) +
+  scale_fill_brewer(
+    palette = "Purples",
+    direction = 1) +
+  # scale_fill_gradient(low = "#F3F1F8",
+  #                     high = "#674EA7",
+  #                     labels = scales::label_percent(accuracy = 1.)) +
   labs(title = "Percent Fully Vaccinated 65+",
        caption =  paste("Source: CDC. Data last updated",
                         tail(cdc_vaccines_geo_merged$short_date,1)),
@@ -114,15 +166,18 @@ ggsave("CDC_vax_65.png",
 
 cdc_total_vax_18 <- ggplot(data = cdc_vaccines_geo_merged) +
   geom_sf(data = cdc_vaccines_geo_merged,
-          mapping = aes(fill = Series_Complete_18PlusPop_Pct/100,
+          mapping = aes(fill = adult_class_new,
                         geometry = geometry),
           #crs = 4326,
           #crs = "NAD83",
           size = .25) +
   coord_sf(crs = st_crs(4326)) +
-  scale_fill_gradient(low = "#F3F1F8",
-                      high = "#674EA7",
-                      labels = scales::label_percent(accuracy = 1.)) +
+  scale_fill_brewer(
+    palette = "Purples",
+    direction = 1) +
+  # scale_fill_gradient(low = "#F3F1F8",
+  #                     high = "#674EA7",
+  #                     labels = scales::label_percent(accuracy = 1.)) +
   labs(title = "Percent Fully Vaccinated 18+",
        caption =  paste("Source: CDC. Data last updated",
                         tail(cdc_vaccines_geo_merged$short_date,1)),
@@ -154,15 +209,18 @@ ggsave("CDC_vax_18.png",
 # pct total pop vaccinated map ----
 cdc_total_vax <- ggplot(data = cdc_vaccines_geo_merged) +
   geom_sf(data = cdc_vaccines_geo_merged,
-          mapping = aes(fill = Series_Complete_Pop_Pct/100,
+          mapping = aes(fill = total_class_new,
                         geometry = geometry),
           #crs = 4326,
           #crs = "NAD83",
           size = .25) +
   coord_sf(crs = st_crs(4326)) +
-  scale_fill_gradient(low = "#F3F1F8",
-                      high = "#674EA7",
-                      labels = scales::label_percent(accuracy = 1.)) +
+  scale_fill_brewer(
+    palette = "Purples",
+    direction = 1) +
+  # scale_fill_gradient(low = "#F3F1F8",
+  #                     high = "#674EA7",
+  #                     labels = scales::label_percent(accuracy = 1.)) +
   labs(title = "Percent Fully Vaccinated",
        caption =  paste("Source: CDC. Data last updated",
                         tail(cdc_vaccines_geo_merged$short_date,1)),
@@ -296,7 +354,7 @@ ggsave("CDC_cases_vax_IL.png",
        path = "../bzigterman.github.io/images/",
        width = 8, height = 8*(628/1200), dpi = 320)
 
-# community transmission level
+# community transmission level ----
 cdc_transmission <- ggplot(data = cdc_cases_merged) +
   geom_sf(data = cdc_cases_merged,
           mapping = aes(fill = community_transmission_level,
