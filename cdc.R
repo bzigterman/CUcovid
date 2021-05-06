@@ -291,7 +291,17 @@ cdc_cases <- cdc_cases %>%
   mutate(GEOID = fips_code) %>%
   mutate(date = ymd(as_date(report_date))) %>%
   mutate(short_date = paste(month(date, label = TRUE, abbr = FALSE),
-                            mday(date)))
+                            mday(date))) %>%
+  mutate(new_cases_class = 
+           cut(x = cases_per_100K_7_day_count_change/7,
+               breaks = c(0,10,30,50,70,100,250,Inf),
+               include.lowest = TRUE
+               )) %>%
+  mutate(new_cases_class_temp = gsub(pattern = "\\(|\\[|\\)|\\]", 
+                                  replacement = "", 
+                                  new_cases_class)) %>%
+  separate(col = new_cases_class_temp, into = c("lwr", "upr")) %>%
+  mutate(new_cases_class_new = paste(lwr," - ",upr, sep = ""))
   
 
 cdc_cases_merged <- merge(cdc_cases,
@@ -300,15 +310,18 @@ cdc_cases_merged <- merge(cdc_cases,
 
 cdc_cases_map <- ggplot(data = cdc_cases_merged) +
   geom_sf(data = cdc_cases_merged,
-          mapping = aes(fill = cases_per_100K_7_day_count_change/7,
+          mapping = aes(fill = new_cases_class_new,
                         geometry = geometry),
           #crs = 4326,
           #crs = "NAD83",
           size = .25) +
   coord_sf(crs = st_crs(4326)) +
-  scale_fill_gradient(low = "#F7EDE3",
-                      high = "#B45F06",
-                      labels = scales::comma) +
+  scale_fill_brewer(
+    palette = "Oranges",
+    direction = 1) +
+  # scale_fill_gradient(low = "#F7EDE3",
+  #                     high = "#B45F06",
+  #                     labels = scales::comma) +
   labs(title = "New Cases per 100,000 Residents",
        subtitle = "Average over past seven days",
        caption =  paste("Source: CDC. Data last updated",
