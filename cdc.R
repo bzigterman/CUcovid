@@ -281,7 +281,7 @@ ggsave("CDC_vax_combined.png",
        path = "../bzigterman.github.io/images/",
        width = 8, height = 8*(628/1200), dpi = 320)
 
-# cdc cases ----
+# cdc cases data ----
 cdc_cases_url <- "https://covid.cdc.gov/covid-data-tracker/COVIDData/getAjaxData?id=integrated_county_latest_external_data"
 cdc_cases <- rio::import(cdc_cases_url,
                          format = "json")
@@ -308,6 +308,8 @@ cdc_cases_merged <- merge(cdc_cases,
                           il_counties_clean,
                           by = "GEOID")
 
+
+# cdc cases map ----
 cdc_cases_map <- ggplot(data = cdc_cases_merged) +
   geom_sf(data = cdc_cases_merged,
           mapping = aes(fill = new_cases_class_new,
@@ -420,3 +422,4 @@ ggsave("region/cdc_transmission.png", width = 8, height = 8*(628/1200), dpi = 32
 ggsave("cdc_transmission.png", 
        path = "../bzigterman.github.io/images/",
        width = 8, height = 8*(628/1200), dpi = 320)
+
