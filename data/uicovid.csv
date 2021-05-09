@@ -286,11 +286,12 @@
 2021-05-04,100,"Spring",7341,8,0.00108976978613268,0.000602010715790741,2025061,6731,1934,"Of 7,341 new tests Tuesday at the University of Illinois, there were 8 unique new cases. Since move-in began Aug. 16, there have been 6,638 new cases. Since classes began Aug. 24, there have been 6,356 new cases.",4.28571428571429,7119
 2021-05-05,101,"Spring",6729,2,0.000297220983801456,0.000540226895296024,2031790,6733,1936,"Of 6,729 new tests Wednesday at the University of Illinois, there were 2 unique new cases. Since move-in began Aug. 16, there have been 6,640 new cases. Since classes began Aug. 24, there have been 6,358 new cases.",3.85714285714286,7139.85714285714
 2021-05-06,102,"Spring",6772,3,0.000443000590667454,0.000577522018026937,2038562,6736,1939,"Of 6,772 new tests Thursday at the University of Illinois, there were 3 unique new cases. Since move-in began Aug. 16, there have been 6,643 new cases. Since classes began Aug. 24, there have been 6,361 new cases.",4,6926.14285714286
-2021-05-07,103,"Spring",7443,0,0,0.000569560172977534,2046005,6736,1939,"At the University of Illinois on Friday:
+2021-05-07,103,"Spring",7443,0,0,0.000569560172977534,2046005,6736,1939,"Of 7,443 new tests Friday at the University of Illinois, there were  unique new cases. Since move-in began Aug. 16, there have been 6,643 new cases. Since classes began Aug. 24, there have been 6,361 new cases.",3.85714285714286,6772.14285714286
+2021-05-08,104,"Spring",2799,1,0.000357270453733476,0.000506970849176172,2048804,6737,1940,"At the University of Illinois on Saturday:
 
-— 7,443 new tests
-—  new cases
-— 6,736 total cases
+— 2,799 new tests
+— 1 new cases
+— 6,737 total cases
 — Positivity of 0%. The seven-day average positivity is 0.1%.
 
-https://go.illinois.edu/COVIDTestingData",3.85714285714286,6772.14285714286
+https://go.illinois.edu/COVIDTestingData",3.42857142857143,6762.85714285714
