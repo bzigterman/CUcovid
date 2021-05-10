@@ -492,11 +492,11 @@ ggplot(last_vax_nearby, aes(y = reorder(CountyName,
 
 last_vax_nearby <- vax_nearby %>%
   filter(Date == tail(Date, 1)) %>%
-  arrange(desc(PercentDose1))
+  arrange(desc(PctVaccinatedPopulation))
 topcounty <- head(last_vax_nearby$CountyName,1)
 
 ggplot(last_vax_nearby, aes(y = reorder(CountyName,
-                                        PercentDose1))) +
+                                        PctVaccinatedPopulation))) +
   
   geom_segment(aes(x = PercentDose1, # line segment to dose1%
                    yend = CountyName),
