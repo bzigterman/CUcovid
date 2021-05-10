@@ -143,7 +143,8 @@ vax_nearby <- full_join(vax_champaign, vax_vermilion) %>%
   mutate(Date = mdy_hms(Report_Date)) %>%
 #  mutate(PersonsDose1 = AdministeredCount - PersonsFullyVaccinated) %>%
   mutate(PercentDose1 = PersonsDose1/population) %>%
-  mutate(PercentOnlyDose1 = PercentDose1 - PctVaccinatedPopulation)
+  mutate(PercentOnlyDose1 = PercentDose1 - PctVaccinatedPopulation) %>%
+  mutate(New_doses_per_100K = (AdministeredCountRollAvg/population)*100000)
 #%>%
  # mutate(Dose1Change = PersonsDose1 - lag(PersonsDose1)) %>%
 #  mutate(Dose2Change = PersonsFullyVaccinated - lag(PersonsFullyVaccinated))
@@ -760,7 +761,7 @@ ggplot(data = vax_nearby,
              ) + 
   labs(title = "Percent of Population Fully Vaccinated in Nearby Counties",
        #subtitle =  "With seven-day moving average",
-       caption = "Source: Illinois Department of Public Health. Note: Counties organized in descending order.")+
+       caption = "Source: Illinois Department of Public Health")+
   theme(text = element_text(family = "Barlow"),
         axis.text.y = element_text(size = 10),
         axis.text.x = element_text(size = 8),
@@ -783,7 +784,61 @@ ggsave("nearbyfull_vax_facet.png",
        path = "../bzigterman.github.io/images/",
        width = 8, height = 6, dpi = 320)
 
+# grid of new doses by county ----
+ggplot(data = vax_nearby,
+       aes(x = as.Date(Date),
+           y = New_doses_per_100K#,
+           #fill = Doses,
+           #colour = Doses
+       )) +
+  geom_line(color = "#674EA7") +
+  # scale_fill_manual(labels = c("At least one dose",
+  #                              "Fully vaccinated"),
+  #                   values = c("#d8cee8","#674EA7"),
+  #                   guide = guide_legend(title = NULL)) +
+  # scale_colour_manual(labels = c("At least one dose",
+  #                                "Fully vaccinated"),
+  #                     values = c("#A897CC","#674EA7"),
+  #                     guide = guide_legend(title = NULL)) +
+  scale_y_continuous(#labels = scales::label_percent(accuracy = 1.),
+                     position = "right",
+                     labels = scales::label_comma()
+                     # breaks = c(0,
+                     #            max(vax_nearby_facet$Percent),
+                     #            max(vax_nearby_facet$PercentDose1))
+  ) +
+  scale_x_date(expand = c(0,0)) +
+  xlab(NULL) +
+  ylab(NULL) +
+  #expand_limits(y = 0) +
+  #guides(fill = guide_legend(reverse = TRUE)) +
+  facet_wrap(~ CountyName#, 
+             #ncol = 4
+  ) + 
+  labs(title = "Average New Vaccine Doses Administered in Nearby Counties",
+       subtitle =  "Per 100,000 residents",
+       caption = "Source: Illinois Department of Public Health")+
+  theme(text = element_text(family = "Barlow"),
+        axis.text.y = element_text(size = 10),
+        axis.text.x = element_text(size = 8),
+        legend.position = c(.9,.1),
+        legend.background = element_blank(),
+        legend.key = element_blank(),
+        #legend.text = element_text(size = 13),
+        panel.grid.minor = element_blank(),
+        panel.background = element_blank(),
+        panel.grid.major.y = element_line(colour = "grey93"),
+        strip.text = element_text(size = 11),
+        strip.background = element_blank(),
+        #strip.placement = "outside",
+        plot.caption = element_text(colour = "grey40"),
+        plot.title = element_text(size = 24, family = "Oswald"))
 
+ggsave("vax/nearby_new_doses_facet.png", width = 8, height = 6, dpi = 320)
+#ggsave("vax/card/nearbybothdosesCard.png", width = 8, height = 1256/300, dpi = 320)
+ggsave("nearby_new_doses_facet.png",
+       path = "../bzigterman.github.io/images/",
+       width = 8, height = 6, dpi = 320)
 
 
 #?facet_wrap
