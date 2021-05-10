@@ -130,16 +130,16 @@ vax_illinois <- rio::import("https://idph.illinois.gov/DPHPublicInformation/api/
 
 vax_nearby <- full_join(vax_champaign, vax_vermilion) %>%
   full_join(vax_ford) %>%
-  #full_join(vax_edgar) %>%
+  full_join(vax_edgar) %>%
   full_join(vax_douglas) %>%
   full_join(vax_piatt) %>%
   full_join(vax_iroquois) %>%
   full_join(vax_dewitt) %>%
   full_join(vax_macon) %>%
-  #full_join(vax_moultrie) %>%
+  full_join(vax_moultrie) %>%
   full_join(vax_mclean) %>%
-  #full_join(vax_coles) %>%
-  #full_join(vax_illinois) %>%
+  full_join(vax_coles) %>%
+  full_join(vax_illinois) %>%
   mutate(Date = mdy_hms(Report_Date)) %>%
 #  mutate(PersonsDose1 = AdministeredCount - PersonsFullyVaccinated) %>%
   mutate(PercentDose1 = PersonsDose1/population) %>%
@@ -498,33 +498,33 @@ topcounty <- head(last_vax_nearby$CountyName,1)
 ggplot(last_vax_nearby, aes(y = reorder(CountyName,
                                         PctVaccinatedPopulation))) +
   
-  geom_segment(aes(x = PercentDose1, # line segment to dose1%
-                   yend = CountyName),
-               xend = 0, 
-               colour = "#d8cee8",
-               size = 7.7, # was 2
-               #alpha = .3
-  ) +
+  # geom_segment(aes(x = PercentDose1, # line segment to dose1%
+  #                  yend = CountyName),
+  #              xend = 0, 
+  #              colour = "#d8cee8",
+  #              size = 7.7, # was 2
+  #              #alpha = .3
+  # ) +
   geom_segment(aes(x = PctVaccinatedPopulation, # first line segment to dose2
                    yend = CountyName), 
                xend = 0, 
                colour = "#674EA7",
-               size = 7.7) + # was 3.6 +
-  geom_text(data = filter(last_vax_nearby, # label for all but top county dose1
-                          CountyName != topcounty),
-            aes(x = PercentDose1,
-                label = percent(PercentDose1, .1)),
-            hjust = -.1,
-            size = 3.5,
-            family = "Barlow") +
-  geom_text(data = filter(last_vax_nearby, # label for top county, dose1
-                          CountyName == topcounty),
-            aes(x = PercentDose1,
-                label = paste(percent(PercentDose1, .1),
-                              "with at least one dose")),
-            hjust = -0.02,
-            size = 3.5,
-            family = "Barlow") +
+               size = 7) + # was 3.6 +
+  # geom_text(data = filter(last_vax_nearby, # label for all but top county dose1
+  #                         CountyName != topcounty),
+  #           aes(x = PercentDose1,
+  #               label = percent(PercentDose1, .1)),
+  #           hjust = -.1,
+  #           size = 3.5,
+  #           family = "Barlow") +
+  # geom_text(data = filter(last_vax_nearby, # label for top county, dose1
+  #                         CountyName == topcounty),
+  #           aes(x = PercentDose1,
+  #               label = paste(percent(PercentDose1, .1),
+  #                             "with at least one dose")),
+  #           hjust = -0.02,
+  #           size = 3.5,
+  #           family = "Barlow") +
   geom_text(data = filter(last_vax_nearby, # label for all but top county, dose2
                           CountyName != topcounty),
             aes(x = PctVaccinatedPopulation,
@@ -638,11 +638,11 @@ ggplot(data = vax_nearby_facet,
         plot.caption = element_text(colour = "grey40"),
         plot.title = element_text(size = 24, family = "Oswald"))
 
-ggsave("vax/nearbyfacet_desc.png", width = 8, height = 6, dpi = 320)
-#ggsave("vax/card/nearbybothdosesCard.png", width = 8, height = 1256/300, dpi = 320)
-ggsave("nearbyfacet.png",
-       path = "../bzigterman.github.io/images/",
-       width = 8, height = 6, dpi = 320)
+# ggsave("vax/nearbyfacet_desc.png", width = 8, height = 6, dpi = 320)
+# #ggsave("vax/card/nearbybothdosesCard.png", width = 8, height = 1256/300, dpi = 320)
+# ggsave("nearbyfacet.png",
+#        path = "../bzigterman.github.io/images/",
+#        width = 8, height = 6, dpi = 320)
 
 
 # geofacet grid ----
@@ -701,9 +701,89 @@ ggplot(data = vax_nearby_facet,
         plot.title = element_text(size = 24, family = "Oswald"))
 
 #ggsave("vax/nearbygeofacet.png", width = 8, height = 6, dpi = 320)
-ggsave("nearbygeofacet.png", 
+# ggsave("nearbygeofacet.png", 
+#        path = "../bzigterman.github.io/images/",
+#        width = 8, height = 6, dpi = 320)
+
+# facet fully vaccinated ----
+# last_vax_nearby <- vax_nearby %>%
+#   filter(Date == tail(Date, 1)) %>%
+#   arrange(desc(PercentDose1))
+# 
+# vax_nearby_facet <- vax_nearby %>%
+#   select(CountyName, Date, PctVaccinatedPopulation, PercentOnlyDose1, PercentDose1) %>%
+#   pivot_longer(cols = c(PctVaccinatedPopulation, PercentOnlyDose1),
+#                names_to = "Doses",
+#                values_to = "Percent") #%>%
+# # arrange(desc(PercentDose1))
+# #%>%
+# # reorder(CountyName, PctVaccinatedPopulation +PercentOnlyDose1)
+# vax_nearby_facet$Doses <- as.factor(vax_nearby_facet$Doses)
+# vax_nearby_facet$Doses <- factor(vax_nearby_facet$Doses, 
+#                                  levels = rev(levels(vax_nearby_facet$Doses)))
+# vax_nearby_facet$CountyName <- as.factor(vax_nearby_facet$CountyName)
+# vax_nearby_facet$CountyName <- factor(vax_nearby_facet$CountyName,
+#                                       levels = last_vax_nearby$CountyName)
+
+
+
+ggplot(data = vax_nearby,
+       aes(x = as.Date(Date),
+           y = PctVaccinatedPopulation#,
+           #fill = Doses,
+           #colour = Doses
+           )) +
+  geom_area(alpha = .6,
+            fill = "#674EA7",
+            color = "#674EA7") +
+  scale_fill_manual(labels = c("At least one dose",
+                               "Fully vaccinated"),
+                    values = c("#d8cee8","#674EA7"),
+                    guide = guide_legend(title = NULL)) +
+  scale_colour_manual(labels = c("At least one dose",
+                                 "Fully vaccinated"),
+                      values = c("#A897CC","#674EA7"),
+                      guide = guide_legend(title = NULL)) +
+  scale_y_continuous(labels = scales::label_percent(accuracy = 1.),
+                     position = "right"
+                     # breaks = c(0,
+                     #            max(vax_nearby_facet$Percent),
+                     #            max(vax_nearby_facet$PercentDose1))
+  ) +
+  scale_x_date(expand = c(0,0)) +
+  xlab(NULL) +
+  ylab(NULL) +
+  #expand_limits(y = 0) +
+  #guides(fill = guide_legend(reverse = TRUE)) +
+  facet_wrap(~ CountyName#, 
+             #ncol = 4
+             ) + 
+  labs(title = "Percent of Population Fully Vaccinated in Nearby Counties",
+       #subtitle =  "With seven-day moving average",
+       caption = "Source: Illinois Department of Public Health. Note: Counties organized in descending order.")+
+  theme(text = element_text(family = "Barlow"),
+        axis.text.y = element_text(size = 10),
+        axis.text.x = element_text(size = 8),
+        legend.position = c(.9,.1),
+        legend.background = element_blank(),
+        legend.key = element_blank(),
+        #legend.text = element_text(size = 13),
+        panel.grid.minor = element_blank(),
+        panel.background = element_blank(),
+        panel.grid.major.y = element_line(colour = "grey93"),
+        strip.text = element_text(size = 11),
+        strip.background = element_blank(),
+        #strip.placement = "outside",
+        plot.caption = element_text(colour = "grey40"),
+        plot.title = element_text(size = 24, family = "Oswald"))
+
+ggsave("vax/nearbyfull_vax_facet.png", width = 8, height = 6, dpi = 320)
+#ggsave("vax/card/nearbybothdosesCard.png", width = 8, height = 1256/300, dpi = 320)
+ggsave("nearbyfull_vax_facet.png",
        path = "../bzigterman.github.io/images/",
        width = 8, height = 6, dpi = 320)
+
+
 
 
 #?facet_wrap
