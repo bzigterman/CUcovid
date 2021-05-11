@@ -295,7 +295,7 @@ cdc_cases <- cdc_cases %>%
   mutate(new_cases_class = 
            cut(x = cases_per_100K_7_day_count_change/7,
                breaks = c(0,5,15,25,35,50,100,Inf),
-               labels = c("0-5","5-15","15-25","25-35","35-50","50-100","100+"),
+               labels = c("0–5","5–15","15–25","25–35","35–50","50–100","100+"),
                include.lowest = TRUE,
               ordered_result = TRUE
                ))# %>%
