@@ -111,7 +111,7 @@ ILvax <- ggplot(vax_IL, aes(x = as.Date(Date)))  +
   labs(title = "Percent of Illinois Vaccinated",
        caption = "Source: Illinois Department of Public Health") +
   theme(text = element_text(family = "Barlow"),
-        axis.text.y = element_text(size = 13),
+        axis.text.y = element_text(size = 10),
         axis.text.x = element_text(size = 13),
         panel.grid = element_blank(),
         panel.background = element_blank(),
