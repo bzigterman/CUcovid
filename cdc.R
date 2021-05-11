@@ -294,14 +294,19 @@ cdc_cases <- cdc_cases %>%
                             mday(date))) %>%
   mutate(new_cases_class = 
            cut(x = cases_per_100K_7_day_count_change/7,
-               breaks = c(0,10,30,50,70,100,250,Inf),
-               include.lowest = TRUE
+               breaks = c(0,10,20,30,40,50,100,Inf),
+               include.lowest = TRUE,
+              ordered_result = TRUE
                )) %>%
   mutate(new_cases_class_temp = gsub(pattern = "\\(|\\[|\\)|\\]", 
                                   replacement = "", 
                                   new_cases_class)) %>%
   separate(col = new_cases_class_temp, into = c("lwr", "upr")) %>%
-  mutate(new_cases_class_new = paste(lwr," - ",upr, sep = ""))
+  mutate(new_cases_class_new = paste(lwr," - ",upr, sep = "")) #%>%
+  # transmute(new_cases_class_new = fct_relevel(new_cases_class_new,
+  #                                             "0 - 5","5 - 15","15 - 25",
+  #                                             "25 - 35","35 - 50","50 -125",
+  #                                             "125+"))
   
 
 cdc_cases_merged <- merge(cdc_cases,
