@@ -153,7 +153,7 @@ xlab(NULL) +
        caption = "Source: Illinois Department of Public Health") +
   #theme_minimal() +
   theme(text = element_text(family = "Barlow"),
-        axis.text.y = element_text(size = 13),
+        axis.text.y = element_text(size = 10),
         axis.text.x = element_text(size = 13),
         panel.grid = element_blank(),
         #panel.grid.minor.y = element_blank(),
