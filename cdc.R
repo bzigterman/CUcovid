@@ -25,7 +25,7 @@ cdc_county_vaccine <- cdc_county_vaccine %>%
                                  replacement = "", 
                                  total_class)) %>%
   separate(col = total_class_temp, into = c("lwr", "upr")) %>%
-  mutate(total_class_new = paste(lwr," - ", upr,"%", sep = "")) %>%
+  mutate(total_class_new = paste(lwr,"–", upr,"%", sep = "")) %>%
   mutate(adult_class = 
            cut(x = Series_Complete_18PlusPop_Pct,
                breaks = 5,
@@ -37,7 +37,7 @@ cdc_county_vaccine <- cdc_county_vaccine %>%
                                  replacement = "", 
                                  adult_class)) %>%
   separate(col = adult_class_temp, into = c("lwr", "upr")) %>%
-  mutate(adult_class_new = paste(lwr," - ", upr,"%", sep = "")) %>%
+  mutate(adult_class_new = paste(lwr,"–", upr,"%", sep = "")) %>%
   mutate(senior_class = 
            cut(x = Series_Complete_65PlusPop_Pct,
                breaks = 5,
@@ -47,7 +47,7 @@ cdc_county_vaccine <- cdc_county_vaccine %>%
                                   replacement = "", 
                                   senior_class)) %>%
   separate(col = senior_class_temp, into = c("lwr", "upr")) %>%
-  mutate(senior_class_new = paste(lwr," - ",upr,"%", sep = ""))
+  mutate(senior_class_new = paste(lwr,"–",upr,"%", sep = ""))
 
 # cut(x = cdc_county_vaccine$Series_Complete_65PlusPop_Pct,
 #     breaks = 5,
