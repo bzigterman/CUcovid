@@ -734,7 +734,7 @@ ggplot(data = vax_nearby,
            #fill = Doses,
            #colour = Doses
            )) +
-  geom_area(alpha = .6,
+  geom_area(alpha = .4,
             fill = "#674EA7",
             color = "#674EA7") +
   scale_fill_manual(labels = c("At least one dose",
