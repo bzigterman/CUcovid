@@ -95,7 +95,7 @@ plot_usmap(data = usa_county_vaccine, values = "total_class",
   # ) +
   labs(title = "Percent Fully Vaccinated",
        caption =  paste("Source: CDC. Data last updated",
-                        tail(usa_vaccines_geo_merged$short_date,1)),
+                        tail(usa_county_vaccine$short_date,1)),
        fill = NULL)+
   #theme_minimal() +
   theme(text = element_text(family = "Barlow"),
