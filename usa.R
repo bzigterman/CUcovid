@@ -172,7 +172,7 @@ plot_usmap(data = usa_cases, values = "new_cases_class",
     direction = 1) +
   labs(title = "Average New Cases per 100,000 Residents",
        caption =  paste("Source: CDC. Data last updated",
-                        tail(usa_vaccines_geo_merged$short_date,1)),
+                        tail(usa_cases$short_date,1)),
        fill = NULL)+
   #theme_minimal() +
   theme(text = element_text(family = "Barlow"),
@@ -196,3 +196,37 @@ ggsave("map/usa_cases.png", width = 8, height = 8*(628/1200), dpi = 320)
 ggsave("usa_cases.png", 
        path = "../bzigterman.github.io/images/",
        width = 8, height = 8*(628/1200), dpi = 320)
+
+# cdc transmission level map ----
+plot_usmap(data = usa_cases, values = "community_transmission_level",
+           size = .01) +
+  scale_fill_brewer(limits = c("low","moderate","substantial","high"),
+                    palette = "Oranges",
+                    direction = 1) +
+  labs(title = "Community Transmission Levels",
+       caption =  paste("Source: CDC. Data last updated",
+                        tail(usa_cases$short_date,1)),
+       fill = NULL)+
+  #theme_minimal() +
+  theme(text = element_text(family = "Barlow"),
+        axis.text = element_blank(),
+        axis.line.x = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank(),
+        #panel.grid.major.x = element_line(colour = "grey93"),
+        #legend.position = "right",
+        panel.grid.major = element_blank(),  
+        #legend.position = c(.1,.9),
+        legend.background = element_blank(),
+        legend.key = element_blank(),
+        legend.key.size = unit(.5, "cm"),
+        panel.background = element_blank(),
+        #legend.text = element_text(size = 13),
+        plot.caption = element_text(colour = "grey40"),
+        plot.title = element_text(size = 16, family = "Oswald")) 
+
+ggsave("map/usa_transmission.png", width = 8, height = 8*(628/1200), dpi = 320)
+ggsave("usa_transmission.png", 
+       path = "../bzigterman.github.io/images/",
+       width = 8, height = 8*(628/1200), dpi = 320)
+
