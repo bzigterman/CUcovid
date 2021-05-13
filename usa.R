@@ -25,42 +25,16 @@ usa_county_vaccine <- usa_county_vaccine %>%
                             mday(date))) %>%
   mutate(total_class = 
            cut(x = Series_Complete_Pop_Pct,
-               breaks = 5,
-               dig.lab = 2,
+               breaks = c(0,20,40,60,80,100),
+               labels = c("0-20%","20-40%","40-60%","60-80%","80-100%"),
+               #dig.lab = 2,
                include.lowest = TRUE
                #labels = c(paste(
                #labels = quantile(Series_Complete_Pop_Pct)/100)
-           )) %>%
-  mutate(total_class_temp = gsub(pattern = "\\(|\\[|\\)|\\]", 
-                                 replacement = "", 
-                                 total_class)) %>%
-  separate(col = total_class_temp, into = c("lwr", "upr")) %>%
-  mutate(total_class_new = paste(lwr,"–", upr,"%", sep = "")) %>%
-  mutate(adult_class = 
-           cut(x = Series_Complete_18PlusPop_Pct,
-               breaks = 5,
-               dig.lab = 2,
-               include.lowest = TRUE
-               #labels = c(paste(
-               #labels = quantile(Series_Complete_Pop_Pct)/100)
-           )) %>%
-  mutate(adult_class_temp = gsub(pattern = "\\(|\\[|\\)|\\]", 
-                                 replacement = "", 
-                                 adult_class)) %>%
-  separate(col = adult_class_temp, into = c("lwr", "upr")) %>%
-  mutate(adult_class_new = paste(lwr,"–", upr,"%", sep = "")) %>%
-  mutate(senior_class = 
-           cut(x = Series_Complete_65PlusPop_Pct,
-               breaks = 5,
-               dig.lab = 2,
-               include.lowest = TRUE
-           )) %>%
-  mutate(senior_class_temp = gsub(pattern = "\\(|\\[|\\)|\\]", 
-                                  replacement = "", 
-                                  senior_class)) %>%
-  separate(col = senior_class_temp, into = c("lwr", "upr")) %>%
-  mutate(senior_class_new = paste(lwr,"–",upr,"%", sep = ""))
+           )) #%>%
+  #drop_na(total_class)
 
+  
 # usa_vaccines_geo_merged <- merge(usa_county_vaccine,
 #                                  uscounties,
 #                                  by = "GEOID")  
@@ -110,12 +84,15 @@ usa_county_vaccine <- usa_county_vaccine %>%
 #        path = "../bzigterman.github.io/images/",
 #        width = 8, height = 8*(628/1200), dpi = 320)
 
-plot_usmap(data = usa_county_vaccine, values = "Series_Complete_Pop_Pct",
+plot_usmap(data = usa_county_vaccine, values = "total_class",
            size = .01) +
-  scale_fill_gradient(low = "#F3F1F8",
-                      high = "#674EA7"#,
-                      #labels = scales::label_percent(accuracy = 1.)
-                      ) +
+  scale_fill_brewer(
+    palette = "Purples",
+    direction = 1) +
+  # scale_fill_gradient(low = "#F3F1F8",
+  #                     high = "#674EA7"#,
+  #                     #labels = scales::label_percent(accuracy = 1.)
+  # ) +
   labs(title = "Percent Fully Vaccinated",
        caption =  paste("Source: CDC. Data last updated",
                         tail(usa_vaccines_geo_merged$short_date,1)),
