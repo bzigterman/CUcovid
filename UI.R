@@ -217,6 +217,10 @@ combined[[2]] <- combined[[2]] + labs(title = "Total Cases by Semester",
   theme(legend.position = c(-.015,.9))
 combined
 ggsave("UI/SemCompareCombined.png", width = 8, height = 4.5, dpi = 320)
+ggsave("SemCompareCombined.png", 
+       path = "../bzigterman.github.io/images/",
+       width = 8, height = 4.5, dpi = 320)
+
 
 # todo
 # [x] save total cases comparison
