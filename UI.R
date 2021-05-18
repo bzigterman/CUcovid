@@ -30,9 +30,9 @@ ggplot(uicases_tests,
   geom_line() +
   facet_wrap(~ New, scales = "free_y",
              ncol = 1) +
-  labs(title = "COVID-19 at the University of Illinois",
-       subtitle = "With moving seven-day average",
-       caption = "Source: University of Illinois. Note: Moving seven-day average.") +
+  labs(#title = "COVID-19 at the University of Illinois",
+       #subtitle = "With moving seven-day average",
+       caption = "Source: University of Illinois.\nNote: Moving seven-day average.") +
   xlab(NULL) +
   ylab(NULL) +
   scale_x_date(expand = c(0,0)) +
