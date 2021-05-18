@@ -32,7 +32,7 @@ ggplot(uicases_tests,
              ncol = 1) +
   labs(title = "COVID-19 at the University of Illinois",
        subtitle = "With moving seven-day average",
-       caption = "Source: University of Illinois") +
+       caption = "Source: University of Illinois. Note: Moving seven-day average.") +
   xlab(NULL) +
   ylab(NULL) +
   scale_x_date(expand = c(0,0)) +
@@ -64,10 +64,10 @@ ggplot(uicases_tests,
         plot.caption = element_text(colour = "grey40"),
         plot.title = element_text(size = 18, family = "Oswald"))
 
-ggsave("UI/UI_Cases_Tests.png", width = 4, height = 5, dpi = 320)
+ggsave("UI/UI_Cases_Tests.png", width = 3, height = 4, dpi = 320)
 ggsave("UI_Cases_Tests.png", 
        path = "../bzigterman.github.io/images/",
-       width = 4, height = 5, dpi = 320)
+       width = 3, height = 4, dpi = 320)
 
 
 # new cases with 7 day avg ----
