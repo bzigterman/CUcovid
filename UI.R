@@ -4,7 +4,7 @@ library(zoo)
 library(patchwork)
 library(tidyverse)
 
-# get the data from google sheet
+# get the data from google sheet ----
 uicovid <- read_sheet("1UUGDwV5qahPos-bhWUfzf4Y1WYXEh-I0JBOJaoGMrJs",
                       sheet = 2) %>%
   mutate(avgnewcases = rollmean(New_Cases, k = 7, 
@@ -13,7 +13,64 @@ uicovid <- read_sheet("1UUGDwV5qahPos-bhWUfzf4Y1WYXEh-I0JBOJaoGMrJs",
                                 fill = NA, align = "right")) 
 write.csv(uicovid,"data/uicovid.csv", row.names = FALSE)
 
-# new cases with 7 day avg
+uicases_tests <- uicovid%>%
+  select(Date, avgnewcases, avgnewtests) %>%
+  mutate("New Cases" =  avgnewcases) %>%
+  mutate("New Tests" =  avgnewtests) %>%
+  pivot_longer(cols = c("New Tests","New Cases"),
+               names_to = "New",
+               values_to = "Number")
+
+# facet of tests and cases ----
+ggplot(uicases_tests,
+       #cases_and_vax, 
+       aes(x = as.Date(Date),
+           y = Number,
+           colour = New)) +
+  geom_line() +
+  facet_wrap(~ New, scales = "free_y",
+             ncol = 1) +
+  labs(title = "COVID-19 at the University of Illinois",
+       subtitle = "With moving seven-day average",
+       caption = "Source: University of Illinois") +
+  xlab(NULL) +
+  ylab(NULL) +
+  scale_x_date(expand = c(0,0)) +
+  scale_y_continuous(labels = label_comma(accuracy = 1),
+                     #   limits = c(0,60000),
+                     position = "right",
+                     expand = expansion(mult = c(0,.05))
+  ) +
+  expand_limits(y = 0) +
+  scale_colour_manual(guide = FALSE,
+                      values = c("#B45F06","#009e89","#ff5f1a",
+                                 "#d90000","#674EA7","#674EA7")) +
+  #theme_minimal() +
+  #theme_classic() +
+  theme(text = element_text(family = "Barlow"),
+        axis.text.y = element_text(size = 10),
+        #  axis.line.x = element_line(colour = "black"),
+        #panel.background = element_rect(fill = "grey98"),
+        axis.text.x = element_text(size = 8),
+        #axis.line.x = element_line(colour = "grey"),
+        #axis.ticks = 
+        panel.grid.minor = element_blank(),
+        panel.background = element_blank(),
+        panel.grid.major.y = element_line(colour = "grey93"),
+        #panel.grid = element_blank(),
+        #panel.border = element_rect(colour = "grey", fill = NA),
+        strip.text = element_text(size = 11),
+        strip.background = element_blank(),
+        plot.caption = element_text(colour = "grey40"),
+        plot.title = element_text(size = 18, family = "Oswald"))
+
+ggsave("UI/UI_Cases_Tests.png", width = 4, height = 5, dpi = 320)
+ggsave("UI_Cases_Tests.png", 
+       path = "../bzigterman.github.io/images/",
+       width = 4, height = 5, dpi = 320)
+
+
+# new cases with 7 day avg ----
 ggplot(uicovid, aes(x = as.Date(Date), y = New_Cases)) +
   geom_col(fill = "#B45F06",
            alpha = .25) +
@@ -41,7 +98,7 @@ ggsave("UICasesWeb.png",
        width = 8, height = 8*(628/1200), dpi = 320)
 # ggsave("1TweetUICases.png", width = 8, height = 8*(628/1200), dpi = 150)
 
-# new tests with 7 day avg
+# new tests with 7 day avg ----
 ggplot(uicovid, aes(x = as.Date(Date), y = New_Tests)) +
   geom_col(fill = "#1C4587",
            alpha = .25) +
@@ -69,7 +126,7 @@ ggsave("UITestsWeb.png",
        width = 8, height = 8*(628/1200), dpi = 320)
 # ggsave("2TweetUITests.png", width = 8, height = 8*(628/1200), dpi = 150)
 
-# positivity with 7 day avg
+# positivity with 7 day avg ----
 ggplot(uicovid, aes(x = as.Date(Date), y = positivity)) +
   geom_point(colour = "#1C4587",
              alpha = .25) +
@@ -121,7 +178,7 @@ ggsave("UIPositivityWeb.png", # save to my website
 # ggsave("UITotals.png", width = 8, height = 8*(628/1200), dpi = 320)
 # ggsave("4TweetUITotals.png", width = 8, height = 8*(628/1200), dpi = 150)
 
-# fall vs spring semester new cases
+# fall vs spring semester new cases ----
 semcomparenew <- ggplot(uicovid, aes(x = Semester_day/7, y = New_Cases, colour = Semester)) +
   #geom_vline(xintercept = 0, colour = "grey50") +
   annotate("rect", xmin = -Inf, xmax = 0, ymin = 0, ymax = Inf,
@@ -161,7 +218,7 @@ ggsave("UISemCompare.png",
        path = "../bzigterman.github.io/images/",
        width = 8, height = 8*(628/1200), dpi = 320)
 
-# fall vs spring semester total cases
+# fall vs spring semester total cases ----
 semcomparetotal <- ggplot(uicovid, 
                           aes(x = Semester_day/7, 
                               y = Sem_totals, 
@@ -222,7 +279,7 @@ ggsave("SemCompareCombined.png",
        width = 8, height = 4.5, dpi = 320)
 
 
-# todo
+# todo ----
 # [x] save total cases comparison
 # [ ] change numbering on charts
 # [x] make side by side image of two good ui charts
