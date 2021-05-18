@@ -64,10 +64,10 @@ ggplot(uicases_tests,
         plot.caption = element_text(colour = "grey40"),
         plot.title = element_text(size = 18, family = "Oswald"))
 
-ggsave("UI/UI_Cases_Tests.png", width = 3, height = 4, dpi = 320)
+ggsave("UI/UI_Cases_Tests.png", width = 5, height = 8*(628/1200), dpi = 320)
 ggsave("UI_Cases_Tests.png", 
        path = "../bzigterman.github.io/images/",
-       width = 3, height = 4, dpi = 320)
+       width = 5, height = 8*(628/1200), dpi = 320)
 
 
 # new cases with 7 day avg ----
