@@ -16,38 +16,66 @@ cdc_county_vaccine <- cdc_county_vaccine %>%
                             mday(date))) %>%
   mutate(total_class = 
            cut(x = Series_Complete_Pop_Pct,
-               breaks = 5,
-               dig.lab = 2
+               breaks = c(0,20,40,60,80,100),
+               labels = c("0-20%","20-40%","40-60%","60-80%","80-100%"),
+               #dig.lab = 2,
+               include.lowest = TRUE
                #labels = c(paste(
                #labels = quantile(Series_Complete_Pop_Pct)/100)
            )) %>%
-  mutate(total_class_temp = gsub(pattern = "\\(|\\[|\\)|\\]", 
-                                 replacement = "", 
-                                 total_class)) %>%
-  separate(col = total_class_temp, into = c("lwr", "upr")) %>%
-  mutate(total_class_new = paste(lwr,"–", upr,"%", sep = "")) %>%
   mutate(adult_class = 
            cut(x = Series_Complete_18PlusPop_Pct,
-               breaks = 5,
-               dig.lab = 2
+               breaks = c(0,20,40,60,80,100),
+               labels = c("0-20%","20-40%","40-60%","60-80%","80-100%"),
+               #dig.lab = 2,
+               include.lowest = TRUE
                #labels = c(paste(
                #labels = quantile(Series_Complete_Pop_Pct)/100)
            )) %>%
-  mutate(adult_class_temp = gsub(pattern = "\\(|\\[|\\)|\\]", 
-                                 replacement = "", 
-                                 adult_class)) %>%
-  separate(col = adult_class_temp, into = c("lwr", "upr")) %>%
-  mutate(adult_class_new = paste(lwr,"–", upr,"%", sep = "")) %>%
   mutate(senior_class = 
            cut(x = Series_Complete_65PlusPop_Pct,
-               breaks = 5,
-               dig.lab = 2
-           )) %>%
-  mutate(senior_class_temp = gsub(pattern = "\\(|\\[|\\)|\\]", 
-                                  replacement = "", 
-                                  senior_class)) %>%
-  separate(col = senior_class_temp, into = c("lwr", "upr")) %>%
-  mutate(senior_class_new = paste(lwr,"–",upr,"%", sep = ""))
+               breaks = c(0,20,40,60,80,100),
+               labels = c("0-20%","20-40%","40-60%","60-80%","80-100%"),
+               #dig.lab = 2,
+               include.lowest = TRUE
+               #labels = c(paste(
+               #labels = quantile(Series_Complete_Pop_Pct)/100)
+           ))
+
+  # mutate(total_class = 
+  #          cut(x = Series_Complete_Pop_Pct,
+  #              breaks = 5,
+  #              dig.lab = 2
+  #              #labels = c(paste(
+  #              #labels = quantile(Series_Complete_Pop_Pct)/100)
+  #          )) %>%
+  # mutate(total_class_temp = gsub(pattern = "\\(|\\[|\\)|\\]", 
+  #                                replacement = "", 
+  #                                total_class)) %>%
+  # separate(col = total_class_temp, into = c("lwr", "upr")) %>%
+  # mutate(total_class_new = paste(lwr,"–", upr,"%", sep = "")) %>%
+  # mutate(adult_class = 
+  #          cut(x = Series_Complete_18PlusPop_Pct,
+  #              breaks = 5,
+  #              dig.lab = 2
+  #              #labels = c(paste(
+  #              #labels = quantile(Series_Complete_Pop_Pct)/100)
+  #          )) %>%
+  # mutate(adult_class_temp = gsub(pattern = "\\(|\\[|\\)|\\]", 
+  #                                replacement = "", 
+  #                                adult_class)) %>%
+  # separate(col = adult_class_temp, into = c("lwr", "upr")) %>%
+  # mutate(adult_class_new = paste(lwr,"–", upr,"%", sep = "")) %>%
+  # mutate(senior_class = 
+  #          cut(x = Series_Complete_65PlusPop_Pct,
+  #              breaks = 5,
+  #              dig.lab = 2
+  #          )) %>%
+  # mutate(senior_class_temp = gsub(pattern = "\\(|\\[|\\)|\\]", 
+  #                                 replacement = "", 
+  #                                 senior_class)) %>%
+  # separate(col = senior_class_temp, into = c("lwr", "upr")) %>%
+  # mutate(senior_class_new = paste(lwr,"–",upr,"%", sep = ""))
 
 # cut(x = cdc_county_vaccine$Series_Complete_65PlusPop_Pct,
 #     breaks = 5,
@@ -122,7 +150,7 @@ cdc_vax_map
 # pct 65+ map ----
 cdc_total_vax_65 <- ggplot(data = cdc_vaccines_geo_merged) +
   geom_sf(data = cdc_vaccines_geo_merged,
-          mapping = aes(fill = senior_class_new,
+          mapping = aes(fill = senior_class,
                         geometry = geometry),
           #crs = 4326,
           #crs = "NAD83",
@@ -166,7 +194,7 @@ ggsave("CDC_vax_65.png",
 
 cdc_total_vax_18 <- ggplot(data = cdc_vaccines_geo_merged) +
   geom_sf(data = cdc_vaccines_geo_merged,
-          mapping = aes(fill = adult_class_new,
+          mapping = aes(fill = adult_class,
                         geometry = geometry),
           #crs = 4326,
           #crs = "NAD83",
@@ -209,7 +237,7 @@ ggsave("CDC_vax_18.png",
 # pct total pop vaccinated map ----
 cdc_total_vax <- ggplot(data = cdc_vaccines_geo_merged) +
   geom_sf(data = cdc_vaccines_geo_merged,
-          mapping = aes(fill = total_class_new,
+          mapping = aes(fill = total_class,
                         geometry = geometry),
           #crs = 4326,
           #crs = "NAD83",
