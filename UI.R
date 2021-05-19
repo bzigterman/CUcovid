@@ -213,10 +213,10 @@ semcomparenew <- ggplot(uicovid, aes(x = Semester_day/7, y = New_Cases, colour =
         legend.text = element_text(size = 13)) 
 semcomparenew
 
-ggsave("UI/1UISemCompare.png", width = 8, height = 8*(628/1200), dpi = 320)
-ggsave("UISemCompare.png", 
-       path = "../bzigterman.github.io/images/",
-       width = 8, height = 8*(628/1200), dpi = 320)
+# ggsave("UI/1UISemCompare.png", width = 8, height = 8*(628/1200), dpi = 320)
+# ggsave("UISemCompare.png", 
+#        path = "../bzigterman.github.io/images/",
+#        width = 8, height = 8*(628/1200), dpi = 320)
 
 # fall vs spring semester total cases ----
 semcomparetotal <- ggplot(uicovid, 
@@ -258,12 +258,12 @@ semcomparetotal <- ggplot(uicovid,
         legend.text = element_text(size = 13)) 
 semcomparetotal
 
-ggsave("UI/UISemCompareTotal.png", width = 8, height = 8*(628/1200), dpi = 320)
-ggsave("UISemCompareTotal.png", 
-       path = "../bzigterman.github.io/images/",
-       width = 8, height = 8*(628/1200), dpi = 320)
+# ggsave("UI/UISemCompareTotal.png", width = 8, height = 8*(628/1200), dpi = 320)
+# ggsave("UISemCompareTotal.png", 
+#        path = "../bzigterman.github.io/images/",
+#        width = 8, height = 8*(628/1200), dpi = 320)
 
-# combined semester comparisons
+# combined semester comparisons ----
 combined <- semcomparenew + semcomparetotal
 combined[[1]] <- combined[[1]] + labs(title = "New Cases by Semester",
                                       subtitle =    "With seven-day moving average",
@@ -273,10 +273,10 @@ combined[[2]] <- combined[[2]] + labs(title = "Total Cases by Semester",
                                       caption  = "Source: University of Illinois") +
   theme(legend.position = c(-.015,.9))
 combined
-ggsave("UI/SemCompareCombined.png", width = 8, height = 4.5, dpi = 320)
-ggsave("SemCompareCombined.png", 
-       path = "../bzigterman.github.io/images/",
-       width = 8, height = 4.5, dpi = 320)
+# ggsave("UI/SemCompareCombined.png", width = 8, height = 4.5, dpi = 320)
+# ggsave("SemCompareCombined.png", 
+#        path = "../bzigterman.github.io/images/",
+#        width = 8, height = 4.5, dpi = 320)
 
 
 # todo ----
