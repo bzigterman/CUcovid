@@ -6,6 +6,7 @@ library(RColorBrewer)
 library(lubridate)
 library(extrafont)
 font_import(prompt=FALSE)
+loadfonts()
 
 
 usa_county_vaccine_url <- "https://covid.cdc.gov/covid-data-tracker/COVIDData/getAjaxData?id=vaccination_county_condensed_data"
