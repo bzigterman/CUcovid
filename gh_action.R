@@ -52,7 +52,7 @@ plot_usmap(data = usa_county_vaccine, values = "total_class",
         legend.key.size = unit(.5, "cm"),
         panel.background = element_blank(),
         plot.caption = element_text(colour = "grey40"),
-        plot.title = element_text(size = 16, family = "DIN Condensed Bold")) 
+        plot.title = element_text(size = 16, family = "Helvetica")) 
 
 ggsave("gh_action/usa_vax_total.png", 
        width = 8, height = 8*(628/1200), dpi = 320)
@@ -104,7 +104,7 @@ plot_usmap(data = usa_cases, values = "community_transmission_level",
         panel.background = element_blank(),
         #legend.text = element_text(size = 13),
         plot.caption = element_text(colour = "grey40"),
-        plot.title = element_text(size = 16, family = "DIN Condensed Bold")) 
+        plot.title = element_text(size = 16, family = "Helvetica")) 
 
 ggsave("gh_action/usa_transmission.png", width = 8, height = 8*(628/1200), dpi = 320)
 
@@ -203,7 +203,7 @@ cdc_total_vax <- ggplot(data = cdc_vaccines_geo_merged) +
         legend.key.size = unit(.5, "cm"),
         panel.background = element_blank(),
         plot.caption = element_text(colour = "grey40"),
-        plot.title = element_text(size = 16, family = "DIN Condensed Bold")) 
+        plot.title = element_text(size = 16, family = "Helvetica")) 
 cdc_total_vax
 
 # il cases map
@@ -233,7 +233,7 @@ cdc_cases_map <- ggplot(data = cdc_cases_merged) +
         legend.key.size = unit(.5, "cm"),
         panel.background = element_blank(),
         plot.caption = element_text(colour = "grey40"),
-        plot.title = element_text(size = 16, family = "DIN Condensed Bold")) 
+        plot.title = element_text(size = 16, family = "Helvetica")) 
 cdc_cases_map
 
 # combined cases and vax map ----
