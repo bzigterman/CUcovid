@@ -34,7 +34,7 @@ plot_usmap(data = usa_county_vaccine, values = "total_class",
        caption =  paste("Source: CDC. Data last updated",
                         tail(usa_county_vaccine$short_date,1)),
        fill = NULL)+
-  theme(text = element_text(family = "Barlow"),
+  theme(text = element_text(family = "Verdana"),
         axis.text = element_blank(),
         axis.line.x = element_blank(),
         axis.ticks = element_blank(),
@@ -46,7 +46,7 @@ plot_usmap(data = usa_county_vaccine, values = "total_class",
         legend.key.size = unit(.5, "cm"),
         panel.background = element_blank(),
         plot.caption = element_text(colour = "grey40"),
-        plot.title = element_text(size = 16, family = "Oswald")) 
+        plot.title = element_text(size = 16, family = "Georgia")) 
 
 ggsave("gh_action/usa_vax_total.png", 
        width = 8, height = 8*(628/1200), dpi = 320)
