@@ -11,7 +11,8 @@ library(tidycensus)
 font_import(prompt=FALSE)
 loadfonts()
 
-# us vaccine data ----
+# us----
+## us vaccine data ----
 usa_county_vaccine_url <- "https://covid.cdc.gov/covid-data-tracker/COVIDData/getAjaxData?id=vaccination_county_condensed_data"
 usa_county_vaccine <- rio::import(usa_county_vaccine_url,
                                   format = "json")
@@ -31,7 +32,7 @@ usa_county_vaccine <- usa_county_vaccine %>%
                           "50-60%","60-70%","70-80%","80-90%","90-100%"),
                include.lowest = TRUE)) 
 
-# make vaccine map ----
+## make vaccine map ----
 plot_usmap(data = usa_county_vaccine, values = "total_class",
            size = .01) +
   scale_fill_brewer(
@@ -58,7 +59,7 @@ plot_usmap(data = usa_county_vaccine, values = "total_class",
 ggsave("gh_action/usa_vax_total.png", 
        width = 8, height = 8*(628/1200), dpi = 320)
 
-# us cases data ----
+## us cases data ----
 usa_cases_url <- "https://covid.cdc.gov/covid-data-tracker/COVIDData/getAjaxData?id=integrated_county_latest_external_data"
 usa_cases <- rio::import(usa_cases_url,
                          format = "json")
@@ -79,7 +80,7 @@ usa_cases <- usa_cases %>%
 
 
 
-# make transmission map ----
+## make transmission map ----
 plot_usmap(data = usa_cases, values = "community_transmission_level",
            size = .01) +
   scale_fill_brewer(limits = c("low","moderate","substantial","high"),
@@ -110,7 +111,8 @@ plot_usmap(data = usa_cases, values = "community_transmission_level",
 ggsave("gh_action/usa_transmission.png", 
        width = 8, height = 8*(628/1200), dpi = 320)
 
-# illinois shapefiles ----
+# illinois ----
+## illinois shapefiles ----
 il_counties <- get_acs(state = "IL", geography = "county", 
                        variables = "B19013_001", geometry = TRUE,
                        key = "CENSUS_API_KEY")
@@ -119,7 +121,7 @@ il_counties_clean <- il_counties %>%
   mutate(estimate = NULL) %>%
   mutate(moe = NULL)
 
-# IL CDC data ----
+## IL CDC data ----
 cdc_county_vaccine_url <- "https://covid.cdc.gov/covid-data-tracker/COVIDData/getAjaxData?id=vaccination_county_condensed_data"
 cdc_county_vaccine <- rio::import(cdc_county_vaccine_url,
                                   format = "json")
@@ -178,7 +180,7 @@ cdc_cases_merged <- merge(cdc_cases,
                           il_counties_clean,
                           by = "GEOID")
 
-# IL vax map ----
+## IL vax map ----
 cdc_total_vax <- ggplot(data = cdc_vaccines_geo_merged) +
   geom_sf(data = cdc_vaccines_geo_merged,
           mapping = aes(fill = total_class,
@@ -237,7 +239,7 @@ cdc_cases_map <- ggplot(data = cdc_cases_merged) +
         plot.title = element_text(size = 16, family = "Georgia")) 
 cdc_cases_map
 
-# il transmission level ----
+## il transmission level ----
 cdc_transmission <- ggplot(data = cdc_cases_merged) +
   geom_sf(data = cdc_cases_merged,
           mapping = aes(fill = community_transmission_level,
@@ -267,7 +269,7 @@ cdc_transmission <- ggplot(data = cdc_cases_merged) +
         plot.title = element_text(size = 16, family = "Georgia")) 
 cdc_transmission 
 
-# combined cases and vax map ----
+## combined cases and vax map ----
 cdc_transmission +
   labs(title = "Community Transmission Levels",
        caption =  NULL,
