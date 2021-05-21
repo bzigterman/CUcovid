@@ -111,7 +111,8 @@ ggsave("gh_action/usa_transmission.png",
 
 # illinois shapefiles ----
 il_counties <- get_acs(state = "IL", geography = "county", 
-                       variables = "B19013_001", geometry = TRUE)
+                       variables = "B19013_001", geometry = TRUE,
+                       key = CENSUS_API_KEY)
 il_counties_clean <- il_counties %>%
   mutate(variable = NULL) %>%
   mutate(estimate = NULL) %>%
