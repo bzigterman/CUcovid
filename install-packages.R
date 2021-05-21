@@ -1,1 +1,1 @@
-install.packages("tidyverse","httr","usmap","RColorBrewer","rio","lubridate")
+install.packages("tidyverse","usmap","RColorBrewer","rio","lubridate")
