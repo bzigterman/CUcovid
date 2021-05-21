@@ -8,7 +8,7 @@ library(extrafont)
 font_import(prompt=FALSE)
 loadfonts()
 
-
+# us vaccine data ----
 usa_county_vaccine_url <- "https://covid.cdc.gov/covid-data-tracker/COVIDData/getAjaxData?id=vaccination_county_condensed_data"
 usa_county_vaccine <- rio::import(usa_county_vaccine_url,
                                   format = "json")
@@ -54,3 +54,54 @@ plot_usmap(data = usa_county_vaccine, values = "total_class",
 
 ggsave("gh_action/usa_vax_total.png", 
        width = 8, height = 8*(628/1200), dpi = 320)
+
+# us cases data ----
+usa_cases_url <- "https://covid.cdc.gov/covid-data-tracker/COVIDData/getAjaxData?id=integrated_county_latest_external_data"
+usa_cases <- rio::import(usa_cases_url,
+                         format = "json")
+usa_cases <- usa_cases$integrated_county_latest_external_data
+usa_cases <- usa_cases %>%
+  filter(County != "Unknown County") %>%
+  filter(State_name != "Puerto Rico") %>%
+  mutate(GEOID = fips_code) %>%
+  mutate(fips = fips_code) %>%
+  mutate(date = ymd(as_date(report_date))) %>%
+  mutate(short_date = paste(month(date, label = TRUE, abbr = FALSE),
+                            mday(date))) %>%
+  mutate(new_cases_class = cut(x = cases_per_100K_7_day_count_change/7,
+                               breaks = c(0,5,15,25,35,50,100,Inf),
+                               labels = c("0–5","5–15","15–25","25–35","35–50","50–100","100+"),
+                               include.lowest = TRUE,
+                               ordered_result = TRUE))
+
+
+
+# make transmission map ----
+plot_usmap(data = usa_cases, values = "community_transmission_level",
+           size = .01) +
+  scale_fill_brewer(limits = c("low","moderate","substantial","high"),
+                    palette = "Oranges",
+                    direction = 1) +
+  labs(title = "Community Transmission Levels",
+       caption =  paste("Source: CDC. Data last updated",
+                        tail(usa_cases$short_date,1)),
+       fill = NULL)+
+  #theme_minimal() +
+  theme(text = element_text(family = "Verdana"),
+        axis.text = element_blank(),
+        axis.line.x = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank(),
+        #panel.grid.major.x = element_line(colour = "grey93"),
+        #legend.position = "right",
+        panel.grid.major = element_blank(),  
+        #legend.position = c(.1,.9),
+        legend.background = element_blank(),
+        legend.key = element_blank(),
+        legend.key.size = unit(.5, "cm"),
+        panel.background = element_blank(),
+        #legend.text = element_text(size = 13),
+        plot.caption = element_text(colour = "grey40"),
+        plot.title = element_text(size = 16, family = "Georgia")) 
+
+ggsave("gh_action/usa_transmission.png", width = 8, height = 8*(628/1200), dpi = 320)
