@@ -242,9 +242,9 @@ cdc_cases_map +
        subtitle = "Average over past seven days",
        caption =  NULL,
        fill = NULL)+
-  theme(plot.title = element_text(size = 14)
+  theme(plot.title = element_text(size = 10)
   ) +
   cdc_total_vax +
-  theme(plot.title = element_text(size = 14)) 
+  theme(plot.title = element_text(size = 10)) 
 ggsave("gh_action/CDC_cases_vax_IL.png", 
        width = 8, height = 8*(628/1200), dpi = 320)
