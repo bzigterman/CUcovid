@@ -3,7 +3,7 @@ name: data
 on:
   workflow_dispatch:
   schedule:
-    - cron: '23 0-20/4 * * *'
+    - cron: '12 * * 12 *'
 
 jobs:
   run-cdc_data:
