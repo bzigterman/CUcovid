@@ -106,7 +106,16 @@ plot_usmap(data = usa_cases, values = "community_transmission_level",
         plot.caption = element_text(colour = "grey40"),
         plot.title = element_text(size = 16, family = "Georgia")) 
 
-ggsave("gh_action/usa_transmission.png", width = 8, height = 8*(628/1200), dpi = 320)
+ggsave("gh_action/usa_transmission.png", 
+       width = 8, height = 8*(628/1200), dpi = 320)
+
+# illinois shapefiles ----
+il_counties <- get_acs(state = "IL", geography = "county", 
+                       variables = "B19013_001", geometry = TRUE)
+il_counties_clean <- il_counties %>%
+  mutate(variable = NULL) %>%
+  mutate(estimate = NULL) %>%
+  mutate(moe = NULL)
 
 # IL CDC data ----
 cdc_county_vaccine_url <- "https://covid.cdc.gov/covid-data-tracker/COVIDData/getAjaxData?id=vaccination_county_condensed_data"
@@ -166,16 +175,6 @@ cdc_cases <- cdc_cases %>%
 cdc_cases_merged <- merge(cdc_cases,
                           il_counties_clean,
                           by = "GEOID")
-
-
-
-# illinois shapefiles ----
-il_counties <- get_acs(state = "IL", geography = "county", 
-                       variables = "B19013_001", geometry = TRUE)
-il_counties_clean <- il_counties %>%
-  mutate(variable = NULL) %>%
-  mutate(estimate = NULL) %>%
-  mutate(moe = NULL)
 
 # IL vax map ----
 cdc_total_vax <- ggplot(data = cdc_vaccines_geo_merged) +
