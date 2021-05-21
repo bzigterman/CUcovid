@@ -237,7 +237,43 @@ cdc_cases_map <- ggplot(data = cdc_cases_merged) +
         plot.title = element_text(size = 16, family = "Georgia")) 
 cdc_cases_map
 
+# il transmission level ----
+cdc_transmission <- ggplot(data = cdc_cases_merged) +
+  geom_sf(data = cdc_cases_merged,
+          mapping = aes(fill = community_transmission_level,
+                        geometry = geometry),
+          size = .25) +
+  coord_sf(crs = st_crs(4326)) +
+  scale_fill_brewer(limits = c("low","moderate","substantial","high"),
+                    palette = "Oranges",
+                    direction = 1) +
+  labs(title = "Community Transmission Levels",
+       caption =  paste("Source: CDC. Data last updated",
+                        tail(cdc_cases_merged$short_date,1)),
+       fill = NULL)+
+  theme(text = element_text(family = "Verdana"),
+        axis.text = element_blank(),
+        axis.line.x = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank(),
+        legend.position = "right",
+        panel.grid.major = element_blank(),  
+        legend.background = element_blank(),
+        legend.key = element_blank(),
+        plot.caption.position = "plot",
+        legend.key.size = unit(.5, "cm"),
+        panel.background = element_blank(),
+        plot.caption = element_text(colour = "grey40"),
+        plot.title = element_text(size = 16, family = "Georgia")) 
+cdc_transmission 
+
 # combined cases and vax map ----
+cdc_transmission +
+  labs(title = "Community Transmission Levels",
+       caption =  NULL,
+       fill = NULL)+
+  theme(plot.title = element_text(size = 10)
+  ) +
 cdc_cases_map + 
   labs(title = "New Cases per 100,000 Residents",
        subtitle = "Average over past seven days",
@@ -249,3 +285,5 @@ cdc_cases_map +
   theme(plot.title = element_text(size = 10)) 
 ggsave("gh_action/CDC_cases_vax_IL.png", 
        width = 8, height = 8*(628/1200), dpi = 320)
+
+
