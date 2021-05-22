@@ -288,4 +288,119 @@ cdc_cases_map +
 ggsave("gh_action/CDC_cases_vax_IL.png", 
        width = 8, height = 8*(628/1200), dpi = 320)
 
+## combined il vax ----
+### pct 65+ map ----
+cdc_total_vax_65 <- ggplot(data = cdc_vaccines_geo_merged) +
+  geom_sf(data = cdc_vaccines_geo_merged,
+          mapping = aes(fill = senior_class,
+                        geometry = geometry),
+          size = .25) +
+  coord_sf(crs = st_crs(4326)) +
+  scale_fill_brewer(
+    palette = "Purples",
+    direction = 1) +
+  labs(title = "Percent Fully Vaccinated 65+",
+       caption =  paste("Source: CDC. Data last updated",
+                        tail(cdc_vaccines_geo_merged$short_date,1)),
+       fill = NULL)+
+  theme(text = element_text(family = "Verdana"),
+        axis.text = element_blank(),
+        axis.line.x = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank(),
+        legend.position = "right",
+        panel.grid.major = element_blank(),  
+        legend.background = element_blank(),
+        legend.key = element_blank(),
+        legend.key.size = unit(.5, "cm"),
+        panel.background = element_blank(),
+        plot.caption = element_text(colour = "grey40"),
+        plot.title = element_text(size = 16, family = "Georgia")) 
+cdc_total_vax_65
 
+### pct 18+ ----
+cdc_total_vax_18 <- ggplot(data = cdc_vaccines_geo_merged) +
+  geom_sf(data = cdc_vaccines_geo_merged,
+          mapping = aes(fill = adult_class,
+                        geometry = geometry),
+          size = .25) +
+  coord_sf(crs = st_crs(4326)) +
+  scale_fill_brewer(
+    palette = "Purples",
+    direction = 1) +
+  labs(title = "Percent Fully Vaccinated 18+",
+       caption =  paste("Source: CDC. Data last updated",
+                        tail(cdc_vaccines_geo_merged$short_date,1)),
+       fill = NULL)+
+  theme(text = element_text(family = "Verdana"),
+        axis.text = element_blank(),
+        axis.line.x = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank(),
+        legend.position = "right",
+        panel.grid.major = element_blank(),  
+        legend.background = element_blank(),
+        legend.key = element_blank(),
+        legend.key.size = unit(.5, "cm"),
+        panel.background = element_blank(),
+        plot.caption = element_text(colour = "grey40"),
+        plot.title = element_text(size = 16, family = "Georgia")) 
+cdc_total_vax_18
+
+### pct total pop vaccinated map ----
+cdc_total_vax <- ggplot(data = cdc_vaccines_geo_merged) +
+  geom_sf(data = cdc_vaccines_geo_merged,
+          mapping = aes(fill = total_class,
+                        geometry = geometry),
+          size = .25) +
+  coord_sf(crs = st_crs(4326)) +
+  scale_fill_brewer(
+    palette = "Purples",
+    direction = 1) +
+  labs(title = "Percent Fully Vaccinated",
+       caption =  paste("Source: CDC. Data last updated",
+                        tail(cdc_vaccines_geo_merged$short_date,1)),
+       fill = NULL)+
+  theme(text = element_text(family = "Verdana"),
+        axis.text = element_blank(),
+        axis.line.x = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank(),
+        legend.position = "right",
+        panel.grid.major = element_blank(),  
+        legend.background = element_blank(),
+        legend.key = element_blank(),
+        legend.key.size = unit(.5, "cm"),
+        panel.background = element_blank(),
+        plot.caption = element_text(colour = "grey40"),
+        plot.title = element_text(size = 16, family = "Georgia")) 
+cdc_total_vax
+
+# combined vax maps ----
+cdc_total_vax + 
+  labs(title = "Percent Fully Vaccinated",
+       subtitle = "Total Population",
+       caption =  NULL,
+       fill = NULL) +
+  theme(legend.position = "right",
+        plot.title = element_text(size = 12),
+        plot.subtitle = element_text(size = 12, 
+                                     hjust = .6)) +
+  cdc_total_vax_18 +
+  labs(title = NULL,
+       subtitle = "18 and older",
+       caption =  NULL,
+       fill = NULL) +
+  theme(legend.position = "right",
+        plot.subtitle = element_text(size = 12, 
+                                     hjust = .6)) +
+  cdc_total_vax_65 +
+  labs(title = NULL,
+       subtitle = "65 and older",
+       fill = NULL) +
+  theme(legend.position = "right",
+        plot.subtitle = element_text(size = 12, 
+                                     hjust = .6))
+
+ggsave("gh_action/CDC_vax_combined.png", 
+       width = 8, height = 8*(628/1200), dpi = 320)
