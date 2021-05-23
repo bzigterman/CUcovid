@@ -115,7 +115,7 @@ illinoispop <- 12741080
 ## illinois shapefiles ----
 il_counties <- get_acs(state = "IL", geography = "county", 
                        variables = "B19013_001", geometry = TRUE,
-                       key = "CENSUS_API_KEY")
+                       key = Sys.getenv("CENSUS_API_KEY"))
 il_counties_clean <- il_counties %>%
   mutate(variable = NULL) %>%
   mutate(estimate = NULL) %>%
