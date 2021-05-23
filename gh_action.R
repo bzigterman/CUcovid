@@ -112,6 +112,8 @@ ggsave("gh_action/usa_transmission.png",
        width = 8, height = 8*(628/1200), dpi = 320)
 
 # illinois ----
+illinoispop <- 12741080
+
 ## illinois shapefiles ----
 il_counties <- get_acs(state = "IL", geography = "county", 
                        variables = "B19013_001", geometry = TRUE,
