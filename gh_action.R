@@ -1,5 +1,6 @@
 library(tidyverse)
 library(zoo)
+library(scales)
 library(rio)
 library(httr)
 library(usmap)
