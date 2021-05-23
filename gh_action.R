@@ -426,9 +426,9 @@ idph_cases_IL <- idph_cases_IL$values %>%
 
 idph_cases_deaths_IL <- idph_cases_IL %>%
   select(Date, avg_new_cases, avg_new_deaths) %>%
-  mutate("New Cases" =  avg_new_cases) %>%
-  mutate("New Deaths" =  avg_new_deaths) %>%
-  pivot_longer(cols = c("New Cases","New Deaths"),
+  mutate("Average New Cases" =  avg_new_cases) %>%
+  mutate("Average New Deaths" =  avg_new_deaths) %>%
+  pivot_longer(cols = c("Average New Cases","Average New Deaths"),
                values_to = "Number",
                names_to = "New")
 
@@ -440,7 +440,7 @@ ggplot(idph_cases_deaths_IL,
   geom_line() +
   facet_wrap(~ New, scales = "free_y",
              ncol = 1) +
-  labs(caption = "Source: Illinois Department of Public Health.\nNote: Moving seven-day average.") +
+  labs(caption = "Source: Illinois Department of Public Health") +
   xlab(NULL) +
   ylab(NULL) +
   scale_x_date(expand = c(0,0)) +
@@ -482,7 +482,7 @@ idph_region6_cases_hospital <- idph_region6 %>%
                values_to = "value",
                names_to = "name")
 
-## facet chart of region cases and hospital beds in use
+## facet chart of region cases and hospital beds in use ----
 ggplot(idph_region6_cases_hospital,
        aes(x = as.Date(Date),
            y = value,
