@@ -12,6 +12,7 @@ library(patchwork)
 library(tidycensus)
 font_import(prompt=FALSE)
 loadfonts()
+options(tigris_use_cache = TRUE)
 
 # us----
 ## us vaccine data ----
