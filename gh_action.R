@@ -41,7 +41,7 @@ plot_usmap(data = usa_county_vaccine, values = "total_class",
     palette = "Purples",
     direction = 1) +
   labs(title = "Percent Fully Vaccinated",
-       caption =  paste("Source: CDC. Data last updated",
+       caption =  paste("Source: CDC. Data updated",
                         tail(usa_county_vaccine$short_date,1)),
        fill = NULL)+
   theme(text = element_text(family = "Verdana"),
@@ -89,24 +89,19 @@ plot_usmap(data = usa_cases, values = "community_transmission_level",
                     palette = "Oranges",
                     direction = 1) +
   labs(title = "Community Transmission Levels",
-       caption =  paste("Source: CDC. Data last updated",
+       caption =  paste("Source: CDC. Data updated",
                         tail(usa_cases$short_date,1)),
        fill = NULL)+
-  #theme_minimal() +
   theme(text = element_text(family = "Verdana"),
         axis.text = element_blank(),
         axis.line.x = element_blank(),
         axis.ticks = element_blank(),
         axis.title = element_blank(),
-        #panel.grid.major.x = element_line(colour = "grey93"),
-        #legend.position = "right",
         panel.grid.major = element_blank(),  
-        #legend.position = c(.1,.9),
         legend.background = element_blank(),
         legend.key = element_blank(),
         legend.key.size = unit(.5, "cm"),
         panel.background = element_blank(),
-        #legend.text = element_text(size = 13),
         plot.caption = element_text(colour = "grey40"),
         plot.title = element_text(size = 16, family = "Georgia")) 
 
@@ -195,7 +190,7 @@ cdc_total_vax <- ggplot(data = cdc_vaccines_geo_merged) +
     palette = "Purples",
     direction = 1) +
   labs(title = "Percent Fully Vaccinated",
-       caption =  paste("Source: CDC. Data last updated",
+       caption =  paste("Source: CDC. Data updated",
                         tail(cdc_vaccines_geo_merged$short_date,1)),
        fill = NULL)+
   theme(text = element_text(family = "Verdana"),
@@ -225,7 +220,7 @@ cdc_cases_map <- ggplot(data = cdc_cases_merged) +
     direction = 1) +
   labs(title = "New Cases per 100,000 Residents",
        subtitle = "Average over past seven days",
-       caption =  paste("Source: CDC. Data last updated",
+       caption =  paste("Source: CDC. Data updated",
                         tail(cdc_cases_merged$short_date,1)),
        fill = NULL)+
   theme(text = element_text(family = "Verdana"),
@@ -254,7 +249,7 @@ cdc_transmission <- ggplot(data = cdc_cases_merged) +
                     palette = "Oranges",
                     direction = 1) +
   labs(title = "Community Transmission Levels",
-       caption =  paste("Source: CDC. Data last updated",
+       caption =  paste("Source: CDC. Data updated",
                         tail(cdc_cases_merged$short_date,1)),
        fill = NULL)+
   theme(text = element_text(family = "Verdana"),
@@ -304,7 +299,7 @@ cdc_total_vax_65 <- ggplot(data = cdc_vaccines_geo_merged) +
     palette = "Purples",
     direction = 1) +
   labs(title = "Percent Fully Vaccinated 65+",
-       caption =  paste("Source: CDC. Data last updated",
+       caption =  paste("Source: CDC. Data updated",
                         tail(cdc_vaccines_geo_merged$short_date,1)),
        fill = NULL)+
   theme(text = element_text(family = "Verdana"),
@@ -333,7 +328,7 @@ cdc_total_vax_18 <- ggplot(data = cdc_vaccines_geo_merged) +
     palette = "Purples",
     direction = 1) +
   labs(title = "Percent Fully Vaccinated 18+",
-       caption =  paste("Source: CDC. Data last updated",
+       caption =  paste("Source: CDC. Data updated",
                         tail(cdc_vaccines_geo_merged$short_date,1)),
        fill = NULL)+
   theme(text = element_text(family = "Verdana"),
@@ -362,7 +357,7 @@ cdc_total_vax <- ggplot(data = cdc_vaccines_geo_merged) +
     palette = "Purples",
     direction = 1) +
   labs(title = "Percent Fully Vaccinated",
-       caption =  paste("Source: CDC. Data last updated",
+       caption =  paste("Source: CDC. Data updated",
                         tail(cdc_vaccines_geo_merged$short_date,1)),
        fill = NULL)+
   theme(text = element_text(family = "Verdana"),
@@ -422,7 +417,7 @@ idph_cases_IL <- idph_cases_IL$values %>%
                                   fill = NA, align = "right")) %>%
   mutate(avg_new_deaths = rollmean(new_deaths, k = 7, 
                                    fill = NA, align = "right")) %>%
-  mutate(Date = ymd_hms(reportDate))
+  mutate(Date = ymd_hms(reportDate)) 
 
 idph_cases_deaths_IL <- idph_cases_IL %>%
   select(Date, avg_new_cases, avg_new_deaths) %>%
@@ -430,7 +425,9 @@ idph_cases_deaths_IL <- idph_cases_IL %>%
   mutate("Average New Deaths" =  avg_new_deaths) %>%
   pivot_longer(cols = c("Average New Cases","Average New Deaths"),
                values_to = "Number",
-               names_to = "New")
+               names_to = "New") %>%
+  mutate(short_date = paste(month(Date, label = TRUE, abbr = FALSE),
+                            mday(Date))) 
 
 ## facet chart of IL cases and deaths ----
 ggplot(idph_cases_deaths_IL,
@@ -440,7 +437,8 @@ ggplot(idph_cases_deaths_IL,
   geom_line() +
   facet_wrap(~ New, scales = "free_y",
              ncol = 1) +
-  labs(caption = "Source: Illinois Department of Public Health") +
+  labs(caption = paste("Source: IDPH. Data updated",
+                       tail(idph_cases_deaths_IL$short_date,1))) +
   xlab(NULL) +
   ylab(NULL) +
   scale_x_date(expand = c(0,0)) +
@@ -480,7 +478,9 @@ idph_region6_cases_hospital <- idph_region6 %>%
   pivot_longer(cols = c("Hospital Beds in Use for COVID-19",
                         "Average New Cases"),
                values_to = "value",
-               names_to = "name")
+               names_to = "name") %>%
+  mutate(short_date = paste(month(Date, label = TRUE, abbr = FALSE),
+                            mday(Date))) 
 
 ## facet chart of region cases and hospital beds in use ----
 ggplot(idph_region6_cases_hospital,
@@ -490,7 +490,8 @@ ggplot(idph_region6_cases_hospital,
   geom_line() +
   facet_wrap(~ name, scales = "free_y",
              ncol = 1) +
-  labs(caption = "Source: Illinois Department of Public Health") +
+  labs(caption = paste("Source: IDPH. Data updated",
+                       tail(idph_region6_cases_hospital$short_date,1))) +
   xlab(NULL) +
   ylab(NULL) +
   scale_x_date(expand = c(0,0)) +
