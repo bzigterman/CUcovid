@@ -406,7 +406,7 @@ ggsave("gh_action/CDC_vax_combined.png",
        width = 8, height = 8*(628/1200), dpi = 320)
 
 # idph data ----
-## case data ----
+## state case data ----
 
 idph_cases_IL <- rio::import("https://idph.illinois.gov/DPHPublicInformation/api/COVID/GetCountyHistorical?countyName=Illinois",
                              format = "json") 
@@ -428,7 +428,7 @@ idph_cases_deaths_IL <- idph_cases_IL %>%
                values_to = "Number",
                names_to = "New")
 
-## facet map of IL cases and deaths ----
+## facet chart of IL cases and deaths ----
 ggplot(idph_cases_deaths_IL,
        aes(x = as.Date(Date),
            y = Number,
@@ -459,5 +459,55 @@ ggplot(idph_cases_deaths_IL,
         plot.caption = element_text(colour = "grey40"),
         plot.title = element_text(size = 18, family = "Georgia"))
 
-ggsave("gh_action/state_Cases_Tests.png", width = 5, height = 8*(628/1200), dpi = 320)
+ggsave("gh_action/state_Cases_Deaths.png", width = 5, height = 8*(628/1200), dpi = 320)
 
+## region data ----
+idph_region6 <- rio::import("https://idph.illinois.gov/DPHPublicInformation/api/COVIDExport/GetResurgenceData?format=csv&regionID=6&daysIncluded=0",
+                            format = "csv") %>%
+  filter(RegionID == 6) %>%
+  mutate(Date = mdy_hms(ReportDate)) %>%
+  mutate(avgnewcases = rollmean(PositiveTests, k = 7, 
+                                fill = NA, align = "right"))
+idph_region6_cases_hospital <- idph_region6 %>%
+  select(Date,avgnewcases,COVIDHospitalBedsInUse) %>%
+  mutate("Average New Cases" = avgnewcases) %>%
+  mutate("Hospital Beds in Use for COVID-19" = COVIDHospitalBedsInUse) %>%
+  select(Date,"Hospital Beds in Use for COVID-19","Average New Cases") %>%
+  pivot_longer(cols = c("Hospital Beds in Use for COVID-19",
+                        "Average New Cases"),
+               values_to = "value",
+               names_to = "name")
+
+## facet chart of region cases and hospital beds in use
+ggplot(idph_region6_cases_hospital,
+       aes(x = as.Date(Date),
+           y = value,
+           colour = name)) +
+  geom_line() +
+  facet_wrap(~ name, scales = "free_y",
+             ncol = 1) +
+  labs(caption = "Source: Illinois Department of Public Health") +
+  xlab(NULL) +
+  ylab(NULL) +
+  scale_x_date(expand = c(0,0)) +
+  scale_y_continuous(labels = label_comma(accuracy = 1),
+                     position = "right",
+                     expand = expansion(mult = c(0,.05))
+  ) +
+  expand_limits(y = 0) +
+  scale_colour_manual(guide = FALSE,
+                      values = c("#B45F06",
+                                 "#d90000","#674EA7","#674EA7")) +
+  theme(text = element_text(family = "Verdana"),
+        axis.text.y = element_text(size = 10),
+        axis.text.x = element_text(size = 8),
+        panel.grid.minor = element_blank(),
+        panel.background = element_blank(),
+        panel.grid.major.y = element_line(colour = "grey93"),
+        strip.text = element_text(size = 11),
+        strip.background = element_blank(),
+        plot.caption = element_text(colour = "grey40"),
+        plot.title = element_text(size = 18, family = "Georgia"))
+
+ggsave("gh_action/region_Cases_Hospital.png", 
+       width = 5, height = 8*(628/1200), dpi = 320)
