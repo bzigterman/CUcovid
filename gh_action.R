@@ -123,7 +123,7 @@ illinoispop <- 12741080
 #   mutate(estimate = NULL) %>%
 #   mutate(moe = NULL)
 # write_rds(il_counties_clean, file = "gh_action/il_counties.rds")
-rdsurl <- "https://github.com/bzigterman/CUcovid/blob/main/gh_action/il_counties.rds"
+rdsurl <- "https://raw.githubusercontent.com/bzigterman/CUcovid/main/gh_action/il_counties.rds"
 il_counties_clean <- rio::import(rdsurl)
 
 #il_counties <- read_rds
