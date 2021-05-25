@@ -122,6 +122,8 @@ il_counties_clean <- il_counties %>%
   mutate(variable = NULL) %>%
   mutate(estimate = NULL) %>%
   mutate(moe = NULL)
+write_rds(il_counties_clean, file = "gh_action/il_counties.rds")
+#il_counties <- read_rds
 
 ## IL CDC data ----
 cdc_county_vaccine_url <- "https://covid.cdc.gov/covid-data-tracker/COVIDData/getAjaxData?id=vaccination_county_condensed_data"
