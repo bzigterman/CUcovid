@@ -27,8 +27,6 @@ jobs:
         run: R -e 'source("install-packages.R", echo = TRUE)'
         
       - name: Run script
-        env: 
-          CENSUS_API_KEY: ${{ secrets.CENSUS_API_KEY }}
         run: Rscript gh_action.R
         
       # Add new files in data folder, commit along with other modified files, push
