@@ -9,7 +9,6 @@ library(lubridate)
 library(extrafont)
 library(sf)
 library(patchwork)
-library(tidycensus)
 font_import(prompt=FALSE)
 loadfonts()
 options(tigris_use_cache = TRUE)
@@ -115,18 +114,8 @@ ggsave("gh_action/usa_transmission.png",
 illinoispop <- 12741080
 
 ## illinois shapefiles ----
-# il_counties <- get_acs(state = "IL", geography = "county", 
-#                        variables = "B19013_001", geometry = TRUE,
-#                        key = Sys.getenv("CENSUS_API_KEY"))
-# il_counties_clean <- il_counties %>%
-#   mutate(variable = NULL) %>%
-#   mutate(estimate = NULL) %>%
-#   mutate(moe = NULL)
-# write_rds(il_counties_clean, file = "gh_action/il_counties.rds")
 rdsurl <- "https://raw.githubusercontent.com/bzigterman/CUcovid/main/gh_action/il_counties.rds"
 il_counties_clean <- rio::import(rdsurl)
-
-#il_counties <- read_rds
 
 ## IL CDC data ----
 cdc_county_vaccine_url <- "https://covid.cdc.gov/covid-data-tracker/COVIDData/getAjaxData?id=vaccination_county_condensed_data"
