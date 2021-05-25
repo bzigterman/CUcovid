@@ -9,3 +9,7 @@ champaign_nyt_longer <- champaign_nyt %>%
   pivot_longer(!date,
                values_to = "values",
                names_to = "names")
+
+idph_hospital_url <- "https://idph.illinois.gov/DPHPublicInformation/api/COVIDExport/GetHospitalUtilizationResults"
+idph_hospital <- rio::import(idph_hospital_url,
+                             format = "json")
