@@ -566,7 +566,7 @@ ggplot(filter(idph_cases_vax_longer, Date > as.Date("2020-12-15")),
            colour = names)) +
   geom_line() +
   facet_wrap(~ names, scales = "free_y") +
-  labs(#title = "COVID-19 Metrics Since Vaccinations Began Dec. 16",
+  labs(title = "Metrics Since Vaccinations Began Dec. 16",
        caption = paste("Source: IDPH. Data updated",
                        tail(idph_cases_vax_longer$short_date,1))) +
   xlab(NULL) +
