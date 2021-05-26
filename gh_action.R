@@ -177,34 +177,31 @@ cdc_cases_merged <- merge(cdc_cases,
                           by = "GEOID")
 
 ## IL vax map ----
-cdc_total_vax <- ggplot(data = cdc_vaccines_geo_merged) +
-  geom_sf(data = cdc_vaccines_geo_merged,
-          mapping = aes(fill = total_class,
-                        geometry = geometry),
-          size = .25) +
-  coord_sf(crs = st_crs(4326)) +
-  scale_fill_brewer(
-    palette = "Purples",
-    direction = 1) +
-  labs(title = "Percent Fully Vaccinated",
-       caption =  paste("Source: CDC. Data updated",
-                        tail(cdc_vaccines_geo_merged$short_date,1)),
-       fill = NULL)+
-  theme(#text = element_text(family = "Gill Sans"),
-        axis.text = element_blank(),
-        axis.line.x = element_blank(),
-        axis.ticks = element_blank(),
-        axis.title = element_blank(),
-        legend.position = "right",
-        panel.grid.major = element_blank(),  
-        legend.background = element_blank(),
-        legend.key = element_blank(),
-        legend.key.size = unit(.5, "cm"),
-        panel.background = element_blank(),
-        plot.caption = element_text(colour = "grey40")#,
-        #plot.title = element_text(size = 16, family = "Gill Sans")
-        ) 
-cdc_total_vax
+# cdc_total_vax <- ggplot(data = cdc_vaccines_geo_merged) +
+#   geom_sf(data = cdc_vaccines_geo_merged,
+#           mapping = aes(fill = total_class,
+#                         geometry = geometry),
+#           size = .25) +
+#   coord_sf(crs = st_crs(4326)) +
+#   scale_fill_brewer(
+#     palette = "Purples",
+#     direction = 1) +
+#   labs(title = "Percent Fully Vaccinated",
+#        caption =  paste("Source: CDC. Data updated",
+#                         tail(cdc_vaccines_geo_merged$short_date,1)),
+#        fill = NULL)+
+#   theme(axis.text = element_blank(),
+#         axis.line.x = element_blank(),
+#         axis.ticks = element_blank(),
+#         axis.title = element_blank(),
+#         legend.position = "right",
+#         panel.grid.major = element_blank(),  
+#         legend.background = element_blank(),
+#         legend.key = element_blank(),
+#         legend.key.size = unit(.5, "cm"),
+#         panel.background = element_blank(),
+#         plot.caption = element_text(colour = "grey40")) 
+# cdc_total_vax
 
 # il cases map
 cdc_cases_map <- ggplot(data = cdc_cases_merged) +
@@ -285,7 +282,7 @@ cdc_cases_map +
   ) #+
   #cdc_total_vax +
   #theme(plot.title = element_text(size = 10)) 
-ggsave("gh_action/CDC_cases_vax_IL.png", 
+ggsave("gh_action/CDC_cases_transmission_IL.png", 
        width = 8, height = 8*(628/1200), dpi = 320)
 
 ## combined il vax ----
