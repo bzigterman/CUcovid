@@ -278,7 +278,7 @@ cdc_transmission +
 cdc_cases_map + 
   labs(title = "New Cases per 100,000 Residents",
        subtitle = "Average over past seven days",
-       caption =  NULL,
+       #caption =  NULL,
        fill = NULL)+
   theme(plot.title = element_text(size = 10),
         plot.subtitle = element_text(size = 9)
