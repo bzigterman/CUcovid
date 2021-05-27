@@ -407,118 +407,118 @@ ggsave("gh_action/CDC_vax_combined.png",
 
 # idph data ----
 ## state case data ----
-
-idph_cases_IL <- rio::import("https://idph.illinois.gov/DPHPublicInformation/api/COVID/GetCountyHistorical?countyName=Illinois",
-                             format = "json") 
-idph_cases_IL <- idph_cases_IL$values %>%
-  mutate(population = illinoispop)  %>%
-  mutate(new_cases = confirmed_cases - lag(confirmed_cases)) %>%
-  mutate(new_deaths = deaths - lag(deaths)) %>%
-  mutate(avg_new_cases = rollmean(new_cases, k = 7, 
-                                  fill = NA, align = "right")) %>%
-  mutate(avg_new_deaths = rollmean(new_deaths, k = 7, 
-                                   fill = NA, align = "right")) %>%
-  mutate(Date = ymd_hms(reportDate)) 
-
-idph_cases_deaths_IL <- idph_cases_IL %>%
-  select(Date, avg_new_cases, avg_new_deaths) %>%
-  mutate("Average New Cases" =  avg_new_cases) %>%
-  mutate("Average New Deaths" =  avg_new_deaths) %>%
-  pivot_longer(cols = c("Average New Cases","Average New Deaths"),
-               values_to = "Number",
-               names_to = "New") %>%
-  mutate(short_date = paste(month(Date, label = TRUE, abbr = FALSE),
-                            mday(Date))) 
+# 
+# idph_cases_IL <- rio::import("https://idph.illinois.gov/DPHPublicInformation/api/COVID/GetCountyHistorical?countyName=Illinois",
+#                              format = "json") 
+# idph_cases_IL <- idph_cases_IL$values %>%
+#   mutate(population = illinoispop)  %>%
+#   mutate(new_cases = confirmed_cases - lag(confirmed_cases)) %>%
+#   mutate(new_deaths = deaths - lag(deaths)) %>%
+#   mutate(avg_new_cases = rollmean(new_cases, k = 7, 
+#                                   fill = NA, align = "right")) %>%
+#   mutate(avg_new_deaths = rollmean(new_deaths, k = 7, 
+#                                    fill = NA, align = "right")) %>%
+#   mutate(Date = ymd_hms(reportDate)) 
+# 
+# idph_cases_deaths_IL <- idph_cases_IL %>%
+#   select(Date, avg_new_cases, avg_new_deaths) %>%
+#   mutate("Average New Cases" =  avg_new_cases) %>%
+#   mutate("Average New Deaths" =  avg_new_deaths) %>%
+#   pivot_longer(cols = c("Average New Cases","Average New Deaths"),
+#                values_to = "Number",
+#                names_to = "New") %>%
+#   mutate(short_date = paste(month(Date, label = TRUE, abbr = FALSE),
+#                             mday(Date))) 
 
 ## facet chart of IL cases and deaths ----
-ggplot(idph_cases_deaths_IL,
-       aes(x = as.Date(Date),
-           y = Number,
-           colour = New)) +
-  geom_line() +
-  facet_wrap(~ New, scales = "free_y",
-             ncol = 1) +
-  labs(caption = paste("Source: IDPH. Data updated",
-                       tail(idph_cases_deaths_IL$short_date,1))) +
-  xlab(NULL) +
-  ylab(NULL) +
-  scale_x_date(expand = c(0,0)) +
-  scale_y_continuous(labels = label_comma(accuracy = 1),
-                     position = "right",
-                     expand = expansion(mult = c(0,.05))
-  ) +
-  expand_limits(y = 0) +
-  scale_colour_manual(guide = FALSE,
-                      values = c("#B45F06",
-                                 "#d90000","#674EA7","#674EA7")) +
-  theme(#text = element_text(family = "Gill Sans"),
-        axis.text.y = element_text(size = 10),
-        axis.text.x = element_text(size = 8),
-        panel.grid.minor = element_blank(),
-        panel.background = element_blank(),
-        panel.grid.major.y = element_line(colour = "grey93"),
-        strip.text = element_text(size = 11),
-        strip.background = element_blank(),
-        plot.caption = element_text(colour = "grey40")#,
-        #plot.title = element_text(size = 18, family = "Gill Sans")
-        )
-
-ggsave("gh_action/state_Cases_Deaths.png", width = 5, height = 8*(628/1200), dpi = 320)
+# ggplot(idph_cases_deaths_IL,
+#        aes(x = as.Date(Date),
+#            y = Number,
+#            colour = New)) +
+#   geom_line() +
+#   facet_wrap(~ New, scales = "free_y",
+#              ncol = 1) +
+#   labs(caption = paste("Source: IDPH. Data updated",
+#                        tail(idph_cases_deaths_IL$short_date,1))) +
+#   xlab(NULL) +
+#   ylab(NULL) +
+#   scale_x_date(expand = c(0,0)) +
+#   scale_y_continuous(labels = label_comma(accuracy = 1),
+#                      position = "right",
+#                      expand = expansion(mult = c(0,.05))
+#   ) +
+#   expand_limits(y = 0) +
+#   scale_colour_manual(guide = FALSE,
+#                       values = c("#B45F06",
+#                                  "#d90000","#674EA7","#674EA7")) +
+#   theme(#text = element_text(family = "Gill Sans"),
+#         axis.text.y = element_text(size = 10),
+#         axis.text.x = element_text(size = 8),
+#         panel.grid.minor = element_blank(),
+#         panel.background = element_blank(),
+#         panel.grid.major.y = element_line(colour = "grey93"),
+#         strip.text = element_text(size = 11),
+#         strip.background = element_blank(),
+#         plot.caption = element_text(colour = "grey40")#,
+#         #plot.title = element_text(size = 18, family = "Gill Sans")
+#         )
+# 
+# ggsave("gh_action/state_Cases_Deaths.png", width = 5, height = 8*(628/1200), dpi = 320)
 
 ## region data ----
-idph_region6 <- rio::import("https://idph.illinois.gov/DPHPublicInformation/api/COVIDExport/GetResurgenceData?format=csv&regionID=6&daysIncluded=0",
-                            format = "csv") %>%
-  filter(RegionID == 6) %>%
-  mutate(Date = mdy_hms(ReportDate)) %>%
-  mutate(avgnewcases = rollmean(PositiveTests, k = 7, 
-                                fill = NA, align = "right"))
-idph_region6_cases_hospital <- idph_region6 %>%
-  select(Date,avgnewcases,COVIDHospitalBedsInUse) %>%
-  mutate("Average New Cases" = avgnewcases) %>%
-  mutate("Hospital Beds in Use for COVID-19" = COVIDHospitalBedsInUse) %>%
-  select(Date,"Hospital Beds in Use for COVID-19","Average New Cases") %>%
-  pivot_longer(cols = c("Hospital Beds in Use for COVID-19",
-                        "Average New Cases"),
-               values_to = "value",
-               names_to = "name") %>%
-  mutate(short_date = paste(month(Date, label = TRUE, abbr = FALSE),
-                            mday(Date))) 
+# idph_region6 <- rio::import("https://idph.illinois.gov/DPHPublicInformation/api/COVIDExport/GetResurgenceData?format=csv&regionID=6&daysIncluded=0",
+#                             format = "csv") %>%
+#   filter(RegionID == 6) %>%
+#   mutate(Date = mdy_hms(ReportDate)) %>%
+#   mutate(avgnewcases = rollmean(PositiveTests, k = 7, 
+#                                 fill = NA, align = "right"))
+# idph_region6_cases_hospital <- idph_region6 %>%
+#   select(Date,avgnewcases,COVIDHospitalBedsInUse) %>%
+#   mutate("Average New Cases" = avgnewcases) %>%
+#   mutate("Hospital Beds in Use for COVID-19" = COVIDHospitalBedsInUse) %>%
+#   select(Date,"Hospital Beds in Use for COVID-19","Average New Cases") %>%
+#   pivot_longer(cols = c("Hospital Beds in Use for COVID-19",
+#                         "Average New Cases"),
+#                values_to = "value",
+#                names_to = "name") %>%
+#   mutate(short_date = paste(month(Date, label = TRUE, abbr = FALSE),
+#                             mday(Date))) 
 
 ## facet chart of region cases and hospital beds in use ----
-ggplot(idph_region6_cases_hospital,
-       aes(x = as.Date(Date),
-           y = value,
-           colour = name)) +
-  geom_line() +
-  facet_wrap(~ name, scales = "free_y",
-             ncol = 1) +
-  labs(caption = paste("Source: IDPH. Data updated",
-                       tail(idph_region6_cases_hospital$short_date,1))) +
-  xlab(NULL) +
-  ylab(NULL) +
-  scale_x_date(expand = c(0,0)) +
-  scale_y_continuous(labels = label_comma(accuracy = 1),
-                     position = "right",
-                     expand = expansion(mult = c(0,.05))
-  ) +
-  expand_limits(y = 0) +
-  scale_colour_manual(guide = FALSE,
-                      values = c("#B45F06",
-                                 "#d90000","#674EA7","#674EA7")) +
-  theme(#text = element_text(family = "Gill Sans"),
-        axis.text.y = element_text(size = 10),
-        axis.text.x = element_text(size = 8),
-        panel.grid.minor = element_blank(),
-        panel.background = element_blank(),
-        panel.grid.major.y = element_line(colour = "grey93"),
-        strip.text = element_text(size = 11),
-        strip.background = element_blank(),
-        plot.caption = element_text(colour = "grey40")#,
-        #plot.title = element_text(size = 18, family = "Gill Sans")
-        )
-
-ggsave("gh_action/region_Cases_Hospital.png", 
-       width = 5, height = 8*(628/1200), dpi = 320)
+# ggplot(idph_region6_cases_hospital,
+#        aes(x = as.Date(Date),
+#            y = value,
+#            colour = name)) +
+#   geom_line() +
+#   facet_wrap(~ name, scales = "free_y",
+#              ncol = 1) +
+#   labs(caption = paste("Source: IDPH. Data updated",
+#                        tail(idph_region6_cases_hospital$short_date,1))) +
+#   xlab(NULL) +
+#   ylab(NULL) +
+#   scale_x_date(expand = c(0,0)) +
+#   scale_y_continuous(labels = label_comma(accuracy = 1),
+#                      position = "right",
+#                      expand = expansion(mult = c(0,.05))
+#   ) +
+#   expand_limits(y = 0) +
+#   scale_colour_manual(guide = FALSE,
+#                       values = c("#B45F06",
+#                                  "#d90000","#674EA7","#674EA7")) +
+#   theme(#text = element_text(family = "Gill Sans"),
+#         axis.text.y = element_text(size = 10),
+#         axis.text.x = element_text(size = 8),
+#         panel.grid.minor = element_blank(),
+#         panel.background = element_blank(),
+#         panel.grid.major.y = element_line(colour = "grey93"),
+#         strip.text = element_text(size = 11),
+#         strip.background = element_blank(),
+#         plot.caption = element_text(colour = "grey40")#,
+#         #plot.title = element_text(size = 18, family = "Gill Sans")
+#         )
+# 
+# ggsave("gh_action/region_Cases_Hospital.png", 
+#        width = 5, height = 8*(628/1200), dpi = 320)
 
 # idph champaign county cases ----
 champaignpop <- 209983
@@ -557,13 +557,13 @@ idph_cases_vax_longer <- idph_cases_vax %>%
 
 
 ## plot ----
-ggplot(filter(idph_cases_vax_longer, Date > as.Date("2020-12-15")),
+ggplot(idph_cases_vax_longer,
        aes(x = as.Date(Date),
            y = values,
            colour = names)) +
   geom_line() +
   facet_wrap(~ names, scales = "free_y") +
-  labs(title = "Metrics Since Vaccinations Began Dec. 16",
+  labs(#title = "Metrics Since Vaccinations Began Dec. 16",
        caption = paste("Source: IDPH. Data updated",
                        tail(idph_cases_vax_longer$short_date,1))) +
   xlab(NULL) +
@@ -585,4 +585,69 @@ ggplot(filter(idph_cases_vax_longer, Date > as.Date("2020-12-15")),
         strip.background = element_blank(),
         plot.caption = element_text(colour = "grey40"))
 ggsave("gh_action/Champaign_facet.png", 
+       width = 6, height = 8*(628/1200), dpi = 320)
+
+# idph Illinois cases ----
+idph_cases_champaign <- rio::import("https://idph.illinois.gov/DPHPublicInformation/api/COVID/GetCountyHistorical?countyName=Illinois",
+                                    format = "json") 
+idph_cases_champaign <- idph_cases_champaign$values %>%
+  mutate(population = illinoispop)  %>%
+  mutate(new_cases = confirmed_cases - lag(confirmed_cases)) %>%
+  mutate(new_deaths = deaths - lag(deaths)) %>%
+  mutate(avg_new_cases = rollmean(new_cases, k = 7, 
+                                  fill = NA, align = "right")) %>%
+  mutate(monthlydead = rollmean(new_deaths, k = 7, 
+                                fill = NA, align = "right"))  %>%
+  mutate(Date = ymd_hms(reportDate)) 
+
+idph_vax_champaign <- rio::import("https://idph.illinois.gov/DPHPublicInformation/api/COVIDExport/GetVaccineAdministration?format=csv&countyName=Illinois",
+                                  format = "csv") %>%
+  mutate(Date = mdy_hms(Report_Date)) 
+
+idph_cases_vax <- full_join(idph_cases_champaign, idph_vax_champaign) %>%
+  select(Date, PersonsFullyVaccinated, AdministeredCountRollAvg,
+         monthlydead, avg_new_cases)
+
+idph_cases_vax_longer <- idph_cases_vax %>%
+  pivot_longer(!Date,
+               values_to = "values",
+               names_to = "names") %>%
+  mutate(names = recode(names, 
+                        "PersonsFullyVaccinated" = "3. People Fully Vaccinated",
+                        "avg_new_cases" = "1. Average New Cases",
+                        "monthlydead" = "2. Average New Deaths",
+                        "AdministeredCountRollAvg" = "4. Average New Vaccine Doses"))  %>%
+  mutate(short_date = paste(month(Date, label = TRUE, abbr = FALSE),
+                            mday(Date)))
+
+
+## plot ----
+ggplot(idph_cases_vax_longer,
+       aes(x = as.Date(Date),
+           y = values,
+           colour = names)) +
+  geom_line() +
+  facet_wrap(~ names, scales = "free_y") +
+  labs(#title = "Metrics Since Vaccinations Began Dec. 16",
+       caption = paste("Source: IDPH. Data updated",
+                       tail(idph_cases_vax_longer$short_date,1))) +
+  xlab(NULL) +
+  ylab(NULL) +
+  scale_x_date(expand = c(0,0)) +
+  scale_y_continuous(labels = label_comma(accuracy = 1),
+                     position = "right",
+                     expand = expansion(mult = c(0,.05))
+  ) +
+  expand_limits(y = 0) +
+  scale_colour_manual(guide = FALSE,
+                      values = c("#B45F06","#d90000","#674EA7","#674EA7")) +
+  theme(axis.text.y = element_text(size = 10),
+        axis.text.x = element_text(size = 8),
+        panel.grid.minor = element_blank(),
+        panel.background = element_blank(),
+        panel.grid.major.y = element_line(colour = "grey93"),
+        strip.text = element_text(size = 11),
+        strip.background = element_blank(),
+        plot.caption = element_text(colour = "grey40"))
+ggsave("gh_action/IL_facet.png", 
        width = 6, height = 8*(628/1200), dpi = 320)
