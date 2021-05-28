@@ -651,3 +651,189 @@ ggplot(idph_cases_vax_longer,
         plot.caption = element_text(colour = "grey40"))
 ggsave("gh_action/IL_facet.png", 
        width = 8, height = 8*(628/1200), dpi = 320)
+
+# vax comparison chart ----
+
+## set population variables ----
+champaignpop <- 209983
+vermilionpop <- 76806
+fordpop <- 13264
+edgarpop <- 17360
+douglaspop <- 19479
+piattpop <- 16396
+iroquoispop <- 27604
+dewittpop <- 15769
+maconpop <- 104712
+moultriepop <- 14717
+illinoispop <- 12741080
+colespop <- 50885
+mcleanpop <- 172828
+
+
+
+## import and clean data ----
+
+vax_champaign <- rio::import("https://idph.illinois.gov/DPHPublicInformation/api/COVIDExport/GetVaccineAdministration?format=csv&countyName=Champaign",
+                             format = "csv") %>%
+  mutate(population = champaignpop) %>%
+  mutate(PersonsDose1 = AdministeredCount - PersonsFullyVaccinated) %>%
+  mutate(Dose1Change = PersonsDose1 - lag(PersonsDose1)) %>%
+  mutate(Dose2Change = PersonsFullyVaccinated - lag(PersonsFullyVaccinated)) 
+
+vax_vermilion <- rio::import("https://idph.illinois.gov/DPHPublicInformation/api/COVIDExport/GetVaccineAdministration?format=csv&countyName=Vermilion",
+                             format = "csv") %>%
+  mutate(population = vermilionpop)  %>%
+  mutate(PersonsDose1 = AdministeredCount - PersonsFullyVaccinated) %>%
+  mutate(Dose1Change = PersonsDose1 - lag(PersonsDose1)) %>%
+  mutate(Dose2Change = PersonsFullyVaccinated - lag(PersonsFullyVaccinated)) 
+
+vax_ford <- rio::import("https://idph.illinois.gov/DPHPublicInformation/api/COVIDExport/GetVaccineAdministration?format=csv&countyName=Ford",
+                        format = "csv") %>%
+  mutate(population = fordpop)  %>%
+  mutate(PersonsDose1 = AdministeredCount - PersonsFullyVaccinated) %>%
+  mutate(Dose1Change = PersonsDose1 - lag(PersonsDose1)) %>%
+  mutate(Dose2Change = PersonsFullyVaccinated - lag(PersonsFullyVaccinated)) 
+
+vax_edgar <- rio::import("https://idph.illinois.gov/DPHPublicInformation/api/COVIDExport/GetVaccineAdministration?format=csv&countyName=Edgar",
+                         format = "csv") %>%
+  mutate(population = edgarpop)  %>%
+  mutate(PersonsDose1 = AdministeredCount - PersonsFullyVaccinated) %>%
+  mutate(Dose1Change = PersonsDose1 - lag(PersonsDose1)) %>%
+  mutate(Dose2Change = PersonsFullyVaccinated - lag(PersonsFullyVaccinated)) 
+
+vax_douglas <- rio::import("https://idph.illinois.gov/DPHPublicInformation/api/COVIDExport/GetVaccineAdministration?format=csv&countyName=Douglas",
+                           format = "csv") %>%
+  mutate(population = douglaspop)  %>%
+  mutate(PersonsDose1 = AdministeredCount - PersonsFullyVaccinated) %>%
+  mutate(Dose1Change = PersonsDose1 - lag(PersonsDose1)) %>%
+  mutate(Dose2Change = PersonsFullyVaccinated - lag(PersonsFullyVaccinated)) 
+
+vax_piatt <- rio::import("https://idph.illinois.gov/DPHPublicInformation/api/COVIDExport/GetVaccineAdministration?format=csv&countyName=Piatt",
+                         format = "csv") %>%
+  mutate(population = piattpop)  %>%
+  mutate(PersonsDose1 = AdministeredCount - PersonsFullyVaccinated) %>%
+  mutate(Dose1Change = PersonsDose1 - lag(PersonsDose1)) %>%
+  mutate(Dose2Change = PersonsFullyVaccinated - lag(PersonsFullyVaccinated)) 
+
+vax_iroquois <- rio::import("https://idph.illinois.gov/DPHPublicInformation/api/COVIDExport/GetVaccineAdministration?format=csv&countyName=Iroquois",
+                            format = "csv") %>%
+  mutate(population = iroquoispop)  %>%
+  mutate(PersonsDose1 = AdministeredCount - PersonsFullyVaccinated) %>%
+  mutate(Dose1Change = PersonsDose1 - lag(PersonsDose1)) %>%
+  mutate(Dose2Change = PersonsFullyVaccinated - lag(PersonsFullyVaccinated)) 
+
+vax_dewitt <- rio::import("https://idph.illinois.gov/DPHPublicInformation/api/COVIDExport/GetVaccineAdministration?format=csv&countyName=De%20Witt",
+                          format = "csv") %>%
+  mutate(population = dewittpop)  %>%
+  mutate(PersonsDose1 = AdministeredCount - PersonsFullyVaccinated) %>%
+  mutate(Dose1Change = PersonsDose1 - lag(PersonsDose1)) %>%
+  mutate(Dose2Change = PersonsFullyVaccinated - lag(PersonsFullyVaccinated)) 
+
+vax_macon <- rio::import("https://idph.illinois.gov/DPHPublicInformation/api/COVIDExport/GetVaccineAdministration?format=csv&countyName=Macon",
+                         format = "csv") %>%
+  mutate(population = maconpop)  %>%
+  mutate(PersonsDose1 = AdministeredCount - PersonsFullyVaccinated) %>%
+  mutate(Dose1Change = PersonsDose1 - lag(PersonsDose1)) %>%
+  mutate(Dose2Change = PersonsFullyVaccinated - lag(PersonsFullyVaccinated)) 
+
+vax_moultrie <- rio::import("https://idph.illinois.gov/DPHPublicInformation/api/COVIDExport/GetVaccineAdministration?format=csv&countyName=Moultrie",
+                            format = "csv") %>%
+  mutate(population = moultriepop)  %>%
+  mutate(PersonsDose1 = AdministeredCount - PersonsFullyVaccinated) %>%
+  mutate(Dose1Change = PersonsDose1 - lag(PersonsDose1)) %>%
+  mutate(Dose2Change = PersonsFullyVaccinated - lag(PersonsFullyVaccinated)) 
+
+vax_coles <- rio::import("https://idph.illinois.gov/DPHPublicInformation/api/COVIDExport/GetVaccineAdministration?format=csv&countyName=Coles",
+                         format = "csv") %>%
+  mutate(population = colespop)  %>%
+  mutate(PersonsDose1 = AdministeredCount - PersonsFullyVaccinated) %>%
+  mutate(Dose1Change = PersonsDose1 - lag(PersonsDose1)) %>%
+  mutate(Dose2Change = PersonsFullyVaccinated - lag(PersonsFullyVaccinated)) 
+
+vax_mclean <- rio::import("https://idph.illinois.gov/DPHPublicInformation/api/COVIDExport/GetVaccineAdministration?format=csv&countyName=McLean",
+                          format = "csv") %>%
+  mutate(population = mcleanpop)  %>%
+  mutate(PersonsDose1 = AdministeredCount - PersonsFullyVaccinated) %>%
+  mutate(Dose1Change = PersonsDose1 - lag(PersonsDose1)) %>%
+  mutate(Dose2Change = PersonsFullyVaccinated - lag(PersonsFullyVaccinated)) 
+
+vax_illinois <- rio::import("https://idph.illinois.gov/DPHPublicInformation/api/COVIDExport/GetVaccineAdministration?format=csv&countyName=Illinois",
+                            format = "csv") %>%
+  mutate(population = illinoispop)  %>%
+  mutate(PersonsDose1 = AdministeredCount - PersonsFullyVaccinated) %>%
+  mutate(Dose1Change = PersonsDose1 - lag(PersonsDose1)) %>%
+  mutate(Dose2Change = PersonsFullyVaccinated - lag(PersonsFullyVaccinated)) 
+
+
+vax_nearby <- full_join(vax_champaign, vax_vermilion) %>%
+  full_join(vax_ford) %>%
+  full_join(vax_edgar) %>%
+  full_join(vax_douglas) %>%
+  full_join(vax_piatt) %>%
+  full_join(vax_iroquois) %>%
+  full_join(vax_dewitt) %>%
+  full_join(vax_macon) %>%
+  full_join(vax_moultrie) %>%
+  full_join(vax_mclean) %>%
+  full_join(vax_coles) %>%
+  full_join(vax_illinois) %>%
+  mutate(Date = mdy_hms(Report_Date)) %>%
+  mutate(PercentDose1 = PersonsDose1/population) %>%
+  mutate(PercentOnlyDose1 = PercentDose1 - PctVaccinatedPopulation) %>%
+  mutate(New_doses_per_100K = (AdministeredCountRollAvg/population)*100000) %>%
+  mutate(short_date = paste(month(Date, label = TRUE, abbr = FALSE),
+                            mday(Date)))
+
+
+## plot ----
+
+last_vax_nearby <- vax_nearby %>%
+  filter(Date == tail(Date, 1)) %>%
+  arrange(desc(PctVaccinatedPopulation))
+topcounty <- head(last_vax_nearby$CountyName,1)
+
+ggplot(last_vax_nearby, aes(y = reorder(CountyName,
+                                        PctVaccinatedPopulation))) +
+  geom_segment(aes(x = PctVaccinatedPopulation, # first line segment to dose2
+                   yend = CountyName), 
+               xend = 0, 
+               colour = "#674EA7",
+               size = 7) + 
+geom_text(data = filter(last_vax_nearby, # label for all but top county, dose2
+                        CountyName != topcounty),
+          aes(x = PctVaccinatedPopulation,
+              label = percent(PctVaccinatedPopulation, .1)),
+          hjust = 1.1,
+          size = 3.5,
+          colour = "white",
+          family = "Barlow") +
+  geom_text(data = filter(last_vax_nearby, # label for top county, dose2
+                          CountyName == topcounty),
+            aes(x = PctVaccinatedPopulation,
+                label = paste("Fully vaccinated:",
+                              percent(PctVaccinatedPopulation, .1)
+                )),
+            hjust = 1.02,
+            size = 3.5,
+            colour = "white",
+            family = "Barlow") +
+  scale_x_continuous(labels = percent,
+                     limits = c(0,1),
+                     expand = expansion(mult = c(0,.05))) +
+  xlab(NULL) +
+  ylab(NULL) +
+  theme_classic() +
+  labs(title = "Percent of Total Population Vaccinated in Nearby Counties",
+       caption =  paste("Source: IDPH. Data updated",
+                        tail(last_vax_nearby$short_date,1)))+
+  theme(axis.text.y = element_text(size = 13),
+        axis.text.x = element_text(size = 13),
+        axis.line.x = element_blank(),
+        axis.ticks.y = element_blank(),
+        panel.grid.major.x = element_line(colour = "grey93"),
+        legend.position = "none",
+        panel.grid.major.y = element_blank(),  
+        plot.caption = element_text(colour = "grey40")) 
+
+ggsave("gh_action/nearbybothdoses.png", 
+       width = 8, height = 8*(628/1200), dpi = 320)
