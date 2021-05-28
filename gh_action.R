@@ -282,7 +282,7 @@ cdc_cases_map +
   ) #+
   #cdc_total_vax +
   #theme(plot.title = element_text(size = 10)) 
-ggsave("gh_action/CDC_cases_transmission_IL.png", 
+ggsave("gh_action/IL_cases_transmission.png", 
        width = 8, height = 8*(628/1200), dpi = 320)
 
 ## combined il vax ----
@@ -402,7 +402,7 @@ cdc_total_vax +
         plot.subtitle = element_text(size = 11, 
                                      hjust = .6))
 
-ggsave("gh_action/CDC_vax_combined.png", 
+ggsave("gh_action/IL_vax_combined.png", 
        width = 8, height = 8*(628/1200), dpi = 320)
 
 # idph data ----
