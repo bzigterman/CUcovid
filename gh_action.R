@@ -805,8 +805,7 @@ geom_text(data = filter(last_vax_nearby, # label for all but top county, dose2
               label = percent(PctVaccinatedPopulation, .1)),
           hjust = 1.1,
           size = 3.5,
-          colour = "white",
-          family = "Barlow") +
+          colour = "white") +
   geom_text(data = filter(last_vax_nearby, # label for top county, dose2
                           CountyName == topcounty),
             aes(x = PctVaccinatedPopulation,
@@ -815,8 +814,7 @@ geom_text(data = filter(last_vax_nearby, # label for all but top county, dose2
                 )),
             hjust = 1.02,
             size = 3.5,
-            colour = "white",
-            family = "Barlow") +
+            colour = "white") +
   scale_x_continuous(labels = percent,
                      limits = c(0,1),
                      expand = expansion(mult = c(0,.05))) +
