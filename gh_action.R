@@ -833,5 +833,5 @@ geom_text(data = filter(last_vax_nearby, # label for all but top county, dose2
         panel.grid.major.y = element_blank(),  
         plot.caption = element_text(colour = "grey40")) 
 
-ggsave("gh_action/nearby_fully_vax.png", 
+ggsave("gh_action/nearby_fully_vaccinated.png", 
        width = 8, height = 8*(628/1200), dpi = 320)
