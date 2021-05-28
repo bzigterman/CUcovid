@@ -585,7 +585,7 @@ ggplot(idph_cases_vax_longer,
         strip.background = element_blank(),
         plot.caption = element_text(colour = "grey40"))
 ggsave("gh_action/Champaign_facet.png", 
-       width = 6, height = 8*(628/1200), dpi = 320)
+       width = 8, height = 8*(628/1200), dpi = 320)
 
 # idph Illinois cases ----
 idph_cases_champaign <- rio::import("https://idph.illinois.gov/DPHPublicInformation/api/COVID/GetCountyHistorical?countyName=Illinois",
@@ -650,4 +650,4 @@ ggplot(idph_cases_vax_longer,
         strip.background = element_blank(),
         plot.caption = element_text(colour = "grey40"))
 ggsave("gh_action/IL_facet.png", 
-       width = 6, height = 8*(628/1200), dpi = 320)
+       width = 8, height = 8*(628/1200), dpi = 320)
