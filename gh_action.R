@@ -809,10 +809,8 @@ geom_text(data = filter(last_vax_nearby, # label for all but top county, dose2
   geom_text(data = filter(last_vax_nearby, # label for top county, dose2
                           CountyName == topcounty),
             aes(x = PctVaccinatedPopulation,
-                label = paste("Fully vaccinated:",
-                              percent(PctVaccinatedPopulation, .1)
-                )),
-            hjust = 1.02,
+                label = percent(PctVaccinatedPopulation, .1)),
+            hjust = 1.1,
             size = 3.5,
             colour = "white") +
   scale_x_continuous(labels = percent,
@@ -821,7 +819,7 @@ geom_text(data = filter(last_vax_nearby, # label for all but top county, dose2
   xlab(NULL) +
   ylab(NULL) +
   theme_classic() +
-  labs(title = "Percent of Total Population Vaccinated in Nearby Counties",
+  labs(title = "Percent of Total Population Fully Vaccinated in Nearby Counties",
        caption =  paste("Source: IDPH. Data updated",
                         tail(last_vax_nearby$short_date,1)))+
   theme(axis.text.y = element_text(size = 13),
