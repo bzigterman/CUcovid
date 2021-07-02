@@ -790,7 +790,7 @@ vax_nearby <- full_join(vax_champaign, vax_vermilion) %>%
 last_vax_nearby <- vax_nearby %>%
   filter(Date == tail(Date, 1)) %>%
   arrange(desc(PctVaccinatedPopulation))
-topcounty <- head(last_vax_nearby$CountyName,1)
+#topcounty <- head(last_vax_nearby$CountyName,1)
 
 ggplot(last_vax_nearby, aes(y = reorder(CountyName,
                                         PctVaccinatedPopulation))) +
@@ -799,20 +799,19 @@ ggplot(last_vax_nearby, aes(y = reorder(CountyName,
                xend = 0, 
                colour = "#674EA7",
                size = 7) + 
-geom_text(data = filter(last_vax_nearby, # label for all but top county, dose2
-                        CountyName != topcounty),
+geom_text(data = last_vax_nearby,
           aes(x = PctVaccinatedPopulation,
               label = percent(PctVaccinatedPopulation, .1)),
           hjust = 1.1,
           size = 3.5,
           colour = "white") +
-  geom_text(data = filter(last_vax_nearby, # label for top county, dose2
-                          CountyName == topcounty),
-            aes(x = PctVaccinatedPopulation,
-                label = percent(PctVaccinatedPopulation, .1)),
-            hjust = 1.1,
-            size = 3.5,
-            colour = "white") +
+  # geom_text(data = filter(last_vax_nearby, # label for top county, dose2
+  #                         CountyName == topcounty),
+  #           aes(x = PctVaccinatedPopulation,
+  #               label = percent(PctVaccinatedPopulation, .1)),
+  #           hjust = 1.1,
+  #           size = 3.5,
+  #           colour = "white") +
   scale_x_continuous(labels = percent,
                      limits = c(0,1),
                      expand = expansion(mult = c(0,.05))) +
