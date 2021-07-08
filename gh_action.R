@@ -704,7 +704,7 @@ ggplot(us_data_longer,
   geom_line() +
   facet_wrap(~ names, scales = "free_y") +
   labs(#title = "Metrics Since Vaccinations Began Dec. 16",
-    caption = paste("Source: Our World in Data and Johns Hopkins University. Data updated",
+    caption = paste("Source: Our World in Data and JHU CSSE COVID-19 Data. Data updated",
                     tail(us_data_longer$short_date,1))) +
   xlab(NULL) +
   ylab(NULL) +
