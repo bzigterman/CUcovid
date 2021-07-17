@@ -96,9 +96,6 @@ ggsave( file, plot = p, device = "png", dpi = 320, width = 8, height = 8*(628/12
 
 
 
-# save to a temp file
-
-
 # post it ----
 rtweet::post_tweet( 
   status = "Key COVID-19 Metrics for Champaign County, Illinois:",
