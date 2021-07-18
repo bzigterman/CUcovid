@@ -79,7 +79,7 @@ p <- ggplot(idph_cases_vax_longer,
                      expand = expansion(mult = c(0,.05))
   ) +
   expand_limits(y = 0) +
-  scale_colour_manual(guide = FALSE,
+  scale_colour_manual(guide = "none",
                       values = c("#B45F06","#d90000","#674EA7","#674EA7")) +
   theme(axis.text.y = element_text(size = 10),
         axis.text.x = element_text(size = 8),
@@ -100,7 +100,7 @@ ggsave( file, plot = p, device = "png", dpi = 320, width = 8, height = 8*(628/12
 rtweet::post_tweet( 
   status = "COVID-19 metrics for Champaign County, Illinois:",
   media = file,
-  media_alt_text = "Charts showing average new cases, deaths in the past month, the number of people fully vaccinated and average new vaccine doses for Champaign County, Illinois",
+  # media_alt_text = "Charts showing average new cases, deaths in the past month, the number of people fully vaccinated and average new vaccine doses for Champaign County, Illinois",
   token = token
 )
 
