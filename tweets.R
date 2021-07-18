@@ -98,7 +98,7 @@ ggsave( file, plot = p, device = "png", dpi = 320, width = 8, height = 8*(628/12
 
 # post it ----
 rtweet::post_tweet( 
-  status = "COVID-19 Metrics for Champaign County, Illinois:",
+  status = "COVID-19 metrics for Champaign County, Illinois:",
   media = file,
   token = token
 )
