@@ -61,6 +61,22 @@ idph_cases_vax_longer <- idph_cases_vax %>%
                             mday(Date)))
 
 
+## text ----
+dead_last_month <- tail(idph_cases_champaign$monthlydead,1)
+avg_new_cases <- round(tail(idph_cases_champaign$avg_new_cases,1))
+pct_fully_vaccinated <- round(100*tail(idph_vax_champaign$PctVaccinatedPopulation,1))
+avg_new_vaccine_doses <- tail(idph_vax_champaign$AdministeredCountRollAvg,1)
+short_date <- tail(idph_cases_vax_longer$short_date,1)
+
+tweet_text <- paste(
+  "As of ",short_date,": \n",
+  dead_last_month," people with COVID-19 have died in the last month. \n",
+  avg_new_cases," new cases have been detected on average each day. \n",
+  avg_new_vaccine_doses," new vaccine doses were administered. \n",
+  pct_fully_vaccinated,"% of Champaign County is fully vaccinated.",
+  sep = ""
+)
+
 ## plot ----
 p <- ggplot(idph_cases_vax_longer,
        aes(x = as.Date(Date),
@@ -98,7 +114,7 @@ ggsave( file, plot = p, device = "png", dpi = 320, width = 8, height = 8*(628/12
 
 # post it ----
 rtweet::post_tweet( 
-  status = "COVID-19 metrics for Champaign County, Illinois:",
+  status = tweet_text,
   media = file,
   # media_alt_text = "Charts showing average new cases, deaths in the past month, the number of people fully vaccinated and average new vaccine doses for Champaign County, Illinois",
   token = token
