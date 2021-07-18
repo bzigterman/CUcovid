@@ -69,10 +69,10 @@ avg_new_vaccine_doses <- tail(idph_vax_champaign$AdministeredCountRollAvg,1)
 short_date <- tail(idph_cases_vax_longer$short_date,1)
 
 tweet_text <- paste(
-  "As of ",short_date,": \n",
-  dead_last_month," people with COVID-19 have died in the last month. \n",
-  avg_new_cases," new cases have been detected on average each day. \n",
-  avg_new_vaccine_doses," new vaccine doses were administered. \n",
+  "As of ",short_date,": \n— ",
+  dead_last_month," people with COVID-19 have died in the last month. \n— ",
+  avg_new_cases," new cases have been detected on average each day. \n— ",
+  avg_new_vaccine_doses," new vaccine doses were administered. \n— ",
   pct_fully_vaccinated,"% of Champaign County is fully vaccinated.",
   sep = ""
 )
