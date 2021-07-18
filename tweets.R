@@ -73,7 +73,7 @@ tweet_text <- paste(
   "Deaths in the past month: ",dead_last_month,"\n— ",
   "Average new cases: ",avg_new_cases,"\n— ",
   "Average new vaccine doses: ",avg_new_vaccine_doses,"\n— ",
-  "Percent of Champaign County fully vaccinated:",pct_fully_vaccinated,"%",
+  "Percent of Champaign County fully vaccinated: ",pct_fully_vaccinated,"%",
   sep = ""
 )
 
