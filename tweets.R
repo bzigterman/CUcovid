@@ -100,6 +100,7 @@ ggsave( file, plot = p, device = "png", dpi = 320, width = 8, height = 8*(628/12
 rtweet::post_tweet( 
   status = "COVID-19 metrics for Champaign County, Illinois:",
   media = file,
+  media_alt_text = "Charts showing average new cases, deaths in the past month, the number of people fully vaccinated and average new vaccine doses for Champaign County, Illinois",
   token = token
 )
 
