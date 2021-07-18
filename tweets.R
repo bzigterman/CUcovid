@@ -70,10 +70,10 @@ short_date <- tail(idph_cases_vax_longer$short_date,1)
 
 tweet_text <- paste(
   "As of ",short_date,": \n\n— ",
-  "Deaths in the past month: ",dead_last_month,"\n— ",
   "Average new cases: ",avg_new_cases,"\n— ",
-  "Average new vaccine doses: ",avg_new_vaccine_doses,"\n— ",
+  "Deaths in the past month: ",dead_last_month,"\n— ",
   "Percent of Champaign County fully vaccinated: ",pct_fully_vaccinated,"%",
+  "Average new vaccine doses: ",avg_new_vaccine_doses,"\n— ",
   sep = ""
 )
 
