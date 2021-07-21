@@ -114,10 +114,10 @@ ggsave( file, plot = p, device = "png", dpi = 320, width = 8, height = 8*(628/12
 
 
 # post it ----
-rtweet::post_tweet( 
-  status = tweet_text,
-  media = file,
-  # media_alt_text = "Charts showing average new cases, deaths in the past month, the number of people fully vaccinated and average new vaccine doses for Champaign County, Illinois",
-  token = token
-)
-
+if (avg_new_cases >= 0) {
+  rtweet::post_tweet( 
+    status = tweet_text,
+    media = file,
+    token = token
+  )
+}
