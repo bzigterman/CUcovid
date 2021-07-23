@@ -40,7 +40,7 @@ plot_usmap(data = usa_county_vaccine, values = "total_class",
   scale_fill_brewer(
     palette = "Purples",
     direction = 1,
-    na.value = "grey75") +
+    na.value = "grey80") +
   labs(title = "Percent Fully Vaccinated",
        caption =  paste("Source: CDC. Data updated",
                         tail(usa_county_vaccine$short_date,1)),
@@ -91,7 +91,8 @@ plot_usmap(data = usa_cases, values = "community_transmission_level",
            size = .01) +
   scale_fill_brewer(limits = c("low","moderate","substantial","high"),
                     palette = "Oranges",
-                    direction = 1) +
+                    direction = 1,
+                    na.value = "grey80") +
   labs(title = "Community Transmission Levels",
        caption =  paste("Source: CDC. Data updated",
                         tail(usa_cases$short_date,1)),
@@ -217,7 +218,7 @@ cdc_cases_map <- ggplot(data = cdc_cases_merged) +
   scale_fill_brewer(
     palette = "Oranges",
     direction = 1,
-    na.value = "grey75") +
+    na.value = "grey80") +
   labs(title = "New Cases per 100,000 Residents",
        subtitle = "Average over past seven days",
        caption =  paste("Source: CDC. Data updated",
@@ -248,7 +249,8 @@ cdc_transmission <- ggplot(data = cdc_cases_merged) +
   coord_sf(crs = st_crs(4326)) +
   scale_fill_brewer(limits = c("low","moderate","substantial","high"),
                     palette = "Oranges",
-                    direction = 1) +
+                    direction = 1,
+                    na.value = "grey80") +
   labs(title = "Community Transmission Levels",
        caption =  paste("Source: CDC. Data updated",
                         tail(cdc_cases_merged$short_date,1)),
@@ -301,7 +303,7 @@ cdc_total_vax_65 <- ggplot(data = cdc_vaccines_geo_merged) +
   scale_fill_brewer(
     palette = "Purples",
     direction = 1,
-    na.value = "grey75") +
+    na.value = "grey80") +
   labs(title = "Percent Fully Vaccinated 65+",
        caption =  paste("Source: CDC. Data updated",
                         tail(cdc_vaccines_geo_merged$short_date,1)),
@@ -332,7 +334,7 @@ cdc_total_vax_18 <- ggplot(data = cdc_vaccines_geo_merged) +
   scale_fill_brewer(
     palette = "Purples",
     direction = 1,
-    na.value = "grey75") +
+    na.value = "grey80") +
   labs(title = "Percent Fully Vaccinated 18+",
        caption =  paste("Source: CDC. Data updated",
                         tail(cdc_vaccines_geo_merged$short_date,1)),
@@ -363,7 +365,7 @@ cdc_total_vax <- ggplot(data = cdc_vaccines_geo_merged) +
   scale_fill_brewer(
     palette = "Purples",
     direction = 1,
-    na.value = "grey75") +
+    na.value = "grey80") +
   labs(title = "Percent Fully Vaccinated",
        caption =  paste("Source: CDC. Data updated",
                         tail(cdc_vaccines_geo_merged$short_date,1)),
