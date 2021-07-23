@@ -80,9 +80,9 @@ tweet_text <- paste(
 
 ## plot ----
 p <- ggplot(idph_cases_vax_longer,
-       aes(x = as.Date(Date),
-           y = values,
-           colour = names)) +
+            aes(x = as.Date(Date),
+                y = values,
+                colour = names)) +
   geom_line() +
   facet_wrap(~ names, scales = "free_y") +
   labs(#title = "Metrics Since Vaccinations Began Dec. 16",
