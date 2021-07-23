@@ -94,18 +94,18 @@ plot_usmap(data = usa_cases, values = "community_transmission_level",
                         tail(usa_cases$short_date,1)),
        fill = NULL)+
   theme(#text = element_text(family = "Gill Sans"),
-        axis.text = element_blank(),
-        axis.line.x = element_blank(),
-        axis.ticks = element_blank(),
-        axis.title = element_blank(),
-        panel.grid.major = element_blank(),  
-        legend.background = element_blank(),
-        legend.key = element_blank(),
-        legend.key.size = unit(.5, "cm"),
-        panel.background = element_blank(),
-        plot.caption = element_text(colour = "grey40")#,
-        #plot.title = element_text(size = 16, family = "Gill Sans")
-        ) 
+    axis.text = element_blank(),
+    axis.line.x = element_blank(),
+    axis.ticks = element_blank(),
+    axis.title = element_blank(),
+    panel.grid.major = element_blank(),  
+    legend.background = element_blank(),
+    legend.key = element_blank(),
+    legend.key.size = unit(.5, "cm"),
+    panel.background = element_blank(),
+    plot.caption = element_text(colour = "grey40")#,
+    #plot.title = element_text(size = 16, family = "Gill Sans")
+  ) 
 
 ggsave("gh_action/usa_transmission.png", 
        width = 8, height = 8*(628/1200), dpi = 320)
@@ -219,19 +219,19 @@ cdc_cases_map <- ggplot(data = cdc_cases_merged) +
                         tail(cdc_cases_merged$short_date,1)),
        fill = NULL)+
   theme(#text = element_text(family = "Gill Sans"),
-        axis.text = element_blank(),
-        axis.line.x = element_blank(),
-        axis.ticks = element_blank(),
-        axis.title = element_blank(),
-        legend.position = "right",
-        panel.grid.major = element_blank(),  
-        legend.background = element_blank(),
-        legend.key = element_blank(),
-        legend.key.size = unit(.5, "cm"),
-        panel.background = element_blank(),
-        plot.caption = element_text(colour = "grey40")#,
-        #plot.title = element_text(size = 16, family = "Gill Sans")
-        ) 
+    axis.text = element_blank(),
+    axis.line.x = element_blank(),
+    axis.ticks = element_blank(),
+    axis.title = element_blank(),
+    legend.position = "right",
+    panel.grid.major = element_blank(),  
+    legend.background = element_blank(),
+    legend.key = element_blank(),
+    legend.key.size = unit(.5, "cm"),
+    panel.background = element_blank(),
+    plot.caption = element_text(colour = "grey40")#,
+    #plot.title = element_text(size = 16, family = "Gill Sans")
+  ) 
 cdc_cases_map
 
 ## il transmission level ----
@@ -249,20 +249,20 @@ cdc_transmission <- ggplot(data = cdc_cases_merged) +
                         tail(cdc_cases_merged$short_date,1)),
        fill = NULL)+
   theme(#text = element_text(family = "Gill Sans"),
-        axis.text = element_blank(),
-        axis.line.x = element_blank(),
-        axis.ticks = element_blank(),
-        axis.title = element_blank(),
-        legend.position = "right",
-        panel.grid.major = element_blank(),  
-        legend.background = element_blank(),
-        legend.key = element_blank(),
-        plot.caption.position = "plot",
-        legend.key.size = unit(.5, "cm"),
-        panel.background = element_blank(),
-        plot.caption = element_text(colour = "grey40")#,
-        #plot.title = element_text(size = 16, family = "Gill Sans")
-        ) 
+    axis.text = element_blank(),
+    axis.line.x = element_blank(),
+    axis.ticks = element_blank(),
+    axis.title = element_blank(),
+    legend.position = "right",
+    panel.grid.major = element_blank(),  
+    legend.background = element_blank(),
+    legend.key = element_blank(),
+    plot.caption.position = "plot",
+    legend.key.size = unit(.5, "cm"),
+    panel.background = element_blank(),
+    plot.caption = element_text(colour = "grey40")#,
+    #plot.title = element_text(size = 16, family = "Gill Sans")
+  ) 
 cdc_transmission 
 
 ## combined cases and vax map ----
@@ -272,7 +272,7 @@ cdc_transmission +
        fill = NULL)+
   theme(plot.title = element_text(size = 10)
   ) +
-cdc_cases_map + 
+  cdc_cases_map + 
   labs(title = "New Cases per 100,000 Residents",
        subtitle = "Average over past seven days",
        #caption =  NULL,
@@ -280,8 +280,8 @@ cdc_cases_map +
   theme(plot.title = element_text(size = 10),
         plot.subtitle = element_text(size = 9)
   ) #+
-  #cdc_total_vax +
-  #theme(plot.title = element_text(size = 10)) 
+#cdc_total_vax +
+#theme(plot.title = element_text(size = 10)) 
 ggsave("gh_action/IL_cases_transmission.png", 
        width = 8, height = 8*(628/1200), dpi = 320)
 
@@ -301,19 +301,19 @@ cdc_total_vax_65 <- ggplot(data = cdc_vaccines_geo_merged) +
                         tail(cdc_vaccines_geo_merged$short_date,1)),
        fill = NULL)+
   theme(#text = element_text(family = "Gill Sans"),
-        axis.text = element_blank(),
-        axis.line.x = element_blank(),
-        axis.ticks = element_blank(),
-        axis.title = element_blank(),
-        legend.position = "right",
-        panel.grid.major = element_blank(),  
-        legend.background = element_blank(),
-        legend.key = element_blank(),
-        legend.key.size = unit(.5, "cm"),
-        panel.background = element_blank(),
-        plot.caption = element_text(colour = "grey40")#,
-        #plot.title = element_text(size = 16, family = "Gill Sans")
-        ) 
+    axis.text = element_blank(),
+    axis.line.x = element_blank(),
+    axis.ticks = element_blank(),
+    axis.title = element_blank(),
+    legend.position = "right",
+    panel.grid.major = element_blank(),  
+    legend.background = element_blank(),
+    legend.key = element_blank(),
+    legend.key.size = unit(.5, "cm"),
+    panel.background = element_blank(),
+    plot.caption = element_text(colour = "grey40")#,
+    #plot.title = element_text(size = 16, family = "Gill Sans")
+  ) 
 cdc_total_vax_65
 
 ### pct 18+ ----
@@ -331,19 +331,19 @@ cdc_total_vax_18 <- ggplot(data = cdc_vaccines_geo_merged) +
                         tail(cdc_vaccines_geo_merged$short_date,1)),
        fill = NULL)+
   theme(#text = element_text(family = "Gill Sans"),
-        axis.text = element_blank(),
-        axis.line.x = element_blank(),
-        axis.ticks = element_blank(),
-        axis.title = element_blank(),
-        legend.position = "right",
-        panel.grid.major = element_blank(),  
-        legend.background = element_blank(),
-        legend.key = element_blank(),
-        legend.key.size = unit(.5, "cm"),
-        panel.background = element_blank(),
-        plot.caption = element_text(colour = "grey40")#,
-        #plot.title = element_text(size = 16, family = "Gill Sans")
-        ) 
+    axis.text = element_blank(),
+    axis.line.x = element_blank(),
+    axis.ticks = element_blank(),
+    axis.title = element_blank(),
+    legend.position = "right",
+    panel.grid.major = element_blank(),  
+    legend.background = element_blank(),
+    legend.key = element_blank(),
+    legend.key.size = unit(.5, "cm"),
+    panel.background = element_blank(),
+    plot.caption = element_text(colour = "grey40")#,
+    #plot.title = element_text(size = 16, family = "Gill Sans")
+  ) 
 cdc_total_vax_18
 
 ### pct total pop vaccinated map ----
@@ -361,19 +361,19 @@ cdc_total_vax <- ggplot(data = cdc_vaccines_geo_merged) +
                         tail(cdc_vaccines_geo_merged$short_date,1)),
        fill = NULL)+
   theme(#text = element_text(family = "Gill Sans"),
-        axis.text = element_blank(),
-        axis.line.x = element_blank(),
-        axis.ticks = element_blank(),
-        axis.title = element_blank(),
-        legend.position = "right",
-        panel.grid.major = element_blank(),  
-        legend.background = element_blank(),
-        legend.key = element_blank(),
-        legend.key.size = unit(.5, "cm"),
-        panel.background = element_blank(),
-        plot.caption = element_text(colour = "grey40")#,
-        #plot.title = element_text(size = 16, family = "Gill Sans")
-        ) 
+    axis.text = element_blank(),
+    axis.line.x = element_blank(),
+    axis.ticks = element_blank(),
+    axis.title = element_blank(),
+    legend.position = "right",
+    panel.grid.major = element_blank(),  
+    legend.background = element_blank(),
+    legend.key = element_blank(),
+    legend.key.size = unit(.5, "cm"),
+    panel.background = element_blank(),
+    plot.caption = element_text(colour = "grey40")#,
+    #plot.title = element_text(size = 16, family = "Gill Sans")
+  ) 
 cdc_total_vax
 
 ## combined vax maps ----
@@ -532,7 +532,7 @@ idph_cases_champaign <- idph_cases_champaign$values %>%
   mutate(avg_new_cases = rollmean(new_cases, k = 7, 
                                   fill = NA, align = "right")) %>%
   mutate(monthlydead = rollmean(new_deaths, k = 31, 
-                                   fill = NA, align = "right")*31)  %>%
+                                fill = NA, align = "right")*31)  %>%
   mutate(Date = ymd_hms(reportDate)) 
 
 idph_vax_champaign <- rio::import("https://idph.illinois.gov/DPHPublicInformation/api/COVIDExport/GetVaccineAdministration?format=csv&countyName=Champaign",
@@ -548,10 +548,10 @@ idph_cases_vax_longer <- idph_cases_vax %>%
                values_to = "values",
                names_to = "names") %>%
   mutate(names = recode(names, 
-                           "PersonsFullyVaccinated" = "3. People Fully Vaccinated",
-                           "avg_new_cases" = "1. Average New Cases",
-                           "monthlydead" = "2. Deaths in Past Month",
-                           "AdministeredCountRollAvg" = "4. Average New Vaccine Doses"))  %>%
+                        "PersonsFullyVaccinated" = "3. People Fully Vaccinated",
+                        "avg_new_cases" = "1. Average New Cases",
+                        "monthlydead" = "2. Deaths in Past Month",
+                        "AdministeredCountRollAvg" = "4. Average New Vaccine Doses"))  %>%
   mutate(short_date = paste(month(Date, label = TRUE, abbr = FALSE),
                             mday(Date)))
 
@@ -564,8 +564,8 @@ ggplot(idph_cases_vax_longer,
   geom_line() +
   facet_wrap(~ names, scales = "free_y") +
   labs(#title = "Metrics Since Vaccinations Began Dec. 16",
-       caption = paste("Source: IDPH. Data updated",
-                       tail(idph_cases_vax_longer$short_date,1))) +
+    caption = paste("Source: IDPH. Data updated",
+                    tail(idph_cases_vax_longer$short_date,1))) +
   xlab(NULL) +
   ylab(NULL) +
   scale_x_date(expand = c(0,0)) +
@@ -629,8 +629,8 @@ ggplot(idph_cases_vax_longer,
   geom_line() +
   facet_wrap(~ names, scales = "free_y") +
   labs(#title = "Metrics Since Vaccinations Began Dec. 16",
-       caption = paste("Source: IDPH. Data updated",
-                       tail(idph_cases_vax_longer$short_date,1))) +
+    caption = paste("Source: IDPH. Data updated",
+                    tail(idph_cases_vax_longer$short_date,1))) +
   xlab(NULL) +
   ylab(NULL) +
   scale_x_date(expand = c(0,0)) +
@@ -662,7 +662,7 @@ jhu_new_cases <- rio::import(jhu_new_cases_url, format = "csv") %>%
   rename(new_cases = "United States") %>%
   mutate(avg_new_cases = rollmean(new_cases, k = 7, 
                                   fill = NA, align = "right"))
-  
+
 
 ### deaths ----
 jhu_new_deaths_url <- "https://github.com/owid/covid-19-data/raw/master/public/data/jhu/new_deaths.csv"
@@ -670,7 +670,7 @@ jhu_new_deaths <- rio::import(jhu_new_deaths_url, format = "csv") %>%
   select(date,"United States") %>%
   rename(new_deaths = "United States") %>%
   mutate(avg_new_deaths = rollmean(new_deaths, k = 7, 
-                                  fill = NA, align = "right"))
+                                   fill = NA, align = "right"))
 
 
 ### vaccines ----
@@ -952,12 +952,12 @@ ggplot(last_vax_nearby, aes(y = reorder(CountyName,
                xend = 0, 
                colour = "#674EA7",
                size = 7) + 
-geom_text(data = last_vax_nearby,
-          aes(x = PctVaccinatedPopulation,
-              label = percent(PctVaccinatedPopulation, .1)),
-          hjust = 1.1,
-          size = 3.5,
-          colour = "white") +
+  geom_text(data = last_vax_nearby,
+            aes(x = PctVaccinatedPopulation,
+                label = percent(PctVaccinatedPopulation, .1)),
+            hjust = 1.1,
+            size = 3.5,
+            colour = "white") +
   # geom_text(data = filter(last_vax_nearby, # label for top county, dose2
   #                         CountyName == topcounty),
   #           aes(x = PctVaccinatedPopulation,
