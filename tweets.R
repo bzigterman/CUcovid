@@ -114,7 +114,11 @@ ggsave( file, plot = p, device = "png", dpi = 320, width = 8, height = 8*(628/12
 
 
 # post it ----
-if (avg_new_cases >= 0) {
+if (avg_new_cases >= 0 && 
+    dead_last_month >= 0 && 
+    pct_fully_vaccinated >= 0 &&
+    pct_fully_vaccinated <= 100 &&
+    avg_new_vaccine_doses >= 0) {
   rtweet::post_tweet( 
     status = tweet_text,
     media = file,
