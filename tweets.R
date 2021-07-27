@@ -67,9 +67,10 @@ avg_new_cases <- round(tail(idph_cases_champaign$avg_new_cases,1))
 pct_fully_vaccinated <- round(100*tail(idph_vax_champaign$PctVaccinatedPopulation,1), digits = 1)
 avg_new_vaccine_doses <- tail(idph_vax_champaign$AdministeredCountRollAvg,1)
 short_date <- tail(idph_cases_vax_longer$short_date,1)
+weekday <- wday(tail(idph_cases_vax_longer$Date,1), label = TRUE, abbr = FALSE)
 
 tweet_text <- paste(
-  "As of ",short_date,": \n\n— ",
+  "As of ",weekday,": \n\n— ",
   "Average new cases: ",avg_new_cases,"\n— ",
   "Deaths in the past month: ",dead_last_month,"\n— ",
   "Percent of Champaign County fully vaccinated: ",pct_fully_vaccinated,"%\n— ",
