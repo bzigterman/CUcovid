@@ -3,17 +3,11 @@ library(zoo)
 library(scales)
 library(rio)
 library(httr)
-#library(usmap)
 library(RColorBrewer)
 library(lubridate)
-# #library(extrafont)
-# #library(sf)
 library(patchwork)
 library(rtweet)
 library(png)
-#font_import(prompt=FALSE)
-#loadfonts()
-#options(tigris_use_cache = TRUE)
 
 # obtain twitter token ----
 token <- rtweet::create_token(
