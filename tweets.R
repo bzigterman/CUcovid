@@ -62,13 +62,17 @@ pct_fully_vaccinated <- round(100*tail(idph_vax_champaign$PctVaccinatedPopulatio
 avg_new_vaccine_doses <- tail(idph_vax_champaign$AdministeredCountRollAvg,1)
 short_date <- tail(idph_cases_vax_longer$short_date,1)
 weekday <- wday(tail(idph_cases_vax_longer$Date,1), label = TRUE, abbr = FALSE)
+month_ago_deaths <- tail(lag(idph_cases_champaign$monthlydead, 31),1)
+month_ago_cases <- round(tail(lag(idph_cases_champaign$avg_new_cases, 31),1))
+month_ago_vaccinated <- round(100*tail(lag(idph_vax_champaign$PctVaccinatedPopulation,31),1), digits = 1)
+month_ago_new_doses <- tail(lag(idph_vax_champaign$AdministeredCountRollAvg,31),1)
 
 tweet_text <- paste(
-  "As of ",weekday,": \n\n— ",
-  "Average new cases: ",avg_new_cases,"\n— ",
-  "Deaths in the past month: ",dead_last_month,"\n— ",
-  "Percent of Champaign County fully vaccinated: ",pct_fully_vaccinated,"%\n— ",
-  "Average new vaccine doses: ",avg_new_vaccine_doses,
+  "As of ",weekday," (vs. a month ago):\n\n",
+  "— Average new cases: ",avg_new_cases," (vs. ",month_ago_cases,")\n",
+  "— Deaths in the past month: ",dead_last_month," (vs. ",month_ago_deaths,")\n",
+  "— Percent of Champaign County fully vaccinated: ",pct_fully_vaccinated,"% (vs. ",month_ago_vaccinated,"%)\n",
+  "— Average new vaccine doses: ",avg_new_vaccine_doses," (vs. ",month_ago_new_doses,")",
   "\n\nSource: http://www.dph.illinois.gov/covid19",
   sep = ""
 )
@@ -106,14 +110,18 @@ p <- ggplot(idph_cases_vax_longer,
 file <- tempfile( fileext = ".png")
 ggsave( file, plot = p, device = "png", dpi = 320, width = 8, height = 8*(628/1200))
 
-
-
 # post it ----
 if (avg_new_cases >= 0 && 
     dead_last_month >= 0 && 
     pct_fully_vaccinated >= 0 &&
     pct_fully_vaccinated <= 100 &&
-    avg_new_vaccine_doses >= 0) {
+    avg_new_vaccine_doses >= 0 &&
+    month_ago_cases >= 0 && 
+    month_ago_deaths >= 0 && 
+    month_ago_vaccinated >= 0 &&
+    month_ago_vaccinated <= 100 &&
+    month_ago_new_doses >= 0
+) {
   rtweet::post_tweet( 
     status = tweet_text,
     media = file,
