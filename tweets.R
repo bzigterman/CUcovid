@@ -58,7 +58,7 @@ idph_cases_vax_longer <- idph_cases_vax %>%
 ## text ----
 dead_last_month <- tail(idph_cases_champaign$monthlydead,1)
 avg_new_cases <- round(tail(idph_cases_champaign$avg_new_cases,1))
-pct_fully_vaccinated <- round(100*tail(idph_vax_champaign$PctVaccinatedPopulation,1), digits = 3)
+pct_fully_vaccinated <- round(100*tail(idph_vax_champaign$PctVaccinatedPopulation,1), digits = 1)
 avg_new_vaccine_doses <- tail(idph_vax_champaign$AdministeredCountRollAvg,1)
 short_date <- tail(idph_cases_vax_longer$short_date,1)
 weekday <- wday(tail(idph_cases_vax_longer$Date,1), label = TRUE, abbr = FALSE)
