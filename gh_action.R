@@ -757,7 +757,7 @@ ggplot(combined_cases,
              size = .1) +
   facet_wrap(~ location) +
   labs(title = "14-Day Percent Change in Average New Cases",
-       caption = paste("Source: JHU CSSE COVID-19 Data, IDPH. Data updated",
+       caption = paste("Source: IDPH and JHU CSSE COVID-19 Data. Data updated",
                        tail(us_data_longer$short_date,1))) +
   xlab(NULL) +
   ylab(NULL) +
