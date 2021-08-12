@@ -757,16 +757,15 @@ ggplot(combined_cases,
        aes(x = as.Date(Date), y = pct_change_new_cases,
            color = pct_change_new_cases >0)) +
   geom_point(size = .1) +
-facet_wrap(~ location) +
+  facet_wrap(~ location) +
   labs(title = "14-Day Percent Change in Average New Cases",
        caption = paste("Source: JHU CSSE COVID-19 Data, IDPH. Data updated",
                        tail(us_data_longer$short_date,1))) +
   xlab(NULL) +
   ylab(NULL) +
-  scale_x_date(expand = c(0,0)) +
+  scale_x_date(expand = expansion(mult = c(0, .01))) +
   scale_y_continuous(labels = label_percent(accuracy = 1),
                      position = "right") +
-  expand_limits(y = 0) +
   scale_colour_manual(guide = "none",
                       values = c("#199fa8","#b32704")) +
   coord_cartesian(ylim = c(-1,2)) +
