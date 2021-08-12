@@ -731,9 +731,6 @@ jhu_new_cases_usa <- rio::import(jhu_new_cases_url, format = "csv") %>%
   mutate(Date = ymd(date)) %>% 
   mutate(location = "United States")
 
-ggplot(jhu_new_cases_usa, aes(x = Date, y = pct_change_new_cases)) +
-  geom_line()
-
 ### World cases ----
 jhu_new_cases_url <- "https://github.com/owid/covid-19-data/raw/master/public/data/jhu/new_cases.csv"
 jhu_new_cases_world <- rio::import(jhu_new_cases_url, format = "csv") %>%
@@ -754,9 +751,10 @@ combined_cases <- full_join(idph_cases_champaign, idph_cases_il) %>%
 
 ## plot ----
 ggplot(combined_cases, 
-       aes(x = as.Date(Date), y = pct_change_new_cases,
-           color = pct_change_new_cases >0)) +
-  geom_point(size = .1) +
+       aes(x = as.Date(Date), y = pct_change_new_cases)) +
+  geom_line(color = "grey95") +
+  geom_point(aes(color = pct_change_new_cases >0),
+             size = .1) +
   facet_wrap(~ location) +
   labs(title = "14-Day Percent Change in Average New Cases",
        caption = paste("Source: JHU CSSE COVID-19 Data, IDPH. Data updated",
