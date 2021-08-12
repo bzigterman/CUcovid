@@ -605,7 +605,7 @@ ggplot(us_data_longer,
 ggsave("gh_action/US_facet.png", 
        width = 8, height = 8*(628/1200), dpi = 320)
 
-# world facet
+# world facet ----
 
 ## get data ----
 ### cases ----
@@ -680,6 +680,107 @@ ggplot(us_data_longer,
 ggsave("gh_action/world_facet.png", 
        width = 8, height = 8*(628/1200), dpi = 320)
 
+
+
+
+# rate of case changes comparison ----
+## get data ----
+### Champaign cases ----
+idph_cases_champaign <- rio::import("https://idph.illinois.gov/DPHPublicInformation/api/COVID/GetCountyHistorical?countyName=Champaign",
+                                    format = "json") 
+idph_cases_champaign <- idph_cases_champaign$values %>%
+  mutate(population = illinoispop)  %>%
+  mutate(new_cases = confirmed_cases - lag(confirmed_cases)) %>%
+  mutate(new_deaths = deaths - lag(deaths)) %>%
+  mutate(avg_new_cases = rollmean(new_cases, k = 7, 
+                                  fill = NA, align = "right")) %>%
+  mutate(monthlydead = rollmean(new_deaths, k = 7, 
+                                fill = NA, align = "right"))  %>%
+  mutate(Date = ymd_hms(reportDate, truncated = 0)) %>%
+  mutate(pct_change_new_cases = 
+           ((avg_new_cases - lag(avg_new_cases,14))/lag(avg_new_cases,14))) %>%
+  mutate(location = "Champaign County")
+
+
+### IL cases -----
+idph_cases_il <- rio::import("https://idph.illinois.gov/DPHPublicInformation/api/COVID/GetCountyHistorical?countyName=Illinois",
+                             format = "json") 
+idph_cases_il <- idph_cases_il$values %>%
+  mutate(population = illinoispop)  %>%
+  mutate(new_cases = confirmed_cases - lag(confirmed_cases)) %>%
+  mutate(new_deaths = deaths - lag(deaths)) %>%
+  mutate(avg_new_cases = rollmean(new_cases, k = 7, 
+                                  fill = NA, align = "right")) %>%
+  mutate(monthlydead = rollmean(new_deaths, k = 7, 
+                                fill = NA, align = "right"))  %>%
+  mutate(Date = ymd_hms(reportDate, truncated = 0)) %>%
+  mutate(pct_change_new_cases = 
+           ((avg_new_cases - lag(avg_new_cases,14))/lag(avg_new_cases,14))) %>%
+  mutate(location = "Illinois")
+
+
+### USA cases ----
+jhu_new_cases_url <- "https://github.com/owid/covid-19-data/raw/master/public/data/jhu/new_cases.csv"
+jhu_new_cases_usa <- rio::import(jhu_new_cases_url, format = "csv") %>%
+  select(date,"United States") %>%
+  rename(new_cases = "United States") %>%
+  mutate(avg_new_cases = rollmean(new_cases, k = 7, 
+                                  fill = NA, align = "right")) %>%
+  mutate(pct_change_new_cases = 
+           ((avg_new_cases - lag(avg_new_cases,14))/lag(avg_new_cases,14))) %>%
+  mutate(Date = ymd(date)) %>% 
+  mutate(location = "United States")
+
+ggplot(jhu_new_cases_usa, aes(x = Date, y = pct_change_new_cases)) +
+  geom_line()
+
+### World cases ----
+jhu_new_cases_url <- "https://github.com/owid/covid-19-data/raw/master/public/data/jhu/new_cases.csv"
+jhu_new_cases_world <- rio::import(jhu_new_cases_url, format = "csv") %>%
+  select(date,"World") %>%
+  rename(new_cases = "World") %>%
+  mutate(avg_new_cases = rollmean(new_cases, k = 7, 
+                                  fill = NA, align = "right")) %>%
+  mutate(pct_change_new_cases = 
+           ((avg_new_cases - lag(avg_new_cases,14))/lag(avg_new_cases,14))) %>%
+  mutate(Date = ymd(date)) %>%
+  mutate(location = "World")
+
+## merge data ----
+combined_cases <- full_join(idph_cases_champaign, idph_cases_il) %>%
+  full_join(jhu_new_cases_usa) %>%
+  full_join(jhu_new_cases_world) %>%
+  select(location, Date,pct_change_new_cases)
+
+## plot ----
+ggplot(combined_cases, 
+       aes(x = as.Date(Date), y = pct_change_new_cases,
+           color = pct_change_new_cases >0)) +
+  geom_point(size = .1) +
+facet_wrap(~ location) +
+  labs(title = "14-Day Percent Change in Average New Cases",
+       caption = paste("Source: JHU CSSE COVID-19 Data, IDPH. Data updated",
+                       tail(us_data_longer$short_date,1))) +
+  xlab(NULL) +
+  ylab(NULL) +
+  scale_x_date(expand = c(0,0)) +
+  scale_y_continuous(labels = label_percent(accuracy = 1),
+                     position = "right") +
+  expand_limits(y = 0) +
+  scale_colour_manual(guide = "none",
+                      values = c("#199fa8","#b32704")) +
+  coord_cartesian(ylim = c(-1,2)) +
+  theme(axis.text.y = element_text(size = 10),
+        axis.text.x = element_text(size = 8),
+        panel.grid.minor = element_blank(),
+        panel.background = element_blank(),
+        panel.grid.major.y = element_line(colour = "grey93"),
+        strip.text = element_text(size = 11),
+        strip.background = element_blank(),
+        plot.caption = element_text(colour = "grey40"))
+
+ggsave("gh_action/new_cases_change_facet.png", 
+       width = 8, height = 8*(628/1200), dpi = 320)
 
 # vax comparison chart ----
 
