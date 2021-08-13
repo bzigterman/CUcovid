@@ -776,9 +776,16 @@ ggplot(combined_cases,
         strip.background = element_blank(),
         plot.caption = element_text(colour = "grey40"))
 
-ggsave("gh_action/new_cases_change_facet.png", 
-       width = 8, height = 8*(628/1200), dpi = 320)
 
+if (avg_new_cases >= 0 && 
+    dead_last_month >= 0 && 
+    pct_fully_vaccinated >= 0 &&
+    pct_fully_vaccinated <= 100 &&
+    avg_new_vaccine_doses >= 0) {
+  ggsave("gh_action/new_cases_change_facet.png", 
+         width = 8, height = 8*(628/1200), dpi = 320)
+}
+  
 # vax comparison chart ----
 
 ## set population variables ----
