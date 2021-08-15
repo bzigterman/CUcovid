@@ -755,6 +755,9 @@ ggplot(combined_cases,
   geom_line(color = "grey95") +
   geom_point(aes(color = pct_change_new_cases >0),
              size = .1) +
+  geom_hline(yintercept = 0,
+             color = "grey25",
+             size = .1) +
   facet_wrap(~ location) +
   labs(title = "14-Day Percent Change in Average New Cases",
        caption = paste("Source: IDPH and JHU CSSE COVID-19 Data. Data updated",
