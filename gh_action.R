@@ -52,7 +52,7 @@ plot_usmap(data = usa_county_vaccine, values = "total_class",
     legend.background = element_blank(),
     legend.key = element_blank(),
     legend.key.size = unit(.5, "cm"),
-    panel.background = element_blank(),
+    plot.background = element_rect(fill = "white", color = "white"),
     plot.caption = element_text(colour = "grey40")
   ) 
 
@@ -102,7 +102,7 @@ plot_usmap(data = usa_cases, values = "community_transmission_level",
     legend.background = element_blank(),
     legend.key = element_blank(),
     legend.key.size = unit(.5, "cm"),
-    panel.background = element_blank(),
+    plot.background = element_rect(fill = "white", color = "white"),
     plot.caption = element_text(colour = "grey40")
   ) 
 
