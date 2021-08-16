@@ -35,12 +35,22 @@ month_ago_vaccinated <- round(100*tail(lag(idph_vax_champaign$PctVaccinatedPopul
 month_ago_new_doses <- tail(lag(idph_vax_champaign$AdministeredCountRollAvg,31),1)
 
 tweet_text <- paste(
-  "As of ",weekday," in Champaign County (vs. a month ago):\n\n",
-  "— Average new cases: ",avg_new_cases," (vs. ",month_ago_cases,")\n",
-  "— Deaths in the past month: ",dead_last_month," (vs. ",month_ago_deaths,")\n",
-  "— Percent of Champaign County fully vaccinated: ",pct_fully_vaccinated,"% (vs. ",month_ago_vaccinated,"%)\n",
-  "— Average new vaccine doses: ",avg_new_vaccine_doses," (vs. ",month_ago_new_doses,")",
-  "\n\n",
+  "As of ",weekday," in Champaign County (vs. a month ago):
+  
+  ",
+  "Average new cases: ",avg_new_cases," (vs. ",month_ago_cases,")
+  
+  ",
+  "Deaths in the past month: ",dead_last_month," (vs. ",month_ago_deaths,")
+  
+  ",
+  "Percent of Champaign County fully vaccinated: ",pct_fully_vaccinated,"% (vs. ",month_ago_vaccinated,"%)
+  
+  ",
+  "Average new vaccine doses: ",avg_new_vaccine_doses," (vs. ",month_ago_new_doses,")",
+  "
+  
+  ",
   sep = ""
 )
 
