@@ -6,7 +6,7 @@ on:
     - cron: '50 18 * * 1-5'
 
 jobs:
-  run-autotweeter:
+  run-automailer:
     runs-on: macOS-latest
     env:
       BUTTONDOWN_API_KEY: ${{ secrets.BUTTONDOWN_API_KEY }}
