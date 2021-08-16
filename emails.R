@@ -90,7 +90,15 @@ Sources: the [Champaign-Urbana Public Health District](https://www.c-uphd.org/ch
 
 email_text <- paste(
   tweet_text,
-  web_text
+  web_text,
+  sep = ""
+)
+
+subject_text <- paste(
+  "Champaign County COVID-19 Metrics for ",
+  wday(today(),label = TRUE, abbr = FALSE),", ",month(today(), label = TRUE,
+                                                abbr = FALSE)," ",day(today()),", ",year(today()),
+  sep = ""
 )
 
 # send email ----
@@ -111,7 +119,7 @@ if (avg_new_cases >= 0 &&
     body = list(
       body = email_text,
       email_type = "public",
-      subject = "Champaign County COVID-19 Metrics"
+      subject = subject_text
     )
   )
 }
