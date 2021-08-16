@@ -1,10 +1,9 @@
 library(httr)
 library(rio)
 library(tidyverse)
+library(zoo)
 
-
-
-# get data
+# get data ----
 champaignpop <- 209983
 
 idph_cases_champaign <- rio::import("https://idph.illinois.gov/DPHPublicInformation/api/COVID/GetCountyHistorical?countyName=Champaign",
@@ -23,9 +22,7 @@ idph_vax_champaign <- rio::import("https://idph.illinois.gov/DPHPublicInformatio
                                   format = "csv") %>%
   mutate(Date = mdy_hms(Report_Date)) 
 
-
-
-## text ----
+# text ----
 dead_last_month <- tail(idph_cases_champaign$monthlydead,1)
 avg_new_cases <- round(tail(idph_cases_champaign$avg_new_cases,1))
 pct_fully_vaccinated <- round(100*tail(idph_vax_champaign$PctVaccinatedPopulation,1), digits = 1)
@@ -46,8 +43,6 @@ tweet_text <- paste(
   "\n\n",
   sep = ""
 )
-
-
 
 web_text <- "
 
@@ -91,7 +86,7 @@ email_text <- paste(
   web_text
 )
 
-
+# send email ----
 if (avg_new_cases >= 0 && 
     dead_last_month >= 0 && 
     pct_fully_vaccinated >= 0 &&
