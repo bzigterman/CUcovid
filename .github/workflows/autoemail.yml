@@ -28,7 +28,7 @@ jobs:
         if: steps.cache-r-packages.outputs.cache-hit != 'true'        
         run: R -e 'source("install-packages.R", echo = TRUE)'
         
-      - name: Download Parse and Tweet
+      - name: Download Parse and Email
         run: Rscript emails.R
         
       # Add new files in data folder, commit along with other modified files, push
