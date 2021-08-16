@@ -108,7 +108,7 @@ if (avg_new_cases >= 0 &&
     body = list(
       body = email_text,
       email_type = "public",
-      subject = "COVID-19 Charts"
+      subject = "Champaign County COVID-19 Metrics"
     )
   )
 }
