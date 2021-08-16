@@ -38,9 +38,12 @@ tweet_text <- paste(
   "As of ",weekday," in Champaign County (vs. a month ago):
   
   ",
-  "- Average new cases: ",avg_new_cases," (vs. ",month_ago_cases,")",
-  "- Deaths in the past month: ",dead_last_month," (vs. ",month_ago_deaths,")",
-  "- Percent of Champaign County fully vaccinated: ",pct_fully_vaccinated,"% (vs. ",month_ago_vaccinated,"%)",
+  "- Average new cases: ",avg_new_cases," (vs. ",month_ago_cases,")
+  ",
+  "- Deaths in the past month: ",dead_last_month," (vs. ",month_ago_deaths,")
+  ",
+  "- Percent of Champaign County fully vaccinated: ",pct_fully_vaccinated,"% (vs. ",month_ago_vaccinated,"%)
+  ",
   "- Average new vaccine doses: ",avg_new_vaccine_doses," (vs. ",month_ago_new_doses,")",
   "
   
