@@ -5,12 +5,9 @@ library(lubridate)
 library(zoo)
 
 # get data ----
-champaignpop <- 209983
-
 idph_cases_champaign <- rio::import("https://idph.illinois.gov/DPHPublicInformation/api/COVID/GetCountyHistorical?countyName=Champaign",
                                     format = "json") 
 idph_cases_champaign <- idph_cases_champaign$values %>%
-  mutate(population = champaignpop)  %>%
   mutate(new_cases = confirmed_cases - lag(confirmed_cases)) %>%
   mutate(new_deaths = deaths - lag(deaths)) %>%
   mutate(avg_new_cases = rollmean(new_cases, k = 7, 
