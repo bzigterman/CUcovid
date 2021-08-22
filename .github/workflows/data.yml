@@ -15,15 +15,15 @@ jobs:
         #with:
         #  r-version: '3.6.3'
           
-      - name: Restore R package cache
-        id: cache-r-packages
-        uses: actions/cache@v2
-        with:
-          path: ${{ env.R_LIBS_USER }}
-          key: ${{ runner.os }}-${{ hashFiles('install-packages.R') }}-1
+      #- name: Restore R package cache
+        #id: cache-r-packages
+        #uses: actions/cache@v2
+        #with:
+          #path: ${{ env.R_LIBS_USER }}
+          #key: ${{ runner.os }}-${{ hashFiles('install-packages.R') }}-1
           
       - name: Install packages
-        if: steps.cache-r-packages.outputs.cache-hit != 'true'        
+        #if: steps.cache-r-packages.outputs.cache-hit != 'true'        
         run: R -e 'source("install-packages.R", echo = TRUE)'
         
       - name: Run script
