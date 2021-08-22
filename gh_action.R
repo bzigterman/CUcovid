@@ -961,3 +961,111 @@ ggplot(last_vax_nearby, aes(y = reorder(CountyName,
 
 ggsave("gh_action/nearby_fully_vaccinated.png", 
        width = 8, height = 8*(628/1200), dpi = 320)
+
+# death acceleration ----
+## get data ----
+### Champaign cases ----
+idph_deaths_champaign <- rio::import("https://idph.illinois.gov/DPHPublicInformation/api/COVID/GetCountyHistorical?countyName=Champaign",
+                                    format = "json") 
+idph_deaths_champaign <- idph_deaths_champaign$values %>%
+  mutate(new_cases = confirmed_cases - lag(confirmed_cases)) %>%
+  mutate(new_deaths = deaths - lag(deaths)) %>%
+  mutate(avg_new_cases = rollmean(new_cases, k = 7, 
+                                  fill = NA, align = "right")) %>%
+  mutate(monthlydead = rollmean(new_deaths, k = 7, 
+                                fill = NA, align = "right"))  %>%
+  mutate(Date = ymd_hms(reportDate, truncated = 0)) %>%
+  mutate(pct_change_new_cases = 
+           ((avg_new_cases - lag(avg_new_cases,14))/lag(avg_new_cases,14))) %>%
+  mutate(pct_change_new_deaths = 
+           ((monthlydead - lag(monthlydead,14))/lag(monthlydead,14))) %>%
+  mutate(location = "Champaign County")
+
+
+### IL cases -----
+idph_deaths_il <- rio::import("https://idph.illinois.gov/DPHPublicInformation/api/COVID/GetCountyHistorical?countyName=Illinois",
+                             format = "json") 
+idph_deaths_il <- idph_deaths_il$values %>%
+  mutate(new_cases = confirmed_cases - lag(confirmed_cases)) %>%
+  mutate(new_deaths = deaths - lag(deaths)) %>%
+  mutate(avg_new_cases = rollmean(new_cases, k = 7, 
+                                  fill = NA, align = "right")) %>%
+  mutate(monthlydead = rollmean(new_deaths, k = 7, 
+                                fill = NA, align = "right"))  %>%
+  mutate(Date = ymd_hms(reportDate, truncated = 0)) %>%
+  mutate(pct_change_new_cases = 
+           ((avg_new_cases - lag(avg_new_cases,14))/lag(avg_new_cases,14))) %>%
+  mutate(pct_change_new_deaths = 
+           ((monthlydead - lag(monthlydead,14))/lag(monthlydead,14))) %>%
+  mutate(location = "Illinois")
+
+
+### USA cases ----
+jhu_new_deaths_url <- "https://github.com/owid/covid-19-data/raw/master/public/data/jhu/new_deaths.csv"
+jhu_new_deaths_usa <- rio::import(jhu_new_deaths_url, format = "csv") %>%
+  select(date,"United States") %>%
+  rename(new_deaths = "United States") %>%
+  mutate(avg_new_deaths = rollmean(new_deaths, k = 7, 
+                                  fill = NA, align = "right")) %>%
+  mutate(pct_change_new_deaths = 
+           ((avg_new_deaths - lag(avg_new_deaths,14))/lag(avg_new_deaths,14))) %>%
+  mutate(Date = ymd(date)) %>% 
+  mutate(location = "United States")
+
+### World cases ----
+jhu_new_deaths_url <- "https://github.com/owid/covid-19-data/raw/master/public/data/jhu/new_deaths.csv"
+jhu_new_deaths_world <- rio::import(jhu_new_deaths_url, format = "csv") %>%
+  select(date,"World") %>%
+  rename(new_deaths = "World") %>%
+  mutate(avg_new_deaths = rollmean(new_deaths, k = 7, 
+                                  fill = NA, align = "right")) %>%
+  mutate(pct_change_new_deaths = 
+           ((avg_new_deaths - lag(avg_new_deaths,14))/lag(avg_new_deaths,14))) %>%
+  mutate(Date = ymd(date)) %>%
+  mutate(location = "World")
+
+## merge data ----
+combined_deaths <- full_join(idph_deaths_il, jhu_new_deaths_usa) %>%
+  full_join(jhu_new_deaths_world) %>%
+  select(location, Date,pct_change_new_deaths)
+
+## plot ----
+ggplot(combined_deaths, 
+       aes(x = as.Date(Date), y = pct_change_new_deaths)) +
+  geom_line(color = "grey95") +
+  geom_point(aes(color = pct_change_new_deaths >0),
+             size = .1) +
+  geom_hline(yintercept = 0,
+             color = "grey25",
+             size = .1) +
+  facet_wrap(~ location, ncol = 1) +
+  labs(title = "14-Day Percent Change in Average New Deaths",
+       caption = paste("Source: IDPH and JHU CSSE COVID-19 Data. Data updated",
+                       tail(us_data_longer$short_date,1))) +
+  xlab(NULL) +
+  ylab(NULL) +
+  scale_x_date(expand = expansion(mult = c(0, .01))) +
+  scale_y_continuous(labels = label_percent(accuracy = 1),
+                     position = "right") +
+  scale_colour_manual(guide = "none",
+                      values = c("#199fa8","#b32704")) +
+  coord_cartesian(ylim = c(-1,2)) +
+  theme(axis.text.y = element_text(size = 10),
+        axis.text.x = element_text(size = 8),
+        panel.grid.minor = element_blank(),
+        panel.background = element_blank(),
+        panel.grid.major.y = element_line(colour = "grey93"),
+        strip.text = element_text(size = 11),
+        strip.background = element_blank(),
+        plot.caption = element_text(colour = "grey40"))
+
+
+if (avg_new_cases >= 0 &&
+    dead_last_month >= 0 &&
+    pct_fully_vaccinated >= 0 &&
+    pct_fully_vaccinated <= 100 &&
+    avg_new_vaccine_doses >= 0) {
+  ggsave("gh_action/new_deaths_change_facet.png",
+         width = 8, height = 8*(628/1200), dpi = 320)
+}
+
