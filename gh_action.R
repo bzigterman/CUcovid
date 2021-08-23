@@ -26,9 +26,9 @@ usa_county_vaccine <- usa_county_vaccine %>%
                             mday(date))) %>%
   mutate(total_class = 
            cut(x = Series_Complete_Pop_Pct,
-               breaks = c(0,10,20,30,40,50,60,70,80,100),
-               labels = c("0–10%","10–20%","20–30%","30–40%","40–50%",
-                          "50–60%","60–70%","70–80%","80–100%"),
+               breaks = c(0,20,30,40,50,60,70,80,90,100),
+               labels = c("0–20%","20–30%","30–40%","40–50%",
+                          "50–60%","60–70%","70–80%","80–90%","90–100%"),
                include.lowest = TRUE)) 
 
 ## make vaccine map ----
@@ -130,23 +130,23 @@ cdc_county_vaccine <- cdc_county_vaccine %>%
                             mday(date))) %>%
   mutate(total_class = 
            cut(x = Series_Complete_Pop_Pct,
-               breaks = c(0,10,20,30,40,50,60,70,80,100),
-               labels = c("0–10%","10–20%","20–30%","30–40%","40–50%",
-                          "50–60%","60–70%","70–80%","80–100%"),
+               breaks = c(0,20,30,40,50,60,70,80,90,100),
+               labels = c("0–20%","20–30%","30–40%","40–50%",
+                          "50–60%","60–70%","70–80%","80–90%","90–100%"),
                include.lowest = TRUE
            )) %>%
   mutate(adult_class = 
            cut(x = Series_Complete_18PlusPop_Pct,
-               breaks = c(0,10,20,30,40,50,60,70,80,100),
-               labels = c("0–10%","10–20%","20–30%","30–40%","40–50%",
-                          "50–60%","60–70%","70–80%","80–100%"),
+               breaks = c(0,20,30,40,50,60,70,80,90,100),
+               labels = c("0–20%","20–30%","30–40%","40–50%",
+                          "50–60%","60–70%","70–80%","80–90%","90–100%"),
                include.lowest = TRUE
            )) %>%
   mutate(senior_class = 
            cut(x = Series_Complete_65PlusPop_Pct,
-               breaks = c(0,10,20,30,40,50,60,70,80,100),
-               labels = c("0–10%","10–20%","20–30%","30–40%","40–50%",
-                          "50–60%","60–70%","70–80%","80–100%"),
+               breaks = c(0,20,30,40,50,60,70,80,90,100),
+               labels = c("0–20%","20–30%","30–40%","40–50%",
+                          "50–60%","60–70%","70–80%","80–90%","90–100%"),
                include.lowest = TRUE
            ))
 cdc_vaccines_geo_merged <- merge(cdc_county_vaccine,
