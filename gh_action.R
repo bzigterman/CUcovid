@@ -758,7 +758,7 @@ ggplot(combined_cases,
   geom_hline(yintercept = 0,
              color = "grey25",
              size = .1) +
-  facet_wrap(~ location) +
+  facet_wrap(~ location, ncol = 1) +
   labs(title = "14-Day Percent Change in Average New Cases",
        caption = paste("Source: IDPH and JHU CSSE COVID-19 Data. Data updated",
                        tail(us_data_longer$short_date,1))) +
@@ -786,7 +786,7 @@ if (avg_new_cases >= 0 &&
     pct_fully_vaccinated <= 100 &&
     avg_new_vaccine_doses >= 0) {
   ggsave("gh_action/new_cases_change_facet.png", 
-         width = 8, height = 8*(628/1200), dpi = 320)
+         width = 8, height = 6, dpi = 320)
 }
   
 # vax comparison chart ----
@@ -1066,6 +1066,6 @@ if (avg_new_cases >= 0 &&
     pct_fully_vaccinated <= 100 &&
     avg_new_vaccine_doses >= 0) {
   ggsave("gh_action/new_deaths_change_facet.png",
-         width = 8, height = 8*(628/1200), dpi = 320)
+         width = 8, height = 6, dpi = 320)
 }
 
