@@ -19,13 +19,11 @@ token <- rtweet::create_token(
 )
 
 
-# idph champaign county cases ----
-champaignpop <- 209983
-
+# tweet text ----
+## get data ----
 idph_cases_champaign <- rio::import("https://idph.illinois.gov/DPHPublicInformation/api/COVID/GetCountyHistorical?countyName=Champaign",
                                     format = "json") 
 idph_cases_champaign <- idph_cases_champaign$values %>%
-  mutate(population = champaignpop)  %>%
   mutate(new_cases = confirmed_cases - lag(confirmed_cases)) %>%
   mutate(new_deaths = deaths - lag(deaths)) %>%
   mutate(avg_new_cases = rollmean(new_cases, k = 7, 
@@ -38,46 +36,114 @@ idph_vax_champaign <- rio::import("https://idph.illinois.gov/DPHPublicInformatio
                                   format = "csv") %>%
   mutate(Date = mdy_hms(Report_Date)) 
 
-idph_cases_vax <- full_join(idph_cases_champaign, idph_vax_champaign) %>%
-  select(Date, PersonsFullyVaccinated, AdministeredCountRollAvg,
-         monthlydead, avg_new_cases)
+## set variables ----
+champaign_dead_last_month <- format(round(signif(tail(idph_cases_champaign$monthlydead,1),3)),big.mark=",")
+champaign_avg_new_cases <- format(round(signif(tail(idph_cases_champaign$avg_new_cases,1),3)),big.mark=",")
+champaign_pct_fully_vaccinated <- round(100*tail(idph_vax_champaign$PctVaccinatedPopulation,1), digits = 1)
+champaign_avg_new_vaccine_doses <- 
+  format(round(signif(tail(idph_vax_champaign$AdministeredCountRollAvg,1),3)),big.mark=",")
+champaign_weekday <- wday(tail(idph_cases_champaign$Date,1), label = TRUE, abbr = FALSE)
+champaign_month_ago_deaths <- format(round(signif(tail(lag(idph_cases_champaign$monthlydead, 14),1),3)),big.mark=",")
+champaign_month_ago_cases <- format(round(signif(tail(lag(idph_cases_champaign$avg_new_cases, 14),1),3)),big.mark=",")
+champaign_month_ago_vaccinated <- round(100*tail(lag(idph_vax_champaign$PctVaccinatedPopulation, 14),1), digits = 1)
+champaign_month_ago_new_doses <- 
+  format(round(signif(tail(lag(idph_vax_champaign$AdministeredCountRollAvg, 14),1),3)),big.mark=",")
+champaign_case_pct_change <- round(100*(tail(idph_cases_champaign$avg_new_cases,1)-tail(lag(idph_cases_champaign$avg_new_cases, 14),1))/tail(lag(idph_cases_champaign$avg_new_cases, 14),1), digits = 0)
+champaign_death_pct_change <- round(100*(tail(idph_cases_champaign$monthlydead,1)-tail(lag(idph_cases_champaign$monthlydead, 14),1))/tail(lag(idph_cases_champaign$monthlydead, 14),1), digits = 0)
+champaign_case_pct_change_text <- 
+  if(champaign_case_pct_change>0) { 
+    paste("+",champaign_case_pct_change,"%↑", sep = "")
+  } else { 
+    paste("",champaign_case_pct_change,"%↓", sep = "")
+  }
+champaign_death_pct_change_text <- 
+  if(champaign_death_pct_change>0) { 
+    paste("+",champaign_death_pct_change,"%↑", sep = "")
+  } else { 
+    paste("",champaign_death_pct_change,"%↓", sep = "")
+  }
 
-idph_cases_vax_longer <- idph_cases_vax %>%
-  pivot_longer(!Date,
-               values_to = "values",
-               names_to = "names") %>%
-  mutate(names = recode(names, 
-                        "PersonsFullyVaccinated" = "3. People Fully Vaccinated",
-                        "avg_new_cases" = "1. Average New Cases",
-                        "monthlydead" = "2. Deaths in Past Month",
-                        "AdministeredCountRollAvg" = "4. Average New Vaccine Doses"))  %>%
-  mutate(short_date = paste(month(Date, label = TRUE, abbr = FALSE),
-                            mday(Date)))
 
 
-## text ----
-dead_last_month <- tail(idph_cases_champaign$monthlydead,1)
-avg_new_cases <- round(tail(idph_cases_champaign$avg_new_cases,1))
-pct_fully_vaccinated <- round(100*tail(idph_vax_champaign$PctVaccinatedPopulation,1), digits = 1)
-avg_new_vaccine_doses <- tail(idph_vax_champaign$AdministeredCountRollAvg,1)
-short_date <- tail(idph_cases_vax_longer$short_date,1)
-weekday <- wday(tail(idph_cases_vax_longer$Date,1), label = TRUE, abbr = FALSE)
-month_ago_deaths <- tail(lag(idph_cases_champaign$monthlydead, 31),1)
-month_ago_cases <- round(tail(lag(idph_cases_champaign$avg_new_cases, 31),1))
-month_ago_vaccinated <- round(100*tail(lag(idph_vax_champaign$PctVaccinatedPopulation,31),1), digits = 1)
-month_ago_new_doses <- tail(lag(idph_vax_champaign$AdministeredCountRollAvg,31),1)
+## make text ----
 
-tweet_text <- paste(
-  "As of ",weekday," (vs. a month ago):\n\n",
-  "— Average new cases: ",avg_new_cases," (vs. ",month_ago_cases,")\n",
-  "— Deaths in the past month: ",dead_last_month," (vs. ",month_ago_deaths,")\n",
-  "— Percent of Champaign County fully vaccinated: ",pct_fully_vaccinated,"% (vs. ",month_ago_vaccinated,"%)\n",
-  "— Average new vaccine doses: ",avg_new_vaccine_doses," (vs. ",month_ago_new_doses,")",
-  "\n\nSource: http://www.dph.illinois.gov/covid19",
-  sep = ""
+champaign_county_text <- paste(
+  "As of ",champaign_weekday," (vs. two weeks ago):
+
+",
+  "— Average new cases: ",champaign_avg_new_cases," (vs. ",champaign_month_ago_cases,") ",champaign_case_pct_change_text,"
+",
+  "— Deaths in the past month: ",champaign_dead_last_month," (vs. ",champaign_month_ago_deaths,")
+",
+  "— Percent of Champaign County fully vaccinated: ",champaign_pct_fully_vaccinated,"% (vs. ",champaign_month_ago_vaccinated,"%)
+",
+  "— Average new vaccine doses: ",champaign_avg_new_vaccine_doses," (vs. ",champaign_month_ago_new_doses,")",
+  "
+
+Source: http://www.dph.illinois.gov/covid19",
+sep = ""
 )
 
-## plot ----
+
+# tweet text og ----
+# champaignpop <- 209983
+# 
+# idph_cases_champaign <- rio::import("https://idph.illinois.gov/DPHPublicInformation/api/COVID/GetCountyHistorical?countyName=Champaign",
+#                                     format = "json") 
+# idph_cases_champaign <- idph_cases_champaign$values %>%
+#   mutate(population = champaignpop)  %>%
+#   mutate(new_cases = confirmed_cases - lag(confirmed_cases)) %>%
+#   mutate(new_deaths = deaths - lag(deaths)) %>%
+#   mutate(avg_new_cases = rollmean(new_cases, k = 7, 
+#                                   fill = NA, align = "right")) %>%
+#   mutate(monthlydead = rollmean(new_deaths, k = 31, 
+#                                 fill = NA, align = "right")*31)  %>%
+#   mutate(Date = ymd_hms(reportDate)) 
+# 
+# idph_vax_champaign <- rio::import("https://idph.illinois.gov/DPHPublicInformation/api/COVIDExport/GetVaccineAdministration?format=csv&countyName=Champaign",
+#                                   format = "csv") %>%
+#   mutate(Date = mdy_hms(Report_Date)) 
+# 
+# idph_cases_vax <- full_join(idph_cases_champaign, idph_vax_champaign) %>%
+#   select(Date, PersonsFullyVaccinated, AdministeredCountRollAvg,
+#          monthlydead, avg_new_cases)
+# 
+# idph_cases_vax_longer <- idph_cases_vax %>%
+#   pivot_longer(!Date,
+#                values_to = "values",
+#                names_to = "names") %>%
+#   mutate(names = recode(names, 
+#                         "PersonsFullyVaccinated" = "3. People Fully Vaccinated",
+#                         "avg_new_cases" = "1. Average New Cases",
+#                         "monthlydead" = "2. Deaths in Past Month",
+#                         "AdministeredCountRollAvg" = "4. Average New Vaccine Doses"))  %>%
+#   mutate(short_date = paste(month(Date, label = TRUE, abbr = FALSE),
+#                             mday(Date)))
+# 
+# 
+## text ----
+# dead_last_month <- tail(idph_cases_champaign$monthlydead,1)
+# avg_new_cases <- round(tail(idph_cases_champaign$avg_new_cases,1))
+# pct_fully_vaccinated <- round(100*tail(idph_vax_champaign$PctVaccinatedPopulation,1), digits = 1)
+# avg_new_vaccine_doses <- tail(idph_vax_champaign$AdministeredCountRollAvg,1)
+# short_date <- tail(idph_cases_vax_longer$short_date,1)
+# weekday <- wday(tail(idph_cases_vax_longer$Date,1), label = TRUE, abbr = FALSE)
+# month_ago_deaths <- tail(lag(idph_cases_champaign$monthlydead, 31),1)
+# month_ago_cases <- round(tail(lag(idph_cases_champaign$avg_new_cases, 31),1))
+# month_ago_vaccinated <- round(100*tail(lag(idph_vax_champaign$PctVaccinatedPopulation,31),1), digits = 1)
+# month_ago_new_doses <- tail(lag(idph_vax_champaign$AdministeredCountRollAvg,31),1)
+# 
+# tweet_text <- paste(
+#   "As of ",weekday," (vs. a month ago):\n\n",
+#   "— Average new cases: ",avg_new_cases," (vs. ",month_ago_cases,")\n",
+#   "— Deaths in the past month: ",dead_last_month," (vs. ",month_ago_deaths,")\n",
+#   "— Percent of Champaign County fully vaccinated: ",pct_fully_vaccinated,"% (vs. ",month_ago_vaccinated,"%)\n",
+#   "— Average new vaccine doses: ",avg_new_vaccine_doses," (vs. ",month_ago_new_doses,")",
+#   "\n\nSource: http://www.dph.illinois.gov/covid19",
+#   sep = ""
+# )
+
+# tweet plot ----
 p <- ggplot(idph_cases_vax_longer,
             aes(x = as.Date(Date),
                 y = values,
@@ -110,20 +176,20 @@ p <- ggplot(idph_cases_vax_longer,
 file <- tempfile( fileext = ".png")
 ggsave( file, plot = p, device = "png", dpi = 320, width = 8, height = 8*(628/1200))
 
-# post it ----
-if (avg_new_cases >= 0 && 
-    dead_last_month >= 0 && 
-    pct_fully_vaccinated >= 0 &&
-    pct_fully_vaccinated <= 100 &&
-    avg_new_vaccine_doses >= 0 &&
-    month_ago_cases >= 0 && 
-    month_ago_deaths >= 0 && 
-    month_ago_vaccinated >= 0 &&
-    month_ago_vaccinated <= 100 &&
-    month_ago_new_doses >= 0
+# post the tweet ----
+if (champaign_avg_new_cases >= 0 && 
+    champaign_dead_last_month >= 0 && 
+    champaign_pct_fully_vaccinated >= 0 &&
+    champaign_pct_fully_vaccinated <= 100 &&
+    champaign_avg_new_vaccine_doses >= 0 &&
+    champaign_month_ago_cases >= 0 && 
+    champaign_month_ago_deaths >= 0 && 
+    champaign_month_ago_vaccinated >= 0 &&
+    champaign_month_ago_vaccinated <= 100 &&
+    champaign_month_ago_new_doses >= 0
 ) {
   rtweet::post_tweet( 
-    status = tweet_text,
+    status = champaign_county_text,
     media = file,
     token = token
   )
