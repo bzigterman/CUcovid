@@ -35,6 +35,25 @@ idph_vax_champaign <- rio::import("https://idph.illinois.gov/DPHPublicInformatio
                                   format = "csv") %>%
   mutate(Date = mdy_hms(Report_Date)) 
 
+idph_cases_vax <- full_join(idph_cases_champaign, idph_vax_champaign) %>%
+  select(Date, PersonsFullyVaccinated, AdministeredCountRollAvg,
+         monthlydead, avg_new_cases)
+
+idph_cases_vax_longer <- idph_cases_vax %>%
+  pivot_longer(!Date,
+               values_to = "values",
+               names_to = "names") %>%
+  mutate(names = recode(names,
+                        "PersonsFullyVaccinated" = "3. People Fully Vaccinated",
+                        "avg_new_cases" = "1. Average New Cases",
+                        "monthlydead" = "2. Deaths in Past Month",
+                        "AdministeredCountRollAvg" = "4. Average New Vaccine Doses"))  %>%
+  mutate(short_date = paste(month(Date, label = TRUE, abbr = FALSE),
+                            mday(Date)))
+
+
+
+
 ## set variables ----
 champaign_dead_last_month <- format(round(signif(tail(idph_cases_champaign$monthlydead,1),3)),big.mark=",")
 champaign_avg_new_cases <- format(round(signif(tail(idph_cases_champaign$avg_new_cases,1),3)),big.mark=",")
