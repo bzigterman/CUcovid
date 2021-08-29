@@ -429,7 +429,8 @@ ggplot(idph_cases_vax_longer,
                        tail(idph_cases_vax_longer$short_date,1))) +
   xlab(NULL) +
   ylab(NULL) +
-  scale_x_date(expand = c(0,0)) +
+  scale_x_date(expand = c(0,0),
+               labels = label_date_short()) +
   scale_y_continuous(labels = label_comma(accuracy = 1),
                      position = "right",
                      expand = expansion(mult = c(0,.05))) +
@@ -504,7 +505,8 @@ ggplot(idph_cases_vax_longer,
                        tail(idph_cases_vax_longer$short_date,1))) +
   xlab(NULL) +
   ylab(NULL) +
-  scale_x_date(expand = c(0,0)) +
+  scale_x_date(expand = c(0,0),
+               labels = label_date_short()) +
   scale_y_continuous(labels = label_comma(accuracy = 1),
                      position = "right",
                      expand = expansion(mult = c(0,.05))
@@ -585,7 +587,8 @@ ggplot(us_data_longer,
                        tail(us_data_longer$short_date,1))) +
   xlab(NULL) +
   ylab(NULL) +
-  scale_x_date(expand = c(0,0)) +
+  scale_x_date(expand = c(0,0),
+               labels = label_date_short()) +
   scale_y_continuous(labels = label_comma(accuracy = 1),
                      position = "right",
                      expand = expansion(mult = c(0,.05))
@@ -660,7 +663,8 @@ ggplot(us_data_longer,
                        tail(us_data_longer$short_date,1))) +
   xlab(NULL) +
   ylab(NULL) +
-  scale_x_date(expand = c(0,0)) +
+  scale_x_date(expand = c(0,0),
+               labels = label_date_short()) +
   scale_y_continuous(labels = label_comma(accuracy = 1),
                      position = "right",
                      expand = expansion(mult = c(0,.05))
@@ -764,7 +768,8 @@ ggplot(combined_cases,
                        tail(us_data_longer$short_date,1))) +
   xlab(NULL) +
   ylab(NULL) +
-  scale_x_date(expand = expansion(mult = c(0, .01))) +
+  scale_x_date(expand = expansion(mult = c(0, .01)),
+               labels = label_date_short()) +
   scale_y_continuous(labels = label_percent(accuracy = 1),
                      position = "right") +
   scale_colour_manual(guide = "none",
@@ -1044,7 +1049,8 @@ ggplot(combined_deaths,
                        tail(us_data_longer$short_date,1))) +
   xlab(NULL) +
   ylab(NULL) +
-  scale_x_date(expand = expansion(mult = c(0, .01))) +
+  scale_x_date(expand = expansion(mult = c(0, .01)),
+               labels = label_date_short()) +
   scale_y_continuous(labels = label_percent(accuracy = 1),
                      position = "right") +
   scale_colour_manual(guide = "none",
