@@ -68,20 +68,23 @@ champaign_month_ago_new_doses <-
   format(round(signif(tail(lag(idph_vax_champaign$AdministeredCountRollAvg, 14),1),3)),big.mark=",")
 champaign_case_pct_change <- round(100*(tail(idph_cases_champaign$avg_new_cases,1)-tail(lag(idph_cases_champaign$avg_new_cases, 14),1))/tail(lag(idph_cases_champaign$avg_new_cases, 14),1), digits = 0)
 champaign_death_pct_change <- round(100*(tail(idph_cases_champaign$monthlydead,1)-tail(lag(idph_cases_champaign$monthlydead, 14),1))/tail(lag(idph_cases_champaign$monthlydead, 14),1), digits = 0)
+
 champaign_case_pct_change_text <- 
-  if(champaign_case_pct_change>0) { 
+  if (champaign_case_pct_change > 0) { 
     paste("+",champaign_case_pct_change,"%↑", sep = "")
+  } else if (champaign_case_pct_change == 0) {
+    paste("", sep = "")
   } else { 
     paste("",champaign_case_pct_change,"%↓", sep = "")
   }
 champaign_death_pct_change_text <- 
-  if(champaign_death_pct_change>0) { 
+  if (champaign_death_pct_change > 0) { 
     paste("+",champaign_death_pct_change,"%↑", sep = "")
+  } else if (champaign_death_pct_change == 0) {  
+    paste("", sep = "")
   } else { 
     paste("",champaign_death_pct_change,"%↓", sep = "")
   }
-
-
 
 ## make text ----
 
