@@ -6,7 +6,7 @@ library(zoo)
 
 
 # get text from website ----
-web_text <- content(GET("https://raw.githubusercontent.com/bzigterman/bzigterman.github.io/master/charts.md"),
+web_text <- content(GET("https://raw.githubusercontent.com/bzigterman/bzigterman.github.io/master/charts/covid.md"),
                     as = "text"
                     )
 
