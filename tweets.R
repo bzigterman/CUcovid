@@ -114,7 +114,8 @@ p <- ggplot(idph_cases_vax_longer,
                     tail(idph_cases_vax_longer$short_date,1))) +
   xlab(NULL) +
   ylab(NULL) +
-  scale_x_date(expand = c(0,0)) +
+  scale_x_date(expand = c(0,0),
+               labels = label_date_short()) +
   scale_y_continuous(labels = label_comma(accuracy = 1),
                      position = "right",
                      expand = expansion(mult = c(0,.05))
