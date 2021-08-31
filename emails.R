@@ -20,7 +20,7 @@ web_text <- content(GET("https://raw.githubusercontent.com/bzigterman/bzigterman
 # ---
 # "
 # str_length(header)
-email_text <- str_sub(web_text, start = 57)
+email_text <- str_sub(web_text, start = 58)
 
 # # get data ----
 # idph_cases_champaign <- rio::import("https://idph.illinois.gov/DPHPublicInformation/api/COVID/GetCountyHistorical?countyName=Champaign",
