@@ -35,7 +35,7 @@ usa_county_vaccine <- usa_county_vaccine %>%
 plot_usmap(data = usa_county_vaccine, values = "total_class",
            size = .01) +
   scale_fill_brewer(
-    palette = "Purples",
+    palette = "PuOr",
     direction = 1,
     na.value = "grey80") +
   labs(title = "Percent Fully Vaccinated",
@@ -265,7 +265,7 @@ cdc_total_vax_65 <- ggplot(data = cdc_vaccines_geo_merged) +
           size = .25) +
   coord_sf(crs = st_crs(4326)) +
   scale_fill_brewer(
-    palette = "Purples",
+    palette = "PuOr",
     direction = 1,
     na.value = "grey80") +
   labs(title = "Percent Fully Vaccinated 65+",
@@ -295,7 +295,7 @@ cdc_total_vax_18 <- ggplot(data = cdc_vaccines_geo_merged) +
           size = .25) +
   coord_sf(crs = st_crs(4326)) +
   scale_fill_brewer(
-    palette = "Purples",
+    palette = "PuOr",
     direction = 1,
     na.value = "grey80") +
   labs(title = "Percent Fully Vaccinated 18+",
@@ -325,7 +325,7 @@ cdc_total_vax <- ggplot(data = cdc_vaccines_geo_merged) +
           size = .25) +
   coord_sf(crs = st_crs(4326)) +
   scale_fill_brewer(
-    palette = "Purples",
+    palette = "PuOr",
     direction = 1,
     na.value = "grey80") +
   labs(title = "Percent Fully Vaccinated",
