@@ -86,7 +86,7 @@ usa_cases <- usa_cases %>%
 plot_usmap(data = usa_cases, values = "community_transmission_level",
            size = .01) +
   scale_fill_brewer(limits = c("low","moderate","substantial","high"),
-                    palette = "Oranges",
+                    palette = "YlOrBr",
                     direction = 1,
                     na.value = "grey80") +
   labs(title = "Community Transmission Levels",
@@ -215,7 +215,7 @@ cdc_transmission <- ggplot(data = cdc_cases_merged) +
           size = .25) +
   coord_sf(crs = st_crs(4326)) +
   scale_fill_brewer(limits = c("low","moderate","substantial","high"),
-                    palette = "Oranges",
+                    palette = "YlOrBr",
                     direction = 1,
                     na.value = "grey80") +
   labs(title = "Community Transmission Levels",
