@@ -562,6 +562,7 @@ owid_vaccines <- rio::import(owid_vaccines_url, format = "csv") %>%
 ### combined
 us_data <- full_join(jhu_new_cases, jhu_new_deaths) %>%
   full_join(owid_vaccines)
+us_data$people_fully_vaccinated <- as.double(us_data$people_fully_vaccinated)
 us_data_longer <- us_data %>%
   select(date, people_fully_vaccinated, avg_new_cases, avg_new_deaths,
          daily_vaccinations) %>%
@@ -575,6 +576,7 @@ us_data_longer <- us_data %>%
                         "daily_vaccinations" = "4. Average New Vaccine Doses"))  %>%
   mutate(short_date = paste(month(date, label = TRUE, abbr = FALSE),
                             mday(date)))
+
 
 ## plot ----
 ggplot(us_data_longer,
@@ -638,6 +640,7 @@ owid_vaccines <- rio::import(owid_vaccines_url, format = "csv") %>%
 ### combined
 us_data <- full_join(jhu_new_cases, jhu_new_deaths) %>%
   full_join(owid_vaccines)
+us_data$people_fully_vaccinated <- as.double(us_data$people_fully_vaccinated)
 us_data_longer <- us_data %>%
   select(date, people_fully_vaccinated, avg_new_cases, avg_new_deaths,
          daily_vaccinations) %>%
