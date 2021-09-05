@@ -395,38 +395,64 @@ idph_vax_champaign <- rio::import("https://idph.illinois.gov/DPHPublicInformatio
                                   format = "csv") %>%
   mutate(Date = mdy_hms(Report_Date)) 
 
-idph_cases_vax <- full_join(idph_cases_champaign, idph_vax_champaign) %>%
-  select(Date, PersonsFullyVaccinated, AdministeredCountRollAvg,
-         monthlydead, avg_new_cases)
 
-idph_cases_vax_longer <- idph_cases_vax %>%
+## hhs hospitalizations ----
+hospitalizations_url <- "https://healthdata.gov/resource/anag-cw7u.json?zip=61801"
+hospitalizations <- rio::import(hospitalizations_url,
+                                format = "json") %>% 
+  mutate(Date = ymd(ymd_hms(collection_week))) %>%
+  mutate(total_adult = as.double(total_adult_patients_hospitalized_confirmed_and_suspected_covid_7_day_sum)) %>%
+  mutate(total_pediatric = as.double(total_pediatric_patients_hospitalized_confirmed_and_suspected_covid_7_day_sum)) %>%
+  select(Date,hospital_name,total_adult,total_pediatric) %>%
+  pivot_longer(cols = c(total_adult,total_pediatric),
+               names_to = "names",
+               values_to = "values") %>%
+  filter(values >= 0) 
+
+hospitalizations_by_date <- hospitalizations %>%
+  group_by(Date,hospital_name) %>%
+  summarise(total = sum(values)) %>%
+  group_by(Date) %>%
+  summarise(sum_hospitalized = sum(total)) %>%
+  mutate(avg_hospitalized = sum_hospitalized/7) %>%
+  mutate(CountyName = "Champaign")
+
+idph_cases_vax_hosp <- full_join(idph_cases_champaign, idph_vax_champaign) %>%
+  full_join(hospitalizations_by_date) %>%
+  select(Date, AdministeredCountRollAvg,
+         monthlydead, avg_new_cases, avg_hospitalized)
+
+idph_cases_vax_hosp_longer <- idph_cases_vax_hosp %>%
   pivot_longer(!Date,
                values_to = "values",
                names_to = "names") %>%
   mutate(names = recode(names, 
-                        "PersonsFullyVaccinated" = "3. People Fully Vaccinated",
+                        "avg_hospitalized" = "3. Average Hospitalized",
                         "avg_new_cases" = "1. Average New Cases",
                         "monthlydead" = "2. Deaths in Past Month",
                         "AdministeredCountRollAvg" = "4. Average New Vaccine Doses"))  %>%
   mutate(short_date = paste(month(Date, label = TRUE, abbr = FALSE),
-                            mday(Date)))
+                            mday(Date))) %>%
+  drop_na()
+
 
 
 dead_last_month <- tail(idph_cases_champaign$monthlydead,1)
 avg_new_cases <- round(tail(idph_cases_champaign$avg_new_cases,1))
 pct_fully_vaccinated <- round(100*tail(idph_vax_champaign$PctVaccinatedPopulation,1), digits = 1)
 avg_new_vaccine_doses <- tail(idph_vax_champaign$AdministeredCountRollAvg,1)
+avg_hospitalized <- round(tail(hospitalizations_by_date$avg_hospitalized,1))
 
 ## plot ----
 
-ggplot(idph_cases_vax_longer,
+ggplot(idph_cases_vax_hosp_longer,
        aes(x = as.Date(Date),
            y = values,
            colour = names)) +
   geom_line() +
   facet_wrap(~ names, scales = "free_y") +
   labs(caption = paste("Source: IDPH. Data updated",
-                       tail(idph_cases_vax_longer$short_date,1))) +
+                       tail(idph_cases_vax_hosp_longer$short_date,1))) +
   xlab(NULL) +
   ylab(NULL) +
   scale_x_date(expand = c(0,0),
@@ -436,7 +462,7 @@ ggplot(idph_cases_vax_longer,
                      expand = expansion(mult = c(0,.05))) +
   expand_limits(y = 0) +
   scale_colour_manual(guide = FALSE,
-                      values = c("#B45F06","#d90000","#674EA7","#674EA7")) +
+                      values = c("#B45F06","#d90000","darkgreen","#674EA7")) +
   theme(axis.text.y = element_text(size = 10),
         axis.text.x = element_text(size = 8),
         panel.grid.minor = element_blank(),
@@ -448,6 +474,7 @@ ggplot(idph_cases_vax_longer,
 
 if (avg_new_cases >= 0 && 
     dead_last_month >= 0 && 
+    avg_hospitalized >= 0 &&
     pct_fully_vaccinated >= 0 &&
     pct_fully_vaccinated <= 100 &&
     avg_new_vaccine_doses >= 0) {
