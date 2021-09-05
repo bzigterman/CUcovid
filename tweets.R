@@ -68,7 +68,7 @@ idph_cases_vax_hosp_longer <- idph_cases_vax_hosp %>%
   mutate(names = recode(names, 
                         "avg_hospitalized" = "2. Average Hospitalized",
                         "avg_new_cases" = "1. Average New Cases",
-                        "monthlydead" = "3. Deaths in Past Month",
+                        "monthlydead" = "3. Deaths in the Past Month",
                         "AdministeredCountRollAvg" = "4. Average New Vaccine Doses"))  %>%
   mutate(short_date = paste(month(Date, label = TRUE, abbr = FALSE),
                             mday(Date))) %>%
