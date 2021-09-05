@@ -451,7 +451,7 @@ ggplot(idph_cases_vax_hosp_longer,
            colour = names)) +
   geom_line() +
   facet_wrap(~ names, scales = "free_y") +
-  labs(caption = paste("Source: IDPH. Data updated",
+  labs(caption = paste("Source: HHS, IDPH. Data updated",
                        tail(idph_cases_vax_hosp_longer$short_date,1))) +
   xlab(NULL) +
   ylab(NULL) +
