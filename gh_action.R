@@ -499,21 +499,28 @@ idph_vax_champaign <- rio::import("https://idph.illinois.gov/DPHPublicInformatio
                                   format = "csv") %>%
   mutate(Date = mdy_hms(Report_Date)) 
 
+idph_hosp <- rio::import("https://idph.illinois.gov/DPHPublicInformation/api/COVIDExport/GetHospitalUtilizationResults?format=csv",
+                         format = "csv") %>%
+  mutate(Date = ymd(mdy_hms(ReportDate))) %>%
+  select(Date, TotalInUseBedsCOVID)
+  
+
 idph_cases_vax <- full_join(idph_cases_champaign, idph_vax_champaign) %>%
-  select(Date, PersonsFullyVaccinated, AdministeredCountRollAvg,
-         monthlydead, avg_new_cases)
+  full_join(idph_hosp) %>%
+  select(Date, AdministeredCountRollAvg,
+         monthlydead, avg_new_cases, TotalInUseBedsCOVID)
 
 idph_cases_vax_longer <- idph_cases_vax %>%
   pivot_longer(!Date,
                values_to = "values",
                names_to = "names") %>%
   mutate(names = recode(names, 
-                        "PersonsFullyVaccinated" = "3. People Fully Vaccinated",
+                        "TotalInUseBedsCOVID" = "2. Hospitalized",
                         "avg_new_cases" = "1. Average New Cases",
-                        "monthlydead" = "2. Average New Deaths",
+                        "monthlydead" = "3. Average New Deaths",
                         "AdministeredCountRollAvg" = "4. Average New Vaccine Doses"))  %>%
   mutate(short_date = paste(month(Date, label = TRUE, abbr = FALSE),
-                            mday(Date)))
+                            mday(Date))) 
 
 dead_last_month <- tail(idph_cases_champaign$monthlydead,1)
 avg_new_cases <- round(tail(idph_cases_champaign$avg_new_cases,1))
@@ -540,7 +547,7 @@ ggplot(idph_cases_vax_longer,
   ) +
   expand_limits(y = 0) +
   scale_colour_manual(guide = FALSE,
-                      values = c("#B45F06","#d90000","#674EA7","#674EA7")) +
+                      values = c("#B45F06","#d90000","black","#674EA7")) +
   theme(axis.text.y = element_text(size = 10),
         axis.text.x = element_text(size = 8),
         panel.grid.minor = element_blank(),
@@ -579,6 +586,11 @@ jhu_new_deaths <- rio::import(jhu_new_deaths_url, format = "csv") %>%
   mutate(avg_new_deaths = rollmean(new_deaths, k = 7, 
                                    fill = NA, align = "right"))
 
+### hospitalizations ----
+owid_hosp_url <- "https://covid.ourworldindata.org/data/owid-covid-data.csv"
+owid_hosp <- rio::import(owid_hosp_url, format = "csv") %>%
+  filter(iso_code == "USA") %>%
+  select(date, hosp_patients)
 
 ### vaccines ----
 owid_vaccines_url <- "https://github.com/owid/covid-19-data/raw/master/public/data/vaccinations/vaccinations.csv"
@@ -588,18 +600,19 @@ owid_vaccines <- rio::import(owid_vaccines_url, format = "csv") %>%
 
 ### combined
 us_data <- full_join(jhu_new_cases, jhu_new_deaths) %>%
+  full_join(owid_hosp) %>%
   full_join(owid_vaccines)
 us_data$people_fully_vaccinated <- as.double(us_data$people_fully_vaccinated)
 us_data_longer <- us_data %>%
-  select(date, people_fully_vaccinated, avg_new_cases, avg_new_deaths,
+  select(date, hosp_patients, avg_new_cases, avg_new_deaths,
          daily_vaccinations) %>%
   pivot_longer(!date,
                values_to = "values",
                names_to = "names") %>%
   mutate(names = recode(names, 
-                        "people_fully_vaccinated" = "3. People Fully Vaccinated",
+                        "hosp_patients" = "2. Hospitalized",
                         "avg_new_cases" = "1. Average New Cases",
-                        "avg_new_deaths" = "2. Average New Deaths",
+                        "avg_new_deaths" = "3. Average New Deaths",
                         "daily_vaccinations" = "4. Average New Vaccine Doses"))  %>%
   mutate(short_date = paste(month(date, label = TRUE, abbr = FALSE),
                             mday(date)))
@@ -624,7 +637,7 @@ ggplot(us_data_longer,
   ) +
   expand_limits(y = 0) +
   scale_colour_manual(guide = FALSE,
-                      values = c("#B45F06","#d90000","#674EA7","#674EA7")) +
+                      values = c("#B45F06","#d90000","black","#674EA7")) +
   theme(axis.text.y = element_text(size = 10),
         axis.text.x = element_text(size = 8),
         panel.grid.minor = element_blank(),
