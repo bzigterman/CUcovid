@@ -427,9 +427,9 @@ idph_cases_vax_hosp_longer <- idph_cases_vax_hosp %>%
                values_to = "values",
                names_to = "names") %>%
   mutate(names = recode(names, 
-                        "avg_hospitalized" = "3. Average Hospitalized",
+                        "avg_hospitalized" = "2. Average Hospitalized",
                         "avg_new_cases" = "1. Average New Cases",
-                        "monthlydead" = "2. Deaths in Past Month",
+                        "monthlydead" = "3. Deaths in Past Month",
                         "AdministeredCountRollAvg" = "4. Average New Vaccine Doses"))  %>%
   mutate(short_date = paste(month(Date, label = TRUE, abbr = FALSE),
                             mday(Date))) %>%
@@ -462,7 +462,7 @@ ggplot(idph_cases_vax_hosp_longer,
                      expand = expansion(mult = c(0,.05))) +
   expand_limits(y = 0) +
   scale_colour_manual(guide = FALSE,
-                      values = c("#B45F06","#d90000","darkgreen","#674EA7")) +
+                      values = c("#B45F06","#d90000","black","#674EA7")) +
   theme(axis.text.y = element_text(size = 10),
         axis.text.x = element_text(size = 8),
         panel.grid.minor = element_blank(),
