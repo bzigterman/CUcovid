@@ -625,7 +625,7 @@ ggplot(us_data_longer,
            colour = names)) +
   geom_line() +
   facet_wrap(~ names, scales = "free_y") +
-  labs(caption = paste("Source: Our World in Data and JHU CSSE COVID-19 Data. Data updated",
+  labs(caption = paste("Source: HHS, Our World in Data and JHU CSSE COVID-19 Data. Data updated",
                        tail(us_data_longer$short_date,1))) +
   xlab(NULL) +
   ylab(NULL) +
