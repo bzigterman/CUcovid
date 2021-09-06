@@ -39,7 +39,7 @@ plot_usmap(data = usa_county_vaccine, values = "total_class",
     direction = 1,
     na.value = "grey80") +
   labs(title = "Percent Fully Vaccinated",
-       caption =  paste("Source: CDC. Data updated",
+       caption =  paste("Source: CDC. Latest data:",
                         tail(usa_county_vaccine$short_date,1)),
        fill = NULL)+
   theme(
@@ -90,7 +90,7 @@ plot_usmap(data = usa_cases, values = "community_transmission_level",
                     direction = 1,
                     na.value = "grey80") +
   labs(title = "Community Transmission Levels",
-       caption =  paste("Source: CDC. Data updated",
+       caption =  paste("Source: CDC. Latest data:",
                         tail(usa_cases$short_date,1)),
        fill = NULL)+
   theme(
@@ -189,7 +189,7 @@ cdc_cases_map <- ggplot(data = cdc_cases_merged) +
     na.value = "grey80") +
   labs(title = "New Cases per 100,000 Residents",
        subtitle = "Average over past seven days",
-       caption =  paste("Source: CDC. Data updated",
+       caption =  paste("Source: CDC. Latest data:",
                         tail(cdc_cases_merged$short_date,1)),
        fill = NULL)+
   theme(
@@ -219,7 +219,7 @@ cdc_transmission <- ggplot(data = cdc_cases_merged) +
                     direction = 1,
                     na.value = "grey80") +
   labs(title = "Community Transmission Levels",
-       caption =  paste("Source: CDC. Data updated",
+       caption =  paste("Source: CDC. Latest data:",
                         tail(cdc_cases_merged$short_date,1)),
        fill = NULL)+
   theme(
@@ -269,7 +269,7 @@ cdc_total_vax_65 <- ggplot(data = cdc_vaccines_geo_merged) +
     direction = 1,
     na.value = "grey80") +
   labs(title = "Percent Fully Vaccinated 65+",
-       caption =  paste("Source: CDC. Data updated",
+       caption =  paste("Source: CDC. Latest data:",
                         tail(cdc_vaccines_geo_merged$short_date,1)),
        fill = NULL)+
   theme(
@@ -299,7 +299,7 @@ cdc_total_vax_18 <- ggplot(data = cdc_vaccines_geo_merged) +
     direction = 1,
     na.value = "grey80") +
   labs(title = "Percent Fully Vaccinated 18+",
-       caption =  paste("Source: CDC. Data updated",
+       caption =  paste("Source: CDC. Latest data:",
                         tail(cdc_vaccines_geo_merged$short_date,1)),
        fill = NULL)+
   theme(
@@ -329,7 +329,7 @@ cdc_total_vax <- ggplot(data = cdc_vaccines_geo_merged) +
     direction = 1,
     na.value = "grey80") +
   labs(title = "Percent Fully Vaccinated",
-       caption =  paste("Source: CDC. Data updated",
+       caption =  paste("Source: CDC. Latest data:",
                         tail(cdc_vaccines_geo_merged$short_date,1)),
        fill = NULL)+
   theme(
@@ -451,7 +451,7 @@ ggplot(idph_cases_vax_hosp_longer,
            colour = names)) +
   geom_line() +
   facet_wrap(~ names, scales = "free_y") +
-  labs(caption = paste("Source: HHS, IDPH. Data updated",
+  labs(caption = paste("Source: HHS, IDPH. Latest data:",
                        tail(idph_cases_vax_hosp_longer$short_date,1))) +
   xlab(NULL) +
   ylab(NULL) +
@@ -535,7 +535,7 @@ ggplot(idph_cases_vax_longer,
            colour = names)) +
   geom_line() +
   facet_wrap(~ names, scales = "free_y") +
-  labs(caption = paste("Source: IDPH. Data updated",
+  labs(caption = paste("Source: IDPH. Latest data:",
                        tail(idph_cases_vax_longer$short_date,1))) +
   xlab(NULL) +
   ylab(NULL) +
@@ -625,7 +625,7 @@ ggplot(us_data_longer,
            colour = names)) +
   geom_line() +
   facet_wrap(~ names, scales = "free_y") +
-  labs(caption = paste("Source: HHS, Our World in Data and JHU CSSE COVID-19 Data. Data updated",
+  labs(caption = paste("Source: HHS, Our World in Data and JHU CSSE COVID-19 Data. Latest data:",
                        tail(us_data_longer$short_date,1))) +
   xlab(NULL) +
   ylab(NULL) +
@@ -702,7 +702,7 @@ ggplot(us_data_longer,
            colour = names)) +
   geom_line() +
   facet_wrap(~ names, scales = "free_y") +
-  labs(caption = paste("Source: Our World in Data and JHU CSSE COVID-19 Data. Data updated",
+  labs(caption = paste("Source: Our World in Data and JHU CSSE COVID-19 Data. Latest data:",
                        tail(us_data_longer$short_date,1))) +
   xlab(NULL) +
   ylab(NULL) +
@@ -807,7 +807,7 @@ ggplot(combined_cases,
              size = .1) +
   facet_wrap(~ location, ncol = 1) +
   labs(title = "14-Day Percent Change in Average New Cases",
-       caption = paste("Source: IDPH and JHU CSSE COVID-19 Data. Data updated",
+       caption = paste("Source: IDPH and JHU CSSE COVID-19 Data. Latest data:",
                        tail(us_data_longer$short_date,1))) +
   xlab(NULL) +
   ylab(NULL) +
@@ -996,7 +996,7 @@ ggplot(last_vax_nearby, aes(y = reorder(CountyName,
   ylab(NULL) +
   theme_classic() +
   labs(title = "Percent of Total Population Fully Vaccinated in Nearby Counties",
-       caption =  paste("Source: IDPH. Data updated",
+       caption =  paste("Source: IDPH. Latest data:",
                         tail(last_vax_nearby$short_date,1)))+
   theme(axis.text.y = element_text(size = 13),
         axis.text.x = element_text(size = 13),
@@ -1088,7 +1088,7 @@ ggplot(combined_deaths,
              size = .1) +
   facet_wrap(~ location, ncol = 1) +
   labs(title = "14-Day Percent Change in Average New Deaths",
-       caption = paste("Source: IDPH and JHU CSSE COVID-19 Data. Data updated",
+       caption = paste("Source: IDPH and JHU CSSE COVID-19 Data. Latest data:",
                        tail(us_data_longer$short_date,1))) +
   xlab(NULL) +
   ylab(NULL) +
