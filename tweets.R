@@ -155,7 +155,7 @@ p <- ggplot(idph_cases_vax_hosp_longer,
   geom_line() +
   facet_wrap(~ names, scales = "free_y") +
   labs(#title = "Metrics Since Vaccinations Began Dec. 16",
-    caption = paste("Source: HHS, IDPH. Data updated",
+    caption = paste("Source: HHS, IDPH. Latest data:",
                     tail(idph_cases_vax_hosp_longer$short_date,1))) +
   xlab(NULL) +
   ylab(NULL) +
