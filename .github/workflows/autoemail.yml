@@ -3,7 +3,7 @@ name: autoemailer
 on:
   workflow_dispatch:
   schedule:
-    - cron: '50 17 * * 2-5'
+    - cron: '50 17 * * 1-5'
 
 jobs:
   run-automailer:
