@@ -383,13 +383,13 @@ idph_cases_champaign <- rio::import("https://idph.illinois.gov/DPHPublicInformat
                                     format = "json") 
 idph_cases_champaign <- idph_cases_champaign$values %>%
   mutate(population = champaignpop)  %>%
-  mutate(new_cases = confirmed_cases - lag(confirmed_cases)) %>%
+  mutate(new_cases = CasesChange) %>%
   mutate(new_cases = replace(new_cases, which(new_cases<0), NA)) %>%
-  mutate(new_deaths = deaths - lag(deaths)) %>%
+  mutate(new_deaths = DeathsChange) %>%
   mutate(avg_new_cases = rollapply(new_cases, width = 7, FUN = mean, na.rm = TRUE, fill = NA, align = "right")) %>%
   mutate(monthlydead = rollmean(new_deaths, k = 31, 
                                 fill = NA, align = "right")*31)  %>%
-  mutate(Date = ymd_hms(reportDate)) 
+  mutate(Date = ymd_hms(ReportDate)) 
 
 idph_vax_champaign <- rio::import("https://idph.illinois.gov/DPHPublicInformation/api/COVIDExport/GetVaccineAdministration?format=csv&countyName=Champaign",
                                   format = "csv") %>%
@@ -487,13 +487,13 @@ idph_cases_champaign <- rio::import("https://idph.illinois.gov/DPHPublicInformat
                                     format = "json") 
 idph_cases_champaign <- idph_cases_champaign$values %>%
   mutate(population = illinoispop)  %>%
-  mutate(new_cases = confirmed_cases - lag(confirmed_cases)) %>%
+  mutate(new_cases = CasesChange) %>%
   mutate(new_cases = replace(new_cases, which(new_cases<0), NA)) %>%
-  mutate(new_deaths = deaths - lag(deaths)) %>%
+  mutate(new_deaths = DeathsChange) %>%
   mutate(avg_new_cases = rollapply(new_cases, width = 7, FUN = mean, na.rm = TRUE, fill = NA, align = "right")) %>%
   mutate(monthlydead = rollmean(new_deaths, k = 7, 
                                 fill = NA, align = "right"))  %>%
-  mutate(Date = ymd_hms(reportDate)) 
+  mutate(Date = ymd_hms(ReportDate)) 
 
 idph_vax_champaign <- rio::import("https://idph.illinois.gov/DPHPublicInformation/api/COVIDExport/GetVaccineAdministration?format=csv&countyName=Illinois",
                                   format = "csv") %>%
@@ -737,13 +737,13 @@ idph_cases_champaign <- rio::import("https://idph.illinois.gov/DPHPublicInformat
                                     format = "json") 
 idph_cases_champaign <- idph_cases_champaign$values %>%
   mutate(population = illinoispop)  %>%
-  mutate(new_cases = confirmed_cases - lag(confirmed_cases)) %>%
+  mutate(new_cases = CasesChange) %>%
   mutate(new_cases = replace(new_cases, which(new_cases<0), NA)) %>%
-  mutate(new_deaths = deaths - lag(deaths)) %>%
+  mutate(new_deaths = DeathsChange) %>%
   mutate(avg_new_cases = rollapply(new_cases, width = 7, FUN = mean, na.rm = TRUE, fill = NA, align = "right")) %>%
   mutate(monthlydead = rollmean(new_deaths, k = 7, 
                                 fill = NA, align = "right"))  %>%
-  mutate(Date = ymd_hms(reportDate, truncated = 0)) %>%
+  mutate(Date = ymd_hms(ReportDate, truncated = 0)) %>%
   mutate(pct_change_new_cases = 
            ((avg_new_cases - lag(avg_new_cases,14))/lag(avg_new_cases,14))) %>%
   mutate(location = "Champaign County")
@@ -754,13 +754,13 @@ idph_cases_il <- rio::import("https://idph.illinois.gov/DPHPublicInformation/api
                              format = "json") 
 idph_cases_il <- idph_cases_il$values %>%
   mutate(population = illinoispop)  %>%
-  mutate(new_cases = confirmed_cases - lag(confirmed_cases)) %>%
+  mutate(new_cases = CasesChange) %>%
   mutate(new_cases = replace(new_cases, which(new_cases<0), NA)) %>%
-  mutate(new_deaths = deaths - lag(deaths)) %>%
+  mutate(new_deaths = DeathsChange) %>%
   mutate(avg_new_cases = rollapply(new_cases, width = 7, FUN = mean, na.rm = TRUE, fill = NA, align = "right")) %>%
   mutate(monthlydead = rollmean(new_deaths, k = 7, 
                                 fill = NA, align = "right"))  %>%
-  mutate(Date = ymd_hms(reportDate, truncated = 0)) %>%
+  mutate(Date = ymd_hms(ReportDate, truncated = 0)) %>%
   mutate(pct_change_new_cases = 
            ((avg_new_cases - lag(avg_new_cases,14))/lag(avg_new_cases,14))) %>%
   mutate(location = "Illinois")
@@ -1016,13 +1016,13 @@ ggsave("gh_action/nearby_fully_vaccinated.png",
 idph_deaths_champaign <- rio::import("https://idph.illinois.gov/DPHPublicInformation/api/COVID/GetCountyHistorical?countyName=Champaign",
                                     format = "json") 
 idph_deaths_champaign <- idph_deaths_champaign$values %>%
-  mutate(new_cases = confirmed_cases - lag(confirmed_cases)) %>%
-  mutate(new_deaths = deaths - lag(deaths)) %>%
+  mutate(new_cases = CasesChange) %>%
+  mutate(new_deaths = DeathsChange) %>%
   mutate(avg_new_cases = rollmean(new_cases, k = 7, 
                                   fill = NA, align = "right")) %>%
   mutate(monthlydead = rollmean(new_deaths, k = 7, 
                                 fill = NA, align = "right"))  %>%
-  mutate(Date = ymd_hms(reportDate, truncated = 0)) %>%
+  mutate(Date = ymd_hms(ReportDate, truncated = 0)) %>%
   mutate(pct_change_new_cases = 
            ((avg_new_cases - lag(avg_new_cases,14))/lag(avg_new_cases,14))) %>%
   mutate(pct_change_new_deaths = 
@@ -1034,13 +1034,13 @@ idph_deaths_champaign <- idph_deaths_champaign$values %>%
 idph_deaths_il <- rio::import("https://idph.illinois.gov/DPHPublicInformation/api/COVID/GetCountyHistorical?countyName=Illinois",
                              format = "json") 
 idph_deaths_il <- idph_deaths_il$values %>%
-  mutate(new_cases = confirmed_cases - lag(confirmed_cases)) %>%
-  mutate(new_deaths = deaths - lag(deaths)) %>%
+  mutate(new_cases = CasesChange) %>%
+  mutate(new_deaths = DeathsChange) %>%
   mutate(avg_new_cases = rollmean(new_cases, k = 7, 
                                   fill = NA, align = "right")) %>%
   mutate(monthlydead = rollmean(new_deaths, k = 7, 
                                 fill = NA, align = "right"))  %>%
-  mutate(Date = ymd_hms(reportDate, truncated = 0)) %>%
+  mutate(Date = ymd_hms(ReportDate, truncated = 0)) %>%
   mutate(pct_change_new_cases = 
            ((avg_new_cases - lag(avg_new_cases,14))/lag(avg_new_cases,14))) %>%
   mutate(pct_change_new_deaths = 

@@ -23,13 +23,13 @@ token <- rtweet::create_token(
 idph_cases_champaign <- rio::import("https://idph.illinois.gov/DPHPublicInformation/api/COVID/GetCountyHistorical?countyName=Champaign",
                                     format = "json") 
 idph_cases_champaign <- idph_cases_champaign$values %>%
-  mutate(new_cases = confirmed_cases - lag(confirmed_cases)) %>%
+  mutate(new_cases = CasesChange) %>%
   mutate(new_cases = replace(new_cases, which(new_cases<0), NA)) %>%
-  mutate(new_deaths = deaths - lag(deaths)) %>%
+  mutate(new_deaths = DeathsChange) %>%
   mutate(avg_new_cases = rollapply(new_cases, width = 7, FUN = mean, na.rm = TRUE, fill = NA, align = "right")) %>%
   mutate(monthlydead = rollmean(new_deaths, k = 31, 
                                 fill = NA, align = "right")*31)  %>%
-  mutate(Date = ymd_hms(reportDate)) 
+  mutate(Date = ymd_hms(ReportDate)) 
 
 idph_vax_champaign <- rio::import("https://idph.illinois.gov/DPHPublicInformation/api/COVIDExport/GetVaccineAdministration?format=csv&countyName=Champaign",
                                   format = "csv") %>%
