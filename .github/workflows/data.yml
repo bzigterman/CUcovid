@@ -22,10 +22,15 @@ jobs:
           #path: ${{ env.R_LIBS_USER }}
           #key: ${{ runner.os }}-${{ hashFiles('install-packages.R') }}-1
           
-      - name: Install packages
-        #if: steps.cache-r-packages.outputs.cache-hit != 'true'      
+          
+      - name: Install gdal pt1
         run: brew install pkg-config
-        run: brew install gdal  
+
+      - name: Install gdal pt2
+        run: brew install gdal 
+          
+      - name: Install packages
+        #if: steps.cache-r-packages.outputs.cache-hit != 'true' 
         run: R -e 'source("install-packages.R", echo = TRUE)'
         
       - name: Run script
