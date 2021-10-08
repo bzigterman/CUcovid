@@ -1,4 +1,3 @@
-install.packages("rgdal")
 install.packages("tidyverse")
 install.packages("usmap")
 install.packages("RColorBrewer")
