@@ -16,3 +16,7 @@ install.packages("zoo")
 install.packages("scales")
 install.packages("rtweet")
 install.packages("png")
+
+update.packages(ask = FALSE,
+                checkBuilt = TRUE)
+
