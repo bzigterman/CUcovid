@@ -109,6 +109,37 @@ plot_usmap(data = usa_cases, values = "community_transmission_level",
 ggsave("gh_action/usa_transmission.png", 
        width = 8, height = 8*(628/1200), dpi = 320)
 
+
+## map new cases ----
+plot_usmap(data = usa_cases, 
+           values = "new_cases_class",
+           size = .01) +
+  scale_fill_brewer(
+    palette = "Oranges",
+    direction = 1,
+    na.value = "grey80") +
+  labs(title = "Average New Cases per 100,000 Residents",
+       caption =  paste("Source: CDC. Latest data:",
+                        tail(usa_cases$short_date,1)),
+       fill = NULL)+
+  theme(
+    axis.text = element_blank(),
+    axis.line.x = element_blank(),
+    axis.ticks = element_blank(),
+    axis.title = element_blank(),
+    panel.grid.major = element_blank(),  
+    legend.background = element_blank(),
+    legend.key = element_blank(),
+    legend.position = "right",
+    legend.key.size = unit(.5, "cm"),
+    plot.background = element_rect(fill = "white", 
+                                   color = "white"),
+    plot.caption = element_text(colour = "grey40")
+  ) 
+
+ggsave("gh_action/usa_new_cases.png", 
+       width = 8, height = 8*(628/1200), dpi = 320)
+
 # illinois ----
 illinoispop <- 12741080
 
@@ -176,7 +207,7 @@ cdc_cases_merged <- merge(cdc_cases,
                           il_counties_clean,
                           by = "GEOID")
 
-# il cases map
+### il cases map ----
 cdc_cases_map <- ggplot(data = cdc_cases_merged) +
   geom_sf(data = cdc_cases_merged,
           mapping = aes(fill = new_cases_class,
