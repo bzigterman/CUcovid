@@ -143,7 +143,7 @@ champaign_county_text <- paste(
 "— Average new vaccine doses: ",champaign_avg_new_vaccine_doses," (vs. ",champaign_month_ago_new_doses,")",
 "
 
-Source: http://www.dph.illinois.gov/covid19",
+More charts: https://bzigterman.com/projects/covid",
 sep = ""
 )
 
