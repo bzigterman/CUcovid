@@ -745,7 +745,7 @@ ggplot(us_data_longer,
   ) +
   expand_limits(y = 0) +
   scale_colour_manual(guide = FALSE,
-                      values = c("#B45F06","#d90000","#674EA7","#674EA7")) +
+                      values = c("#B45F06","#d90000","#674EA7","#35978f")) +
   theme(axis.text.y = element_text(size = 10),
         axis.text.x = element_text(size = 8),
         panel.grid.minor = element_blank(),
