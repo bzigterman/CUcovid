@@ -8,7 +8,7 @@ library(zoo)
 web_text <- content(GET("https://raw.githubusercontent.com/bzigterman/bzigterman.github.io/master/projects/covid.md"),
                     as = "text")
 
-email_text <- str_sub(web_text, start = 63)
+email_text <- str_sub(web_text, start = 64)
 
 subject_text <- paste(
   "Champaign County COVID-19 Metrics for ",
