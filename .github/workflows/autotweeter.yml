@@ -3,7 +3,7 @@ name: autotweeter
 on:
   workflow_dispatch:
   schedule:
-    - cron: '50 19 * * 1-5'
+    - cron: '50 19 * * 2-4'
 
 jobs:
   run-autotweeter:
