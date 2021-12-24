@@ -103,6 +103,7 @@ champaign_pct_fully_vaccinated <- round(100*tail(idph_vax_champaign$PctVaccinate
 champaign_avg_new_vaccine_doses <- 
   format(round(signif(tail(idph_vax_champaign$AdministeredCountRollAvg,1),3)),big.mark=",")
 champaign_weekday <- wday(tail(idph_cases_champaign$Date,1), label = TRUE, abbr = FALSE)
+short_today <- wday(today(), label = TRUE, abbr = FALSE)
 champaign_month_ago_deaths <- format(round(signif(tail(lag(idph_cases_champaign$monthlydead, 14),1),3)),big.mark=",")
 champaign_month_ago_cases <- format(round(signif(tail(lag(idph_cases_champaign$avg_new_cases, 14),1),3)),big.mark=",")
 champaign_month_ago_vaccinated <- round(100*tail(lag(idph_vax_champaign$PctVaccinatedPopulation, 13),1), digits = 1)
@@ -191,7 +192,8 @@ if (champaign_avg_new_cases >= 0 &&
     champaign_month_ago_deaths >= 0 && 
     champaign_month_ago_vaccinated >= 0 &&
     champaign_month_ago_vaccinated <= 100 &&
-    champaign_month_ago_new_doses >= 0
+    champaign_month_ago_new_doses >= 0 && 
+    champaign_weekday == short_today
 ) {
   rtweet::post_tweet( 
     status = champaign_county_text,
