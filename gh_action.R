@@ -848,7 +848,7 @@ ggplot(combined_cases,
                      position = "right") +
   scale_colour_manual(guide = "none",
                       values = c("#199fa8","#b32704")) +
-  coord_cartesian(ylim = c(-1,2)) +
+  coord_cartesian(ylim = c(-1,2.5)) +
   theme(axis.text.y = element_text(size = 10),
         axis.text.x = element_text(size = 8),
         axis.ticks.y = element_blank(),
