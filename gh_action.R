@@ -35,6 +35,8 @@ usa_county_vaccine <- usa_county_vaccine %>%
 plot_usmap(data = usa_county_vaccine, values = "total_class",
            size = .01) +
   scale_fill_brewer(
+    limits = c("0–10%","10–20%","20–30%","30–40%","40–50%",
+               "50–60%","60–70%","70–80%","80–90%","90–100%"),
     palette = "BrBG",
     direction = 1,
     na.value = "grey80") +
@@ -115,6 +117,8 @@ plot_usmap(data = usa_cases,
            values = "new_cases_class",
            size = .01) +
   scale_fill_brewer(
+    limits = c("0–5","5–15","15–25",
+               "25–35","35–50","50–100","100+"),
     palette = "Oranges",
     direction = 1,
     na.value = "grey80") +
@@ -215,6 +219,8 @@ cdc_cases_map <- ggplot(data = cdc_cases_merged) +
           size = .25) +
   coord_sf(crs = st_crs(4326)) +
   scale_fill_brewer(
+    limits = c("0–5","5–15","15–25",
+               "25–35","35–50","50–100","100+"),
     palette = "Oranges",
     direction = 1,
     na.value = "grey80") +
@@ -296,6 +302,8 @@ cdc_total_vax_65 <- ggplot(data = cdc_vaccines_geo_merged) +
           size = .25) +
   coord_sf(crs = st_crs(4326)) +
   scale_fill_brewer(
+    limits = c("0–10%","10–20%","20–30%","30–40%","40–50%",
+               "50–60%","60–70%","70–80%","80–90%","90–100%"),
     palette = "BrBG",
     direction = 1,
     na.value = "grey80") +
@@ -326,6 +334,8 @@ cdc_total_vax_18 <- ggplot(data = cdc_vaccines_geo_merged) +
           size = .25) +
   coord_sf(crs = st_crs(4326)) +
   scale_fill_brewer(
+    limits = c("0–10%","10–20%","20–30%","30–40%","40–50%",
+               "50–60%","60–70%","70–80%","80–90%","90–100%"),
     palette = "BrBG",
     direction = 1,
     na.value = "grey80") +
@@ -356,6 +366,8 @@ cdc_total_vax <- ggplot(data = cdc_vaccines_geo_merged) +
           size = .25) +
   coord_sf(crs = st_crs(4326)) +
   scale_fill_brewer(
+    limits = c("0–10%","10–20%","20–30%","30–40%","40–50%",
+               "50–60%","60–70%","70–80%","80–90%","90–100%"),
     palette = "BrBG",
     direction = 1,
     na.value = "grey80") +
@@ -384,16 +396,16 @@ cdc_total_vax +
        subtitle = "Total Population",
        caption =  NULL,
        fill = NULL) +
-  theme(legend.position = "right",
-        plot.title = element_text(size = 12),
-        plot.subtitle = element_text(size = 11, 
-                                     hjust = .6)) +
+   theme(legend.position = "none",
+         plot.title = element_text(size = 12),
+         plot.subtitle = element_text(size = 11, 
+                                      hjust = .6)) +
   cdc_total_vax_18 +
   labs(title = NULL,
        subtitle = "18 and older",
        caption =  NULL,
        fill = NULL) +
-  theme(legend.position = "right",
+  theme(legend.position = "none",
         plot.subtitle = element_text(size = 11, 
                                      hjust = .6)) +
   cdc_total_vax_65 +
