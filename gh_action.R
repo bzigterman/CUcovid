@@ -91,7 +91,6 @@ scale <- ggplot(vax_freq, aes(x = total_class,
     axis.line.x = element_blank(),
     axis.ticks = element_blank(),
     axis.title = element_blank(),
-    legend.position = "none",
     panel.grid = element_blank(),  
     legend.background = element_blank(),
     legend.key = element_blank(),
@@ -132,7 +131,7 @@ usa_cases <- usa_cases %>%
 
 
 ## make transmission map ----
-plot_usmap(data = usa_cases, values = "community_transmission_level",
+transmission_map <- plot_usmap(data = usa_cases, values = "community_transmission_level",
            size = .01) +
   scale_fill_brewer(limits = c("low","moderate","substantial","high"),
                     palette = "YlOrBr",
@@ -147,20 +146,61 @@ plot_usmap(data = usa_cases, values = "community_transmission_level",
     axis.line.x = element_blank(),
     axis.ticks = element_blank(),
     axis.title = element_blank(),
-    panel.grid.major = element_blank(),  
+    panel.grid.major = element_blank(),
+    legend.position = "none",
     legend.background = element_blank(),
     legend.key = element_blank(),
     legend.key.size = unit(.5, "cm"),
     plot.background = element_rect(fill = "white", color = "white"),
     plot.caption = element_text(colour = "grey40")
   ) 
+transmission_map
 
-ggsave("gh_action/usa_transmission.png", 
+transmission_freq <- usa_cases %>%
+  count(community_transmission_level) %>%
+  group_by(community_transmission_level)
+
+scale <- ggplot(transmission_freq, aes(x = community_transmission_level,
+                              y = n,
+                              color = community_transmission_level,
+                              fill = community_transmission_level)) +
+  geom_col() +
+  theme_minimal() +
+  scale_fill_brewer(limits = c("low","moderate","substantial","high"),
+                    palette = "YlOrBr",
+                    direction = 1,
+                    na.value = "grey80")  + 
+  scale_color_brewer(limits = c("low","moderate","substantial","high"),
+                     palette = "YlOrBr",
+                     direction = 1,
+                     na.value = "grey80")  +  
+  coord_flip() +
+  scale_x_discrete(limits = rev(c("low","moderate","substantial","high"))) +
+  theme(
+    axis.text.x = element_blank(),
+    axis.line.x = element_blank(),
+    axis.ticks = element_blank(),
+    axis.title = element_blank(),
+    legend.position = "none",
+    panel.grid = element_blank(),  
+    legend.background = element_blank(),
+    legend.key = element_blank(),
+    legend.key.size = unit(.5, "cm"),
+    plot.background = element_rect(fill = "white", color = "white"),
+    plot.caption = element_text(colour = "grey40")
+  ) 
+scale
+
+plot_grid(transmission_map, scale,
+          ncol = 2,
+          rel_widths = c(10,2))
+
+ggsave("gh_action/usa_transmission.png", bg = "white",
        width = 8, height = 8*(628/1200), dpi = 320)
 
 
 ## map new cases ----
-plot_usmap(data = usa_cases, 
+cases_map <- plot_usmap(data = usa_cases, 
            values = "new_cases_class",
            size = .01) +
   scale_fill_brewer(
@@ -181,14 +221,61 @@ plot_usmap(data = usa_cases,
     panel.grid.major = element_blank(),  
     legend.background = element_blank(),
     legend.key = element_blank(),
-    legend.position = "right",
+    legend.position = "none",
     legend.key.size = unit(.5, "cm"),
     plot.background = element_rect(fill = "white", 
                                    color = "white"),
     plot.caption = element_text(colour = "grey40")
   ) 
+cases_map
 
-ggsave("gh_action/usa_new_cases.png", 
+
+cases_freq <- usa_cases %>%
+  count(new_cases_class) %>%
+  group_by(new_cases_class)
+
+scale <- ggplot(cases_freq, aes(x = new_cases_class,
+                                       y = n,
+                                       color = new_cases_class,
+                                       fill = new_cases_class,
+                                label = n)) +
+  geom_col() +
+  theme_minimal() +
+  scale_fill_brewer(
+    limits = c("0–5","5–15","15–25",
+               "25–35","35–50","50–100","100+"),
+    palette = "Oranges",
+    direction = 1,
+    na.value = "grey80") +
+  scale_color_brewer(
+    limits = c("0–5","5–15","15–25",
+               "25–35","35–50","50–100","100+"),
+    palette = "Oranges",
+    direction = 1,
+    na.value = "grey80") +
+  coord_flip() +
+  scale_x_discrete(limits = rev(levels(cases_freq$new_cases_class))) +
+  theme(
+    axis.text.x = element_blank(),
+    axis.line.x = element_blank(),
+    axis.ticks = element_blank(),
+    axis.title = element_blank(),
+    legend.position = "none",
+    panel.grid = element_blank(),  
+    legend.background = element_blank(),
+    legend.key = element_blank(),
+    legend.key.size = unit(.5, "cm"),
+    plot.background = element_rect(fill = "white", color = "white"),
+    plot.caption = element_text(colour = "grey40")
+  ) 
+scale
+
+plot_grid(cases_map, scale,
+          ncol = 2,
+          rel_widths = c(10,2))
+
+
+ggsave("gh_action/usa_new_cases.png", bg = "white",
        width = 8, height = 8*(628/1200), dpi = 320)
 
 # illinois ----
