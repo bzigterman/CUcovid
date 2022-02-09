@@ -229,7 +229,6 @@ cases_map <- plot_usmap(data = usa_cases,
   ) 
 cases_map
 
-
 cases_freq <- usa_cases %>%
   count(new_cases_class) %>%
   group_by(new_cases_class)
