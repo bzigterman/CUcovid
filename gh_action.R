@@ -96,6 +96,9 @@ scale <- ggplot(vax_freq, aes(x = total_class,
     legend.background = element_blank(),
     legend.key = element_blank(),
     legend.key.size = unit(.5, "cm"),
+    plot.margin = margin(b = 150,
+                         t= 5,
+                         r = 5),
     plot.background = element_rect(fill = "white", color = "white"),
     plot.caption = element_text(colour = "grey40")
   ) 
@@ -187,6 +190,9 @@ scale <- ggplot(transmission_freq, aes(x = community_transmission_level,
     legend.background = element_blank(),
     legend.key = element_blank(),
     legend.key.size = unit(.5, "cm"),
+    plot.margin = margin(b = 230,
+                         t= 5,
+                         r = 5),
     plot.background = element_rect(fill = "white", color = "white"),
     plot.caption = element_text(colour = "grey40")
   ) 
@@ -265,6 +271,9 @@ scale <- ggplot(cases_freq, aes(x = new_cases_class,
     legend.background = element_blank(),
     legend.key = element_blank(),
     legend.key.size = unit(.5, "cm"),
+    plot.margin = margin(b = 190,
+                         t= 5,
+                         r = 5),
     plot.background = element_rect(fill = "white", color = "white"),
     plot.caption = element_text(colour = "grey40")
   ) 
