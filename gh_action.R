@@ -874,10 +874,10 @@ us_data_longer <- us_data %>%
                values_to = "values",
                names_to = "names") %>%
   mutate(names = recode_factor(names, 
-                        "avg_new_cases" = "1. Average New Cases",
-                        "avg_new_deaths" = "2. Average New Deaths",
-                        "people_fully_vaccinated" = "3. People Fully Vaccinated",
-                        "daily_vaccinations" = "4. Average New Vaccine Doses"))  %>%
+                        "avg_new_cases" = "Average New Cases",
+                        "avg_new_deaths" = "Average New Deaths",
+                        "people_fully_vaccinated" = "People Fully Vaccinated",
+                        "daily_vaccinations" = "Average New Vaccine Doses"))  %>%
   mutate(short_date = paste(month(date, label = TRUE, abbr = FALSE),
                             mday(date)))
 
