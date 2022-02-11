@@ -1316,3 +1316,13 @@ if (avg_new_cases >= 0 &&
          width = 8, height = 6, dpi = 320)
 }
 
+if (avg_new_cases >= 0 &&
+    dead_last_month >= 0 &&
+    pct_fully_vaccinated >= 0 &&
+    pct_fully_vaccinated <= 100 &&
+    avg_new_vaccine_doses >= 0) {
+  ggsave("gh_action/new_deaths_change_facet_mobile.png",
+         width = 4, height = 6, dpi = 320)
+}
+
+
