@@ -700,11 +700,11 @@ idph_cases_vax_longer <- idph_cases_vax %>%
   pivot_longer(!Date,
                values_to = "values",
                names_to = "names") %>%
-  mutate(names = recode(names, 
-                        "TotalInUseBedsCOVID" = "2. Hospitalized",
-                        "avg_new_cases" = "1. Average New Cases",
-                        "monthlydead" = "3. Average New Deaths",
-                        "AdministeredCountRollAvg" = "4. Average New Vaccine Doses"))  %>%
+  mutate(names = recode_factor(names, 
+  						"avg_new_cases" = "Average New Cases",
+                        "TotalInUseBedsCOVID" = "Hospitalized",     
+                        "monthlydead" = "Average New Deaths",
+                        "AdministeredCountRollAvg" = "Average New Vaccine Doses"))  %>%
   mutate(short_date = paste(month(Date, label = TRUE, abbr = FALSE),
                             mday(Date))) 
 
