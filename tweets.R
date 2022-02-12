@@ -65,11 +65,11 @@ idph_cases_vax_hosp_longer <- idph_cases_vax_hosp %>%
   pivot_longer(!Date,
                values_to = "values",
                names_to = "names") %>%
-  mutate(names = recode(names, 
-                        "avg_hospitalized" = "2. Average Hospitalized",
-                        "avg_new_cases" = "1. Average New Cases",
-                        "monthlydead" = "3. Deaths in the Past Month",
-                        "AdministeredCountRollAvg" = "4. Average New Vaccine Doses"))  %>%
+  mutate(names = recode_factor(names, 
+                        "avg_new_cases" = "Average New Cases",
+                        "avg_hospitalized" = "Average Hospitalized",
+                        "monthlydead" = "Deaths in the Past Month",
+                        "AdministeredCountRollAvg" = "Average New Vaccine Doses"))  %>%
   mutate(short_date = paste(month(Date, label = TRUE, abbr = FALSE),
                             mday(Date))) %>%
   drop_na()
