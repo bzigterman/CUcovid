@@ -110,11 +110,61 @@ scale <- ggplot(vax_freq, aes(x = total_class,
   ) 
 scale
 
+scale_mobile <- ggplot(vax_freq, aes(x = total_class,
+                                     y = n,
+                                     color = total_class,
+                                     label = n,
+                                     fill = total_class)) +
+  geom_col() +
+  geom_text(aes(y = 0),
+            color = "black",
+            size = 3,
+            hjust = 0) + 
+  theme_minimal() +
+  scale_fill_brewer(
+    limits = c("0–10%","10–20%","20–30%","30–40%","40–50%",
+               "50–60%","60–70%","70–80%","80–90%","90–100%"),
+    palette = "BrBG",
+    direction = 1,
+    na.value = "grey80")  + 
+  scale_color_brewer(
+    limits = c("0–10%","10–20%","20–30%","30–40%","40–50%",
+               "50–60%","60–70%","70–80%","80–90%","90–100%"),
+    palette = "BrBG",
+    direction = 1,
+    na.value = "grey80")  +  
+  coord_flip() +
+  scale_x_discrete(limits = rev(levels(vax_freq$total_class))) +
+  theme(
+    axis.text.x = element_blank(),
+    axis.line.x = element_blank(),
+    axis.ticks = element_blank(),
+    axis.title = element_blank(),
+    panel.grid = element_blank(),  
+    legend.position = "none",
+    legend.background = element_blank(),
+    legend.key = element_blank(),
+    legend.key.size = unit(.5, "cm"),
+    #plot.margin = margin(b = 150,
+     #                    t= 5,
+      #                   r = 5),
+    plot.background = element_rect(fill = "white", color = "white"),
+    plot.caption = element_text(colour = "grey40")
+  ) 
+scale_mobile
+
 plot_grid(us_vax_map, scale,
           ncol = 2,
           rel_widths = c(10,2))
 
 ggsave("gh_action/usa_vax_total.png", bg = "white", 
+       width = 8, height = 8*(628/1200), dpi = 320)
+
+plot_grid(us_vax_map, scale_mobile,
+          ncol = 2,
+          rel_widths = c(10,2))
+
+ggsave("gh_action/usa_vax_total_mobile.png", bg = "white", 
        width = 8, height = 8*(628/1200), dpi = 320)
 
 ## us cases data ----
