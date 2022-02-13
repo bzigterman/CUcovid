@@ -34,7 +34,7 @@ usa_county_vaccine <- usa_county_vaccine %>%
 
 ## make vaccine map ----
 us_vax_map <- plot_usmap(data = usa_county_vaccine, values = "total_class",
-           size = .01) +
+                         size = .01) +
   scale_fill_brewer(
     limits = c("0–10%","10–20%","20–30%","30–40%","40–50%",
                "50–60%","60–70%","70–80%","80–90%","90–100%"),
@@ -60,18 +60,23 @@ us_vax_map <- plot_usmap(data = usa_county_vaccine, values = "total_class",
   ) 
 us_vax_map
 #ggsave("gh_action/usa_vax_total.png", 
- #      width = 8, height = 8*(628/1200), dpi = 320)
+#      width = 8, height = 8*(628/1200), dpi = 320)
 
 vax_freq <- usa_county_vaccine %>%
   count(total_class) %>%
   group_by(total_class) #%>%
-  #mutate(total_class_n = paste(total_class,"\n",n,sep=""))
+#mutate(total_class_n = paste(total_class,"\n",n,sep=""))
 
 scale <- ggplot(vax_freq, aes(x = total_class,
-                     y = n,
-                     color = total_class,
-                     fill = total_class)) +
+                              y = n,
+                              color = total_class,
+                              label = n,
+                              fill = total_class)) +
   geom_col() +
+  geom_text(aes(y = 0),
+            color = "black",
+            size = 3,
+            hjust = 0) + 
   theme_minimal() +
   scale_fill_brewer(
     limits = c("0–10%","10–20%","20–30%","30–40%","40–50%",
@@ -137,7 +142,7 @@ usa_cases <- usa_cases %>%
 
 ## make transmission map ----
 transmission_map <- plot_usmap(data = usa_cases, values = "community_transmission_level",
-           size = .01) +
+                               size = .01) +
   scale_fill_brewer(limits = c("low","moderate","substantial","high"),
                     palette = "YlOrBr",
                     direction = 1,
@@ -166,10 +171,15 @@ transmission_freq <- usa_cases %>%
   group_by(community_transmission_level)
 
 scale <- ggplot(transmission_freq, aes(x = community_transmission_level,
-                              y = n,
-                              color = community_transmission_level,
-                              fill = community_transmission_level)) +
+                                       y = n,
+                                       label = n,
+                                       color = community_transmission_level,
+                                       fill = community_transmission_level)) +
   geom_col() +
+  geom_text(aes(y = 0),
+            color = "black",
+            size = 3,
+            hjust = 0) + 
   theme_minimal() +
   scale_fill_brewer(limits = c("low","moderate","substantial","high"),
                     palette = "YlOrBr",
@@ -209,8 +219,8 @@ ggsave("gh_action/usa_transmission.png", bg = "white",
 
 ## map new cases ----
 cases_map <- plot_usmap(data = usa_cases, 
-           values = "new_cases_class",
-           size = .01) +
+                        values = "new_cases_class",
+                        size = .01) +
   scale_fill_brewer(
     limits = c("0–5","5–15","15–25",
                "25–35","35–50","50–100","100+"),
@@ -242,11 +252,15 @@ cases_freq <- usa_cases %>%
   group_by(new_cases_class)
 
 scale <- ggplot(cases_freq, aes(x = new_cases_class,
-                                       y = n,
-                                       color = new_cases_class,
-                                       fill = new_cases_class,
+                                y = n,
+                                color = new_cases_class,
+                                fill = new_cases_class,
                                 label = n)) +
   geom_col() +
+  geom_text(aes(y = 0),
+            color = "black",
+            size = 3,
+            hjust = 0) + 
   theme_minimal() +
   scale_fill_brewer(
     limits = c("0–5","5–15","15–25",
@@ -283,7 +297,6 @@ scale
 plot_grid(cases_map, scale,
           ncol = 2,
           rel_widths = c(10,2))
-
 
 ggsave("gh_action/usa_new_cases.png", bg = "white",
        width = 8, height = 8*(628/1200), dpi = 320)
@@ -540,10 +553,10 @@ cdc_total_vax +
        subtitle = "Total Population",
        caption =  NULL,
        fill = NULL) +
-   theme(legend.position = "none",
-         plot.title = element_text(size = 12),
-         plot.subtitle = element_text(size = 11, 
-                                      hjust = .6)) +
+  theme(legend.position = "none",
+        plot.title = element_text(size = 12),
+        plot.subtitle = element_text(size = 11, 
+                                     hjust = .6)) +
   cdc_total_vax_18 +
   labs(title = NULL,
        subtitle = "18 and older",
@@ -614,10 +627,10 @@ idph_cases_vax_hosp_longer <- idph_cases_vax_hosp %>%
                values_to = "values",
                names_to = "names") %>%
   mutate(names = recode_factor(names, 
-                        "avg_new_cases" = "Average New Cases",
-                        "avg_hospitalized" = "Average Hospitalized",
-                        "monthlydead" = "Deaths in the Past Month",
-                        "AdministeredCountRollAvg" = "Average New Vaccine Doses"))  %>%
+                               "avg_new_cases" = "Average New Cases",
+                               "avg_hospitalized" = "Average Hospitalized",
+                               "monthlydead" = "Deaths in the Past Month",
+                               "AdministeredCountRollAvg" = "Average New Vaccine Doses"))  %>%
   mutate(short_date = paste(month(Date, label = TRUE, abbr = FALSE),
                             mday(Date))) %>%
   drop_na()
@@ -690,7 +703,7 @@ idph_hosp <- rio::import("https://idph.illinois.gov/DPHPublicInformation/api/COV
                          format = "csv") %>%
   mutate(Date = ymd(mdy_hms(ReportDate))) %>%
   select(Date, TotalInUseBedsCOVID)
-  
+
 
 idph_cases_vax <- full_join(idph_cases_champaign, idph_vax_champaign) %>%
   full_join(idph_hosp) %>%
@@ -702,10 +715,10 @@ idph_cases_vax_longer <- idph_cases_vax %>%
                values_to = "values",
                names_to = "names") %>%
   mutate(names = recode_factor(names, 
-  						"avg_new_cases" = "Average New Cases",
-                        "TotalInUseBedsCOVID" = "Hospitalized",     
-                        "monthlydead" = "Average New Deaths",
-                        "AdministeredCountRollAvg" = "Average New Vaccine Doses"))  %>%
+                               "avg_new_cases" = "Average New Cases",
+                               "TotalInUseBedsCOVID" = "Hospitalized",     
+                               "monthlydead" = "Average New Deaths",
+                               "AdministeredCountRollAvg" = "Average New Vaccine Doses"))  %>%
   mutate(short_date = paste(month(Date, label = TRUE, abbr = FALSE),
                             mday(Date))) 
 
@@ -797,10 +810,10 @@ us_data_longer <- us_data %>%
                values_to = "values",
                names_to = "names") %>%
   mutate(names = recode_factor(names, 
-                        "avg_new_cases" = "Average New Cases",
-                        "hosp_patients" = "Hospitalized",
-                        "avg_new_deaths" = "Average New Deaths",
-                        "daily_vaccinations" = "Average New Vaccine Doses"))  %>%
+                               "avg_new_cases" = "Average New Cases",
+                               "hosp_patients" = "Hospitalized",
+                               "avg_new_deaths" = "Average New Deaths",
+                               "daily_vaccinations" = "Average New Vaccine Doses"))  %>%
   mutate(short_date = paste(month(date, label = TRUE, abbr = FALSE),
                             mday(date)))
 
@@ -875,10 +888,10 @@ us_data_longer <- us_data %>%
                values_to = "values",
                names_to = "names") %>%
   mutate(names = recode_factor(names, 
-                        "avg_new_cases" = "Average New Cases",
-                        "avg_new_deaths" = "Average New Deaths",
-                        "people_fully_vaccinated" = "People Fully Vaccinated",
-                        "daily_vaccinations" = "Average New Vaccine Doses"))  %>%
+                               "avg_new_cases" = "Average New Cases",
+                               "avg_new_deaths" = "Average New Deaths",
+                               "people_fully_vaccinated" = "People Fully Vaccinated",
+                               "daily_vaccinations" = "Average New Vaccine Doses"))  %>%
   mutate(short_date = paste(month(date, label = TRUE, abbr = FALSE),
                             mday(date)))
 
@@ -1034,7 +1047,7 @@ if (avg_new_cases >= 0 &&
          width = 4, height = 8, dpi = 320)
 }
 
-  
+
 # vax comparison chart ----
 
 ## set population variables ----
@@ -1212,7 +1225,7 @@ ggsave("gh_action/nearby_fully_vaccinated.png",
 ## get data ----
 ### Champaign cases ----
 idph_deaths_champaign <- rio::import("https://idph.illinois.gov/DPHPublicInformation/api/COVID/GetCountyHistorical?countyName=Champaign",
-                                    format = "json") 
+                                     format = "json") 
 idph_deaths_champaign <- idph_deaths_champaign$values %>%
   mutate(new_cases = CasesChange) %>%
   mutate(new_deaths = DeathsChange) %>%
@@ -1230,7 +1243,7 @@ idph_deaths_champaign <- idph_deaths_champaign$values %>%
 
 ### IL cases -----
 idph_deaths_il <- rio::import("https://idph.illinois.gov/DPHPublicInformation/api/COVID/GetCountyHistorical?countyName=Illinois",
-                             format = "json") 
+                              format = "json") 
 idph_deaths_il <- idph_deaths_il$values %>%
   mutate(new_cases = CasesChange) %>%
   mutate(new_deaths = DeathsChange) %>%
@@ -1252,7 +1265,7 @@ jhu_new_deaths_usa <- rio::import(jhu_new_deaths_url, format = "csv") %>%
   select(date,"United States") %>%
   rename(new_deaths = "United States") %>%
   mutate(avg_new_deaths = rollmean(new_deaths, k = 7, 
-                                  fill = NA, align = "right")) %>%
+                                   fill = NA, align = "right")) %>%
   mutate(pct_change_new_deaths = 
            ((avg_new_deaths - lag(avg_new_deaths,14))/lag(avg_new_deaths,14))) %>%
   mutate(Date = ymd(date)) %>% 
@@ -1264,7 +1277,7 @@ jhu_new_deaths_world <- rio::import(jhu_new_deaths_url, format = "csv") %>%
   select(date,"World") %>%
   rename(new_deaths = "World") %>%
   mutate(avg_new_deaths = rollmean(new_deaths, k = 7, 
-                                  fill = NA, align = "right")) %>%
+                                   fill = NA, align = "right")) %>%
   mutate(pct_change_new_deaths = 
            ((avg_new_deaths - lag(avg_new_deaths,14))/lag(avg_new_deaths,14))) %>%
   mutate(Date = ymd(date)) %>%
