@@ -64,7 +64,8 @@ us_vax_map
 
 vax_freq <- usa_county_vaccine %>%
   count(total_class) %>%
-  group_by(total_class)
+  group_by(total_class) #%>%
+  #mutate(total_class_n = paste(total_class,"\n",n,sep=""))
 
 scale <- ggplot(vax_freq, aes(x = total_class,
                      y = n,
