@@ -62,6 +62,35 @@ us_vax_map
 #ggsave("gh_action/usa_vax_total.png", 
 #      width = 8, height = 8*(628/1200), dpi = 320)
 
+
+us_vax_map_mobile <- plot_usmap(data = usa_county_vaccine, values = "total_class",
+                         size = .01) +
+  scale_fill_brewer(
+    limits = c("0–10%","10–20%","20–30%","30–40%","40–50%",
+               "50–60%","60–70%","70–80%","80–90%","90–100%"),
+    palette = "BrBG",
+    direction = 1,
+    na.value = "grey80") +
+  labs(title = "Percent Fully Vaccinated",
+       caption =  paste("Source: CDC. Latest data:",
+                        tail(usa_county_vaccine$short_date,1)),
+       fill = NULL)+
+  theme(
+    axis.text = element_blank(),
+    axis.line.x = element_blank(),
+    axis.ticks = element_blank(),
+    axis.title = element_blank(),
+    legend.position = "none",
+    panel.grid.major = element_blank(),  
+    legend.background = element_blank(),
+    legend.key = element_blank(),
+    legend.key.size = unit(.5, "cm"),
+    plot.background = element_rect(fill = "white", color = "white"),
+    plot.caption = element_text(colour = "grey40"),
+    plot.title = element_text(size = 18)
+  ) 
+us_vax_map_mobile
+
 vax_freq <- usa_county_vaccine %>%
   count(total_class) %>%
   group_by(total_class) #%>%
@@ -118,7 +147,7 @@ scale_mobile <- ggplot(vax_freq, aes(x = total_class,
   geom_col() +
   geom_text(aes(y = 0),
             color = "black",
-            size = 3,
+            size = 4,
             hjust = 0) + 
   theme_minimal() +
   scale_fill_brewer(
@@ -137,6 +166,7 @@ scale_mobile <- ggplot(vax_freq, aes(x = total_class,
   scale_x_discrete(limits = rev(levels(vax_freq$total_class))) +
   theme(
     axis.text.x = element_blank(),
+    axis.text.y = element_text(size = 11),
     axis.line.x = element_blank(),
     axis.ticks = element_blank(),
     axis.title = element_blank(),
@@ -155,14 +185,14 @@ scale_mobile
 
 plot_grid(us_vax_map, scale,
           ncol = 2,
-          rel_widths = c(10,2))
+          rel_widths = c(4.4,2))
 
 ggsave("gh_action/usa_vax_total.png", bg = "white", 
        width = 8, height = 8*(628/1200), dpi = 320)
 
-plot_grid(us_vax_map, scale_mobile,
+plot_grid(us_vax_map_mobile, scale_mobile,
           ncol = 2,
-          rel_widths = c(10,2))
+          rel_widths = c(4.4,2))
 
 ggsave("gh_action/usa_vax_total_mobile.png", bg = "white", 
        width = 8, height = 8*(628/1200), dpi = 320)
