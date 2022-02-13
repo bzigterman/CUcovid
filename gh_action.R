@@ -291,7 +291,7 @@ scale
 
 plot_grid(transmission_map, scale,
           ncol = 2,
-          rel_widths = c(10,2))
+          rel_widths = c(4.4,2))
 
 ggsave("gh_action/usa_transmission.png", bg = "white",
        width = 8, height = 8*(628/1200), dpi = 320)
@@ -376,7 +376,7 @@ scale
 
 plot_grid(cases_map, scale,
           ncol = 2,
-          rel_widths = c(10,2))
+          rel_widths = c(4.4,2))
 
 ggsave("gh_action/usa_new_cases.png", bg = "white",
        width = 8, height = 8*(628/1200), dpi = 320)
