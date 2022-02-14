@@ -1126,8 +1126,8 @@ ggplot(combined_cases,
              color = "grey25",
              size = .1) +
   facet_wrap(~ location, ncol = 1) +
-  labs(title = "14-Day Percent Change in Average New Cases",
-       caption = paste("Source: IDPH and JHU CSSE COVID-19 Data. Latest data:",
+  labs(title = "14-Day Change in Average New Cases",
+       caption = paste("Source: IDPH and JHU CSSE COVID-19 Data.\nLatest data:",
                        tail(us_data_longer$short_date,1))) +
   xlab(NULL) +
   ylab(NULL) +
@@ -1138,13 +1138,13 @@ ggplot(combined_cases,
   scale_colour_manual(guide = "none",
                       values = c("#199fa8","#b32704")) +
   coord_cartesian(ylim = c(-1,2.5)) +
-  theme(axis.text.y = element_text(size = 10),
-        axis.text.x = element_text(size = 8),
+  theme(#axis.text.y = element_text(size = 10),
+        #axis.text.x = element_text(size = 8),
         axis.ticks.y = element_blank(),
         panel.grid.minor = element_blank(),
         panel.background = element_blank(),
         panel.grid.major.y = element_line(colour = "grey93"),
-        strip.text = element_text(size = 11),
+        #strip.text = element_text(size = 11),
         strip.background = element_blank(),
         plot.caption = element_text(colour = "grey40"))
 
@@ -1418,8 +1418,8 @@ ggplot(combined_deaths,
              color = "grey25",
              size = .1) +
   facet_wrap(~ location, ncol = 1) +
-  labs(title = "14-Day Percent Change in Average New Deaths",
-       caption = paste("Source: IDPH and JHU CSSE COVID-19 Data. Latest data:",
+  labs(title = "14-Day Change in Average New Deaths",
+       caption = paste("Source: IDPH and JHU CSSE COVID-19 Data.\nLatest data:",
                        tail(us_data_longer$short_date,1))) +
   xlab(NULL) +
   ylab(NULL) +
@@ -1430,13 +1430,13 @@ ggplot(combined_deaths,
   scale_colour_manual(guide = "none",
                       values = c("#199fa8","#b32704")) +
   coord_cartesian(ylim = c(-1,2)) +
-  theme(axis.text.y = element_text(size = 10),
-        axis.text.x = element_text(size = 8),
+  theme(#axis.text.y = element_text(size = 10),
+        #axis.text.x = element_text(size = 8),
         axis.ticks.y = element_blank(),
         panel.grid.minor = element_blank(),
         panel.background = element_blank(),
         panel.grid.major.y = element_line(colour = "grey93"),
-        strip.text = element_text(size = 11),
+        #strip.text = element_text(size = 11),
         strip.background = element_blank(),
         plot.caption = element_text(colour = "grey40"))
 
