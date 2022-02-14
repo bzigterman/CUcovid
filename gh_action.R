@@ -790,8 +790,6 @@ ggplot(idph_cases_vax_hosp_longer,
         strip.background = element_blank(),
         plot.caption = element_text(colour = "grey40"))
 
-
-
 if (avg_new_cases >= 0 && 
     dead_last_month >= 0 && 
     avg_hospitalized >= 0 &&
@@ -886,6 +884,45 @@ if (avg_new_cases >= 0 &&
          width = 8, height = 8*(628/1200), dpi = 320)
 }
 
+ggplot(idph_cases_vax_longer,
+       aes(x = as.Date(Date),
+           y = values,
+           colour = names)) +
+  geom_line() +
+  facet_wrap(~ names, scales = "free_y",
+             ncol = 1) +
+  labs(caption = paste("Source: IDPH. Latest data:",
+                       tail(idph_cases_vax_longer$short_date,1))) +
+  xlab(NULL) +
+  ylab(NULL) +
+  scale_x_date(expand = c(0,0),
+               labels = label_date_short()) +
+  scale_y_continuous(labels = label_comma(accuracy = 1),
+                     position = "right",
+                     expand = expansion(mult = c(0,.05))
+  ) +
+  expand_limits(y = 0) +
+  scale_colour_manual(guide = "none",
+                      values = c("#B45F06","#d90000","black","#35978f")) +
+  theme(#axis.text.y = element_text(size = 10),
+        #axis.text.x = element_text(size = 8),
+        panel.grid.minor = element_blank(),
+        panel.background = element_blank(),
+        panel.grid.major.y = element_line(colour = "grey93"),
+        #strip.text = element_text(size = 11),
+        strip.background = element_blank(),
+        plot.caption = element_text(colour = "grey40"))
+
+if (avg_new_cases >= 0 && 
+    dead_last_month >= 0 && 
+    pct_fully_vaccinated >= 0 &&
+    pct_fully_vaccinated <= 100 &&
+    avg_new_vaccine_doses >= 0) {  
+  ggsave("gh_action/IL_facet_mobile.png", 
+         width = 3, height = 8*(628/1200), dpi = 320)
+}
+
+
 # us facet ----
 
 ## get data ----
@@ -970,6 +1007,38 @@ ggplot(us_data_longer,
 ggsave("gh_action/US_facet.png", 
        width = 8, height = 8*(628/1200), dpi = 320)
 
+ggplot(us_data_longer,
+       aes(x = as.Date(date),
+           y = values,
+           colour = names)) +
+  geom_line() +
+  facet_wrap(~ names, scales = "free_y",
+             ncol = 1) +
+  labs(caption = paste("Source: HHS, Our World in Data and\nJHU CSSE COVID-19 Data.\nLatest data:",
+                       tail(us_data_longer$short_date,1))) +
+  xlab(NULL) +
+  ylab(NULL) +
+  scale_x_date(expand = c(0,0),
+               labels = label_date_short()) +
+  scale_y_continuous(labels = label_comma(accuracy = 1),
+                     position = "right",
+                     expand = expansion(mult = c(0,.05))
+  ) +
+  expand_limits(y = 0) +
+  scale_colour_manual(guide = "none",
+                      values = c("#B45F06","#d90000","black","#35978f")) +
+  theme(#axis.text.y = element_text(size = 10),
+        #axis.text.x = element_text(size = 8),
+        panel.grid.minor = element_blank(),
+        panel.background = element_blank(),
+        panel.grid.major.y = element_line(colour = "grey93"),
+        #strip.text = element_text(size = 11),
+        strip.background = element_blank(),
+        plot.caption = element_text(colour = "grey40"))
+
+ggsave("gh_action/US_facet_mobile.png", 
+       width = 3, height = 8*(628/1200), dpi = 320)
+
 # world facet ----
 
 ## get data ----
@@ -1047,7 +1116,37 @@ ggplot(us_data_longer,
 ggsave("gh_action/world_facet.png", 
        width = 8, height = 8*(628/1200), dpi = 320)
 
+ggplot(us_data_longer,
+       aes(x = as.Date(date),
+           y = values,
+           colour = names)) +
+  geom_line() +
+  facet_wrap(~ names, scales = "free_y",
+             ncol = 1) +
+  labs(caption = paste("Source: Our World in Data and\nJHU CSSE COVID-19 Data.\nLatest data:",
+                       tail(us_data_longer$short_date,1))) +
+  xlab(NULL) +
+  ylab(NULL) +
+  scale_x_date(expand = c(0,0),
+               labels = label_date_short()) +
+  scale_y_continuous(labels = label_comma(accuracy = 1),
+                     position = "right",
+                     expand = expansion(mult = c(0,.05))
+  ) +
+  expand_limits(y = 0) +
+  scale_colour_manual(guide = "none",
+                      values = c("#B45F06","black","#35978f","#35978f")) +
+  theme(#axis.text.y = element_text(size = 10),
+        #axis.text.x = element_text(size = 8),
+        panel.grid.minor = element_blank(),
+        panel.background = element_blank(),
+        panel.grid.major.y = element_line(colour = "grey93"),
+        #strip.text = element_text(size = 11),
+        strip.background = element_blank(),
+        plot.caption = element_text(colour = "grey40"))
 
+ggsave("gh_action/world_facet_mobile.png", 
+       width = 3, height = 8*(628/1200), dpi = 320)
 
 
 # rate of case changes comparison ----
