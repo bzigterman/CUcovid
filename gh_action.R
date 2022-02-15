@@ -147,7 +147,7 @@ scale_mobile <- ggplot(vax_freq, aes(x = total_class,
   geom_col() +
   geom_text(aes(y = 0),
             color = "black",
-            size = 4,
+            size = 5,
             hjust = 0) + 
   theme_minimal() +
   scale_fill_brewer(
@@ -166,7 +166,7 @@ scale_mobile <- ggplot(vax_freq, aes(x = total_class,
   scale_x_discrete(limits = rev(levels(vax_freq$total_class))) +
   theme(
     axis.text.x = element_blank(),
-    axis.text.y = element_text(size = 11),
+    axis.text.y = element_text(size = 15),
     axis.line.x = element_blank(),
     axis.ticks = element_blank(),
     axis.title = element_blank(),
@@ -331,7 +331,7 @@ scale_mobile <- ggplot(transmission_freq, aes(x = community_transmission_level,
   geom_col() +
   geom_text(aes(y = 0),
             color = "black",
-            size = 4,
+            size = 5,
             hjust = 0) + 
   theme_minimal() +
   scale_fill_brewer(limits = c("low","moderate","substantial","high"),
@@ -347,7 +347,7 @@ scale_mobile <- ggplot(transmission_freq, aes(x = community_transmission_level,
   theme(
     axis.text.x = element_blank(),
     axis.line.x = element_blank(),
-    axis.text.y = element_text(size = 11),
+    axis.text.y = element_text(size = 15),
     axis.ticks = element_blank(),
     axis.title = element_blank(),
     legend.position = "none",
@@ -453,6 +453,92 @@ plot_grid(cases_map, scale,
           rel_widths = c(4.4,2))
 
 ggsave("gh_action/usa_new_cases.png", bg = "white",
+       width = 8, height = 8*(628/1200), dpi = 320)
+
+
+cases_map_mobile <- plot_usmap(data = usa_cases, 
+                        values = "new_cases_class",
+                        size = .01) +
+  scale_fill_brewer(
+    limits = c("0–5","5–15","15–25",
+               "25–35","35–50","50–100","100+"),
+    palette = "Oranges",
+    direction = 1,
+    na.value = "grey80") +
+  labs(title = "Average New Cases per 100,000 Residents",
+       caption =  paste("Source: CDC. Latest data:",
+                        tail(usa_cases$short_date,1)),
+       fill = NULL)+
+  theme(
+    axis.text = element_blank(),
+    axis.line.x = element_blank(),
+    axis.ticks = element_blank(),
+    axis.title = element_blank(),
+    panel.grid.major = element_blank(),  
+    legend.background = element_blank(),
+    legend.key = element_blank(),
+    legend.position = "none",
+    legend.key.size = unit(.5, "cm"),
+    plot.background = element_rect(fill = "white", 
+                                   color = "white"),
+    plot.caption = element_text(colour = "grey40"),
+    plot.title = element_text(size = 18)
+  ) 
+cases_map_mobile
+
+cases_freq <- usa_cases %>%
+  count(new_cases_class) %>%
+  group_by(new_cases_class)
+
+scale_mobile <- ggplot(cases_freq, aes(x = new_cases_class,
+                                y = n,
+                                color = new_cases_class,
+                                fill = new_cases_class,
+                                label = n)) +
+  geom_col() +
+  geom_text(aes(y = 0),
+            color = "black",
+            size = 5,
+            hjust = 0) + 
+  theme_minimal() +
+  scale_fill_brewer(
+    limits = c("0–5","5–15","15–25",
+               "25–35","35–50","50–100","100+"),
+    palette = "Oranges",
+    direction = 1,
+    na.value = "grey80") +
+  scale_color_brewer(
+    limits = c("0–5","5–15","15–25",
+               "25–35","35–50","50–100","100+"),
+    palette = "Oranges",
+    direction = 1,
+    na.value = "grey80") +
+  coord_flip() +
+  scale_x_discrete(limits = rev(levels(cases_freq$new_cases_class))) +
+  theme(
+    axis.text.x = element_blank(),
+    axis.line.x = element_blank(),
+    axis.ticks = element_blank(),
+    axis.text.y = element_text(size = 15),
+    axis.title = element_blank(),
+    legend.position = "none",
+    panel.grid = element_blank(),  
+    legend.background = element_blank(),
+    legend.key = element_blank(),
+    legend.key.size = unit(.5, "cm"),
+    #plot.margin = margin(b = 190,
+     #                    t= 5,
+      #                   r = 5),
+    plot.background = element_rect(fill = "white", color = "white"),
+    plot.caption = element_text(colour = "grey40")
+  ) 
+scale_mobile
+
+plot_grid(cases_map_mobile, scale_mobile,
+          ncol = 2,
+          rel_widths = c(4.4,2))
+
+ggsave("gh_action/usa_new_cases_mobile.png", bg = "white",
        width = 8, height = 8*(628/1200), dpi = 320)
 
 # illinois ----
