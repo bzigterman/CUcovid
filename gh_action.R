@@ -273,6 +273,7 @@ scale <- ggplot(transmission_freq, aes(x = community_transmission_level,
   scale_x_discrete(limits = rev(c("low","moderate","substantial","high"))) +
   theme(
     axis.text.x = element_blank(),
+    axis.text.y = element_text(size = 11),
     axis.line.x = element_blank(),
     axis.ticks = element_blank(),
     axis.title = element_blank(),
@@ -294,6 +295,79 @@ plot_grid(transmission_map, scale,
           rel_widths = c(4.4,2))
 
 ggsave("gh_action/usa_transmission.png", bg = "white",
+       width = 8, height = 8*(628/1200), dpi = 320)
+
+transmission_map_mobile <- plot_usmap(data = usa_cases, 
+                                      values = "community_transmission_level",
+                               size = .01) +
+  scale_fill_brewer(limits = c("low","moderate","substantial","high"),
+                    palette = "YlOrBr",
+                    direction = 1,
+                    na.value = "grey80") +
+  labs(title = "Community Transmission Levels",
+       caption =  paste("Source: CDC. Latest data:",
+                        tail(usa_cases$short_date,1)),
+       fill = NULL)+
+  theme(
+    axis.text = element_blank(),
+    axis.line.x = element_blank(),
+    axis.ticks = element_blank(),
+    axis.title = element_blank(),
+    panel.grid.major = element_blank(),
+    legend.position = "none",
+    legend.background = element_blank(),
+    legend.key = element_blank(),
+    legend.key.size = unit(.5, "cm"),
+    plot.background = element_rect(fill = "white", color = "white"),
+    plot.caption = element_text(colour = "grey40"),
+    plot.title = element_text(size = 18)
+  ) 
+transmission_map_mobile
+
+scale_mobile <- ggplot(transmission_freq, aes(x = community_transmission_level,
+                                       y = n,
+                                       label = n,
+                                       color = community_transmission_level,
+                                       fill = community_transmission_level)) +
+  geom_col() +
+  geom_text(aes(y = 0),
+            color = "black",
+            size = 4,
+            hjust = 0) + 
+  theme_minimal() +
+  scale_fill_brewer(limits = c("low","moderate","substantial","high"),
+                    palette = "YlOrBr",
+                    direction = 1,
+                    na.value = "grey80")  + 
+  scale_color_brewer(limits = c("low","moderate","substantial","high"),
+                     palette = "YlOrBr",
+                     direction = 1,
+                     na.value = "grey80")  +  
+  coord_flip() +
+  scale_x_discrete(limits = rev(c("low","moderate","substantial","high"))) +
+  theme(
+    axis.text.x = element_blank(),
+    axis.line.x = element_blank(),
+    axis.ticks = element_blank(),
+    axis.title = element_blank(),
+    legend.position = "none",
+    panel.grid = element_blank(),  
+    legend.background = element_blank(),
+    legend.key = element_blank(),
+    legend.key.size = unit(.5, "cm"),
+    #plot.margin = margin(b = 230,
+     #                    t= 5,
+      #                   r = 5),
+    plot.background = element_rect(fill = "white", color = "white"),
+    plot.caption = element_text(colour = "grey40")
+  ) 
+scale_mobile
+
+plot_grid(transmission_map_mobile, scale_mobile,
+          ncol = 2,
+          rel_widths = c(4.4,2))
+
+ggsave("gh_action/usa_transmission_mobile.png", bg = "white",
        width = 8, height = 8*(628/1200), dpi = 320)
 
 
