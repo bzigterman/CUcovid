@@ -273,7 +273,6 @@ scale <- ggplot(transmission_freq, aes(x = community_transmission_level,
   scale_x_discrete(limits = rev(c("low","moderate","substantial","high"))) +
   theme(
     axis.text.x = element_blank(),
-    axis.text.y = element_text(size = 11),
     axis.line.x = element_blank(),
     axis.ticks = element_blank(),
     axis.title = element_blank(),
@@ -348,6 +347,7 @@ scale_mobile <- ggplot(transmission_freq, aes(x = community_transmission_level,
   theme(
     axis.text.x = element_blank(),
     axis.line.x = element_blank(),
+    axis.text.y = element_text(size = 11),
     axis.ticks = element_blank(),
     axis.title = element_blank(),
     legend.position = "none",
