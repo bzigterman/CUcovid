@@ -64,7 +64,7 @@ us_vax_map
 
 
 us_vax_map_mobile <- plot_usmap(data = usa_county_vaccine, values = "total_class",
-                         size = .01) +
+                                size = .01) +
   scale_fill_brewer(
     limits = c("0–10%","10–20%","20–30%","30–40%","40–50%",
                "50–60%","60–70%","70–80%","80–90%","90–100%"),
@@ -176,8 +176,8 @@ scale_mobile <- ggplot(vax_freq, aes(x = total_class,
     legend.key = element_blank(),
     legend.key.size = unit(.5, "cm"),
     #plot.margin = margin(b = 150,
-     #                    t= 5,
-      #                   r = 5),
+    #                    t= 5,
+    #                   r = 5),
     plot.background = element_rect(fill = "white", color = "white"),
     plot.caption = element_text(colour = "grey40")
   ) 
@@ -298,7 +298,7 @@ ggsave("gh_action/usa_transmission.png", bg = "white",
 
 transmission_map_mobile <- plot_usmap(data = usa_cases, 
                                       values = "community_transmission_level",
-                               size = .01) +
+                                      size = .01) +
   scale_fill_brewer(limits = c("low","moderate","substantial","high"),
                     palette = "YlOrBr",
                     direction = 1,
@@ -324,10 +324,10 @@ transmission_map_mobile <- plot_usmap(data = usa_cases,
 transmission_map_mobile
 
 scale_mobile <- ggplot(transmission_freq, aes(x = community_transmission_level,
-                                       y = n,
-                                       label = n,
-                                       color = community_transmission_level,
-                                       fill = community_transmission_level)) +
+                                              y = n,
+                                              label = n,
+                                              color = community_transmission_level,
+                                              fill = community_transmission_level)) +
   geom_col() +
   geom_text(aes(y = 0),
             color = "black",
@@ -356,8 +356,8 @@ scale_mobile <- ggplot(transmission_freq, aes(x = community_transmission_level,
     legend.key = element_blank(),
     legend.key.size = unit(.5, "cm"),
     #plot.margin = margin(b = 230,
-     #                    t= 5,
-      #                   r = 5),
+    #                    t= 5,
+    #                   r = 5),
     plot.background = element_rect(fill = "white", color = "white"),
     plot.caption = element_text(colour = "grey40")
   ) 
@@ -457,8 +457,8 @@ ggsave("gh_action/usa_new_cases.png", bg = "white",
 
 
 cases_map_mobile <- plot_usmap(data = usa_cases, 
-                        values = "new_cases_class",
-                        size = .01) +
+                               values = "new_cases_class",
+                               size = .01) +
   scale_fill_brewer(
     limits = c("0–5","5–15","15–25",
                "25–35","35–50","50–100","100+"),
@@ -491,10 +491,10 @@ cases_freq <- usa_cases %>%
   group_by(new_cases_class)
 
 scale_mobile <- ggplot(cases_freq, aes(x = new_cases_class,
-                                y = n,
-                                color = new_cases_class,
-                                fill = new_cases_class,
-                                label = n)) +
+                                       y = n,
+                                       color = new_cases_class,
+                                       fill = new_cases_class,
+                                       label = n)) +
   geom_col() +
   geom_text(aes(y = 0),
             color = "black",
@@ -527,8 +527,8 @@ scale_mobile <- ggplot(cases_freq, aes(x = new_cases_class,
     legend.key = element_blank(),
     legend.key.size = unit(.5, "cm"),
     #plot.margin = margin(b = 190,
-     #                    t= 5,
-      #                   r = 5),
+    #                    t= 5,
+    #                   r = 5),
     plot.background = element_rect(fill = "white", color = "white"),
     plot.caption = element_text(colour = "grey40")
   ) 
@@ -942,13 +942,13 @@ ggplot(idph_cases_vax_hosp_longer,
   scale_colour_manual(guide = "none",
                       values = c("#B45F06","#d90000","black","#35978f")) +
   theme(#axis.text.y = element_text(size = 10),
-        #axis.text.x = element_text(size = 8),
-        panel.grid.minor = element_blank(),
-        panel.background = element_blank(),
-        panel.grid.major.y = element_line(colour = "grey93"),
-        #strip.text = element_text(size = 11),
-        strip.background = element_blank(),
-        plot.caption = element_text(colour = "grey40"))
+    #axis.text.x = element_text(size = 8),
+    panel.grid.minor = element_blank(),
+    panel.background = element_blank(),
+    panel.grid.major.y = element_line(colour = "grey93"),
+    #strip.text = element_text(size = 11),
+    strip.background = element_blank(),
+    plot.caption = element_text(colour = "grey40"))
 
 if (avg_new_cases >= 0 && 
     dead_last_month >= 0 && 
@@ -1065,13 +1065,13 @@ ggplot(idph_cases_vax_longer,
   scale_colour_manual(guide = "none",
                       values = c("#B45F06","#d90000","black","#35978f")) +
   theme(#axis.text.y = element_text(size = 10),
-        #axis.text.x = element_text(size = 8),
-        panel.grid.minor = element_blank(),
-        panel.background = element_blank(),
-        panel.grid.major.y = element_line(colour = "grey93"),
-        #strip.text = element_text(size = 11),
-        strip.background = element_blank(),
-        plot.caption = element_text(colour = "grey40"))
+    #axis.text.x = element_text(size = 8),
+    panel.grid.minor = element_blank(),
+    panel.background = element_blank(),
+    panel.grid.major.y = element_line(colour = "grey93"),
+    #strip.text = element_text(size = 11),
+    strip.background = element_blank(),
+    plot.caption = element_text(colour = "grey40"))
 
 if (avg_new_cases >= 0 && 
     dead_last_month >= 0 && 
@@ -1188,13 +1188,13 @@ ggplot(us_data_longer,
   scale_colour_manual(guide = "none",
                       values = c("#B45F06","#d90000","black","#35978f")) +
   theme(#axis.text.y = element_text(size = 10),
-        #axis.text.x = element_text(size = 8),
-        panel.grid.minor = element_blank(),
-        panel.background = element_blank(),
-        panel.grid.major.y = element_line(colour = "grey93"),
-        #strip.text = element_text(size = 11),
-        strip.background = element_blank(),
-        plot.caption = element_text(colour = "grey40"))
+    #axis.text.x = element_text(size = 8),
+    panel.grid.minor = element_blank(),
+    panel.background = element_blank(),
+    panel.grid.major.y = element_line(colour = "grey93"),
+    #strip.text = element_text(size = 11),
+    strip.background = element_blank(),
+    plot.caption = element_text(colour = "grey40"))
 
 ggsave("gh_action/US_facet_mobile.png", 
        width = 3, height = 8*(628/1200), dpi = 320)
@@ -1297,13 +1297,13 @@ ggplot(us_data_longer,
   scale_colour_manual(guide = "none",
                       values = c("#B45F06","black","#35978f","#35978f")) +
   theme(#axis.text.y = element_text(size = 10),
-        #axis.text.x = element_text(size = 8),
-        panel.grid.minor = element_blank(),
-        panel.background = element_blank(),
-        panel.grid.major.y = element_line(colour = "grey93"),
-        #strip.text = element_text(size = 11),
-        strip.background = element_blank(),
-        plot.caption = element_text(colour = "grey40"))
+    #axis.text.x = element_text(size = 8),
+    panel.grid.minor = element_blank(),
+    panel.background = element_blank(),
+    panel.grid.major.y = element_line(colour = "grey93"),
+    #strip.text = element_text(size = 11),
+    strip.background = element_blank(),
+    plot.caption = element_text(colour = "grey40"))
 
 ggsave("gh_action/world_facet_mobile.png", 
        width = 3, height = 8*(628/1200), dpi = 320)
@@ -1398,14 +1398,14 @@ ggplot(combined_cases,
                       values = c("#199fa8","#b32704")) +
   coord_cartesian(ylim = c(-1,2.5)) +
   theme(#axis.text.y = element_text(size = 10),
-        #axis.text.x = element_text(size = 8),
-        axis.ticks.y = element_blank(),
-        panel.grid.minor = element_blank(),
-        panel.background = element_blank(),
-        panel.grid.major.y = element_line(colour = "grey93"),
-        #strip.text = element_text(size = 11),
-        strip.background = element_blank(),
-        plot.caption = element_text(colour = "grey40"))
+    #axis.text.x = element_text(size = 8),
+    axis.ticks.y = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.background = element_blank(),
+    panel.grid.major.y = element_line(colour = "grey93"),
+    #strip.text = element_text(size = 11),
+    strip.background = element_blank(),
+    plot.caption = element_text(colour = "grey40"))
 
 
 if (avg_new_cases >= 0 && 
@@ -1690,14 +1690,14 @@ ggplot(combined_deaths,
                       values = c("#199fa8","#b32704")) +
   coord_cartesian(ylim = c(-1,2)) +
   theme(#axis.text.y = element_text(size = 10),
-        #axis.text.x = element_text(size = 8),
-        axis.ticks.y = element_blank(),
-        panel.grid.minor = element_blank(),
-        panel.background = element_blank(),
-        panel.grid.major.y = element_line(colour = "grey93"),
-        #strip.text = element_text(size = 11),
-        strip.background = element_blank(),
-        plot.caption = element_text(colour = "grey40"))
+    #axis.text.x = element_text(size = 8),
+    axis.ticks.y = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.background = element_blank(),
+    panel.grid.major.y = element_line(colour = "grey93"),
+    #strip.text = element_text(size = 11),
+    strip.background = element_blank(),
+    plot.caption = element_text(colour = "grey40"))
 
 
 if (avg_new_cases >= 0 &&
