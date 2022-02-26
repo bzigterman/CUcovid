@@ -221,6 +221,166 @@ usa_cases <- usa_cases %>%
 
 
 ## make transmission map ----
+
+usa_community_level_url <- "https://www.cdc.gov/coronavirus/2019-ncov/modules/science/us_community_burden_by_county.json"
+us_community_levels <- rio::import(usa_community_level_url,
+                         format = "json")
+us_community_levels <- us_community_levels$data
+us_community_levels <- us_community_levels %>%
+  filter(County != "Unknown County") %>%
+  filter(State != "Puerto Rico") %>%
+  mutate(GEOID = FIPS) %>%
+  mutate(fips = FIPS) %>%
+  mutate(community_level = `COVID-19 Community Level`)
+
+community_level_map <- plot_usmap(data = us_community_levels, values = "community_level",
+                               size = .01) +
+  scale_fill_brewer(limits = c("Low","Medium","High"),
+                    palette = "Spectral",
+                    direction = -1,
+                    na.value = "grey80") +
+  labs(title = "Community Levels",
+       caption =  "Source: CDC",
+       fill = NULL)+
+  theme(
+    axis.text = element_blank(),
+    axis.line.x = element_blank(),
+    axis.ticks = element_blank(),
+    axis.title = element_blank(),
+    panel.grid.major = element_blank(),
+    legend.position = "none",
+    legend.background = element_blank(),
+    legend.key = element_blank(),
+    legend.key.size = unit(.5, "cm"),
+    plot.background = element_rect(fill = "white", color = "white"),
+    plot.caption = element_text(colour = "grey40")
+  ) 
+community_level_map
+
+community_level_freq <- us_community_levels %>%
+  count(community_level) %>%
+  group_by(community_level)
+
+scale <- ggplot(community_level_freq, aes(x = community_level,
+                                       y = n,
+                                       label = n,
+                                       color = community_level,
+                                       fill = community_level)) +
+  geom_col() +
+  geom_text(aes(y = 0),
+            color = "black",
+            size = 3,
+            hjust = 0) + 
+  theme_minimal() +
+  scale_fill_brewer(limits = c("Low","Medium","High"),
+                    palette = "Spectral",
+                    direction = -1,
+                    na.value = "grey80")  + 
+  scale_color_brewer(limits = c("Low","Medium","High"),
+                    palette = "Spectral",
+                    direction = -1,
+                    na.value = "grey80")  +  
+  coord_flip() +
+  scale_x_discrete(limits = rev(c("Low","Medium","High"))) +
+  theme(
+    axis.text.x = element_blank(),
+    axis.line.x = element_blank(),
+    axis.ticks = element_blank(),
+    axis.title = element_blank(),
+    legend.position = "none",
+    panel.grid = element_blank(),  
+    legend.background = element_blank(),
+    legend.key = element_blank(),
+    legend.key.size = unit(.5, "cm"),
+    plot.margin = margin(b = 230,
+                         t= 5,
+                         r = 5),
+    plot.background = element_rect(fill = "white", color = "white"),
+    plot.caption = element_text(colour = "grey40")
+  ) 
+scale
+
+plot_grid(community_level_map, scale,
+          ncol = 2,
+          rel_widths = c(4.4,2))
+
+ggsave("gh_action/usa_community_levels.png", bg = "white",
+       width = 8, height = 8*(628/1200), dpi = 320)
+
+community_level_map_mobile <- plot_usmap(data = us_community_levels, 
+                                      values = "community_level",
+                                      size = .01) +
+  scale_fill_brewer(limits = c("Low","Medium","High"),
+                    palette = "Spectral",
+                    direction = -1,
+                    na.value = "grey80") +
+  labs(title = "Community Levels",
+       caption =  "Source: CDC",
+       fill = NULL)+
+  theme(
+    axis.text = element_blank(),
+    axis.line.x = element_blank(),
+    axis.ticks = element_blank(),
+    axis.title = element_blank(),
+    panel.grid.major = element_blank(),
+    legend.position = "none",
+    legend.background = element_blank(),
+    legend.key = element_blank(),
+    legend.key.size = unit(.5, "cm"),
+    plot.background = element_rect(fill = "white", color = "white"),
+    plot.caption = element_text(colour = "grey40"),
+    plot.title = element_text(size = 18)
+  ) 
+community_level_map_mobile
+
+scale_mobile <- ggplot(community_level_freq, aes(x = community_level,
+                                              y = n,
+                                              label = n,
+                                              color = community_level,
+                                              fill = community_level)) +
+  geom_col() +
+  geom_text(aes(y = 0),
+            color = "black",
+            size = 5,
+            hjust = 0) + 
+  theme_minimal() +
+  scale_fill_brewer(limits = c("Low","Medium","High"),
+                    palette = "Spectral",
+                    direction = -1,
+                    na.value = "grey80")  + 
+  scale_color_brewer(limits = c("Low","Medium","High"),
+                    palette = "Spectral",
+                    direction = -1,
+                    na.value = "grey80")  +  
+  coord_flip() +
+  scale_x_discrete(limits = rev(c("Low","Medium","High"))) +
+  theme(
+    axis.text.x = element_blank(),
+    axis.line.x = element_blank(),
+    axis.text.y = element_text(size = 15),
+    axis.ticks = element_blank(),
+    axis.title = element_blank(),
+    legend.position = "none",
+    panel.grid = element_blank(),  
+    legend.background = element_blank(),
+    legend.key = element_blank(),
+    legend.key.size = unit(.5, "cm"),
+    #plot.margin = margin(b = 230,
+    #                    t= 5,
+    #                   r = 5),
+    plot.background = element_rect(fill = "white", color = "white"),
+    plot.caption = element_text(colour = "grey40")
+  ) 
+scale_mobile
+
+plot_grid(community_level_map_mobile, scale_mobile,
+          ncol = 2,
+          rel_widths = c(4.4,2))
+
+ggsave("gh_action/usa_community_level_mobile.png", bg = "white",
+       width = 8, height = 8*(628/1200), dpi = 320)
+
+## community level map ----
 transmission_map <- plot_usmap(data = usa_cases, values = "community_transmission_level",
                                size = .01) +
   scale_fill_brewer(limits = c("low","moderate","substantial","high"),
@@ -369,7 +529,6 @@ plot_grid(transmission_map_mobile, scale_mobile,
 
 ggsave("gh_action/usa_transmission_mobile.png", bg = "white",
        width = 8, height = 8*(628/1200), dpi = 320)
-
 
 ## map new cases ----
 cases_map <- plot_usmap(data = usa_cases, 
@@ -608,6 +767,45 @@ cdc_cases_merged <- merge(cdc_cases,
                           il_counties_clean,
                           by = "GEOID")
 
+
+il_levels <- us_community_levels %>%
+  filter(State == "Illinois")
+
+il_levels_geo <- merge(il_levels,
+                       il_counties_clean,
+                       by = "GEOID")
+
+### Il levels map ----
+cdc_levels <- ggplot(data = il_levels_geo) +
+  geom_sf(data = il_levels_geo,
+          mapping = aes(fill = community_level,
+                        geometry = geometry),
+          size = .25) +
+  coord_sf(crs = st_crs(4326)) +
+  scale_fill_brewer(limits = c("Low","Medium","High"),
+                    palette = "Spectral",
+                    direction = -1,
+                    na.value = "grey80") +
+  labs(title = "Community Levels",
+       caption =  "Source: CDC",
+       fill = NULL)+
+  theme(
+    axis.text = element_blank(),
+    axis.line.x = element_blank(),
+    axis.ticks = element_blank(),
+    axis.title = element_blank(),
+    legend.position = "right",
+    panel.grid.major = element_blank(),  
+    legend.background = element_blank(),
+    legend.key = element_blank(),
+    plot.caption.position = "plot",
+    legend.key.size = unit(.5, "cm"),
+    panel.background = element_blank(),
+    plot.caption = element_text(colour = "grey40")
+  ) 
+cdc_levels 
+
+
 ### il cases map ----
 cdc_cases_map <- ggplot(data = cdc_cases_merged) +
   geom_sf(data = cdc_cases_merged,
@@ -673,6 +871,11 @@ cdc_transmission <- ggplot(data = cdc_cases_merged) +
 cdc_transmission 
 
 ## combined cases and vax map ----
+cdc_levels +
+  labs(title = "Community Levels",
+       caption =  NULL,
+       fill = NULL)+
+  theme(plot.title = element_text(size = 10)) +
 cdc_transmission +
   labs(title = "Community Transmission Levels",
        caption =  NULL,
