@@ -1587,6 +1587,47 @@ ggplot(combined_cases,
   geom_hline(yintercept = 0,
              color = "grey25",
              size = .1) +
+  facet_wrap(~ location, ncol = 1,
+             strip.position = "left") +
+  labs(title = "14-Day Change in Average New Cases",
+       caption = paste("Source: IDPH and JHU CSSE COVID-19 Data.\nLatest data:",
+                       tail(us_data_longer$short_date,1))) +
+  xlab(NULL) +
+  ylab(NULL) +
+  scale_x_date(expand = expansion(mult = c(0, .01)),
+               labels = label_date_short()) +
+  scale_y_continuous(labels = label_percent(accuracy = 1),
+                     position = "right") +
+  scale_colour_manual(guide = "none",
+                      values = c("#199fa8","#b32704")) +
+  coord_cartesian(ylim = c(-1,2.5)) +
+  theme(#axis.text.y = element_text(size = 10),
+    #axis.text.x = element_text(size = 8),
+    axis.ticks.y = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.background = element_blank(),
+    panel.grid.major.y = element_line(colour = "grey93"),
+    #strip.text = element_text(size = 11),
+    strip.background = element_blank(),
+    plot.caption = element_text(colour = "grey40"))
+
+if (avg_new_cases >= 0 && 
+    dead_last_month >= 0 && 
+    pct_fully_vaccinated >= 0 &&
+    pct_fully_vaccinated <= 100 &&
+    avg_new_vaccine_doses >= 0) {
+  ggsave("gh_action/new_cases_change_facet.png", 
+         width = 8, height = 8, dpi = 320)
+}
+
+ggplot(combined_cases, 
+       aes(x = as.Date(Date), y = pct_change_new_cases)) +
+  geom_line(color = "grey95") +
+  geom_point(aes(color = pct_change_new_cases >0),
+             size = .1) +
+  geom_hline(yintercept = 0,
+             color = "grey25",
+             size = .1) +
   facet_wrap(~ location, ncol = 1) +
   labs(title = "14-Day Change in Average New Cases",
        caption = paste("Source: IDPH and JHU CSSE COVID-19 Data.\nLatest data:",
@@ -1610,15 +1651,6 @@ ggplot(combined_cases,
     strip.background = element_blank(),
     plot.caption = element_text(colour = "grey40"))
 
-
-if (avg_new_cases >= 0 && 
-    dead_last_month >= 0 && 
-    pct_fully_vaccinated >= 0 &&
-    pct_fully_vaccinated <= 100 &&
-    avg_new_vaccine_doses >= 0) {
-  ggsave("gh_action/new_cases_change_facet.png", 
-         width = 8, height = 8, dpi = 320)
-}
 
 if (avg_new_cases >= 0 && 
     dead_last_month >= 0 && 
@@ -1879,7 +1911,8 @@ ggplot(combined_deaths,
   geom_hline(yintercept = 0,
              color = "grey25",
              size = .1) +
-  facet_wrap(~ location, ncol = 1) +
+  facet_wrap(~ location, ncol = 1,
+             strip.position = "left") +
   labs(title = "14-Day Change in Average New Deaths",
        caption = paste("Source: IDPH and JHU CSSE COVID-19 Data.\nLatest data:",
                        tail(us_data_longer$short_date,1))) +
@@ -1902,7 +1935,6 @@ ggplot(combined_deaths,
     strip.background = element_blank(),
     plot.caption = element_text(colour = "grey40"))
 
-
 if (avg_new_cases >= 0 &&
     dead_last_month >= 0 &&
     pct_fully_vaccinated >= 0 &&
@@ -1911,6 +1943,37 @@ if (avg_new_cases >= 0 &&
   ggsave("gh_action/new_deaths_change_facet.png",
          width = 8, height = 6, dpi = 320)
 }
+
+ggplot(combined_deaths, 
+       aes(x = as.Date(Date), y = pct_change_new_deaths)) +
+  geom_line(color = "grey95") +
+  geom_point(aes(color = pct_change_new_deaths >0),
+             size = .1) +
+  geom_hline(yintercept = 0,
+             color = "grey25",
+             size = .1) +
+  facet_wrap(~ location, ncol = 1) +
+  labs(title = "14-Day Change in Average New Deaths",
+       caption = paste("Source: IDPH and JHU CSSE COVID-19 Data.\nLatest data:",
+                       tail(us_data_longer$short_date,1))) +
+  xlab(NULL) +
+  ylab(NULL) +
+  scale_x_date(expand = expansion(mult = c(0, .01)),
+               labels = label_date_short()) +
+  scale_y_continuous(labels = label_percent(accuracy = 1),
+                     position = "right") +
+  scale_colour_manual(guide = "none",
+                      values = c("#199fa8","#b32704")) +
+  coord_cartesian(ylim = c(-1,2)) +
+  theme(#axis.text.y = element_text(size = 10),
+    #axis.text.x = element_text(size = 8),
+    axis.ticks.y = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.background = element_blank(),
+    panel.grid.major.y = element_line(colour = "grey93"),
+    #strip.text = element_text(size = 11),
+    strip.background = element_blank(),
+    plot.caption = element_text(colour = "grey40"))
 
 if (avg_new_cases >= 0 &&
     dead_last_month >= 0 &&
