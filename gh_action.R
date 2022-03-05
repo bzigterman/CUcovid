@@ -222,19 +222,17 @@ usa_cases <- usa_cases %>%
 
 ## make transmission map ----
 
-usa_community_level_url <- "https://www.cdc.gov/coronavirus/2019-ncov/modules/science/us_community_burden_by_county.json"
+usa_community_level_url <- "https://www.cdc.gov/coronavirus/2019-ncov/modules/science/us-community-levels-by-county.json"
 us_community_levels <- rio::import(usa_community_level_url,
-                         format = "json")
+                                   format = "json")
 us_community_levels <- us_community_levels$data
 us_community_levels <- us_community_levels %>%
-  filter(County != "Unknown County") %>%
-  filter(State != "Puerto Rico") %>%
   mutate(GEOID = FIPS) %>%
   mutate(fips = FIPS) %>%
   mutate(community_level = `COVID-19 Community Level`)
 
 community_level_map <- plot_usmap(data = us_community_levels, values = "community_level",
-                               size = .01) +
+                                  size = .01) +
   scale_fill_brewer(limits = c("Low","Medium","High"),
                     palette = "Spectral",
                     direction = -1,
@@ -262,10 +260,10 @@ community_level_freq <- us_community_levels %>%
   group_by(community_level)
 
 scale <- ggplot(community_level_freq, aes(x = community_level,
-                                       y = n,
-                                       label = n,
-                                       color = community_level,
-                                       fill = community_level)) +
+                                          y = n,
+                                          label = n,
+                                          color = community_level,
+                                          fill = community_level)) +
   geom_col() +
   geom_text(aes(y = 0),
             color = "black",
@@ -277,9 +275,9 @@ scale <- ggplot(community_level_freq, aes(x = community_level,
                     direction = -1,
                     na.value = "grey80")  + 
   scale_color_brewer(limits = c("Low","Medium","High"),
-                    palette = "Spectral",
-                    direction = -1,
-                    na.value = "grey80")  +  
+                     palette = "Spectral",
+                     direction = -1,
+                     na.value = "grey80")  +  
   coord_flip() +
   scale_x_discrete(limits = rev(c("Low","Medium","High"))) +
   theme(
@@ -308,8 +306,8 @@ ggsave("gh_action/usa_community_levels.png", bg = "white",
        width = 8, height = 8*(628/1200), dpi = 320)
 
 community_level_map_mobile <- plot_usmap(data = us_community_levels, 
-                                      values = "community_level",
-                                      size = .01) +
+                                         values = "community_level",
+                                         size = .01) +
   scale_fill_brewer(limits = c("Low","Medium","High"),
                     palette = "Spectral",
                     direction = -1,
@@ -334,10 +332,10 @@ community_level_map_mobile <- plot_usmap(data = us_community_levels,
 community_level_map_mobile
 
 scale_mobile <- ggplot(community_level_freq, aes(x = community_level,
-                                              y = n,
-                                              label = n,
-                                              color = community_level,
-                                              fill = community_level)) +
+                                                 y = n,
+                                                 label = n,
+                                                 color = community_level,
+                                                 fill = community_level)) +
   geom_col() +
   geom_text(aes(y = 0),
             color = "black",
@@ -349,9 +347,9 @@ scale_mobile <- ggplot(community_level_freq, aes(x = community_level,
                     direction = -1,
                     na.value = "grey80")  + 
   scale_color_brewer(limits = c("Low","Medium","High"),
-                    palette = "Spectral",
-                    direction = -1,
-                    na.value = "grey80")  +  
+                     palette = "Spectral",
+                     direction = -1,
+                     na.value = "grey80")  +  
   coord_flip() +
   scale_x_discrete(limits = rev(c("Low","Medium","High"))) +
   theme(
@@ -769,7 +767,7 @@ cdc_cases_merged <- merge(cdc_cases,
 
 
 il_levels <- us_community_levels %>%
-  filter(State == "Illinois")
+  filter(StateName == "Illinois")
 
 il_levels_geo <- merge(il_levels,
                        il_counties_clean,
@@ -876,7 +874,7 @@ cdc_levels +
        caption =  NULL,
        fill = NULL)+
   theme(plot.title = element_text(size = 10)) +
-cdc_transmission +
+  cdc_transmission +
   labs(title = "Community Transmission Levels",
        caption =  NULL,
        fill = NULL)+
