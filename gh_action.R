@@ -221,15 +221,11 @@ usa_cases <- usa_cases %>%
 
 
 ## make transmission map ----
-
-usa_community_level_url <- "https://www.cdc.gov/coronavirus/2019-ncov/modules/science/us-community-levels-by-county.json"
-us_community_levels <- rio::import(usa_community_level_url,
-                                   format = "json")
-us_community_levels <- us_community_levels$data
-us_community_levels <- us_community_levels %>%
-  mutate(GEOID = FIPS) %>%
-  mutate(fips = FIPS) %>%
-  mutate(community_level = `COVID-19 Community Level`)
+us_community_levels <- usa_cases %>%
+  mutate(community_level = case_when(
+    CCL_community_burden_level_integer == 0 ~ "Low",
+    CCL_community_burden_level_integer == 1 ~ "Medium",
+    CCL_community_burden_level_integer == 2 ~ "High"))
 
 community_level_map <- plot_usmap(data = us_community_levels, values = "community_level",
                                   size = .01) +
@@ -767,7 +763,7 @@ cdc_cases_merged <- merge(cdc_cases,
 
 
 il_levels <- us_community_levels %>%
-  filter(StateName == "Illinois")
+  filter(State_name == "Illinois")
 
 il_levels_geo <- merge(il_levels,
                        il_counties_clean,
