@@ -225,7 +225,10 @@ us_community_levels <- usa_cases %>%
   mutate(community_level = case_when(
     CCL_community_burden_level_integer == 0 ~ "Low",
     CCL_community_burden_level_integer == 1 ~ "Medium",
-    CCL_community_burden_level_integer == 2 ~ "High"))
+    CCL_community_burden_level_integer == 2 ~ "High")) %>%
+  mutate(date = ymd(as_date(CCL_report_date))) %>%
+  mutate(short_date = paste(month(date, label = TRUE, abbr = FALSE),
+                            mday(date)))
 
 community_level_map <- plot_usmap(data = us_community_levels, values = "community_level",
                                   size = .01) +
@@ -234,7 +237,8 @@ community_level_map <- plot_usmap(data = us_community_levels, values = "communit
                     direction = -1,
                     na.value = "grey80") +
   labs(title = "Community Levels",
-       caption =  "Source: CDC",
+       caption =  paste("Source: CDC. Latest data:",
+                        tail(us_community_levels$short_date,1)),
        fill = NULL)+
   theme(
     axis.text = element_blank(),
@@ -309,7 +313,8 @@ community_level_map_mobile <- plot_usmap(data = us_community_levels,
                     direction = -1,
                     na.value = "grey80") +
   labs(title = "Community Levels",
-       caption =  "Source: CDC",
+       caption =  paste("Source: CDC. Latest data:",
+                        tail(us_community_levels$short_date,1)),
        fill = NULL)+
   theme(
     axis.text = element_blank(),
