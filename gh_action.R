@@ -1158,6 +1158,8 @@ if (avg_new_cases >= 0 &&
 }
 
 # idph Illinois cases ----
+cdc_il_url <- "https://covid.cdc.gov/covid-data-tracker/COVIDData/getAjaxData?id=us_trend_by_IL"
+
 idph_cases_champaign <- rio::import("https://idph.illinois.gov/DPHPublicInformation/api/COVID/GetCountyHistorical?countyName=Illinois",
                                     format = "json") 
 idph_cases_champaign <- idph_cases_champaign$values %>%
@@ -1284,23 +1286,23 @@ if (avg_new_cases >= 0 &&
 
 ## get data ----
 ### cases ----
-jhu_new_cases_url <- "https://github.com/owid/covid-19-data/raw/master/public/data/jhu/new_cases.csv"
-jhu_new_cases <- rio::import(jhu_new_cases_url, format = "csv") %>%
-  select(date,"United States") %>%
-  mutate(date = as_date(date)) %>%
-  rename(new_cases = "United States") %>%
-  mutate(avg_new_cases = rollmean(new_cases, k = 7, 
-                                  fill = NA, align = "right"))
+# jhu_new_cases_url <- "https://github.com/owid/covid-19-data/raw/master/public/data/jhu/new_cases.csv"
+# jhu_new_cases <- rio::import(jhu_new_cases_url, format = "csv") %>%
+#   select(date,"United States") %>%
+#   mutate(date = as_date(date)) %>%
+#   rename(new_cases = "United States") %>%
+#   mutate(avg_new_cases = rollmean(new_cases, k = 7, 
+#                                   fill = NA, align = "right"))
 
 
 ### deaths ----
-jhu_new_deaths_url <- "https://github.com/owid/covid-19-data/raw/master/public/data/jhu/new_deaths.csv"
-jhu_new_deaths <- rio::import(jhu_new_deaths_url, format = "csv") %>%
-  select(date,"United States") %>%
-  mutate(date = as_date(date)) %>%
-  rename(new_deaths = "United States") %>%
-  mutate(avg_new_deaths = rollmean(new_deaths, k = 7, 
-                                   fill = NA, align = "right"))
+# jhu_new_deaths_url <- "https://github.com/owid/covid-19-data/raw/master/public/data/jhu/new_deaths.csv"
+# jhu_new_deaths <- rio::import(jhu_new_deaths_url, format = "csv") %>%
+#   select(date,"United States") %>%
+#   mutate(date = as_date(date)) %>%
+#   rename(new_deaths = "United States") %>%
+#   mutate(avg_new_deaths = rollmean(new_deaths, k = 7, 
+#                                    fill = NA, align = "right"))
 
 cdc_usa_data_url <- "https://covid.cdc.gov/covid-data-tracker/COVIDData/getAjaxData?id=us_trend_by_USA"
 cdc_usa_data <- rio::import(cdc_usa_data_url, format = "json")$us_trend_by_Geography
@@ -1329,18 +1331,18 @@ cdc_vax <- cdc_usa_data %>%
   select(date,daily_vaccinations)
 
 ### hospitalizations ----
-owid_hosp_url <- "https://covid.ourworldindata.org/data/owid-covid-data.csv"
-owid_hosp <- rio::import(owid_hosp_url, format = "csv") %>%
-  filter(iso_code == "USA") %>%
-  mutate(date = as_date(date)) %>%
-  select(date, hosp_patients)
+# owid_hosp_url <- "https://covid.ourworldindata.org/data/owid-covid-data.csv"
+# owid_hosp <- rio::import(owid_hosp_url, format = "csv") %>%
+#   filter(iso_code == "USA") %>%
+#   mutate(date = as_date(date)) %>%
+#   select(date, hosp_patients)
 
 ### vaccines ----
-owid_vaccines_url <- "https://github.com/owid/covid-19-data/raw/master/public/data/vaccinations/vaccinations.csv"
-owid_vaccines <- rio::import(owid_vaccines_url, format = "csv") %>%
-  filter(iso_code == "USA") %>%
-  mutate(date = as_date(date)) %>%
-  select(date, people_fully_vaccinated,daily_vaccinations)
+# owid_vaccines_url <- "https://github.com/owid/covid-19-data/raw/master/public/data/vaccinations/vaccinations.csv"
+# owid_vaccines <- rio::import(owid_vaccines_url, format = "csv") %>%
+#   filter(iso_code == "USA") %>%
+#   mutate(date = as_date(date)) %>%
+#   select(date, people_fully_vaccinated,daily_vaccinations)
 
 ### combined
 us_data <- full_join(cdc_new_cases, cdc_new_deaths) %>%
@@ -1542,7 +1544,7 @@ ggsave("gh_action/world_facet_mobile.png",
 idph_cases_champaign <- rio::import("https://idph.illinois.gov/DPHPublicInformation/api/COVID/GetCountyHistorical?countyName=Champaign",
                                     format = "json") 
 idph_cases_champaign <- idph_cases_champaign$values %>%
-  mutate(population = illinoispop)  %>%
+  #mutate(population = illinoispop)  %>%
   mutate(new_cases = CasesChange) %>%
   mutate(new_cases = replace(new_cases, which(new_cases<0), NA)) %>%
   mutate(new_deaths = DeathsChange) %>%
@@ -1550,6 +1552,7 @@ idph_cases_champaign <- idph_cases_champaign$values %>%
   mutate(monthlydead = rollmean(new_deaths, k = 7, 
                                 fill = NA, align = "right"))  %>%
   mutate(Date = ymd_hms(ReportDate, truncated = 0)) %>%
+  mutate(date = as_date(Date)) %>%
   mutate(pct_change_new_cases = 
            ((avg_new_cases - lag(avg_new_cases,14))/lag(avg_new_cases,14))) %>%
   mutate(location = "Champaign County")
@@ -1559,7 +1562,7 @@ idph_cases_champaign <- idph_cases_champaign$values %>%
 idph_cases_il <- rio::import("https://idph.illinois.gov/DPHPublicInformation/api/COVID/GetCountyHistorical?countyName=Illinois",
                              format = "json") 
 idph_cases_il <- idph_cases_il$values %>%
-  mutate(population = illinoispop)  %>%
+  #mutate(population = illinoispop)  %>%
   mutate(new_cases = CasesChange) %>%
   mutate(new_cases = replace(new_cases, which(new_cases<0), NA)) %>%
   mutate(new_deaths = DeathsChange) %>%
@@ -1567,21 +1570,28 @@ idph_cases_il <- idph_cases_il$values %>%
   mutate(monthlydead = rollmean(new_deaths, k = 7, 
                                 fill = NA, align = "right"))  %>%
   mutate(Date = ymd_hms(ReportDate, truncated = 0)) %>%
+  mutate(date = as_date(Date)) %>%
   mutate(pct_change_new_cases = 
            ((avg_new_cases - lag(avg_new_cases,14))/lag(avg_new_cases,14))) %>%
   mutate(location = "Illinois")
 
 
 ### USA cases ----
-jhu_new_cases_url <- "https://github.com/owid/covid-19-data/raw/master/public/data/jhu/new_cases.csv"
-jhu_new_cases_usa <- rio::import(jhu_new_cases_url, format = "csv") %>%
-  select(date,"United States") %>%
-  rename(new_cases = "United States") %>%
-  mutate(avg_new_cases = rollmean(new_cases, k = 7, 
-                                  fill = NA, align = "right")) %>%
+# jhu_new_cases_url <- "https://github.com/owid/covid-19-data/raw/master/public/data/jhu/new_cases.csv"
+# jhu_new_cases_usa <- rio::import(jhu_new_cases_url, format = "csv") %>%
+#   select(date,"United States") %>%
+#   rename(new_cases = "United States") %>%
+#   mutate(avg_new_cases = rollmean(new_cases, k = 7, 
+#                                   fill = NA, align = "right")) %>%
+#   mutate(pct_change_new_cases = 
+#            ((avg_new_cases - lag(avg_new_cases,14))/lag(avg_new_cases,14))) %>%
+#   mutate(Date = ymd(date)) %>% 
+#   mutate(location = "United States")
+
+cdc_new_cases_acceleration <- cdc_new_cases %>%
   mutate(pct_change_new_cases = 
            ((avg_new_cases - lag(avg_new_cases,14))/lag(avg_new_cases,14))) %>%
-  mutate(Date = ymd(date)) %>% 
+  mutate(Date = date) %>%
   mutate(location = "United States")
 
 ### World cases ----
@@ -1594,11 +1604,12 @@ jhu_new_cases_world <- rio::import(jhu_new_cases_url, format = "csv") %>%
   mutate(pct_change_new_cases = 
            ((avg_new_cases - lag(avg_new_cases,14))/lag(avg_new_cases,14))) %>%
   mutate(Date = ymd(date)) %>%
+  mutate(date = as_date(Date)) %>%
   mutate(location = "World")
 
 ## merge data ----
 combined_cases <- full_join(idph_cases_champaign, idph_cases_il) %>%
-  full_join(jhu_new_cases_usa) %>%
+  full_join(cdc_new_cases_acceleration) %>%
   full_join(jhu_new_cases_world) %>%
   select(location, Date,pct_change_new_cases)
 
@@ -1614,7 +1625,7 @@ ggplot(combined_cases,
   facet_wrap(~ location, ncol = 1,
              strip.position = "left") +
   labs(title = "14-Day Change in Average New Cases",
-       caption = paste("Source: IDPH and JHU CSSE COVID-19 Data.\nLatest data:",
+       caption = paste("Source: CDC, IDPH and JHU CSSE COVID-19 Data.\nLatest data:",
                        tail(us_data_longer$short_date,1))) +
   xlab(NULL) +
   ylab(NULL) +
@@ -1654,7 +1665,7 @@ ggplot(combined_cases,
              size = .1) +
   facet_wrap(~ location, ncol = 1) +
   labs(title = "14-Day Change in Average New Cases",
-       caption = paste("Source: IDPH and JHU CSSE COVID-19 Data.\nLatest data:",
+       caption = paste("Source: CDC, IDPH and JHU CSSE COVID-19 Data.\nLatest data:",
                        tail(us_data_longer$short_date,1))) +
   xlab(NULL) +
   ylab(NULL) +
@@ -1890,6 +1901,7 @@ idph_deaths_il <- idph_deaths_il$values %>%
   mutate(monthlydead = rollmean(new_deaths, k = 7, 
                                 fill = NA, align = "right"))  %>%
   mutate(Date = ymd_hms(ReportDate, truncated = 0)) %>%
+  mutate(date = as_date(Date)) %>%
   mutate(pct_change_new_cases = 
            ((avg_new_cases - lag(avg_new_cases,14))/lag(avg_new_cases,14))) %>%
   mutate(pct_change_new_deaths = 
@@ -1898,16 +1910,23 @@ idph_deaths_il <- idph_deaths_il$values %>%
 
 
 ### USA cases ----
-jhu_new_deaths_url <- "https://github.com/owid/covid-19-data/raw/master/public/data/jhu/new_deaths.csv"
-jhu_new_deaths_usa <- rio::import(jhu_new_deaths_url, format = "csv") %>%
-  select(date,"United States") %>%
-  rename(new_deaths = "United States") %>%
-  mutate(avg_new_deaths = rollmean(new_deaths, k = 7, 
-                                   fill = NA, align = "right")) %>%
+# jhu_new_deaths_url <- "https://github.com/owid/covid-19-data/raw/master/public/data/jhu/new_deaths.csv"
+# jhu_new_deaths_usa <- rio::import(jhu_new_deaths_url, format = "csv") %>%
+#   select(date,"United States") %>%
+#   rename(new_deaths = "United States") %>%
+#   mutate(avg_new_deaths = rollmean(new_deaths, k = 7, 
+#                                    fill = NA, align = "right")) %>%
+#   mutate(pct_change_new_deaths = 
+#            ((avg_new_deaths - lag(avg_new_deaths,14))/lag(avg_new_deaths,14))) %>%
+#   mutate(Date = ymd(date)) %>% 
+#   mutate(location = "United States")
+
+cdc_new_deaths_acceleration <- cdc_new_deaths %>%
   mutate(pct_change_new_deaths = 
            ((avg_new_deaths - lag(avg_new_deaths,14))/lag(avg_new_deaths,14))) %>%
-  mutate(Date = ymd(date)) %>% 
+  mutate(Date = date) %>%
   mutate(location = "United States")
+
 
 ### World cases ----
 jhu_new_deaths_url <- "https://github.com/owid/covid-19-data/raw/master/public/data/jhu/new_deaths.csv"
@@ -1919,10 +1938,11 @@ jhu_new_deaths_world <- rio::import(jhu_new_deaths_url, format = "csv") %>%
   mutate(pct_change_new_deaths = 
            ((avg_new_deaths - lag(avg_new_deaths,14))/lag(avg_new_deaths,14))) %>%
   mutate(Date = ymd(date)) %>%
+  mutate(date = as_date(Date)) %>%
   mutate(location = "World")
 
 ## merge data ----
-combined_deaths <- full_join(idph_deaths_il, jhu_new_deaths_usa) %>%
+combined_deaths <- full_join(idph_deaths_il, cdc_new_deaths_acceleration) %>%
   full_join(jhu_new_deaths_world) %>%
   select(location, Date,pct_change_new_deaths)
 
@@ -1938,7 +1958,7 @@ ggplot(combined_deaths,
   facet_wrap(~ location, ncol = 1,
              strip.position = "left") +
   labs(title = "14-Day Change in Average New Deaths",
-       caption = paste("Source: IDPH and JHU CSSE COVID-19 Data.\nLatest data:",
+       caption = paste("Source: CDC, IDPH and JHU CSSE COVID-19 Data.\nLatest data:",
                        tail(us_data_longer$short_date,1))) +
   xlab(NULL) +
   ylab(NULL) +
@@ -1978,7 +1998,7 @@ ggplot(combined_deaths,
              size = .1) +
   facet_wrap(~ location, ncol = 1) +
   labs(title = "14-Day Change in Average New Deaths",
-       caption = paste("Source: IDPH and JHU CSSE COVID-19 Data.\nLatest data:",
+       caption = paste("Source: CDC, IDPH and JHU CSSE COVID-19 Data.\nLatest data:",
                        tail(us_data_longer$short_date,1))) +
   xlab(NULL) +
   ylab(NULL) +
