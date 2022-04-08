@@ -1287,6 +1287,7 @@ if (avg_new_cases >= 0 &&
 jhu_new_cases_url <- "https://github.com/owid/covid-19-data/raw/master/public/data/jhu/new_cases.csv"
 jhu_new_cases <- rio::import(jhu_new_cases_url, format = "csv") %>%
   select(date,"United States") %>%
+  mutate(date = as_date(date)) %>%
   rename(new_cases = "United States") %>%
   mutate(avg_new_cases = rollmean(new_cases, k = 7, 
                                   fill = NA, align = "right"))
@@ -1296,27 +1297,56 @@ jhu_new_cases <- rio::import(jhu_new_cases_url, format = "csv") %>%
 jhu_new_deaths_url <- "https://github.com/owid/covid-19-data/raw/master/public/data/jhu/new_deaths.csv"
 jhu_new_deaths <- rio::import(jhu_new_deaths_url, format = "csv") %>%
   select(date,"United States") %>%
+  mutate(date = as_date(date)) %>%
   rename(new_deaths = "United States") %>%
   mutate(avg_new_deaths = rollmean(new_deaths, k = 7, 
                                    fill = NA, align = "right"))
+
+cdc_usa_data_url <- "https://covid.cdc.gov/covid-data-tracker/COVIDData/getAjaxData?id=us_trend_by_USA"
+cdc_usa_data <- rio::import(cdc_usa_data_url, format = "json")$us_trend_by_Geography
+cdc_new_deaths <- cdc_usa_data %>%
+  select(date,seven_day_avg_new_deaths) %>%
+  mutate(date = mdy(date)) %>%
+  mutate(avg_new_deaths = seven_day_avg_new_deaths) %>%
+  select(date,avg_new_deaths)
+
+cdc_new_cases <- cdc_usa_data %>%
+  select(date,seven_day_avg_new_cases) %>%
+  mutate(date = mdy(date)) %>%
+  mutate(avg_new_cases = seven_day_avg_new_cases) %>%
+  select(date,avg_new_cases)
+
+cdc_hosp <- cdc_usa_data %>%
+  select(date,sum_inpatient_beds_used_covid_7DayAvg) %>%
+  mutate(date = mdy(date)) %>%
+  mutate(hosp_patients = sum_inpatient_beds_used_covid_7DayAvg) %>%
+  select(date,hosp_patients)
+
+cdc_vax <- cdc_usa_data %>%
+  select(date,Administered_7_Day_Rolling_Average) %>%
+  mutate(date = mdy(date)) %>%
+  mutate(daily_vaccinations = Administered_7_Day_Rolling_Average) %>%
+  select(date,daily_vaccinations)
 
 ### hospitalizations ----
 owid_hosp_url <- "https://covid.ourworldindata.org/data/owid-covid-data.csv"
 owid_hosp <- rio::import(owid_hosp_url, format = "csv") %>%
   filter(iso_code == "USA") %>%
+  mutate(date = as_date(date)) %>%
   select(date, hosp_patients)
 
 ### vaccines ----
 owid_vaccines_url <- "https://github.com/owid/covid-19-data/raw/master/public/data/vaccinations/vaccinations.csv"
 owid_vaccines <- rio::import(owid_vaccines_url, format = "csv") %>%
   filter(iso_code == "USA") %>%
+  mutate(date = as_date(date)) %>%
   select(date, people_fully_vaccinated,daily_vaccinations)
 
 ### combined
-us_data <- full_join(jhu_new_cases, jhu_new_deaths) %>%
-  full_join(owid_hosp) %>%
-  full_join(owid_vaccines)
-us_data$people_fully_vaccinated <- as.double(us_data$people_fully_vaccinated)
+us_data <- full_join(cdc_new_cases, cdc_new_deaths) %>%
+  full_join(cdc_hosp) %>%
+  full_join(cdc_vax)
+#us_data$people_fully_vaccinated <- as.double(us_data$people_fully_vaccinated)
 us_data_longer <- us_data %>%
   select(date, hosp_patients, avg_new_cases, avg_new_deaths,
          daily_vaccinations) %>%
@@ -1339,7 +1369,7 @@ ggplot(us_data_longer,
            colour = names)) +
   geom_line() +
   facet_wrap(~ names, scales = "free_y") +
-  labs(caption = paste("Source: HHS, Our World in Data and JHU CSSE COVID-19 Data. Latest data:",
+  labs(caption = paste("Source: CDC. Latest data:",
                        tail(us_data_longer$short_date,1))) +
   xlab(NULL) +
   ylab(NULL) +
@@ -1371,7 +1401,7 @@ ggplot(us_data_longer,
   geom_line() +
   facet_wrap(~ names, scales = "free_y",
              ncol = 1) +
-  labs(caption = paste("Source: HHS, Our World in Data and\nJHU CSSE COVID-19 Data.\nLatest data:",
+  labs(caption = paste("Source: CDC. Latest data:",
                        tail(us_data_longer$short_date,1))) +
   xlab(NULL) +
   ylab(NULL) +
