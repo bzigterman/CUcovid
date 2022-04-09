@@ -2,8 +2,6 @@ name: autoemailer
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '50 19 * * 1-5'
 
 jobs:
   run-automailer:
