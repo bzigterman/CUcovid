@@ -1018,7 +1018,8 @@ cdc_total_vax +
 ggsave("gh_action/IL_vax_combined.png", 
        width = 8, height = 8*(628/1200), dpi = 320)
 
-# idph champaign county cases ----
+# Champaign ----
+## idph ----
 champaignpop <- 209983
 
 idph_cases_champaign <- rio::import("https://idph.illinois.gov/DPHPublicInformation/api/COVID/GetCountyHistorical?countyName=Champaign",
@@ -1059,20 +1060,42 @@ hospitalizations_by_date <- hospitalizations %>%
   mutate(avg_hospitalized = sum_hospitalized/7) %>%
   mutate(CountyName = "Champaign")
 
+## cdc ----
+cdc_champaign_url <- "https://covid.cdc.gov/covid-data-tracker/COVIDData/getAjaxData?id=integrated_county_timeseries_fips_17019_external"
+cdc_champaign_data <- rio::import(
+  cdc_champaign_url,
+  format = "json")$integrated_county_timeseries_external_data
+
+cdc_champaign_hosp <- cdc_champaign_data %>%
+  select(date, percent_adult_inpatient_beds_used_confirmed_covid,
+         percent_adult_icu_beds_used_confirmed_covid) %>%
+  arrange(date) %>%
+  mutate(date = ymd(date)) %>%
+  mutate(Date = ymd(date))
+
+## combined ----
+
 idph_cases_vax_hosp <- full_join(idph_cases_champaign, idph_vax_champaign) %>%
   full_join(hospitalizations_by_date) %>%
+  full_join(cdc_champaign_hosp) %>%
   select(Date, AdministeredCountRollAvg,
-         monthlydead, avg_new_cases, avg_hospitalized)
+         monthlydead, avg_new_cases, avg_hospitalized,
+         percent_adult_inpatient_beds_used_confirmed_covid,
+         percent_adult_icu_beds_used_confirmed_covid) %>%
+  arrange(Date)
 
 idph_cases_vax_hosp_longer <- idph_cases_vax_hosp %>%
   pivot_longer(!Date,
                values_to = "values",
                names_to = "names") %>%
-  mutate(names = recode_factor(names, 
-                               "avg_new_cases" = "Average New Cases",
-                               "avg_hospitalized" = "Average Hospitalized",
-                               "monthlydead" = "Deaths in the Past Month",
-                               "AdministeredCountRollAvg" = "Average New Vaccine Doses"))  %>%
+  mutate(names = recode_factor(
+    names, 
+    "avg_new_cases" = "Average New Cases",
+    "monthlydead" = "Deaths in the Past Month",
+    "AdministeredCountRollAvg" = "Average New Vaccine Doses",
+    "avg_hospitalized" = "Average Hospitalized",
+    "percent_adult_inpatient_beds_used_confirmed_covid" = "Pct. Hosp. Beds Used",
+    "percent_adult_icu_beds_used_confirmed_covid" = "Pct. ICU Beds Used"))%>%
   mutate(short_date = paste(month(Date, label = TRUE, abbr = FALSE),
                             mday(Date))) %>%
   drop_na()
@@ -1093,7 +1116,7 @@ ggplot(idph_cases_vax_hosp_longer,
            colour = names)) +
   geom_line() +
   facet_wrap(~ names, scales = "free_y") +
-  labs(caption = paste("Source: HHS, IDPH. Latest data:",
+  labs(caption = paste("Source: CDC, HHS and IDPH. Latest data:",
                        tail(idph_cases_vax_hosp_longer$short_date,1))) +
   xlab(NULL) +
   ylab(NULL) +
@@ -1103,8 +1126,9 @@ ggplot(idph_cases_vax_hosp_longer,
                      position = "right",
                      expand = expansion(mult = c(0,.05))) +
   expand_limits(y = 0) +
-  scale_colour_manual(guide = FALSE,
-                      values = c("#B45F06","#d90000","black","#35978f")) +
+ scale_colour_manual(guide = "none",
+                      values = c("#B45F06","#d90000","#35978f","black",
+                                 "black","black")) +
   theme(axis.text.y = element_text(size = 10),
         axis.text.x = element_text(size = 8),
         panel.grid.minor = element_blank(),
@@ -1124,14 +1148,32 @@ if (avg_new_cases >= 0 &&
          width = 8, height = 8*(628/1200), dpi = 320)
 }
 
+idph_cases_vax_hosp_longer <- idph_cases_vax_hosp %>%
+  pivot_longer(!Date,
+               values_to = "values",
+               names_to = "names") %>%
+  mutate(names = recode_factor(
+    names, 
+    "avg_new_cases" = "Avg. New Cases",
+    "monthlydead" = "Monthly Deaths",
+    "AdministeredCountRollAvg" = "Avg. New Vaccine Doses",
+    "avg_hospitalized" = "Avg. Hospitalized",
+    "percent_adult_inpatient_beds_used_confirmed_covid" = "% Hosp. Beds Used",
+    "percent_adult_icu_beds_used_confirmed_covid" = "% ICU Beds Used"))%>%
+  mutate(short_date = paste(month(Date, label = TRUE, abbr = FALSE),
+                            mday(Date))) %>%
+  drop_na()
+
+
 ggplot(idph_cases_vax_hosp_longer,
        aes(x = as.Date(Date),
            y = values,
            colour = names)) +
   geom_line() +
   facet_wrap(~ names, scales = "free_y",
-             ncol = 1) +
-  labs(caption = paste("Source: HHS, IDPH. Latest data:",
+             ncol = 2,
+             dir = "v") +
+  labs(caption = paste("Source: CDC, HHS and IDPH. Latest data:",
                        tail(idph_cases_vax_hosp_longer$short_date,1))) +
   xlab(NULL) +
   ylab(NULL) +
@@ -1142,15 +1184,19 @@ ggplot(idph_cases_vax_hosp_longer,
                      expand = expansion(mult = c(0,.05))) +
   expand_limits(y = 0) +
   scale_colour_manual(guide = "none",
-                      values = c("#B45F06","#d90000","black","#35978f")) +
+                      values = c("#B45F06","#d90000","#35978f","black",
+                                 "black","black")) +
   theme(#axis.text.y = element_text(size = 10),
     #axis.text.x = element_text(size = 8),
     panel.grid.minor = element_blank(),
+    strip.text = element_text(size = 6),
+    axis.text = element_text(size = 5),
     panel.background = element_blank(),
     panel.grid.major.y = element_line(colour = "grey93"),
     #strip.text = element_text(size = 11),
     strip.background = element_blank(),
-    plot.caption = element_text(colour = "grey40"))
+    plot.caption = element_text(colour = "grey40",
+                                size = 4))
 
 if (avg_new_cases >= 0 && 
     dead_last_month >= 0 && 
