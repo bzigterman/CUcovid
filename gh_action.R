@@ -1127,8 +1127,8 @@ ggplot(idph_cases_vax_hosp_longer,
                      expand = expansion(mult = c(0,.05))) +
   expand_limits(y = 0) +
  scale_colour_manual(guide = "none",
-                      values = c("#B45F06","#d90000","#35978f","black",
-                                 "black","black")) +
+                      values = c("#B45F06","black","#35978f","#d90000",
+                                 "#d90000","#d90000")) +
   theme(axis.text.y = element_text(size = 10),
         axis.text.x = element_text(size = 8),
         panel.grid.minor = element_blank(),
@@ -1184,8 +1184,8 @@ ggplot(idph_cases_vax_hosp_longer,
                      expand = expansion(mult = c(0,.05))) +
   expand_limits(y = 0) +
   scale_colour_manual(guide = "none",
-                      values = c("#B45F06","#d90000","#35978f","black",
-                                 "black","black")) +
+                      values = c("#B45F06","black","#35978f","#d90000",
+                                 "#d90000","#d90000")) +
   theme(#axis.text.y = element_text(size = 10),
     #axis.text.x = element_text(size = 8),
     panel.grid.minor = element_blank(),
