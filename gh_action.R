@@ -1222,7 +1222,7 @@ wastewater <- rio::import(wastewater_url,
 wastewater_date <- tail(wastewater$short_date,1)
 
 wastewater_plus_cases <- full_join(wastewater, idph_cases_champaign) %>%
-  select(Date,ptc_15d,detect_prop_15d,percentile,CasesChange) %>%
+  select(Date,ptc_15d,detect_prop_15d,percentile,avg_new_cases) %>%
   arrange(Date)%>%
   filter(Date >= "2022-01-01")
 
@@ -1230,10 +1230,11 @@ wastewater_plus_cases_longer <- wastewater_plus_cases %>%
   pivot_longer(!Date) %>%
   mutate(name = recode_factor(
     name, 
-    "CasesChange" = "New Cases",
+    "avg_new_cases" = "Avg. New Cases",
     "detect_prop_15d" = "Pct. Tests Detecting SARS-CoV-2",
     "ptc_15d" = "15-Day Pct. Change",
-    "percentile" = "Percentile"))
+    "percentile" = "Percentile")) %>%
+  drop_na()
 
 
 p <- ggplot(data = wastewater_plus_cases_longer,
