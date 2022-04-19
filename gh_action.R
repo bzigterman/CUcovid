@@ -1230,7 +1230,7 @@ wastewater_plus_cases_longer <- wastewater_plus_cases %>%
   pivot_longer(!Date) %>%
   mutate(name = recode_factor(
     name, 
-    "CasesChange" = "Avg. New Cases",
+    "CasesChange" = "New Cases",
     "detect_prop_15d" = "Pct. Tests Detecting SARS-CoV-2",
     "ptc_15d" = "15-Day Pct. Change",
     "percentile" = "Percentile"))
