@@ -1210,6 +1210,91 @@ if (avg_new_cases >= 0 &&
          width = 3, height = 8*(628/1200), dpi = 320)
 }
 
+### wastewater ----
+wastewater_url <- "https://data.cdc.gov/resource/2ew6-ywp6.csv?county_fips=17019"
+wastewater <- rio::import(wastewater_url,
+                          format = "csv") %>%
+  mutate(Date = ymd(date_end)) %>%
+  select(Date,ptc_15d,detect_prop_15d,percentile) %>%
+  arrange(Date) %>%
+  mutate(short_date = paste(month(Date, label = TRUE, abbr = FALSE),
+                            mday(Date))) 
+wastewater_date <- tail(wastewater$short_date,1)
+
+wastewater_plus_cases <- full_join(wastewater, idph_cases_champaign) %>%
+  select(Date,ptc_15d,detect_prop_15d,percentile,CasesChange) %>%
+  arrange(Date)
+
+wastewater_plus_cases_longer <- wastewater_plus_cases %>%
+  pivot_longer(!Date) %>%
+  mutate(name = recode_factor(
+    name, 
+    "CasesChange" = "Avg. New Cases",
+    "detect_prop_15d" = "Pct. Tests Detecting SARS-CoV-2",
+    "ptc_15d" = "15-Day Pct. Change",
+    "percentile" = "Percentile"))
+
+
+p <- ggplot(data = wastewater_plus_cases_longer,
+            aes(x = as.Date(Date),
+                y = value,
+                colour = name)) +
+  geom_line() +
+  facet_wrap(~ name, scales = "free_y") +
+  xlab(NULL) +
+  ylab(NULL) +
+  labs(caption = paste("Source: CDC. Latest data:",wastewater_date)) +
+  scale_x_date(expand = c(0,0),
+               labels = label_date_short()) +
+  scale_y_continuous(labels = label_comma(accuracy = 1),
+                     position = "right") +
+  theme(
+    legend.position = "none",
+    axis.text.y = element_text(size = 10),
+    axis.text.x = element_text(size = 8),
+    panel.grid.minor = element_blank(),
+    panel.background = element_blank(),
+    panel.grid.major.y = element_line(colour = "grey93"),
+    strip.text = element_text(size = 11),
+    strip.background = element_blank(),
+    plot.caption = element_text(colour = "grey40")
+  )
+p
+
+if (avg_new_cases >= 0 && 
+    dead_last_month >= 0 && 
+    avg_hospitalized >= 0 &&
+    pct_fully_vaccinated >= 0 &&
+    pct_fully_vaccinated <= 100 &&
+    avg_new_vaccine_doses >= 0) {
+  ggsave("gh_action/champaign_wastewater.png", 
+         width = 8, height = 8*(628/1200), dpi = 320)
+}
+
+p_mobile <- p +
+  facet_wrap(~ name, scales = "free_y",
+             ncol = 1) +
+  theme(
+    axis.text.y = element_text(size = 5),
+    panel.grid.minor = element_blank(),
+    panel.background = element_blank(),
+    panel.grid.major.y = element_line(colour = "grey93"),
+    strip.text = element_text(size = 7),
+    strip.background = element_blank(),
+    plot.caption = element_text(colour = "grey40"))
+p_mobile
+
+if (avg_new_cases >= 0 && 
+    dead_last_month >= 0 && 
+    avg_hospitalized >= 0 &&
+    pct_fully_vaccinated >= 0 &&
+    pct_fully_vaccinated <= 100 &&
+    avg_new_vaccine_doses >= 0) {
+  ggsave("gh_action/champaign_wastewater_mobile.png", 
+         width = 3, height = 8*(628/1200), dpi = 320)
+}
+
+
 ## Ilinois ----
 cdc_il_url <- "https://covid.cdc.gov/covid-data-tracker/COVIDData/getAjaxData?id=us_trend_by_IL"
 
