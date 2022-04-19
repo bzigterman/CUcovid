@@ -1276,13 +1276,14 @@ p_mobile <- p +
   facet_wrap(~ name, scales = "free_y",
              ncol = 1) +
   theme(
-    axis.text.y = element_text(size = 5),
+    axis.text.y = element_text(size = 6),
     panel.grid.minor = element_blank(),
     panel.background = element_blank(),
     panel.grid.major.y = element_line(colour = "grey93"),
     strip.text = element_text(size = 7),
     strip.background = element_blank(),
-    plot.caption = element_text(colour = "grey40"))
+    plot.caption = element_text(colour = "grey40",
+                                size = 5))
 p_mobile
 
 if (avg_new_cases >= 0 && 
