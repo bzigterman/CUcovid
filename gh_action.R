@@ -1171,7 +1171,7 @@ ggplot(idph_cases_vax_hosp_longer,
        aes(x = as.Date(Date),
            y = values,
            colour = names)) +
-  geom_line() +
+  geom_line(size = .7) +
   facet_wrap(~ names, scales = "free_y",
              ncol = 2,
              dir = "v") +
