@@ -1207,7 +1207,7 @@ if (avg_new_cases >= 0 &&
     pct_fully_vaccinated <= 100 &&
     avg_new_vaccine_doses >= 0) {
   ggsave("gh_action/Champaign_facet_mobile.png", 
-         width = 3, height = 8*(628/1200), dpi = 320)
+         width = 2, height = 8*(628/1200), dpi = 320)
 }
 
 ### wastewater ----
