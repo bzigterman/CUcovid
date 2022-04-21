@@ -1173,7 +1173,7 @@ ggplot(idph_cases_vax_hosp_longer,
            colour = names)) +
   geom_line(size = .3) +
   facet_wrap(~ names, scales = "free_y",
-             ncol = 2,
+             ncol = 1,
              dir = "v") +
   labs(caption = paste("Source: CDC, HHS and IDPH. Latest data:",
                        tail(idph_cases_vax_hosp_longer$short_date,1))) +
@@ -1191,8 +1191,8 @@ ggplot(idph_cases_vax_hosp_longer,
   theme(#axis.text.y = element_text(size = 10),
     #axis.text.x = element_text(size = 8),
     panel.grid.minor = element_blank(),
-    strip.text = element_text(size = 6),
-    axis.text = element_text(size = 5),
+    strip.text = element_text(size = 8),
+    axis.text.y = element_text(size = 7),
     panel.background = element_blank(),
     panel.grid.major.y = element_line(colour = "grey93"),
     #strip.text = element_text(size = 11),
@@ -1277,11 +1277,11 @@ p_mobile <- p +
   facet_wrap(~ name, scales = "free_y",
              ncol = 1) +
   theme(
-    axis.text.y = element_text(size = 6),
+    axis.text.y = element_text(size = 7),
     panel.grid.minor = element_blank(),
     panel.background = element_blank(),
     panel.grid.major.y = element_line(colour = "grey93"),
-    strip.text = element_text(size = 7),
+    strip.text = element_text(size = 8),
     strip.background = element_blank(),
     plot.caption = element_text(colour = "grey40",
                                 size = 5))
