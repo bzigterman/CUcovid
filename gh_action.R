@@ -1244,7 +1244,7 @@ wastewater_plus_cases_longer <- wastewater_plus_cases %>%
   mutate(name = recode_factor(
     name, 
     "avg_new_cases" = "Avg. New Cases",
-    "pcr_conc_smoothed" = "SARS-CoV-2 Concentration",
+    "pcr_conc_smoothed" = "Normalized SARS-CoV-2 Concentration",
     "detect_prop_15d" = "Pct. Tests Detecting SARS-CoV-2",
     #"ptc_15d" = "15-Day Pct. Change",
     "percentile" = "Percentile")) %>%
