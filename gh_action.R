@@ -1214,18 +1214,28 @@ if (avg_new_cases >= 0 &&
 }
 
 ### wastewater ----
+url <- "https://covid.cdc.gov/covid-data-tracker/COVIDData/getAjaxData?id=HHS_NWSS_Concentration_Timeseries_Data"
+water <- rio::import(url, format = "json")$HHS_NWSS_Concentration_Timeseries_Data %>%
+  filter(key_plot_id == "NWSS_il_655_Treatment plant_raw wastewater") %>%
+  arrange(date) %>%
+  mutate(Date = ymd(date))
+
+
 wastewater_url <- "https://data.cdc.gov/resource/2ew6-ywp6.csv?wwtp_id=655"
 wastewater <- rio::import(wastewater_url,
                           format = "csv") %>%
   mutate(Date = ymd(date_end)) %>%
- # select(Date,ptc_15d,detect_prop_15d,percentile) %>%
+  select(Date,ptc_15d,detect_prop_15d,percentile) %>%
   arrange(Date) %>%
   mutate(short_date = paste(month(Date, label = TRUE, abbr = FALSE),
                             mday(Date))) 
 wastewater_date <- tail(wastewater$short_date,1)
 
 wastewater_plus_cases <- full_join(wastewater, idph_cases_champaign) %>%
-  select(Date,ptc_15d,detect_prop_15d,percentile,avg_new_cases) %>%
+  full_join(water) %>%
+  select(Date,#ptc_15d,
+         detect_prop_15d,percentile,
+         avg_new_cases, pcr_conc_smoothed) %>%
   arrange(Date)%>%
   filter(Date >= "2022-01-01")
 
@@ -1234,8 +1244,9 @@ wastewater_plus_cases_longer <- wastewater_plus_cases %>%
   mutate(name = recode_factor(
     name, 
     "avg_new_cases" = "Avg. New Cases",
+    "pcr_conc_smoothed" = "SARS-CoV-2 Concentration",
     "detect_prop_15d" = "Pct. Tests Detecting SARS-CoV-2",
-    "ptc_15d" = "15-Day Pct. Change",
+    #"ptc_15d" = "15-Day Pct. Change",
     "percentile" = "Percentile")) %>%
   drop_na()
 
