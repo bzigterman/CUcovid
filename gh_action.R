@@ -1218,7 +1218,8 @@ url <- "https://covid.cdc.gov/covid-data-tracker/COVIDData/getAjaxData?id=HHS_NW
 water <- rio::import(url, format = "json")$HHS_NWSS_Concentration_Timeseries_Data %>%
   filter(key_plot_id == "NWSS_il_655_Treatment plant_raw wastewater") %>%
   arrange(date) %>%
-  mutate(Date = ymd(date))
+  mutate(Date = ymd(date)) %>%
+  mutate(smaller_conc = pcr_conc_smoothed/1000000000)
 
 
 wastewater_url <- "https://data.cdc.gov/resource/2ew6-ywp6.csv?wwtp_id=655"
@@ -1235,7 +1236,7 @@ wastewater_plus_cases <- full_join(wastewater, idph_cases_champaign) %>%
   full_join(water) %>%
   select(Date,#ptc_15d,
          detect_prop_15d,percentile,
-         avg_new_cases, pcr_conc_smoothed) %>%
+         avg_new_cases, smaller_conc) %>%
   arrange(Date)%>%
   filter(Date >= "2022-01-01")
 
@@ -1244,7 +1245,7 @@ wastewater_plus_cases_longer <- wastewater_plus_cases %>%
   mutate(name = recode_factor(
     name, 
     "avg_new_cases" = "Avg. New Cases",
-    "pcr_conc_smoothed" = "Normalized SARS-CoV-2 Concentration",
+    "smaller_conc" = "Normalized SARS-CoV-2 Concentration",
     "detect_prop_15d" = "Pct. Tests Detecting SARS-CoV-2",
     #"ptc_15d" = "15-Day Pct. Change",
     "percentile" = "Percentile")) %>%
@@ -1262,8 +1263,7 @@ p <- ggplot(data = wastewater_plus_cases_longer,
   labs(caption = paste("Source: CDC and IDPH. Latest data:",wastewater_date)) +
   scale_x_date(expand = c(0,0),
                labels = label_date_short()) +
-  scale_y_continuous(labels = label_comma(accuracy = 1),
-                     position = "right") +
+  scale_y_continuous(position = "right") +
   theme(
     legend.position = "none",
     axis.text.y = element_text(size = 10),
