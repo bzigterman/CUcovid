@@ -1263,7 +1263,8 @@ p <- ggplot(data = wastewater_plus_cases_longer,
   labs(caption = paste("Source: CDC and IDPH. Latest data:",wastewater_date)) +
   scale_x_date(expand = c(0,0),
                labels = label_date_short()) +
-  scale_y_continuous(position = "right") +
+  scale_y_continuous(labels = label_comma(),
+                     position = "right") +
   theme(
     legend.position = "none",
     axis.text.y = element_text(size = 10),
