@@ -1257,7 +1257,7 @@ p <- ggplot(data = wastewater_plus_cases_longer,
                 y = value,
                 colour = name)) +
   geom_line() +
-  facet_wrap(~ name, scales = "free_y") +
+  facet_wrap(~ name, scales = "free_y", dir = "v") +
   xlab(NULL) +
   ylab(NULL) +
   labs(caption = paste("Source: CDC and IDPH. Latest data:",wastewater_date)) +
