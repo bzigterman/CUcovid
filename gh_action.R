@@ -871,11 +871,11 @@ cdc_transmission <- ggplot(data = cdc_cases_merged) +
 cdc_transmission 
 
 ### combined cases and vax map ----
-cdc_levels +
-  labs(title = "Community Levels",
-       caption =  NULL,
-       fill = NULL)+
-  theme(plot.title = element_text(size = 10)) +
+#cdc_levels +
+ # labs(title = "Community Levels",
+  #     caption =  NULL,
+   #    fill = NULL)+
+#  theme(plot.title = element_text(size = 10)) +
   cdc_transmission +
   labs(title = "Community Transmission Levels",
        #caption =  NULL,
