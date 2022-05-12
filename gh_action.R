@@ -1231,7 +1231,7 @@ wastewater_plus_cases <- full_join(wastewater, idph_cases_champaign) %>%
          detect_prop_15d,percentile,
          avg_new_cases, smaller_conc) %>%
   arrange(Date)%>%
-  filter(Date >= "2022-01-01")
+  filter(Date >= "2021-11-22")
 
 wastewater_plus_cases_longer <- wastewater_plus_cases %>%
   pivot_longer(!Date) %>%
