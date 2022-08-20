@@ -1364,10 +1364,10 @@ cdc_il_new_deaths <- cdc_il_data %>%
   select(date,avg_new_deaths)
 
 cdc_il_new_cases <- cdc_il_data %>%
-  select(date,seven_day_avg_new_cases) %>%
+  select(date,seven_day_avg_new_cases, percent_positive_7_day) %>%
   mutate(date = mdy(date)) %>%
   mutate(avg_new_cases = seven_day_avg_new_cases) %>%
-  select(date,avg_new_cases)
+  select(date,avg_new_cases, percent_positive_7_day)
 
 cdc_il_hosp <- cdc_il_data %>%
   select(date,sum_inpatient_beds_used_covid_7DayAvg) %>%
@@ -1385,8 +1385,8 @@ cdc_il_vax <- cdc_il_data %>%
 cdc_il_joined <- full_join(cdc_il_new_cases, cdc_il_vax) %>%
   full_join(cdc_il_hosp) %>%
   full_join(cdc_il_new_deaths) %>%
-  select(date, daily_vaccinations,
-         avg_new_deaths, avg_new_cases, hosp_patients)
+  select(date,
+         avg_new_deaths, avg_new_cases, hosp_patients, percent_positive_7_day)
 
 cdc_il_longer <- cdc_il_joined %>%
   pivot_longer(!date,
@@ -1396,7 +1396,7 @@ cdc_il_longer <- cdc_il_joined %>%
                                "avg_new_cases" = "Average New Cases",
                                "hosp_patients" = "Hospitalized",     
                                "avg_new_deaths" = "Average New Deaths",
-                               "daily_vaccinations" = "Average New Vaccine Doses"))  %>%
+                               "percent_positive_7_day" = "Test Positivity"))  %>%
   mutate(short_date = paste(month(date, label = TRUE, abbr = FALSE),
                             mday(date))) 
 
@@ -1511,10 +1511,10 @@ cdc_new_deaths <- cdc_usa_data %>%
   select(date,avg_new_deaths)
 
 cdc_new_cases <- cdc_usa_data %>%
-  select(date,seven_day_avg_new_cases) %>%
+  select(date,seven_day_avg_new_cases, percent_positive_7_day) %>%
   mutate(date = mdy(date)) %>%
   mutate(avg_new_cases = seven_day_avg_new_cases) %>%
-  select(date,avg_new_cases)
+  select(date,avg_new_cases, percent_positive_7_day)
 
 cdc_hosp <- cdc_usa_data %>%
   select(date,sum_inpatient_beds_used_covid_7DayAvg) %>%
@@ -1549,7 +1549,7 @@ us_data <- full_join(cdc_new_cases, cdc_new_deaths) %>%
 #us_data$people_fully_vaccinated <- as.double(us_data$people_fully_vaccinated)
 us_data_longer <- us_data %>%
   select(date, hosp_patients, avg_new_cases, avg_new_deaths,
-         daily_vaccinations) %>%
+         percent_positive_7_day) %>%
   pivot_longer(!date,
                values_to = "values",
                names_to = "names") %>%
@@ -1557,7 +1557,7 @@ us_data_longer <- us_data %>%
                                "avg_new_cases" = "Average New Cases",
                                "hosp_patients" = "Hospitalized",
                                "avg_new_deaths" = "Average New Deaths",
-                               "daily_vaccinations" = "Average New Vaccine Doses"))  %>%
+                               "percent_positive_7_day" = "Test Positivity"))  %>%
   mutate(short_date = paste(month(date, label = TRUE, abbr = FALSE),
                             mday(date)))
 
@@ -1660,16 +1660,13 @@ us_data <- full_join(jhu_new_cases, jhu_new_deaths) %>%
   full_join(owid_vaccines)
 us_data$people_fully_vaccinated <- as.double(us_data$people_fully_vaccinated)
 us_data_longer <- us_data %>%
-  select(date, people_fully_vaccinated, avg_new_cases, avg_new_deaths,
-         daily_vaccinations) %>%
+  select(date, avg_new_cases, avg_new_deaths) %>%
   pivot_longer(!date,
                values_to = "values",
                names_to = "names") %>%
   mutate(names = recode_factor(names, 
                                "avg_new_cases" = "Average New Cases",
-                               "avg_new_deaths" = "Average New Deaths",
-                               "people_fully_vaccinated" = "People Fully Vaccinated",
-                               "daily_vaccinations" = "Average New Vaccine Doses"))  %>%
+                               "avg_new_deaths" = "Average New Deaths"))  %>%
   mutate(short_date = paste(month(date, label = TRUE, abbr = FALSE),
                             mday(date)))
 
@@ -1692,7 +1689,7 @@ ggplot(us_data_longer,
   ) +
   expand_limits(y = 0) +
   scale_colour_manual(guide = "none",
-                      values = c("#B45F06","black","#35978f","#35978f")) +
+                      values = c("#B45F06","black")) +
   theme(axis.text.y = element_text(size = 10),
         axis.text.x = element_text(size = 8),
         panel.grid.minor = element_blank(),
@@ -1704,7 +1701,7 @@ ggplot(us_data_longer,
         plot.caption = element_text(colour = "grey40"))
 
 ggsave("gh_action/world_facet.png", 
-       width = 8, height = 8*(628/1200), dpi = 320)
+       width = 8, height = (8*(628/1200))/2, dpi = 320)
 
 ggplot(us_data_longer,
        aes(x = as.Date(date),
@@ -1725,7 +1722,7 @@ ggplot(us_data_longer,
   ) +
   expand_limits(y = 0) +
   scale_colour_manual(guide = "none",
-                      values = c("#B45F06","black","#35978f","#35978f")) +
+                      values = c("#B45F06","black")) +
   theme(#axis.text.y = element_text(size = 10),
     #axis.text.x = element_text(size = 8),
     panel.grid.minor = element_blank(),
@@ -1737,7 +1734,7 @@ ggplot(us_data_longer,
     plot.caption = element_text(colour = "grey40"))
 
 ggsave("gh_action/world_facet_mobile.png", 
-       width = 3, height = 8*(628/1200), dpi = 320)
+       width = 3, height = (8*(628/1200))/2, dpi = 320)
 
 
 # acceleration charts ----
