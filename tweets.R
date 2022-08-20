@@ -56,10 +56,28 @@ hospitalizations_by_date <- hospitalizations %>%
   mutate(avg_hospitalized = sum_hospitalized/7) %>%
   mutate(CountyName = "Champaign")
 
+## cdc hospitalizations ----
+cdc_champaign_url <- "https://covid.cdc.gov/covid-data-tracker/COVIDData/getAjaxData?id=integrated_county_timeseries_fips_17019_external"
+cdc_champaign_data <- rio::import(
+  cdc_champaign_url,
+  format = "json")$integrated_county_timeseries_external_data
+
+cdc_champaign_hosp <- cdc_champaign_data %>%
+  select(date, percent_adult_inpatient_beds_used_confirmed_covid,
+         percent_adult_icu_beds_used_confirmed_covid) %>%
+  arrange(date) %>%
+  mutate(date = ymd(date)) %>%
+  mutate(Date = ymd(date)) %>%
+  filter(date > ymd("2020-07-14"))
+
+## combine data ----
 idph_cases_vax_hosp <- full_join(idph_cases_champaign, idph_vax_champaign) %>%
   full_join(hospitalizations_by_date) %>%
-  select(Date, AdministeredCountRollAvg,
-         monthlydead, avg_new_cases, avg_hospitalized)
+  full_join(cdc_champaign_hosp) %>%
+  select(Date, #AdministeredCountRollAvg,
+         monthlydead, avg_new_cases, avg_hospitalized,
+         percent_adult_inpatient_beds_used_confirmed_covid) %>%
+  arrange(Date)
 
 idph_cases_vax_hosp_longer <- idph_cases_vax_hosp %>%
   pivot_longer(!Date,
@@ -67,9 +85,9 @@ idph_cases_vax_hosp_longer <- idph_cases_vax_hosp %>%
                names_to = "names") %>%
   mutate(names = recode_factor(names, 
                         "avg_new_cases" = "Average New Cases",
-                        "avg_hospitalized" = "Average Hospitalized",
                         "monthlydead" = "Deaths in the Past Month",
-                        "AdministeredCountRollAvg" = "Average New Vaccine Doses"))  %>%
+                        "avg_hospitalized" = "Average Hospitalized",
+                        "percent_adult_inpatient_beds_used_confirmed_covid" = "Percent of Hospital Beds Used by COVID-19 Patients"))  %>%
   mutate(short_date = paste(month(Date, label = TRUE, abbr = FALSE),
                             mday(Date))) %>%
   drop_na()
@@ -153,7 +171,7 @@ p <- ggplot(idph_cases_vax_hosp_longer,
   geom_line() +
   facet_wrap(~ names, scales = "free_y") +
   labs(#title = "Metrics Since Vaccinations Began Dec. 16",
-    caption = paste("Source: HHS, IDPH. Latest data:",
+    caption = paste("Sources: CDC, HHS, IDPH. Latest data:",
                     tail(idph_cases_vax_hosp_longer$short_date,1))) +
   xlab(NULL) +
   ylab(NULL) +
@@ -165,7 +183,7 @@ p <- ggplot(idph_cases_vax_hosp_longer,
   ) +
   expand_limits(y = 0) +
   scale_colour_manual(guide = "none",
-                      values = c("#B45F06","#d90000","black","#35978f")) +
+                      values = c("#B45F06","black","#d90000","#d90000")) +
   theme(axis.text.y = element_text(size = 10),
         axis.text.x = element_text(size = 8),
         panel.grid.minor = element_blank(),
