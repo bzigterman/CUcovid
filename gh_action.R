@@ -1701,7 +1701,7 @@ ggplot(us_data_longer,
         plot.caption = element_text(colour = "grey40"))
 
 ggsave("gh_action/world_facet.png", 
-       width = 8, height = (8*(628/1200))/2, dpi = 320)
+       width = 8, height = (8*(628/1200))/1.5, dpi = 320)
 
 ggplot(us_data_longer,
        aes(x = as.Date(date),
@@ -1734,7 +1734,7 @@ ggplot(us_data_longer,
     plot.caption = element_text(colour = "grey40"))
 
 ggsave("gh_action/world_facet_mobile.png", 
-       width = 3, height = (8*(628/1200))/2, dpi = 320)
+       width = 3, height = (8*(628/1200))/1.5, dpi = 320)
 
 
 # acceleration charts ----
