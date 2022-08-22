@@ -1736,7 +1736,6 @@ ggplot(us_data_longer,
 ggsave("gh_action/world_facet_mobile.png", 
        width = 3, height = (8*(628/1200))/1.5, dpi = 320)
 
-
 # acceleration charts ----
 ## cases ----
 ### get data ----

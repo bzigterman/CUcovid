@@ -4,6 +4,9 @@ on:
   workflow_dispatch:
   schedule:
     - cron: '*/5 * * * *'
+  push:
+    paths:
+      - 'gh_action.R'
 
 jobs:
   run-cdc_data:
