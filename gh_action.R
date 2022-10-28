@@ -1358,27 +1358,27 @@ cdc_il_url <- "https://covid.cdc.gov/covid-data-tracker/COVIDData/getAjaxData?id
 cdc_il_data_url <- "https://covid.cdc.gov/covid-data-tracker/COVIDData/getAjaxData?id=us_trend_by_IL"
 cdc_il_data <- rio::import(cdc_il_data_url, format = "json")$us_trend_by_Geography
 cdc_il_new_deaths <- cdc_il_data %>%
-  select(date,seven_day_avg_new_deaths) %>%
+  select(date,new_death) %>%
   mutate(date = mdy(date)) %>%
-  mutate(avg_new_deaths = seven_day_avg_new_deaths) %>%
+  mutate(avg_new_deaths = new_death) %>%
   select(date,avg_new_deaths)
 
 cdc_il_new_cases <- cdc_il_data %>%
-  select(date,seven_day_avg_new_cases, percent_positive_7_day) %>%
+  select(date,New_case, percent_positive_7_day) %>%
   mutate(date = mdy(date)) %>%
-  mutate(avg_new_cases = seven_day_avg_new_cases) %>%
+  mutate(avg_new_cases = New_case) %>%
   select(date,avg_new_cases, percent_positive_7_day)
 
 cdc_il_hosp <- cdc_il_data %>%
-  select(date,sum_inpatient_beds_used_covid_7DayAvg) %>%
+  select(date,weekly_inpatient_beds_used_clean) %>%
   mutate(date = mdy(date)) %>%
-  mutate(hosp_patients = sum_inpatient_beds_used_covid_7DayAvg) %>%
+  mutate(hosp_patients = weekly_inpatient_beds_used_clean) %>%
   select(date,hosp_patients)
 
 cdc_il_vax <- cdc_il_data %>%
-  select(date,Administered_7_Day_Rolling_Average) %>%
+  select(date,Administered_Weekly) %>%
   mutate(date = mdy(date)) %>%
-  mutate(daily_vaccinations = Administered_7_Day_Rolling_Average) %>%
+  mutate(daily_vaccinations = Administered_Weekly) %>%
   select(date,daily_vaccinations)
 
 
@@ -1505,27 +1505,27 @@ if (avg_new_cases >= 0 &&
 cdc_usa_data_url <- "https://covid.cdc.gov/covid-data-tracker/COVIDData/getAjaxData?id=us_trend_by_USA"
 cdc_usa_data <- rio::import(cdc_usa_data_url, format = "json")$us_trend_by_Geography
 cdc_new_deaths <- cdc_usa_data %>%
-  select(date,seven_day_avg_new_deaths) %>%
+  select(date,new_death) %>%
   mutate(date = mdy(date)) %>%
-  mutate(avg_new_deaths = seven_day_avg_new_deaths) %>%
+  mutate(avg_new_deaths = new_death) %>%
   select(date,avg_new_deaths)
 
 cdc_new_cases <- cdc_usa_data %>%
-  select(date,seven_day_avg_new_cases, percent_positive_7_day) %>%
+  select(date,New_case, percent_positive_7_day) %>%
   mutate(date = mdy(date)) %>%
-  mutate(avg_new_cases = seven_day_avg_new_cases) %>%
-  select(date,avg_new_cases, percent_positive_7_day)
+  mutate(avg_new_cases = New_case) %>%
+  select(date,New_case, percent_positive_7_day)
 
 cdc_hosp <- cdc_usa_data %>%
-  select(date,sum_inpatient_beds_used_covid_7DayAvg) %>%
+  select(date,weekly_inpatient_beds_used_clean) %>%
   mutate(date = mdy(date)) %>%
-  mutate(hosp_patients = sum_inpatient_beds_used_covid_7DayAvg) %>%
+  mutate(hosp_patients = weekly_inpatient_beds_used_clean) %>%
   select(date,hosp_patients)
 
 cdc_vax <- cdc_usa_data %>%
-  select(date,Administered_7_Day_Rolling_Average) %>%
+  select(date,Administered_Weekly) %>%
   mutate(date = mdy(date)) %>%
-  mutate(daily_vaccinations = Administered_7_Day_Rolling_Average) %>%
+  mutate(daily_vaccinations = Administered_Weekly) %>%
   select(date,daily_vaccinations)
 
 #### hospitalizations ----
