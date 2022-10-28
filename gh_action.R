@@ -1514,7 +1514,7 @@ cdc_new_cases <- cdc_usa_data %>%
   select(date,New_case, percent_positive_7_day) %>%
   mutate(date = mdy(date)) %>%
   mutate(avg_new_cases = New_case) %>%
-  select(date,New_case, percent_positive_7_day)
+  select(date,avg_new_cases, percent_positive_7_day)
 
 cdc_hosp <- cdc_usa_data %>%
   select(date,weekly_inpatient_beds_used_clean) %>%
