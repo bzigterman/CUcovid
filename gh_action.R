@@ -1776,7 +1776,7 @@ idph_cases_champaign <- idph_cases_champaign$values %>%
 
 cdc_IL_case_acceleration <- cdc_il_new_cases %>%
   mutate(pct_change_new_cases = 
-           ((avg_new_cases - lag(avg_new_cases,14))/lag(avg_new_cases,14))) %>%
+           ((avg_new_cases - lag(avg_new_cases,2))/lag(avg_new_cases,2))) %>%
   mutate(Date = date) %>%
   mutate(location = "Illinois") 
 
@@ -1794,7 +1794,7 @@ cdc_IL_case_acceleration <- cdc_il_new_cases %>%
 
 cdc_new_cases_acceleration <- cdc_new_cases %>%
   mutate(pct_change_new_cases = 
-           ((avg_new_cases - lag(avg_new_cases,14))/lag(avg_new_cases,14))) %>%
+           ((avg_new_cases - lag(avg_new_cases,2))/lag(avg_new_cases,2))) %>%
   mutate(Date = date) %>%
   mutate(location = "United States")
 
@@ -1905,65 +1905,18 @@ if (avg_new_cases >= 0 &&
 
 ## death  ----
 ### get data ----
-#### Champaign  ----
-# idph_deaths_champaign <- rio::import("https://idph.illinois.gov/DPHPublicInformation/api/COVID/GetCountyHistorical?countyName=Champaign",
-#                                      format = "json") 
-# idph_deaths_champaign <- idph_deaths_champaign$values %>%
-#   mutate(new_cases = CasesChange) %>%
-#   mutate(new_deaths = DeathsChange) %>%
-#   mutate(avg_new_cases = rollmean(new_cases, k = 7, 
-#                                   fill = NA, align = "right")) %>%
-#   mutate(monthlydead = rollmean(new_deaths, k = 7, 
-#                                 fill = NA, align = "right"))  %>%
-#   mutate(Date = ymd_hms(ReportDate, truncated = 0)) %>%
-#   mutate(pct_change_new_cases = 
-#            ((avg_new_cases - lag(avg_new_cases,14))/lag(avg_new_cases,14))) %>%
-#   mutate(pct_change_new_deaths = 
-#            ((monthlydead - lag(monthlydead,14))/lag(monthlydead,14))) %>%
-#   mutate(location = "Champaign County")
-
-
 #### IL  -----
-# idph_deaths_il <- rio::import("https://idph.illinois.gov/DPHPublicInformation/api/COVID/GetCountyHistorical?countyName=Illinois",
-#                               format = "json") 
-# idph_deaths_il <- idph_deaths_il$values %>%
-#   mutate(new_cases = CasesChange) %>%
-#   mutate(new_deaths = DeathsChange) %>%
-#   mutate(avg_new_cases = rollmean(new_cases, k = 7, 
-#                                   fill = NA, align = "right")) %>%
-#   mutate(monthlydead = rollmean(new_deaths, k = 7, 
-#                                 fill = NA, align = "right"))  %>%
-#   mutate(Date = ymd_hms(ReportDate, truncated = 0)) %>%
-#   mutate(date = as_date(Date)) %>%
-#   mutate(pct_change_new_cases = 
-#            ((avg_new_cases - lag(avg_new_cases,14))/lag(avg_new_cases,14))) %>%
-#   mutate(pct_change_new_deaths = 
-#            ((monthlydead - lag(monthlydead,14))/lag(monthlydead,14))) %>%
-#   mutate(location = "Illinois")
-
-
 cdc_IL_death_acceleration <- cdc_il_new_deaths %>%
   mutate(pct_change_new_deaths = 
-           ((avg_new_deaths - lag(avg_new_deaths,14))/lag(avg_new_deaths,14))) %>%
+           ((avg_new_deaths - lag(avg_new_deaths,2))/lag(avg_new_deaths,2))) %>%
   mutate(Date = date) %>%
   mutate(location = "Illinois") 
 
 
 #### USA  ----
-# jhu_new_deaths_url <- "https://github.com/owid/covid-19-data/raw/master/public/data/jhu/new_deaths.csv"
-# jhu_new_deaths_usa <- rio::import(jhu_new_deaths_url, format = "csv") %>%
-#   select(date,"United States") %>%
-#   rename(new_deaths = "United States") %>%
-#   mutate(avg_new_deaths = rollmean(new_deaths, k = 7, 
-#                                    fill = NA, align = "right")) %>%
-#   mutate(pct_change_new_deaths = 
-#            ((avg_new_deaths - lag(avg_new_deaths,14))/lag(avg_new_deaths,14))) %>%
-#   mutate(Date = ymd(date)) %>% 
-#   mutate(location = "United States")
-
 cdc_new_deaths_acceleration <- cdc_new_deaths %>%
   mutate(pct_change_new_deaths = 
-           ((avg_new_deaths - lag(avg_new_deaths,14))/lag(avg_new_deaths,14))) %>%
+           ((avg_new_deaths - lag(avg_new_deaths,2))/lag(avg_new_deaths,2))) %>%
   mutate(Date = date) %>%
   mutate(location = "United States")
 
