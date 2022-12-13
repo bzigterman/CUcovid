@@ -20,16 +20,32 @@ token <- rtweet::create_token(
 
 # compile tweet text ----
 ## get data ----
-idph_cases_champaign <- rio::import("https://idph.illinois.gov/DPHPublicInformation/api/COVID/GetCountyHistorical?countyName=Champaign",
-                                    format = "json") 
-idph_cases_champaign <- idph_cases_champaign$values %>%
+idph_cases_champaigns <- rio::import("https://idph.illinois.gov/DPHPublicInformation/api/COVID/GetCountyHistorical?countyName=Champaign",
+                                     format = "json") 
+idph_cases_champaign <- idph_cases_champaigns$values %>%
   mutate(new_cases = CasesChange) %>%
+  mutate(Date = ymd_hms(ReportDate)) |> 
   mutate(new_cases = replace(new_cases, which(new_cases<0), NA)) %>%
-  mutate(new_deaths = DeathsChange) %>%
+  mutate(new_deaths = DeathsChange) |> 
+  mutate(
+    add = rev(Reduce(function(prev, this) if (this > 0) 0 else prev+this,
+                     rev(new_deaths), init = 0, accumulate = TRUE))[-1],
+    new_deaths = if_else(new_deaths > 0, new_deaths + add, 0)
+  ) |> 
+  mutate(
+    add = rev(Reduce(function(prev, this) if (this > 0) 0 else prev+this,
+                     rev(new_deaths), init = 0, accumulate = TRUE))[-1],
+    new_deaths = if_else(new_deaths > 0, new_deaths + add, 0)
+  ) |>
+  mutate(
+    add = rev(Reduce(function(prev, this) if (this > 0) 0 else prev+this,
+                     rev(new_deaths), init = 0, accumulate = TRUE))[-1],
+    new_deaths = if_else(new_deaths > 0, new_deaths + add, 0)
+  ) |>
+  select(-add) |> 
   mutate(avg_new_cases = rollapply(new_cases, width = 7, FUN = mean, na.rm = TRUE, fill = NA, align = "right")) %>%
   mutate(monthlydead = rollmean(new_deaths, k = 31, 
-                                fill = NA, align = "right")*31)  %>%
-  mutate(Date = ymd_hms(ReportDate)) 
+                                fill = NA, align = "right")*31)
 
 idph_vax_champaign <- rio::import("https://idph.illinois.gov/DPHPublicInformation/api/COVIDExport/GetVaccineAdministration?format=csv&countyName=Champaign",
                                   format = "csv") %>%
@@ -162,6 +178,7 @@ champaign_county_text <- paste(
 More charts: https://bzigterman.com/projects/covid",
 sep = ""
 )
+champaign_county_text
 
 # tweet plot ----
 p <- ggplot(idph_cases_vax_hosp_longer,
@@ -192,7 +209,7 @@ p <- ggplot(idph_cases_vax_hosp_longer,
         strip.text = element_text(size = 11),
         strip.background = element_blank(),
         plot.caption = element_text(colour = "grey40"))
-
+p
 # save to a temp file
 file <- tempfile( fileext = ".png")
 ggsave( file, plot = p, device = "png", dpi = 320, width = 8, height = 8*(628/1200))
