@@ -218,7 +218,5 @@ if (champaign_avg_new_cases >= 0 &&
             alt_text = "A line chart with today's COVID-19 statistics")
 }
 
-post_toot(status = champaign_county_text,
-          media = file,
-          alt_text = "A line chart with today's COVID-19 statistics")
+
 
