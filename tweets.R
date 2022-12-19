@@ -220,7 +220,7 @@ if (champaign_avg_new_cases >= 0 &&
   rtweet::post_tweet( 
     status = champaign_county_text,
     media = file,
-    media_alt_text = "Line charts with today's COVID-19 statistics",
+    media_alt_text = "Line charts with today's COVID-19 statistics for Champaign County, Illinois",
     token = token
   )
 }

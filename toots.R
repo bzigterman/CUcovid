@@ -215,7 +215,7 @@ if (champaign_avg_new_cases >= 0 &&
 ) {
   post_toot(status = champaign_county_text,
             media = file,
-            alt_text = "Line charts with today's COVID-19 statistics")
+            alt_text = "Line charts with today's COVID-19 statistics for Champaign County, Illinois")
 }
 
 
