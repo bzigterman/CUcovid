@@ -6,7 +6,7 @@ on:
     - cron: '50 19 * * 1-5'
 
 jobs:
-  run-autotweeter:
+  run-autoposter:
     runs-on: macOS-latest
     env:
       RTOOT_DEFAULT_TOKEN: ${{ secrets.RTOOT_DEFAULT_TOKEN }}
