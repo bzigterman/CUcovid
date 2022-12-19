@@ -17,6 +17,7 @@ install.packages("sf")
 install.packages("zoo")
 install.packages("scales")
 install.packages("rtweet")
+install.packages("rtoot")
 install.packages("png")
 
 update.packages(ask = FALSE,
