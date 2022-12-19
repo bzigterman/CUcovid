@@ -11,7 +11,7 @@ library(png)
 
 # obtain mastodon token ----
 Sys.getenv("RTOOT_ACCESS_TOKEN_SECRET")
-token <- readRDS(Sys.getenv("RTOOT_ACCESS_TOKEN_SECRET"))
+verify_envvar()
 
 # compile tweet text ----
 ## get data ----
@@ -215,6 +215,5 @@ if (champaign_avg_new_cases >= 0 &&
 ) {
   post_toot(status = champaign_county_text,
             media = file,
-            token = token,
             alt_text = "A line chart with today's COVID-19 statistics")
 }
