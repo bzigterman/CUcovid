@@ -9,7 +9,7 @@ jobs:
   run-autotweeter:
     runs-on: macOS-latest
     env:
-      RTOOT_ACCESS_TOKEN_SECRET: ${{ secrets.RTOOT_ACCESS_TOKEN_SECRET }}
+      RTOOT_DEFAULT_TOKEN: ${{ secrets.RTOOT_DEFAULT_TOKEN }}
     steps:
       - uses: actions/checkout@v2
       

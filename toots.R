@@ -10,9 +10,23 @@ library(rtoot)
 library(png)
 
 # obtain mastodon token ----
-Sys.getenv("RTOOT_ACCESS_TOKEN_SECRET")
-verify_envvar()
-
+# auth_setup(name = "champaigncovid",
+#            instance = "mastodon.social",
+#            type = "user",
+#            clipboard = TRUE)
+# token <- readRDS(file.path(tools::R_user_dir("rtoot", "config"), "champaigncovid.rds"))
+# content <- convert_token_to_envvar(token) 
+# content
+# 
+# verify_credentials(token)
+# Sys.getenv("RTOOT_DEFAULT_TOKEN")
+# envvar <- Sys.getenv("RTOOT_DEFAULT_TOKEN")
+# text_token <- Sys.getenv("RTOOT_DEFAULT_TOKEN")
+# verify_envvar()
+# 
+# token <- get_token_from_envvar(envvar = envvar)
+# token <- verify_credentials(token)
+token <- Sys.getenv("RTOOT_DEFAULT_TOKEN")
 # compile tweet text ----
 ## get data ----
 idph_cases_champaigns <- rio::import("https://idph.illinois.gov/DPHPublicInformation/api/COVID/GetCountyHistorical?countyName=Champaign",
@@ -215,5 +229,6 @@ if (champaign_avg_new_cases >= 0 &&
 ) {
   post_toot(status = champaign_county_text,
             media = file,
+            token = token,
             alt_text = "A line chart with today's COVID-19 statistics")
 }
