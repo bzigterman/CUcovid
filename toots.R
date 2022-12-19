@@ -11,6 +11,7 @@ library(png)
 
 # obtain mastodon token ----
 token <- Sys.getenv("RTOOT_DEFAULT_TOKEN")
+verify_envvar(verbose = TRUE)
 
 # compile tweet text ----
 ## get data ----
@@ -214,12 +215,10 @@ if (champaign_avg_new_cases >= 0 &&
 ) {
   post_toot(status = champaign_county_text,
             media = file,
-            token = token,
             alt_text = "A line chart with today's COVID-19 statistics")
 }
 
 post_toot(status = champaign_county_text,
           media = file,
-          token = token,
           alt_text = "A line chart with today's COVID-19 statistics")
 
