@@ -35,7 +35,7 @@ usa_county_vaccine <- usa_county_vaccine %>%
 
 ### vaccine map ----
 us_vax_map <- plot_usmap(data = usa_county_vaccine, values = "total_class",
-                         size = .01) +
+                         linewidth = .01) +
   scale_fill_brewer(
     limits = c("0–10%","10–20%","20–30%","30–40%","40–50%",
                "50–60%","60–70%","70–80%","80–90%","90–100%"),
@@ -65,7 +65,7 @@ us_vax_map
 
 
 us_vax_map_mobile <- plot_usmap(data = usa_county_vaccine, values = "total_class",
-                                size = .01) +
+                                linewidth = .01) +
   scale_fill_brewer(
     limits = c("0–10%","10–20%","20–30%","30–40%","40–50%",
                "50–60%","60–70%","70–80%","80–90%","90–100%"),
@@ -232,7 +232,7 @@ us_community_levels <- usa_cases %>%
                             mday(date)))
 
 community_level_map <- plot_usmap(data = us_community_levels, values = "community_level",
-                                  size = .01) +
+                                  linewidth = .01) +
   scale_fill_brewer(limits = c("Low","Medium","High"),
                     palette = "Spectral",
                     direction = -1,
@@ -308,7 +308,7 @@ ggsave("gh_action/usa_community_levels.png", bg = "white",
 
 community_level_map_mobile <- plot_usmap(data = us_community_levels, 
                                          values = "community_level",
-                                         size = .01) +
+                                         linewidth = .01) +
   scale_fill_brewer(limits = c("Low","Medium","High"),
                     palette = "Spectral",
                     direction = -1,
@@ -382,7 +382,7 @@ ggsave("gh_action/usa_community_level_mobile.png", bg = "white",
 
 ### community level map ----
 transmission_map <- plot_usmap(data = usa_cases, values = "community_transmission_level",
-                               size = .01) +
+                               linewidth = .01) +
   scale_fill_brewer(limits = c("low","moderate","substantial","high"),
                     palette = "YlOrBr",
                     direction = 1,
@@ -458,7 +458,7 @@ ggsave("gh_action/usa_transmission.png", bg = "white",
 
 transmission_map_mobile <- plot_usmap(data = usa_cases, 
                                       values = "community_transmission_level",
-                                      size = .01) +
+                                      linewidth = .01) +
   scale_fill_brewer(limits = c("low","moderate","substantial","high"),
                     palette = "YlOrBr",
                     direction = 1,
@@ -533,7 +533,7 @@ ggsave("gh_action/usa_transmission_mobile.png", bg = "white",
 ### new cases map ----
 cases_map <- plot_usmap(data = usa_cases, 
                         values = "new_cases_class",
-                        size = .01) +
+                        linewidth = .01) +
   scale_fill_brewer(
     limits = c("0–5","5–15","15–25",
                "25–35","35–50","50–100","100+"),
@@ -617,7 +617,7 @@ ggsave("gh_action/usa_new_cases.png", bg = "white",
 
 cases_map_mobile <- plot_usmap(data = usa_cases, 
                                values = "new_cases_class",
-                               size = .01) +
+                               linewidth = .01) +
   scale_fill_brewer(
     limits = c("0–5","5–15","15–25",
                "25–35","35–50","50–100","100+"),
