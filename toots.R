@@ -210,8 +210,8 @@ if (champaign_avg_new_cases >= 0 &&
     champaign_month_ago_deaths >= 0 && 
     champaign_month_ago_vaccinated >= 0 &&
     champaign_month_ago_vaccinated <= 100 &&
-    champaign_month_ago_new_doses >= 0 && 
-    champaign_weekday == short_today
+    champaign_month_ago_new_doses >= 0 #&& 
+    #champaign_weekday == short_today
 ) {
   post_toot(status = champaign_county_text,
             media = file,
