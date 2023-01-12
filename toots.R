@@ -15,6 +15,29 @@ verify_envvar(verbose = TRUE)
 
 # compile tweet text ----
 ## get data ----
+nyt_data <- full_join(rio::import("https://github.com/nytimes/covid-19-data/raw/master/us-counties-2020.csv",
+                             format = "csv"),rio::import("https://github.com/nytimes/covid-19-data/raw/master/us-counties-2021.csv",
+              format = "csv")) |> 
+  full_join(rio::import("https://github.com/nytimes/covid-19-data/raw/master/us-counties-2022.csv",
+              format = "csv")) |>
+  full_join(rio::import("https://github.com/nytimes/covid-19-data/raw/master/us-counties-2023.csv",
+              format = "csv")) |> 
+  filter(fips == 17019)
+nyt_champaign <- nyt_data |> 
+  mutate(Date = ymd(date)) |> 
+  mutate(new_cases = cases - lag(cases, 1)) |> 
+  mutate(new_cases = replace(new_cases, which(new_cases<0), NA)) |> 
+  mutate(new_deathss = deaths-lag(deaths,1))|> 
+  mutate(
+    add = Reduce(function(prev, this) min(this+prev, 0),
+                 new_deathss, init = 0, accumulate = TRUE, right = TRUE)[-1], 
+    new_deaths = pmax(new_deathss + add, 0)
+  ) %>%
+  select(-add) |> select (-new_deathss) |> select(-date) |> 
+  mutate(avg_new_cases = rollapply(new_cases, width = 7, FUN = mean, na.rm = TRUE, fill = NA, align = "right")) %>%
+  mutate(monthlydead = rollmean(new_deaths, k = 31, 
+                                fill = NA, align = "right")*31)
+
 idph_cases_champaigns <- rio::import("https://idph.illinois.gov/DPHPublicInformation/api/COVID/GetCountyHistorical?countyName=Champaign",
                                      format = "json") 
 idph_cases_champaign <- idph_cases_champaigns$values %>%
@@ -31,10 +54,6 @@ idph_cases_champaign <- idph_cases_champaigns$values %>%
   mutate(avg_new_cases = rollapply(new_cases, width = 7, FUN = mean, na.rm = TRUE, fill = NA, align = "right")) %>%
   mutate(monthlydead = rollmean(new_deaths, k = 31, 
                                 fill = NA, align = "right")*31)
-
-idph_vax_champaign <- rio::import("https://idph.illinois.gov/DPHPublicInformation/api/COVIDExport/GetVaccineAdministration?format=csv&countyName=Champaign",
-                                  format = "csv") %>%
-  mutate(Date = mdy_hms(Report_Date)) 
 
 ## hhs hospitalizations ----
 hospitalizations_url <- "https://healthdata.gov/resource/anag-cw7u.json?zip=61801"
@@ -72,8 +91,7 @@ cdc_champaign_hosp <- cdc_champaign_data %>%
   filter(date > ymd("2020-07-14"))
 
 ## combine data ----
-idph_cases_vax_hosp <- full_join(idph_cases_champaign, idph_vax_champaign) %>%
-  full_join(hospitalizations_by_date) %>%
+idph_cases_vax_hosp <- full_join(nyt_champaign, hospitalizations_by_date) %>%
   full_join(cdc_champaign_hosp) %>%
   select(Date, #AdministeredCountRollAvg,
          monthlydead, avg_new_cases, avg_hospitalized,
@@ -116,20 +134,14 @@ idph_cases_vax_hosp_longer <- idph_cases_vax_hosp %>%
 
 
 ## set variables ----
-champaign_dead_last_month <- format(round(signif(tail(idph_cases_champaign$monthlydead,1),3)),big.mark=",")
-champaign_avg_new_cases <- format(round(signif(tail(idph_cases_champaign$avg_new_cases,1),3)),big.mark=",")
-champaign_pct_fully_vaccinated <- round(100*tail(idph_vax_champaign$PctFullyVaccinatedPopulation,1), digits = 1)
-champaign_avg_new_vaccine_doses <- 
-  format(round(signif(tail(idph_vax_champaign$AdministeredCountRollAvg,1),3)),big.mark=",")
-champaign_weekday <- wday(tail(idph_cases_champaign$Date,1), label = TRUE, abbr = FALSE)
-short_today <- wday(today(), label = TRUE, abbr = FALSE)
-champaign_month_ago_deaths <- format(round(signif(tail(lag(idph_cases_champaign$monthlydead, 14),1),3)),big.mark=",")
-champaign_month_ago_cases <- format(round(signif(tail(lag(idph_cases_champaign$avg_new_cases, 14),1),3)),big.mark=",")
-champaign_month_ago_vaccinated <- round(100*tail(lag(idph_vax_champaign$PctFullyVaccinatedPopulation, 13),1), digits = 1)
-champaign_month_ago_new_doses <- 
-  format(round(signif(tail(lag(idph_vax_champaign$AdministeredCountRollAvg, 13),1),3)),big.mark=",")
-champaign_case_pct_change <- round(100*(tail(idph_cases_champaign$avg_new_cases,1)-tail(lag(idph_cases_champaign$avg_new_cases, 14),1))/tail(lag(idph_cases_champaign$avg_new_cases, 14),1), digits = 0)
-champaign_death_pct_change <- round(100*(tail(idph_cases_champaign$monthlydead,1)-tail(lag(idph_cases_champaign$monthlydead, 14),1))/tail(lag(idph_cases_champaign$monthlydead, 14),1), digits = 0)
+champaign_dead_last_month <- format(round(signif(tail(nyt_champaign$monthlydead,1),3)),big.mark=",")
+champaign_avg_new_cases <- format(round(signif(tail(nyt_champaign$avg_new_cases,1),3)),big.mark=",")
+champaign_weekday <- wday(tail(nyt_champaign$Date,1), label = TRUE, abbr = FALSE)
+short_today <- wday(today()-days(1), label = TRUE, abbr = FALSE)
+champaign_month_ago_deaths <- format(round(signif(tail(lag(nyt_champaign$monthlydead, 14),1),3)),big.mark=",")
+champaign_month_ago_cases <- format(round(signif(tail(lag(nyt_champaign$avg_new_cases, 14),1),3)),big.mark=",")
+champaign_case_pct_change <- round(100*(tail(nyt_champaign$avg_new_cases,1)-tail(lag(idph_cases_champaign$avg_new_cases, 14),1))/tail(lag(idph_cases_champaign$avg_new_cases, 14),1), digits = 0)
+champaign_death_pct_change <- round(100*(tail(nyt_champaign$monthlydead,1)-tail(lag(idph_cases_champaign$monthlydead, 14),1))/tail(lag(idph_cases_champaign$monthlydead, 14),1), digits = 0)
 
 champaign_case_pct_change_text <- 
   if (champaign_case_pct_change > 0) { 
@@ -174,7 +186,7 @@ p <- ggplot(idph_cases_vax_hosp_longer,
   geom_line() +
   facet_wrap(~ names, scales = "free_y") +
   labs(#title = "Metrics Since Vaccinations Began Dec. 16",
-    caption = paste("Sources: CDC, HHS, IDPH. Latest data:",
+    caption = paste("Sources: NYT, CDC, HHS. Latest data:",
                     tail(idph_cases_vax_hosp_longer$short_date,1))) +
   xlab(NULL) +
   ylab(NULL) +
@@ -203,15 +215,9 @@ ggsave( file, plot = p, device = "png", dpi = 320, width = 8, height = 4.5)
 # post the tweet ----
 if (champaign_avg_new_cases >= 0 && 
     champaign_dead_last_month >= 0 && 
-    champaign_pct_fully_vaccinated >= 0 &&
-    champaign_pct_fully_vaccinated <= 100 &&
-    champaign_avg_new_vaccine_doses >= 0 &&
     champaign_month_ago_cases >= 0 && 
     champaign_month_ago_deaths >= 0 && 
-    champaign_month_ago_vaccinated >= 0 &&
-    champaign_month_ago_vaccinated <= 100 &&
-    champaign_month_ago_new_doses >= 0 #&& 
-    #champaign_weekday == short_today
+    champaign_weekday == short_today
 ) {
   post_toot(status = champaign_county_text,
             media = file,
