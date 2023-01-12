@@ -1124,7 +1124,7 @@ ggplot(idph_cases_vax_hosp_longer,
            colour = names)) +
   geom_line() +
   facet_wrap(~ names, scales = "free_y") +
-  labs(caption = paste("Source: CDC, HHS and IDPH. Latest data:",
+  labs(caption = paste("Source: CDC, HHS and NYT. Latest data:",
                        tail(idph_cases_vax_hosp_longer$short_date,1))) +
   xlab(NULL) +
   ylab(NULL) +
@@ -1266,7 +1266,7 @@ p <- ggplot(data = wastewater_plus_cases_longer,
   facet_wrap(~ name, scales = "free_y", dir = "v") +
   xlab(NULL) +
   ylab(NULL) +
-  labs(caption = paste("Source: CDC and IDPH. Latest data:",wastewater_date)) +
+  labs(caption = paste("Source: CDC, NYT and IDPH. Latest data:",wastewater_date)) +
   scale_x_date(expand = c(0,0),
                labels = label_date_short()) +
   scale_y_continuous(labels = label_comma(),
@@ -1854,7 +1854,7 @@ ggplot(combined_cases,
   facet_wrap(~ location, ncol = 1,
              strip.position = "left") +
   labs(title = "14-Day Change in Average New Cases",
-       caption = paste("Source: CDC, IDPH and JHU CSSE COVID-19 Data.\nLatest data:",
+       caption = paste("Source: CDC, NYT and JHU CSSE COVID-19 Data.\nLatest data:",
                        tail(us_data_longer$short_date,1))) +
   xlab(NULL) +
   ylab(NULL) +
