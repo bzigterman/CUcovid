@@ -30,8 +30,13 @@ nyt_data <- full_join(rio::import("https://github.com/nytimes/covid-19-data/raw/
   filter(fips == 17019)
 nyt_champaign <- nyt_data |> 
   mutate(Date = ymd(date)) |> 
-  mutate(new_cases = cases - lag(cases, 1)) |> 
-  mutate(new_cases = replace(new_cases, which(new_cases<0), NA)) |> 
+  mutate(new_casess = cases - lag(cases, 1)) |> 
+  mutate(
+    add = Reduce(function(prev, this) min(this+prev, 0),
+                 new_casess, init = 0, accumulate = TRUE, right = TRUE)[-1], 
+    new_cases = pmax(new_casess + add, 0)
+  ) %>%
+  select(-add) |> select (-new_casess) |>
   mutate(new_deathss = deaths-lag(deaths,1))|> 
   mutate(
     add = Reduce(function(prev, this) min(this+prev, 0),
