@@ -207,7 +207,7 @@ file <- tempfile( fileext = ".png")
 ggsave( file, plot = p, device = "png", dpi = 320, width = 8, height = 8*(628/1200))
 
 # post the tweet ----
-if (champaign_avg_new_cases >= 0 && 
+if (champaign_avg_new_cases > 0 && 
     champaign_dead_last_month >= 0 && 
     champaign_month_ago_cases >= 0 && 
     champaign_month_ago_deaths >= 0 && 
