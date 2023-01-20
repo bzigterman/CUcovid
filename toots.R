@@ -145,8 +145,8 @@ champaign_weekday <- wday(tail(nyt_champaign$Date,1), label = TRUE, abbr = FALSE
 short_today <- wday(today()-days(1), label = TRUE, abbr = FALSE)
 champaign_month_ago_deaths <- format(round(signif(tail(lag(nyt_champaign$monthlydead, 14),1),3)),big.mark=",")
 champaign_month_ago_cases <- format(round(signif(tail(lag(nyt_champaign$avg_new_cases, 14),1),3)),big.mark=",")
-champaign_case_pct_change <- round(100*(tail(nyt_champaign$avg_new_cases,1)-tail(lag(idph_cases_champaign$avg_new_cases, 14),1))/tail(lag(idph_cases_champaign$avg_new_cases, 14),1), digits = 0)
-champaign_death_pct_change <- round(100*(tail(nyt_champaign$monthlydead,1)-tail(lag(idph_cases_champaign$monthlydead, 14),1))/tail(lag(idph_cases_champaign$monthlydead, 14),1), digits = 0)
+champaign_case_pct_change <- round(100*(tail(nyt_champaign$avg_new_cases,1)-tail(lag(nyt_champaign$avg_new_cases, 14),1))/tail(lag(nyt_champaign$avg_new_cases, 14),1), digits = 0)
+champaign_death_pct_change <- round(100*(tail(nyt_champaign$monthlydead,1)-tail(lag(nyt_champaign$monthlydead, 14),1))/tail(lag(nyt_champaign$monthlydead, 14),1), digits = 0)
 
 champaign_case_pct_change_text <- 
   if (champaign_case_pct_change > 0) { 
