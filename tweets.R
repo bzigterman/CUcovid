@@ -20,14 +20,16 @@ token <- rtweet::create_token(
 
 # compile tweet text ----
 ## get data ----
-nyt_data <- full_join(rio::import("https://github.com/nytimes/covid-19-data/raw/master/us-counties-2020.csv",
-                                  format = "csv"),rio::import("https://github.com/nytimes/covid-19-data/raw/master/us-counties-2021.csv",
-                                                              format = "csv")) |> 
-  full_join(rio::import("https://github.com/nytimes/covid-19-data/raw/master/us-counties-2022.csv",
-                        format = "csv")) |>
-  full_join(rio::import("https://github.com/nytimes/covid-19-data/raw/master/us-counties-2023.csv",
-                        format = "csv")) |> 
-  filter(fips == 17019)
+get_nyt_covid <- function(year) {
+  nyt_url <-  paste0(paste0("https://github.com/nytimes/covid-19-data/raw/master/us-counties-",year,".csv"))
+  nyt_csv <- rio::import(nyt_url, format = "csv")|> 
+    filter(fips == 17019)
+}
+
+nyt_data <- map(2020:year(now(tzone = "America/Chicago")),
+                get_nyt_covid) 
+nyt_data <- do.call("rbind",nyt_data)
+
 nyt_champaign <- nyt_data |> 
   mutate(Date = ymd(date)) |> 
   mutate(new_casess = cases - lag(cases, 1)) |> 
