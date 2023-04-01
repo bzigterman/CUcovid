@@ -116,7 +116,7 @@ idph_cases_vax_hosp_longer <- idph_cases_vax_hosp %>%
 ## set variables ----
 champaign_avg_new_cases <- format(round(signif(tail(idph_cases_champaign$avg_new_cases,1),3)),big.mark=",")
 champaign_weekday <- wday(tail(idph_cases_champaign$Date,1), label = TRUE, abbr = FALSE)
-short_today <- wday(today()-days(1), label = TRUE, abbr = FALSE)
+short_today <- wday(today()-days(2), label = TRUE, abbr = FALSE)
 champaign_month_ago_cases <- format(round(signif(tail(lag(idph_cases_champaign$avg_new_cases, 14),1),3)),big.mark=",")
 champaign_case_pct_change <- round(100*(tail(idph_cases_champaign$avg_new_cases,1)-tail(lag(idph_cases_champaign$avg_new_cases, 14),1))/tail(lag(idph_cases_champaign$avg_new_cases, 14),1), digits = 0)
 
