@@ -1509,7 +1509,7 @@ ggplot(us_data_longer,
            colour = names)) +
   geom_line() +
   facet_wrap(~ names, scales = "free_y") +
-  labs(caption = paste("Source: Our World in Data and JHU CSSE COVID-19 Data. Latest data:",
+  labs(caption = paste("Source: Our World in Data. Latest data:",
                        tail(us_data_longer$short_date,1))) +
   xlab(NULL) +
   ylab(NULL) +
@@ -1542,7 +1542,7 @@ ggplot(us_data_longer,
   geom_line() +
   facet_wrap(~ names, scales = "free_y",
              ncol = 1) +
-  labs(caption = paste("Source: Our World in Data and\nJHU CSSE COVID-19 Data.\nLatest data:",
+  labs(caption = paste("Source: Our World in Data.\nLatest data:",
                        tail(us_data_longer$short_date,1))) +
   xlab(NULL) +
   ylab(NULL) +
@@ -1640,7 +1640,7 @@ ggplot(combined_cases,
   facet_wrap(~ location, ncol = 1,
              strip.position = "left") +
   labs(title = "14-Day Change in Average New Cases",
-       caption = paste("Source: CDC and JHU CSSE COVID-19 Data.\nLatest data:",
+       caption = paste("Source: CDC.\nLatest data:",
                        tail(us_data_longer$short_date,1))) +
   xlab(NULL) +
   ylab(NULL) +
@@ -1679,7 +1679,7 @@ ggplot(combined_cases,
              size = .1) +
   facet_wrap(~ location, ncol = 1) +
   labs(title = "14-Day Change in Average New Cases",
-       caption = paste("Source: CDC, IDPH and JHU CSSE COVID-19 Data.\nLatest data:",
+       caption = paste("Source: CDC and OWID.\nLatest data:",
                        tail(us_data_longer$short_date,1))) +
   xlab(NULL) +
   ylab(NULL) +
@@ -1752,7 +1752,7 @@ ggplot(combined_deaths,
   facet_wrap(~ location, ncol = 1,
              strip.position = "left") +
   labs(title = "14-Day Change in Average New Deaths",
-       caption = paste("Source: CDC and JHU CSSE COVID-19 Data.\nLatest data:",
+       caption = paste("Source: CDC and OWID.\nLatest data:",
                        tail(us_data_longer$short_date,1))) +
   xlab(NULL) +
   ylab(NULL) +
@@ -1791,7 +1791,7 @@ ggplot(combined_deaths,
              size = .1) +
   facet_wrap(~ location, ncol = 1) +
   labs(title = "14-Day Change in Average New Deaths",
-       caption = paste("Source: CDC and JHU CSSE COVID-19 Data.\nLatest data:",
+       caption = paste("Source: CDC and OWID.\nLatest data:",
                        tail(us_data_longer$short_date,1))) +
   xlab(NULL) +
   ylab(NULL) +
