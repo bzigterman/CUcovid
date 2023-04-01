@@ -1451,22 +1451,37 @@ ggsave("gh_action/US_facet_mobile.png",
 
 ### get data ----
 #### cases ----
-jhu_new_cases_url <- "https://github.com/owid/covid-19-data/raw/master/public/data/jhu/new_cases.csv"
-jhu_new_cases <- rio::import(jhu_new_cases_url, format = "csv") %>%
-  select(date,"World") %>%
-  rename(new_cases = "World") %>%
+owid_url <- "https://github.com/owid/covid-19-data/raw/master/public/data/cases_deaths/new_cases.csv"
+owid_new_cases_world <- rio::import(owid_url, format = "csv") |> 
+  select(date,World) |> 
+  mutate(new_cases = World) |> 
   mutate(avg_new_cases = rollmean(new_cases, k = 7, 
-                                  fill = NA, align = "right"))
+                                  fill = NA, align = "right")) |> 
+  mutate(pct_change_new_cases = 
+           ((avg_new_cases - lag(avg_new_cases,14))/lag(avg_new_cases,14))) %>%
+  mutate(Date = ymd(date)) %>%
+  mutate(date = as_date(Date)) %>%
+  mutate(location = "World") |> 
+  select(!World)
+
+jhu_new_cases <- owid_new_cases_world
 
 
 #### deaths ----
-jhu_new_deaths_url <- "https://github.com/owid/covid-19-data/raw/master/public/data/jhu/new_deaths.csv"
-jhu_new_deaths <- rio::import(jhu_new_deaths_url, format = "csv") %>%
-  select(date,"World") %>%
-  rename(new_deaths = "World") %>%
+owid_url <- "https://github.com/owid/covid-19-data/raw/master/public/data/cases_deaths/new_deaths.csv"
+owid_new_deaths_world <- rio::import(owid_url, format = "csv") |> 
+  select(date,World) |> 
+  mutate(new_deaths = World) |> 
   mutate(avg_new_deaths = rollmean(new_deaths, k = 7, 
-                                   fill = NA, align = "right"))
+                                   fill = NA, align = "right")) |> 
+  mutate(pct_change_new_deaths = 
+           ((avg_new_deaths - lag(avg_new_deaths,14))/lag(avg_new_deaths,14))) %>%
+  mutate(Date = ymd(date)) %>%
+  mutate(date = as_date(Date)) %>%
+  mutate(location = "World") |> 
+  select(!World)
 
+jhu_new_deaths <- owid_new_deaths_world
 
 #### vaccines ----
 owid_vaccines_url <- "https://github.com/owid/covid-19-data/raw/master/public/data/vaccinations/vaccinations.csv"
@@ -1475,9 +1490,7 @@ owid_vaccines <- rio::import(owid_vaccines_url, format = "csv") %>%
   select(date, people_fully_vaccinated,daily_vaccinations)
 
 #### combined
-us_data <- full_join(jhu_new_cases, jhu_new_deaths) %>%
-  full_join(owid_vaccines)
-us_data$people_fully_vaccinated <- as.double(us_data$people_fully_vaccinated)
+us_data <- full_join(jhu_new_cases, jhu_new_deaths) 
 us_data_longer <- us_data %>%
   select(date, avg_new_cases, avg_new_deaths) %>%
   pivot_longer(!date,
@@ -1602,12 +1615,7 @@ cdc_new_cases_acceleration <- cdc_new_cases %>%
   mutate(location = "United States")
 
 #### World  ----
-jhu_new_cases_url <- "https://github.com/owid/covid-19-data/raw/master/public/data/jhu/new_cases.csv"
-jhu_new_cases_world <- rio::import(jhu_new_cases_url, format = "csv") %>%
-  select(date,"World") %>%
-  rename(new_cases = "World") %>%
-  mutate(avg_new_cases = rollmean(new_cases, k = 7, 
-                                  fill = NA, align = "right")) %>%
+jhu_new_cases_world <- jhu_new_cases %>%
   mutate(pct_change_new_cases = 
            ((avg_new_cases - lag(avg_new_cases,14))/lag(avg_new_cases,14))) %>%
   mutate(Date = ymd(date)) %>%
@@ -1720,12 +1728,7 @@ cdc_new_deaths_acceleration <- cdc_new_deaths %>%
 
 
 #### World ----
-jhu_new_deaths_url <- "https://github.com/owid/covid-19-data/raw/master/public/data/jhu/new_deaths.csv"
-jhu_new_deaths_world <- rio::import(jhu_new_deaths_url, format = "csv") %>%
-  select(date,"World") %>%
-  rename(new_deaths = "World") %>%
-  mutate(avg_new_deaths = rollmean(new_deaths, k = 7, 
-                                   fill = NA, align = "right")) %>%
+jhu_new_deaths_world <- jhu_new_deaths %>%
   mutate(pct_change_new_deaths = 
            ((avg_new_deaths - lag(avg_new_deaths,14))/lag(avg_new_deaths,14))) %>%
   mutate(Date = ymd(date)) %>%
