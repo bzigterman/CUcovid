@@ -106,8 +106,8 @@ file <- tempfile( fileext = ".png")
 ggsave( file, plot = p, device = "png", dpi = 320, width = 5, height = 5)
 
 # post ----
-if (champaign_avg_new_cases >= 0 && 
-    champaign_month_ago_cases >= 0 && 
+if (champaign_avg_hospitalized >= 0 && 
+    champaign_month_ago_hospitalized >= 0 && 
     latest_data >= now(tzone = "America/Chicago") - days(x = 7)
 ) {
   post_toot(status = champaign_county_text,
