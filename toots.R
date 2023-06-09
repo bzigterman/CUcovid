@@ -103,7 +103,7 @@ p <- ggplot(combined,
 p
 # save to a temp file
 file <- tempfile( fileext = ".png")
-ggsave( file, plot = p, device = "png", dpi = 320, width = 5, height = 5)
+ggsave( file, plot = p, device = "png", dpi = 320, width = 4, height = 4)
 
 # post ----
 if (champaign_avg_hospitalized >= 0 && 
