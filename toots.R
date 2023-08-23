@@ -108,7 +108,7 @@ ggsave( file, plot = p, device = "png", dpi = 320, width = 4, height = 4)
 # post ----
 if (champaign_avg_hospitalized >= 0 && 
     champaign_month_ago_hospitalized >= 0 && 
-    latest_data >= now(tzone = "America/Chicago") - days(x = 7)
+    latest_data >= now(tzone = "America/Chicago") - days(x = 14)
 ) {
   post_toot(status = champaign_county_text,
             media = file,
