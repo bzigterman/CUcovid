@@ -2,8 +2,6 @@ name: autotweeter
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '0 15 * * 1'
 
 jobs:
   run-autotweeter:
